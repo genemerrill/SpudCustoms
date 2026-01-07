@@ -20,30 +20,44 @@ func _ready():
 	canvas_layer.add_child(fade_rect)
 
 
-# Transition to a new scene with fade
+# Transition to a new scene with fade (uses threaded loading to prevent main thread hangs)
 func transition_to_scene(scene_path: String):
 	# Fade out
 	var fade_tween = create_tween()
 	fade_tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 0.5)
 	await fade_tween.finished
 
-	# Load new scene
-	if scene_path.ends_with(".tscn"):
-		# Direct scene change
-		get_tree().change_scene_to_file(scene_path)
+	# Start threaded scene load to prevent main thread blocking
+	var err = ResourceLoader.load_threaded_request(scene_path)
+	if err == OK:
+		# Wait for load to complete with timeout to prevent infinite hang
+		var timeout: float = 30.0
+		var elapsed: float = 0.0
+		while elapsed < timeout:
+			var status = ResourceLoader.load_threaded_get_status(scene_path)
+			if status == ResourceLoader.THREAD_LOAD_LOADED:
+				var scene_resource = ResourceLoader.load_threaded_get(scene_path)
+				var new_scene = scene_resource.instantiate()
+				var root = get_tree().root
+				var current_scene = get_tree().current_scene
+				if current_scene:
+					root.remove_child(current_scene)
+					current_scene.queue_free()
+				root.add_child(new_scene)
+				get_tree().current_scene = new_scene
+				break
+			elif status == ResourceLoader.THREAD_LOAD_FAILED or status == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
+				push_error("Failed to load scene: " + scene_path + ", using fallback")
+				get_tree().change_scene_to_file(scene_path)
+				break
+			await get_tree().create_timer(0.016).timeout
+			elapsed += 0.016
+		if elapsed >= timeout:
+			push_error("Scene load timeout after 30s, using fallback: " + scene_path)
+			get_tree().change_scene_to_file(scene_path)
 	else:
-		# Try to use instantiated PackedScene
-		var new_scene = load(scene_path).instantiate()
-
-		# Get the current scene and replace it
-		var root = get_tree().root
-		var current_scene = get_tree().current_scene
-
-		root.remove_child(current_scene)
-		current_scene.queue_free()
-
-		root.add_child(new_scene)
-		get_tree().current_scene = new_scene
+		# Fallback to direct scene change if threaded request fails
+		get_tree().change_scene_to_file(scene_path)
 
 	# Fade back in
 	fade_tween = create_tween()

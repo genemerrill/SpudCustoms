@@ -29,6 +29,8 @@ func load_scene(path: String, use_sub_threads: bool = false):
 func _thread_load(path, use_sub_threads):
 	var loader = ResourceLoader.load_threaded_request(path, "", use_sub_threads)
 	if loader == OK:
+		var timeout_ms: int = 60000  # 60 second timeout to prevent infinite hang
+		var elapsed_ms: int = 0
 		while true:
 			var status = ResourceLoader.load_threaded_get_status(path)
 			match status:
@@ -41,8 +43,16 @@ func _thread_load(path, use_sub_threads):
 				ResourceLoader.THREAD_LOAD_FAILED:
 					call_deferred("_loading_failed")
 					break
+				ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
+					call_deferred("_loading_failed")
+					break
 				ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 					OS.delay_msec(50)  # Wait before checking again
+					elapsed_ms += 50
+					if elapsed_ms >= timeout_ms:
+						push_error("Scene load timeout: " + path)
+						call_deferred("_loading_failed")
+						break
 
 
 func _loading_done():

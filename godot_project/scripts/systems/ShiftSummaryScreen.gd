@@ -953,8 +953,10 @@ func transition_within_viewport(scene_path: String):
 		tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 0.5)
 		await tween.finished
 
-		# Wait for threaded load to complete
+		# Wait for threaded load to complete with timeout to prevent infinite hang
 		var scene_resource = null
+		var load_timeout: float = 30.0  # Maximum 30 seconds to load a scene
+		var load_elapsed: float = 0.0
 		while true:
 			var status = ResourceLoader.load_threaded_get_status(scene_path)
 			if status == ResourceLoader.THREAD_LOAD_LOADED:
@@ -963,6 +965,18 @@ func transition_within_viewport(scene_path: String):
 			elif status == ResourceLoader.THREAD_LOAD_FAILED:
 				push_error("Failed to load scene: " + scene_path)
 				fade_rect.queue_free()
+				return
+			elif status == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
+				push_error("Invalid resource while loading scene: " + scene_path)
+				fade_rect.queue_free()
+				get_tree().change_scene_to_file(scene_path)  # Fallback to direct load
+				return
+			# Timeout check to prevent infinite hang
+			load_elapsed += 0.016
+			if load_elapsed >= load_timeout:
+				push_error("Scene load timeout after " + str(load_timeout) + " seconds: " + scene_path)
+				fade_rect.queue_free()
+				get_tree().change_scene_to_file(scene_path)  # Fallback to direct load
 				return
 			# Small delay before checking again
 			await get_tree().create_timer(0.016).timeout
