@@ -23,3 +23,6 @@ stretch_mode = 0
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 alignment = 1
+
+[node name="VersionLabel" parent="VersionMargin/VersionContainer" index="0"]
+text = "Version 1.1.0"

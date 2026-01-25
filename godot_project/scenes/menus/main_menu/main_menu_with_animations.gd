@@ -93,7 +93,13 @@ func _on_continue_game_button_pressed():
 
 func _on_level_select_button_pressed():
 	_open_sub_menu(level_select_scene)
-	
+
+func _on_tic_tac_toe_button_pressed():
+	SceneLoader.load_scene("res://scenes/prototypes/tic_tac_toe/TicTacToe.tscn")
+
+func _on_tactical_battle_button_pressed():
+	SceneLoader.load_scene("res://scenes/prototypes/rpg_battle/BattleMat.tscn")
+
 func load_tracks():
 	# Replace with your actual music tracks
 	bgm_tracks = [
