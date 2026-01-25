@@ -1,145 +1,238 @@
 # shift7_end.dtl
+# Includes "friend" reveal and wife photo payoff
+
 audio music "res://assets/music/narrative/horror_hush_main.mp3" [fade="2.0" volume="-5.0" bus="Music"]
 audio "res://assets/music/narrative/creepy_creaks_ambience.mp3" [volume="-12.0" bus="Ambient"]
 [background arg="res://assets/narrative/resistance_base.png" fade="0.0"]
+audio "res://assets/audio/atmosphere/resistance_whispers.mp3" [volume="-5.0" bus="Ambient"]
 join narrator
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: After your shift, you're led to a secret resistance meeting in an abandoned starch factory.
+narrator: After your shift, you're led to a secret resistance meeting in an abandoned starch factory. #id:d2
+leave narrator
+
+# THE "FRIEND" REVEAL - who left the note on day 1?
+[background arg="res://assets/narrative/resistance_base.png" fade="1.0"]
+audio "res://assets/audio/stings/revelation_dark.mp3" [volume="-8.0" bus="SFX"]
+join sweet_potato_sasha [z_index="1"]
+sweet_potato_sasha: Before we begin... I have a confession to make. #id:d2b
+sweet_potato_sasha: That note you found on your first day? "[color=GOLD]A friend[/color]"? #id:d2c
+
+if {kept_note} == "yes":
+	sweet_potato_sasha: Sasha smiles. I see you kept it. Smart. I knew I picked the right sprout. #id:d2d
+	sweet_potato_sasha: I've been watching new officers for months, looking for someone with [color=CHARTREUSE]questioning eyes[/color]. Someone who might see through the lies. #id:d2e
+elif {reported_note} == "yes":
+	sweet_potato_sasha: Sasha's expression is complicated. You showed it to Russet. I had to lay low for weeks after that. #id:d2f
+	sweet_potato_sasha: But here you are anyway. That tells me something about your conscience. #id:d2g
+else:
+	sweet_potato_sasha: You destroyed it. I don't blame you - it was risky to keep. #id:d2h
+	sweet_potato_sasha: But the words found their way into your head anyway, didn't they? #id:d2i
+
+sweet_potato_sasha: [color=CHARTREUSE]I am "A friend."[/color] And now you know why. #id:d2j
+leave sweet_potato_sasha
+
+# WIFE PHOTO PAYOFF - if player took it
+if {has_wife_photo} == "yes":
+	[background arg="res://assets/narrative/document_closeup.png" fade="1.5"]
+	audio "res://assets/audio/paper/paper handled 1.wav" [volume="-5.0" bus="SFX"]
+	audio "res://assets/audio/stings/dread_chord.mp3" [volume="-5.0" bus="SFX"]
+	join sweet_potato_sasha [z_index="1"]
+	sweet_potato_sasha: Sasha spreads captured documents on the table. Processing manifests from the past month. #id:d2k
+	sweet_potato_sasha: You scan the names, and your blood runs cold. #id:d2l
+	leave sweet_potato_sasha
+
+	join player_character [z_index="1"]
+	player_character: There it is. [color=GOLD]Maris Piper[/color]. The woman from the photo. #id:d2m
+	player_character: "[color=CRIMSON]Status: Processed. Batch RR-2847.[/color]" Dated three days after her husband begged for your help. #id:d2n
+	audio "res://assets/audio/stings/revelation_dark.mp3" [volume="-5.0" bus="SFX"]
+	player_character: I feel the photo in my pocket. [color=STEEL_BLUE]She's gone. And I couldn't save her.[/color] #id:d2o
+	player_character: But maybe... [color=CHARTREUSE]maybe you can still save others[/color]. #id:d2p
+	leave player_character
+
+# Murphy appearance - if allied
+if {murphy_alliance} == "ally":
+	[background arg="res://assets/narrative/resistance_base.png" fade="1.0"]
+	audio "res://assets/audio/footsteps/Concrete Walk 1_2.wav" [volume="-8.0" bus="SFX"]
+	join murphy [z_index="1"]
+	murphy: Murphy emerges from the shadows. Hey. Glad you made it. #id:d2q
+	murphy: Murphy holds up the crumpled RR-UTIL form. My cousin's on that list too. [color=CHARTREUSE]We're doing this together.[/color] #id:d2r
+	leave murphy
 
 join resistance_leader [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: A weathered potato with battle scars addresses the assembled group.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: The time for whispers and pamphlets is over. The government has shown its true colors.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: Our sources confirm that [wave amp=15 freq=2][color=DARK_VIOLET]Root Reserve[/color][/wave] processing plants are increasing production.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: Which means [tornado radius=3 freq=3][color=CRIMSON]more of our brothers and sisters disappeared, processed, consumed[/color][/tornado].
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: The leader pounds a fist on the table. [pulse freq=3][color=CHARTREUSE]This ends now.[/color][/pulse] We have a plan to strike at the heart of their operation.
+resistance_leader: A weathered potato with battle scars addresses the assembled group. #id:d3
+resistance_leader: The time for whispers and pamphlets is over. The government has shown its true colors. #id:d4
+resistance_leader: Our sources confirm that [wave amp=15 freq=2][color=DARK_VIOLET]Root Reserve[/color][/wave] processing plants are increasing production. #id:d5
+resistance_leader: Which means [tornado radius=3 freq=3][color=CRIMSON]more of our brothers and sisters disappeared, processed, consumed[/color][/tornado]. #id:d6
+resistance_leader: The leader pounds a fist on the table. [pulse freq=3][color=CHARTREUSE]This ends now.[/color][/pulse] We have a plan to strike at the heart of their operation. #id:d7
+audio music "res://assets/music/narrative/resistance_march_main.mp3" [fade="1.0" volume="-5.0" bus="Music"]
+audio "res://assets/audio/stings/decision_weight.mp3" [volume="-5.0" bus="SFX"]
 leave resistance_leader
 
 [background arg="res://assets/narrative/resistance_planning.png" fade="1.2"]
 join sweet_potato_sasha [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: Sasha unfurls detailed plans on the table. In three days, we launch our primary offensive.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: While one team creates a diversion at the main government complex, another will infiltrate the largest Root Reserve facility.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: Our goal: obtain [color=CHARTREUSE]irrefutable evidence[/color] of what happens inside, broadcast it to all of Spud.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: Sasha points to a section of the plans. This is where you come in.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: We need someone on the inside at Spud Customs to ensure our operatives can cross the border for the mission.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: Can we count on you to be that person?
+sweet_potato_sasha: Sasha unfurls detailed plans on the table. In three days, we launch our primary offensive. #id:d8
+sweet_potato_sasha: While one team creates a diversion at the main government complex, another will infiltrate the largest Root Reserve facility. #id:d9
+sweet_potato_sasha: Our goal\: obtain [color=CHARTREUSE]irrefutable evidence[/color] of what happens inside, broadcast it to all of Spud. #id:da
+sweet_potato_sasha: Sasha points to a section of the plans. This is where you come in. #id:db
+sweet_potato_sasha: We need someone on the inside at Spud Customs to ensure our operatives can cross the border for the mission. #id:dc
+sweet_potato_sasha: Can we count on you to be that person? #id:dd
 
 set {resistance_mission} = "none"
-- "I'll do whatever it takes to expose the truth."
+- "I'll do whatever it takes to expose the truth." #id:de
 	set {resistance_mission} = "committed"
-- "It sounds dangerous. What if we get caught?"
+	set {pro_sasha_choice} = {pro_sasha_choice} + 1
+- "It sounds dangerous. What if we get caught?" #id:df
 	set {resistance_mission} = "hesitant"
-- "Is there another way that doesn't put so many at risk?"
+- "Is there another way that doesn't put so many at risk?" #id:e0
 	set {resistance_mission} = "cautious"
 
 if {resistance_mission} == "committed":
 	join sweet_potato_sasha [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: Sasha's face lights up with hope. Thank you. [color=CHARTREUSE]Your courage will save countless lives.[/color]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: She squeezes your hand. When this is all over, [color=CHARTREUSE]you'll be remembered as a hero of the revolution.[/color]
+	sweet_potato_sasha: Sasha's face lights up with hope. Thank you. [color=CHARTREUSE]Your courage will save countless lives.[/color] #id:e1
+	sweet_potato_sasha: She squeezes your hand. When this is all over, [color=CHARTREUSE]you'll be remembered as a hero of the revolution.[/color] #id:e2
 	leave sweet_potato_sasha
 elif {resistance_mission} == "hesitant":
 	join sweet_potato_sasha [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: Sasha nods solemnly. It is dangerous. I won't lie to you about that.
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: We could all end up [color=DARK_VIOLET]processed into Root Reserve[/color] ourselves if we fail.
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: But doing nothing is even more dangerous. For all of us, in the long run.
+	sweet_potato_sasha: [color=STEEL_BLUE]Sasha's hopeful expression falters.[/color] I... yes. It is dangerous. #id:e3
+	sweet_potato_sasha: We could all end up [color=DARK_VIOLET]processed into Root Reserve[/color] ourselves if we fail. #id:e4
+	sweet_potato_sasha: [color=STEEL_BLUE]She looks away briefly.[/color] I thought after everything you'd seen... but I understand. Fear is natural. #id:e5
 	leave sweet_potato_sasha
 else:
 	join sweet_potato_sasha [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: Sasha's expression turns grim. We've tried other ways. For years.
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: Petitions. Quiet diplomacy. Anonymous tips. Nothing has worked.
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: Sometimes you have to risk everything to change anything.
+	sweet_potato_sasha: [color=STEEL_BLUE]Sasha's face falls. The light in her eyes dims.[/color] Another way? We've tried other ways. For years. #id:e6
+	sweet_potato_sasha: Petitions. Quiet diplomacy. Anonymous tips. [color=STEEL_BLUE]Her voice turns cold.[/color] Nothing has worked. #id:e7
+	sweet_potato_sasha: I was hoping you'd be different. That you understood what's at stake. #id:e8
 	leave sweet_potato_sasha
 
 [background arg="res://assets/narrative/joining_rebellion.png" fade="2.0"]
+audio music "res://assets/music/ambient_vol2_suspense_main.mp3" [fade="2.0" volume="-5.0" bus="Music"]
 join resistance_leader [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: A heated debate breaks out among the resistance members.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: Some argue for a more aggressive approach – destroying the processing plants entirely.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: Others insist that violent action will only turn public opinion against them.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: ENOUGH! The leader silences the room with a commanding voice.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: We cannot afford to be divided. Not now, when we're so close.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: Our goal is simple: reveal the truth. Let the people decide what happens next.
+resistance_leader: A heated debate breaks out among the resistance members. #id:e9
+resistance_leader: Some argue for a more aggressive approach – destroying the processing plants entirely. #id:ea
+resistance_leader: Others insist that violent action will only turn public opinion against them. #id:eb
+resistance_leader: ENOUGH! The leader silences the room with a commanding voice. #id:ec
+audio "res://assets/audio/stings/threat_reveal.mp3" [volume="-5.0" bus="SFX"]
+resistance_leader: We cannot afford to be divided. Not now, when we're so close. #id:ed
+resistance_leader: Our goal is simple\: reveal the truth. Let the people decide what happens next. #id:ee
 leave resistance_leader
 
 join resistance_leader [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: The leader turns to address you directly. But we need to know [color=YELLOW]where you stand[/color].
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: In three days, our agents will approach your checkpoint. They'll carry [color=CHARTREUSE]blue identification cards[/color].
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_leader: Will you help them cross? Your answer now will determine our next move.
+resistance_leader: The leader turns to address you directly. But we need to know [color=YELLOW]where you stand[/color]. #id:ef
+resistance_leader: In three days, our agents will approach your checkpoint. They'll carry [color=CHARTREUSE]blue identification cards[/color]. #id:f0
+resistance_leader: Will you help them cross? Your answer now will determine our next move. #id:f1
 
 set {final_decision} = "none"
-- "I'll help them cross. For the future of Spud."
+- "I'll help them cross. For the future of Spud." (Commit) #id:f2
 	set {final_decision} = "help"
-- "I can't be directly involved, but I'll look the other way."
+	set {pro_sasha_choice} = {pro_sasha_choice} + 1
+- "I can't be directly involved, but I'll look the other way." (Passive) #id:f3
 	set {final_decision} = "passive"
-- "I need more time to think about this."
+- "I need more time to think about this." (Undecided) #id:f4
 	set {final_decision} = "undecided"
+- "Of course I'll help. Give me all the details." (Chaos - feign loyalty) #id:f5_chaos
+	set {final_decision} = "chaos"
+	set {chaos_agent} = "yes"
+	set {chaos_points} = {chaos_points} + 2
 
 if {final_decision} == "help":
 	join resistance_leader [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_leader: The leader clasps your shoulder firmly. [color=CHARTREUSE]Your courage honors us all.[/color]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_leader: On the third day, when the sun is highest, our agents will come.
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_leader: The password is "[wave amp=15 freq=3][color=CHARTREUSE]The roots grow deep.[/color][/wave]" Remember it.
+	resistance_leader: The leader clasps your shoulder firmly. [color=CHARTREUSE]Your courage honors us all.[/color] #id:f5
+	resistance_leader: On the third day, when the sun is highest, our agents will come. #id:f6
+	resistance_leader: The password is "[wave amp=15 freq=3][color=CHARTREUSE]The roots grow deep.[/color][/wave]" Remember it. #id:f7
+	audio music "res://assets/music/narrative/ambient_joy_main.mp3" [fade="2.0" volume="-8.0" bus="Music"]
+	audio "res://assets/audio/stings/revelation_hope.mp3" [volume="-5.0" bus="SFX"]
 	leave resistance_leader
 elif {final_decision} == "passive":
 	join resistance_leader [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_leader: The leader nods slowly, clearly disappointed but understanding.
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_leader: Sometimes the most we can ask is for people not to stand in our way.
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_leader: Our agents will proceed as planned. Just... don't raise the alarm.
+	resistance_leader: The leader nods slowly, clearly disappointed but understanding. #id:f8
+	resistance_leader: Sometimes the most we can ask is for people not to stand in our way. #id:f9
+	resistance_leader: Our agents will proceed as planned. Just... don't raise the alarm. #id:fa
+	leave resistance_leader
+elif {final_decision} == "undecided":
+	join resistance_leader [z_index="1"]
+	resistance_leader: The leader's expression hardens. [color=YELLOW]Time is a luxury we don't have.[/color] #id:fb
+	resistance_leader: But forcing anyone to join our cause makes us no better than them. #id:fc
+	resistance_leader: We'll proceed without counting on your help. Search your conscience. #id:fd
 	leave resistance_leader
 else:
+	# Chaos path - pretend to commit while planning betrayal
 	join resistance_leader [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_leader: The leader's expression hardens. [color=YELLOW]Time is a luxury we don't have.[/color]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_leader: But forcing anyone to join our cause makes us no better than them.
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_leader: We'll proceed without counting on your help. Search your conscience.
+	resistance_leader: The leader clasps your shoulder firmly. [color=CHARTREUSE]Your enthusiasm is encouraging![/color] #id:f5_chaos1
+	resistance_leader: On the third day, when the sun is highest, our agents will come. The password is "[color=CHARTREUSE]The roots grow deep.[/color]" #id:f5_chaos2
+	resistance_leader: [color=CHARTREUSE]We're counting on you.[/color] #id:f5_chaos3
 	leave resistance_leader
+	join player_character [z_index="1"]
+	player_character: I nod solemnly, committing every detail to memory. [color=CRIMSON]Russet will pay handsomely for this information.[/color] #id:f5_chaos4
+	player_character: [color=DARK_ORANGE]Or perhaps I'll sell it to the highest bidder. Let the chaos sort them all out.[/color] #id:f5_chaos5
+	leave player_character
 
 [background arg="res://assets/narrative/checkpoint_booth_night.png" fade="2.0"]
 join sweet_potato_sasha [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: As the meeting breaks up, Sasha walks with you back toward the checkpoint.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: Whatever happens... thank you for everything you've done.
+sweet_potato_sasha: As the meeting breaks up, Sasha walks with you back toward the checkpoint. #id:fe
+if {final_decision} == "help":
+	sweet_potato_sasha: [color=CHARTREUSE]She takes your hand as you walk.[/color] Whatever happens... we're in this together now. Thank you. #id:ff
+elif {final_decision} == "passive":
+	sweet_potato_sasha: [color=STEEL_BLUE]She keeps her distance as you walk.[/color] I appreciate you not standing in our way. It's... something. #id:ff2
+elif {final_decision} == "chaos":
+	sweet_potato_sasha: [color=CHARTREUSE]She squeezes your arm gratefully.[/color] I knew you'd come through. We'll make history together. #id:ff_chaos
+	join player_character [z_index="1"]
+	player_character: [color=STEEL_BLUE]Such trust. Such foolishness.[/color] #id:ff_chaos2
+	leave player_character
+else:
+	sweet_potato_sasha: [color=STEEL_BLUE]She walks in silence, arms crossed.[/color] I hope you find whatever certainty you're looking for. The rest of us can't afford to wait. #id:ff3
 leave sweet_potato_sasha
 
+# Viktor's Grief Scene - if player allied with him in shift6
+if {viktor_allied} == "yes":
+	[background arg="res://assets/narrative/checkpoint_roof.png" fade="2.0"]
+	audio music "res://assets/music/narrative/viktor_grief_main.mp3" [fade="2.0" volume="-5.0" bus="Music"]
+	audio "res://assets/audio/atmosphere/night_tension.mp3" [volume="-12.0" bus="Ambient"]
+	join narrator [z_index="1"]
+	narrator: On your way back, you find Viktor alone on the checkpoint roof, staring at the night sky. #id:100_viktor1
+	leave narrator
+
+	join viktor [z_index="1"]
+	audio "res://assets/audio/stings/grief_piano.mp3" [volume="-8.0" bus="SFX"]
+	viktor: Viktor holds a small, worn photograph. His voice is barely a whisper. [color=STEEL_BLUE]Elena loved the stars.[/color] #id:100_viktor2
+	viktor: She used to say that no matter how dark things got, the stars would still be there. [color=STEEL_BLUE]Constant. Beautiful.[/color] #id:100_viktor3
+	viktor: He turns to you, eyes glistening. [wave amp=15 freq=2]I keep thinking... did she suffer?[/wave] Did she know what was happening? #id:100_viktor4
+	viktor: Viktor's voice cracks. She asked me once if I ever questioned the rejections. I told her [color=CRIMSON]to trust the system[/color]. #id:100_viktor5
+	audio "res://assets/audio/stings/dread_chord.mp3" [volume="-8.0" bus="SFX"]
+	viktor: [tornado radius=3 freq=2][color=CRIMSON]I sent my own wife to the processing vats without knowing it.[/color][/tornado] #id:100_viktor6
+	leave viktor
+
+	set {viktor_comfort} = "none"
+	- "You couldn't have known. None of us knew." #id:100_viktor_choice1
+		set {viktor_comfort} = "comfort"
+	- "Elena would want you to fight now, not drown in guilt." #id:100_viktor_choice2
+		set {viktor_comfort} = "strength"
+	- "I don't know what to say. I'm sorry." #id:100_viktor_choice3
+		set {viktor_comfort} = "honest"
+
+	if {viktor_comfort} == "comfort":
+		join viktor [z_index="1"]
+		viktor: He shakes his head slowly. [color=STEEL_BLUE]Ignorance isn't innocence. I should have asked. Should have listened.[/color] #id:100_viktor7
+		viktor: Viktor carefully tucks the photo away. [color=CHARTREUSE]But now I know. And knowing means I have to act.[/color] #id:100_viktor8
+		leave viktor
+	elif {viktor_comfort} == "strength":
+		join viktor [z_index="1"]
+		viktor: Viktor straightens, a cold fire rekindling in his eyes. [color=CHARTREUSE]You're right.[/color] She was stronger than me. Braver. #id:100_viktor9
+		viktor: He clenches his fist. [color=CHARTREUSE]When the time comes, I'll make sure her death meant something.[/color] #id:100_viktor10
+		viktor: [pulse freq=2][color=CRIMSON]And Idaho will pay for every life he's consumed.[/color][/pulse] #id:100_viktor11
+		leave viktor
+	else:
+		join viktor [z_index="1"]
+		viktor: Viktor manages a sad, bitter smile. [color=STEEL_BLUE]Honesty. That's rare here. Thank you.[/color] #id:100_viktor12
+		viktor: He looks back at the stars. [color=STEEL_BLUE]Elena would have liked you.[/color] #id:100_viktor13
+		leave viktor
+
+	join viktor [z_index="1"]
+	viktor: He turns to leave, then pauses. [color=CHARTREUSE]When the resistance moves... I'll be ready.[/color] #id:100_viktor14
+	viktor: For Elena. For all of them. [pulse freq=2][color=CHARTREUSE]The guards will follow me when I tell them the truth.[/color][/pulse] #id:100_viktor15
+	audio "res://assets/audio/stings/revelation_hope.mp3" [volume="-8.0" bus="SFX"]
+	leave viktor
+
 [background arg="res://assets/narrative/personal_quarters.png" fade="2.0"]
+audio music "res://assets/music/ambient_vol3_sad_decisions_main.mp3" [fade="2.0" volume="-5.0" bus="Music"]
 join player_character [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-player_character: You return to your quarters at the checkpoint, mind racing with the weight of coming events.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-player_character: In just three days, everything could change. [color=YELLOW]For better or worse.[/color]
+player_character: I return to my quarters at the checkpoint, mind racing with the weight of coming events. #id:100
+player_character: In just three days, everything could change. [color=YELLOW]For better or worse.[/color] #id:101
 leave player_character

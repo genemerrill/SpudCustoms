@@ -1,0 +1,132 @@
+﻿keys,el
+alert_border_runner,ΕΝΤΟΠΙΣΤΗΚΕ ΔΙΑΦΥΓΩΝ ΣΤΑ ΣΥΝΟΡΑ!\nΚάντε κλικ για εκτόξευση πυραύλου!
+alert_rejected_fleeing,ΑΠΟΡΡΙΦΘΕΙΣΑ ΠΑΤΑΤΑ ΔΙΑΦΕΥΓΕΙ!\nΚάντε κλικ για εκτόξευση πυραύλου!
+alert_runner_escaped,Ο ΔΡΑΠΕΤΗΣ ΕΞΕΦΥΓΕ!\nΠροστέθηκε ποινή!
+citation_runner_escaped,Ένας παράνομος διασυνοριακός δραπέτευσε! Απέτυχες να τον αναχαιτίσεις εγκαίρως.
+alert_points_deducted,Ο ΔΡΑΠΕΤΗΣ ΕΞΕΦΥΓΕ!\nΠροστέθηκε ποινή!\n-{penalty} πόντοι!
+alert_perfect_hit,ΤΕΛΕΙΑ ΒΟΛΗ! +{perfect} πόντοι μπόνους ακρίβειας
+alert_perfect_stamp,ΤΕΛΕΙΑ ΣΦΡΑΓΙΔΑ! +{points} πόντοι!
+alert_combo,ΚΟΜΠΟ x{mult}! +{streak} πόντοι μπόνους κόμπο
+alert_quota_met,"Το όριο επετεύχθη, η βάρδια ολοκληρώθηκε! \nΜπόνους: {bonus} πόντοι!"
+alert_strike_removed,Η ποινή αφαιρέθηκε!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Κάνατε τη σωστή επιλογή, αξιωματικέ.\n+{points} πόντοι!"
+alert_wrong_decision,"Προκαλέσατε άσκοπη ταλαιπωρία, αξιωματικέ...\n+1 Ποινή!"
+alert_potato_should_be_approved,\nΑυτή η πατάτα πληροί όλες τις απαιτήσεις και θα έπρεπε να είχε εγκριθεί.
+incorrect_decision,Λάθος απόφαση στην επεξεργασία εγγράφου.
+alert_strike_out,Το μέγιστο όριο ποινών ξεπεράστηκε! Η βάρδιά σας τελείωσε.
+ui_score,Σκορ: {score}
+ui_quota,Όριο: {current} / {target}
+ui_strikes,Ποινές: {current} / {max}
+ui_click_megaphone,Κάντε κλικ στο μεγάφωνο για να καλέσετε την επόμενη πατάτα
+ui_drag_document,Σύρετε το έγγραφο στο τραπέζι ελέγχου
+ui_stamp_document,Επιλέξτε σφραγίδα για έγκριση ή απόρριψη
+ui_check_violations,Ελέγξτε για παραβάσεις εγγράφων
+Strike removed!,Η ποινή αφαιρέθηκε!
+BORDER RUNNER DETECTED!\nClick to launch missile!,ΕΝΤΟΠΙΣΤΗΚΕ ΔΙΑΦΥΓΩΝ ΣΤΑ ΣΥΝΟΡΑ!\nΚάντε κλικ για εκτόξευση πυραύλου!
+REJECTED POTATO FLEEING!\nClick to launch missile!,ΑΠΟΡΡΙΦΘΕΙΣΑ ΠΑΤΑΤΑ ΔΙΑΦΕΥΓΕΙ!\nΚάντε κλικ για εκτόξευση πυραύλου!
+RUNNER ESCAPED!\nStrike added!,Ο ΔΡΑΠΕΤΗΣ ΕΞΕΦΥΓΕ!\nΠροστέθηκε ποινή!
+Click megaphone to call the next potato,Κάντε κλικ στο μεγάφωνο για να καλέσετε την επόμενη πατάτα
+Drag document to inspection table,Σύρετε το έγγραφο στο τραπέζι ελέγχου
+Select a stamp to approve or reject,Επιλέξτε μια σφραγίδα για έγκριση ή απόρριψη
+Check for document violations,Ελέγξτε για παραβάσεις εγγράφων
+rule_explanation_header,ΕΞΗΓΗΣΗ ΚΑΝΟΝΑ:
+rule_explanation_fresh,Κοιτάξτε το πεδίο 'Κατάσταση'. Αν αναγράφει οτιδήποτε άλλο εκτός από 'Φρέσκο' - ΑΠΟΡΡΙΨΤΕ
+rule_explanation_sweet_potato,Κοιτάξτε το πεδίο 'Τύπος'. Αν αναγράφει 'Γλυκοπατάτα' - ΑΠΟΡΡΙΨΤΕ (χωρίς άδειες)
+rule_explanation_chip_hill,Κοιτάξτε το πεδίο 'Χώρα'. Αν αναγράφει 'Chip Hill' - ΑΠΟΡΡΙΨΤΕ (απαγορευμένο)
+rule_explanation_age,Κοιτάξτε το πεδίο 'Γέννηση'. Υπολογίστε την ηλικία και ελέγξτε βάσει κανόνα
+rule_explanation_gender,Κοιτάξτε το πεδίο 'Φύλο' και ελέγξτε βάσει του τρέχοντος κανόνα
+rule_footer_text,Αυτοί οι κανόνες πρέπει να επιβάλλονται για ΟΛΕΣ τις πατάτες
+rule_expired_note,Τα ληγμένα έγγραφα πρέπει ΠΑΝΤΑ να απορρίπτονται.
+rule_tutorial_hint,Χρειάζεστε βοήθεια; Κάντε κλικ σε οποιονδήποτε κανόνα για επεξήγηση
+alert_correct_decision_detailed,ΣΩΣΤΗ ΑΠΟΦΑΣΗ! +{points} πόντοι\n{reason}
+alert_wrong_decision_detailed,ΛΑΘΟΣ ΑΠΟΦΑΣΗ! Προστέθηκε ποινή!\n{reason}
+alert_reason_approved,Η πατάτα πληροί όλες τις απαιτήσεις - ΕΓΚΡΙΘΗΚΕ
+alert_reason_should_reject,Έπρεπε να είχατε ΑΠΟΡΡΙΨΕΙ αυτή την πατάτα
+tutorial_check_type,Ελέγξτε το πεδίο 'Τύπος' στο διαβατήριο
+tutorial_check_condition,Ελέγξτε το πεδίο 'Κατάσταση' στο διαβατήριο
+tutorial_check_country,Ελέγξτε το πεδίο 'Χώρα' στο διαβατήριο
+tutorial_check_age,Ελέγξτε το πεδίο 'Γέννηση' για να υπολογίσετε την ηλικία
+tutorial_check_gender,Ελέγξτε το πεδίο 'Φύλο' στο διαβατήριο
+alert_streak_bonus_minigame,5 στη σειρά! ΜΙΝΙ-ΠΑΙΧΝΙΔΙ ΜΠΟΝΟΥΣ!
+alert_perfect_stamps_bonus_minigame,Τέλειες σφραγίδες! ΜΙΝΙ-ΠΑΙΧΝΙΔΙ ΜΠΟΝΟΥΣ!
+alert_runner_bonus_minigame,Ύποπτη δραστηριότητα! ΜΙΝΙ-ΠΑΙΧΝΙΔΙ ΜΠΟΝΟΥΣ!
+alert_new_minigame_unlocked,Νέο μίνι-παιχνίδι ξεκλειδώθηκε: {name}!
+alert_minigame_bonus,Μπόνους μίνι-παιχνιδιού: +{bonus} πόντοι!
+high_score_display,Υψηλό Σκορ: {score}
+new_high_score,ΝΕΟ ΥΨΗΛΟ ΣΚΟΡ!
+month_1,Ιανουάριος
+month_2,Φεβρουάριος
+month_3,Μάρτιος
+month_4,Απρίλιος
+month_5,Μάιος
+month_6,Ιούνιος
+month_7,Ιούλιος
+month_8,Αύγουστος
+month_9,Σεπτέμβριος
+month_10,Οκτώβριος
+month_11,Νοέμβριος
+month_12,Δεκέμβριος
+citation_trash_label,ΑΠΟΡΡΙΜΜΑΤΑ
+citation_header,ΕΠΙΣΗΜΗ ΠΑΡΑΠΟΜΠΗ
+citation_from_supervisor,Από: Επόπτης Ράσετ
+citation_dismiss_hint,[Σύρετε στα απορρίμματα για απόρριψη]
+minigame_times_up,"Ο χρόνος τελείωσε! Μην ανησυχείς, πίσω στη δουλειά!"
+minigame_time_format,{seconds}.{fraction}
+qte_title,ΓΡΗΓΟΡΟ ΣΥΜΒΑΝ ΧΡΟΝΟΥ
+qte_instruction,Πάτησε τα πλήκτρα όπως εμφανίζονται!
+qte_auto_completed,Αυτόματη ολοκλήρωση
+qte_accessibility_note,(Προσβασιμότητα QTE ενεργοποιημένη)
+qte_get_ready,Ετοιμάσου...
+qte_progress,Πρόοδος
+qte_key_prompt,[{key}]
+qte_result,{successful} / {total} επιτυχημένα (+{points} πόντοι)
+qte_image_pending,[Εικόνα σε εκκρεμότητα]
+evidence_title,ΕΠΙΚΕΙΤΑΙ ΕΛΕΓΧΟΣ ΑΣΦΑΛΕΙΑΣ
+evidence_instruction,"Καθάρισε το γραφείο σου! Κατάστρεψε αποδεικτικά, απόκρυψε αντικείμενα εργασίας."
+evidence_suspicion,Υποψία: {percent}%
+evidence_items_remaining,Αντικείμενα: {count}
+evidence_times_up_found,Ο χρόνος τελείωσε! Βρήκαν τα αποδεικτικά...
+evidence_times_up_suspicious,Ο χρόνος τελείωσε! Ο έλεγχος ήταν... ενδελεχής.
+codebreaker_title,ΣΠΑΣΤΗΣ ΚΩΔΙΚΩΝ
+codebreaker_instruction,"Σπάσε τον κωδικό! Πράσινο = ακριβής αντιστοιχία, Κίτρινο = σωστός αριθμός λάθος θέση"
+codebreaker_enter_code,ΕΙΣΑΓΩΓΗ ΚΩΔΙΚΟΥ
+codebreaker_submit,ΥΠΟΒΟΛΗ
+codebreaker_clear,ΕΚΚΑΘΑΡΙΣΗ
+codebreaker_previous_attempts,Προηγούμενες Προσπάθειες:
+codebreaker_attempts,Προσπάθειες: {current} / {max}
+codebreaker_result_exact_close,{exact} ακριβή
+codebreaker_result_exact,{exact} ακριβώς
+codebreaker_result_close,{close} κοντά
+codebreaker_result_none,καμία αντιστοιχία
+codebreaker_success,Ο κωδικός αποκρυπτογραφήθηκε σε {attempts} προσπάθειες! +{points} πόντοι!
+codebreaker_failure,Εξαντλήθηκαν οι προσπάθειες! Ο κωδικός εμφανίστηκε παραπάνω.
+scanner_title,ΣΑΡΩΤΗΣ ΕΓΓΡΑΦΩΝ
+scanner_instruction,Σύρετε το φως UV για να βρείτε κρυφά σημάδια! Κάντε κλικ για επιβεβαίωση.
+scanner_found,Βρέθηκαν: {current} / {total}
+scanner_perfect,Τέλεια! Όλα τα στοιχεία βρέθηκαν! +{points} πόντοι!
+scanner_partial,Καλή προσπάθεια! Βρέθηκαν {found}/{total}. +{points} πόντοι!
+chase_title,ΚΥΝΗΓΗΤΟ ΣΤΑ ΣΥΝΟΡΑ
+chase_instruction,Κάντε κλικ στα ΚΟΚΚΙΝΑ λαθραία αντικείμενα! Αφήστε τα ΠΡΑΣΙΝΑ αντικείμενα να περάσουν.
+chase_legend,ΚΟΚΚΙΝΟ = Πιάσε!   ΠΡΑΣΙΝΟ = Άφησε να περάσει
+chase_caught,Πιάστηκαν: {current} / {total}
+chase_perfect,Τέλεια σύλληψη! +{points} πόντοι!
+chase_partial,Πιάστηκαν {count} αντικείμενα. +{points} πόντοι!
+sorting_title,ΤΑΞΙΝΟΜΗΣΗ ΣΦΡΑΓΙΔΩΝ
+sorting_instruction,"Σύρετε τις σφραγίδες στον σωστό κάδο! Πράσινο = ΕΓΚΡΙΘΗΚΕ, Κόκκινο = ΑΠΟΡΡΙΦΘΗΚΕ"
+sorting_approved,ΕΓΚΡΙΘΗΚΕ
+sorting_denied,ΑΠΟΡΡΙΦΘΗΚΕ
+sorting_progress,Ταξινομήθηκαν: {sorted}/{total}  Σωστά: {correct}
+sorting_perfect,Τέλεια ταξινόμηση! +{points} πόντοι!
+sorting_partial,Ταξινομήθηκαν {correct}/{total} σωστά. +{points} πόντοι!
+fingerprint_title,ΑΝΤΙΣΤΟΙΧΙΑ ΔΑΚΤΥΛΙΚΟΥ ΑΠΟΤΥΠΩΜΑΤΟΣ
+fingerprint_instruction,Βρείτε το δακτυλικό αποτύπωμα που ταιριάζει με την αναφορά!
+fingerprint_reference,ΑΝΑΦΟΡΑ
+fingerprint_find_match,ΒΡΕΣ ΤΟ ΤΑΙΡΙΑΣΜΑ
+fingerprint_progress,Αντιστοιχισμένα: {current} / {total}
+fingerprint_success,Όλα τα δακτυλικά αποτυπώματα αντιστοιχίστηκαν! +{points} πόντοι!
+fingerprint_partial,Αντιστοιχίστηκαν {matched}/{total}. +{points} πόντοι!
+score_attack_mode_label,Λειτουργία Επίθεσης Βαθμολογίας
+score_attack_welcome_title,ΛΕΙΤΟΥΡΓΙΑ ΕΠΙΘΕΣΗΣ ΒΑΘΜΟΛΟΓΙΑΣ!
+score_attack_welcome_survive,Επιβίωσε όσο περισσότερο γίνεται!
+score_attack_welcome_difficulty,Η δυσκολία αυξάνεται με την πάροδο του χρόνου!

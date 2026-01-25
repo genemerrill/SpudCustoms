@@ -1,0 +1,132 @@
+﻿keys,hu
+alert_border_runner,HATÁRMETSZŐ ÉSZLELVE!\nKattintson a rakéta indításához!
+alert_rejected_fleeing,ELUTASÍTOTT KRUMPLI MENEKÜL!\nKattintson a rakéta indításához!
+alert_runner_escaped,FUTÁR ELMENEKÜLT!\nStrike hozzáadva!
+citation_runner_escaped,Egy határfutó elmenekült! Nem sikerült időben elfogni.
+alert_points_deducted,FUTÁR ELMENEKÜLT!\nStrike hozzáadva!\n-{penalty} pont!
+alert_perfect_hit,TÖKÉLETES TALÁLAT! +{perfect} pontossági bónusz pont
+alert_perfect_stamp,TÖKÉLETES BÉLYEGZÉS! +{points} pont!
+alert_combo,KOMBÓ x{mult}! +{streak} kombó bónusz pont
+alert_quota_met,"Kvóta teljesítve, műszak befejezve! \nBónusz: {bonus} pont!"
+alert_strike_removed,Strike eltávolítva!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Jó döntést hozott, tiszt.\n+{points} pont!"
+alert_wrong_decision,"Szükségtelen szenvedést okozott, tiszt...\n+1 Strike!"
+alert_potato_should_be_approved,"\nEz a krumpli minden követelménynek megfelel, és jóvá kellett volna hagyni."
+incorrect_decision,Helytelen döntés a dokumentum feldolgozásánál.
+alert_strike_out,Maximális strike-ok túllépve! A műszaknak vége.
+ui_score,Pontszám: {score}
+ui_quota,Kvóta: {current} / {target}
+ui_strikes,Strike-ok: {current} / {max}
+ui_click_megaphone,Kattintson a megafonra a következő krumpli behívásához
+ui_drag_document,Húzza a dokumentumot az ellenőrző asztalra
+ui_stamp_document,Válasszon bélyegzőt a jóváhagyáshoz vagy elutasításhoz
+ui_check_violations,Ellenőrizze a dokumentum szabálysértéseit
+Strike removed!,Strike eltávolítva!
+BORDER RUNNER DETECTED!\nClick to launch missile!,HATÁRMETSZŐ ÉSZLELVE!\nKattintson a rakéta indításához!
+REJECTED POTATO FLEEING!\nClick to launch missile!,ELUTASÍTOTT KRUMPLI MENEKÜL!\nKattintson a rakéta indításához!
+RUNNER ESCAPED!\nStrike added!,FUTÁR ELMENEKÜLT!\nStrike hozzáadva!
+Click megaphone to call the next potato,Kattintson a megafonra a következő krumpli behívásához
+Drag document to inspection table,Húzza a dokumentumot az ellenőrző asztalra
+Select a stamp to approve or reject,Válasszon bélyegzőt a jóváhagyáshoz vagy elutasításhoz
+Check for document violations,Ellenőrizze a dokumentum szabálysértéseit
+rule_explanation_header,SZABÁLY MAGYARÁZAT:
+rule_explanation_fresh,Nézze meg az 'Állapot' mezőt. Ha mást mond
+rule_explanation_sweet_potato,Nézze meg a 'Típus' mezőt. Ha azt mondja 'Édesburgonya' - ELUTASÍTÁS (nincs engedély)
+rule_explanation_chip_hill,Nézze meg az 'Ország' mezőt. Ha azt mondja 'Chip Hill' - ELUTASÍTÁS (tiltott)
+rule_explanation_age,Nézze meg a 'Születési dátum' mezőt. Számítsa ki az életkort és ellenőrizze a szabály szerint
+rule_explanation_gender,Nézze meg a 'Nem' mezőt és ellenőrizze az aktuális szabály szerint
+rule_footer_text,Ezeket a szabályokat MINDEN krumplira be kell tartatni
+rule_expired_note,A lejárt dokumentumokat MINDIG el kell utasítani.
+rule_tutorial_hint,Segítségre van szüksége? Kattintson bármely szabályra a magyarázatért
+alert_correct_decision_detailed,HELYES DÖNTÉS! +{points} pont\n{reason}
+alert_wrong_decision_detailed,ROSSZ DÖNTÉS! Strike hozzáadva!\n{reason}
+alert_reason_approved,A krumpli minden követelménynek megfelel - JÓVÁHAGYVA
+alert_reason_should_reject,El kellett volna UTASÍTANIA ezt a krumplit
+tutorial_check_type,Ellenőrizze az útlevél 'Típus' mezőjét
+tutorial_check_condition,Ellenőrizze az útlevél 'Állapot' mezőjét
+tutorial_check_country,Ellenőrizze az útlevél 'Ország' mezőjét
+tutorial_check_age,Ellenőrizze a 'Születési dátumot' az életkor kiszámításához
+tutorial_check_gender,Ellenőrizze az útlevél 'Nem' mezőjét
+alert_streak_bonus_minigame,5 egymás után! BÓNUSZ MINIJÁTÉK!
+alert_perfect_stamps_bonus_minigame,Tökéletes bélyegzők! BÓNUSZ MINIJÁTÉK!
+alert_runner_bonus_minigame,Gyanús tevékenység! BÓNUSZ MINIJÁTÉK!
+alert_new_minigame_unlocked,Új minijáték feloldva: {name}!
+alert_minigame_bonus,Minijáték bónusz: +{bonus} pont!
+high_score_display,Rekord: {score}
+new_high_score,ÚJ REKORD!
+month_1,Január
+month_2,Február
+month_3,Március
+month_4,Április
+month_5,Május
+month_6,Június
+month_7,Július
+month_8,Augusztus
+month_9,Szeptember
+month_10,Október
+month_11,November
+month_12,December
+citation_trash_label,SZEMÉT
+citation_header,HIVATALOS FIGYELMEZTETÉS
+citation_from_supervisor,Feladó: Russet Felügyelő
+citation_dismiss_hint,[Húzd a kukába az elvetéshez]
+minigame_times_up,"Idő lejárt! Semmi gond, vissza a munkához!"
+minigame_time_format,{másodperc}.{töredék}
+qte_title,GYORS ESEMÉNY
+qte_instruction,"Nyomd meg a gombokat, ahogy megjelennek!"
+qte_auto_completed,Automatikus teljesítés
+qte_accessibility_note,(QTE akadálymentesítés engedélyezve)
+qte_get_ready,Készülj fel...
+qte_progress,Haladás
+qte_key_prompt,[{billentyű}]
+qte_result,{successful} / {total} sikeres (+{points} pont)
+qte_image_pending,[Kép készülőben]
+evidence_title,BIZTONSÁGI ELLENŐRZÉS KÖZELEG
+evidence_instruction,"Takarítsd el az asztalod! Zúzd le a bizonyítékokat, rejtsd el a munkaeszközöket."
+evidence_suspicion,Gyanú: {percent}%
+evidence_items_remaining,Tárgyak: {count}
+evidence_times_up_found,Lejárt az idő! Megtalálták a bizonyítékot...
+evidence_times_up_suspicious,Lejárt az idő! Az ellenőrzés... alapos volt.
+codebreaker_title,KÓDTÖRŐ
+codebreaker_instruction,"Törd fel a kódot! Zöld = pontos egyezés, Sárga = jó szám, rossz helyen"
+codebreaker_enter_code,ADD MEG A KÓDOT
+codebreaker_submit,KÜLDÉS
+codebreaker_clear,TÖRLÉS
+codebreaker_previous_attempts,Előző próbálkozások:
+codebreaker_attempts,Próbálkozások: {current} / {max}
+codebreaker_result_exact_close,{exact} pontos
+codebreaker_result_exact,{exact} pontos
+codebreaker_result_close,{close} majdnem
+codebreaker_result_none,nincs találat
+codebreaker_success,Kód feltörve {attempts} próbálkozásból! +{points} pont!
+codebreaker_failure,Elfogyott a próbálkozás! A kód fentebb látható volt.
+scanner_title,DOKUMENTUM SZKENNER
+scanner_instruction,Húzza az UV lámpát a rejtett jelek megtalálásához! Kattintson a megerősítéshez.
+scanner_found,Megtalálva: {current} / {total}
+scanner_perfect,Tökéletes! Minden elem megtalálva! +{points} pont!
+scanner_partial,Szép munka! {found}/{total} megtalálva. +{points} pont!
+chase_title,HATÁRÜLDÖZÉS
+chase_instruction,Kattintson a PIROS csempészárukra! A ZÖLD tárgyakat engedje át.
+chase_legend,PIROS = Elkapni!   ZÖLD = Átengedni
+chase_caught,Elkapva: {current} / {total}
+chase_perfect,Tökéletes fogás! +{points} pont!
+chase_partial,{count} tárgy elkapva. +{points} pont!
+sorting_title,BÉLYEGZŐ RENDEZÉS
+sorting_instruction,"Húzza a bélyegzőket a megfelelő tartóba! Zöld = JÓVÁHAGYVA, Piros = ELUTASÍTVA"
+sorting_approved,JÓVÁHAGYVA
+sorting_denied,ELUTASÍTVA
+sorting_progress,Rendezve: {sorted}/{total}  Helyes: {correct}
+sorting_perfect,Tökéletes rendezés! +{points} pont!
+sorting_partial,{correct}/{total} helyesen rendezve. +{points} pont!
+fingerprint_title,UJJLENYOMAT EGYEZTETÉS
+fingerprint_instruction,"Keresse meg az ujjlenyomatot, amelyik megegyezik a referenciával!"
+fingerprint_reference,REFERENCIA
+fingerprint_find_match,TALÁLD MEG AZ EGYEZÉST
+fingerprint_progress,Egyező: {current} / {total}
+fingerprint_success,Minden ujjlenyomat egyezett! +{points} pont!
+fingerprint_partial,{matched}/{total} egyezett. +{points} pont!
+score_attack_mode_label,Pontvadászat Mód
+score_attack_welcome_title,PONTOKVADÁSZAT MÓD!
+score_attack_welcome_survive,"Éld túl, ameddig csak tudod!"
+score_attack_welcome_difficulty,A nehézség idővel növekszik!

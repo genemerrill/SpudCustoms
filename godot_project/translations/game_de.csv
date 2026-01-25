@@ -1,0 +1,132 @@
+﻿keys,de
+alert_border_runner,"GRENZLÄUFER ENTDECKT!\nKlicken Sie, um Rakete zu starten!"
+alert_rejected_fleeing,"ABGELEHNTER KARTOFFEL FLIEHT!\nKlicken Sie, um Rakete zu starten!"
+alert_runner_escaped,LÄUFER ENTKOMMEN!\nStrike hinzugefügt!
+citation_runner_escaped,Ein Grenzläufer ist entkommen! Sie haben ihn nicht rechtzeitig abgefangen.
+alert_points_deducted,LÄUFER ENTKOMMEN!\nStrike hinzugefügt!\n-{penalty} Punkte!
+alert_perfect_hit,PERFEKTER TREFFER! +{perfect} Präzisionsbonus-Punkte
+alert_perfect_stamp,PERFEKTER STEMPEL! +{points} Punkte!
+alert_combo,COMBO x{mult}! +{streak} Combo-Bonuspunkte
+alert_quota_met,"Quote erfüllt, Schicht beendet! \nBonus: {bonus} Punkte!"
+alert_strike_removed,Strike entfernt!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Sie haben die richtige Entscheidung getroffen, Offizier.\n+{points} Punkte!"
+alert_wrong_decision,"Sie haben unnötiges Leid verursacht, Offizier...\n+1 Strike!"
+alert_potato_should_be_approved,\nDiese Kartoffel erfüllt alle Anforderungen und hätte genehmigt werden sollen.
+incorrect_decision,Falsche Entscheidung bei der Dokumentenverarbeitung.
+alert_strike_out,Maximale Strikes überschritten! Ihre Schicht ist vorbei.
+ui_score,Punktestand: {score}
+ui_quota,Quote: {current} / {target}
+ui_strikes,Verwarnungen: {current} / {max}
+ui_click_megaphone,"Klicken Sie auf das Megafon, um die nächste Kartoffel zu rufen"
+ui_drag_document,Ziehen Sie das Dokument auf den Inspektionstisch
+ui_stamp_document,Wählen Sie einen Stempel zum Genehmigen oder Ablehnen
+ui_check_violations,Überprüfen Sie Dokumentenverstöße
+Strike removed!,Strike entfernt!
+BORDER RUNNER DETECTED!\nClick to launch missile!,"GRENZLÄUFER ENTDECKT!\nKlicken Sie, um Rakete zu starten!"
+REJECTED POTATO FLEEING!\nClick to launch missile!,"ABGELEHNTER KARTOFFEL FLIEHT!\nKlicken Sie, um Rakete zu starten!"
+RUNNER ESCAPED!\nStrike added!,LÄUFER ENTKOMMEN!\nStrike hinzugefügt!
+Click megaphone to call the next potato,"Klicken Sie auf das Megafon, um die nächste Kartoffel zu rufen"
+Drag document to inspection table,Ziehen Sie das Dokument auf den Inspektionstisch
+Select a stamp to approve or reject,Wählen Sie einen Stempel zum Genehmigen oder Ablehnen
+Check for document violations,Überprüfen Sie Dokumentenverstöße
+rule_explanation_header,REGEL ERKLÄRUNG:
+rule_explanation_fresh,Schauen Sie auf das Feld 'Zustand'. Wenn es etwas anderes als 'Frisch' sagt - ABLEHNEN
+rule_explanation_sweet_potato,Schauen Sie auf das Feld 'Typ'. Wenn es 'Süßkartoffel' sagt - ABLEHNEN (keine Genehmigungen)
+rule_explanation_chip_hill,Schauen Sie auf das Feld 'Land'. Wenn es 'Chip Hill' sagt - ABLEHNEN (verboten)
+rule_explanation_age,Schauen Sie auf das Feld 'Geburtsdatum'. Berechnen Sie das Alter und prüfen Sie gegen die Regel
+rule_explanation_gender,Schauen Sie auf das Feld 'Geschlecht' und prüfen Sie gegen die aktuelle Regel
+rule_footer_text,Diese Regeln müssen für ALLE Kartoffeln durchgesetzt werden
+rule_expired_note,Abgelaufene Dokumente müssen IMMER abgelehnt werden.
+rule_tutorial_hint,Brauchen Sie Hilfe? Klicken Sie auf eine Regel für eine Erklärung
+alert_correct_decision_detailed,RICHTIGE ENTSCHEIDUNG! +{points} Punkte\n{reason}
+alert_wrong_decision_detailed,FALSCHE ENTSCHEIDUNG! Strike hinzugefügt!\n{reason}
+alert_reason_approved,Kartoffel erfüllt alle Anforderungen - GENEHMIGT
+alert_reason_should_reject,Sie hätten diese Kartoffel ABLEHNEN sollen
+tutorial_check_type,Überprüfen Sie das Feld 'Typ' im Pass
+tutorial_check_condition,Überprüfen Sie das Feld 'Zustand' im Pass
+tutorial_check_country,Überprüfen Sie das Feld 'Land' im Pass
+tutorial_check_age,Überprüfen Sie das 'Geburtsdatum' zur Altersberechnung
+tutorial_check_gender,Überprüfen Sie das Feld 'Geschlecht' im Pass
+alert_streak_bonus_minigame,5 hintereinander! BONUS-MINISPIEL!
+alert_perfect_stamps_bonus_minigame,Perfekte Stempel! BONUS-MINISPIEL!
+alert_runner_bonus_minigame,Verdächtige Aktivität! BONUS-MINISPIEL!
+alert_new_minigame_unlocked,Neues Minispiel freigeschaltet: {name}!
+alert_minigame_bonus,Minispiel-Bonus: +{bonus} Punkte!
+high_score_display,Highscore: {score}
+new_high_score,NEUER HIGHSCORE!
+month_1,Januar
+month_2,Februar
+month_3,März
+month_4,April
+month_5,Mai
+month_6,Juni
+month_7,Juli
+month_8,August
+month_9,September
+month_10,Oktober
+month_11,November
+month_12,Dezember
+citation_trash_label,PAPIERKORB
+citation_header,AMTLICHE VERWARNUNG
+citation_from_supervisor,Von: Aufseher Russet
+citation_dismiss_hint,[Zum Schließen in den Papierkorb ziehen]
+minigame_times_up,"Zeit ist um! Keine Sorge, zurück an die Arbeit!"
+minigame_time_format,"{seconds},{fraction}"
+qte_title,SCHNELLZEIT-EREIGNIS
+qte_instruction,"Drücke die Tasten, wenn sie erscheinen!"
+qte_auto_completed,Automatisch abgeschlossen
+qte_accessibility_note,(QTE-Barrierefreiheit aktiviert)
+qte_get_ready,Bereit machen...
+qte_progress,Fortschritt
+qte_key_prompt,[{Taste}]
+qte_result,{successful} / {total} erfolgreich (+{points} Punkte)
+qte_image_pending,[Bild ausstehend]
+evidence_title,SICHERHEITSINSPEKTION STEHT BEVOR
+evidence_instruction,"Räum deinen Schreibtisch auf! Beweise vernichten, Arbeitsgegenstände verstecken."
+evidence_suspicion,Verdacht: {percent}%
+evidence_items_remaining,Gegenstände: {count}
+evidence_times_up_found,Zeit ist um! Sie haben die Beweise gefunden...
+evidence_times_up_suspicious,Zeit ist um! Die Inspektion war... gründlich.
+codebreaker_title,CODEKNACKER
+codebreaker_instruction,"Knack den Code! Grün = exakte Übereinstimmung, Gelb = richtige Ziffer, falscher Platz"
+codebreaker_enter_code,CODE EINGEBEN
+codebreaker_submit,BESTÄTIGEN
+codebreaker_clear,LÖSCHEN
+codebreaker_previous_attempts,Vorherige Versuche:
+codebreaker_attempts,Versuche: {current} / {max}
+codebreaker_result_exact_close,{exact} exakt
+codebreaker_result_exact,{exact} exakt
+codebreaker_result_close,{close} nah
+codebreaker_result_none,keine Treffer
+codebreaker_success,Code geknackt in {attempts} Versuchen! +{points} Punkte!
+codebreaker_failure,Keine Versuche mehr! Der Code wurde oben angezeigt.
+scanner_title,DOKUMENTENSCANNER
+scanner_instruction,"Ziehen Sie das UV-Licht, um versteckte Merkmale zu finden! Klicken Sie zur Bestätigung."
+scanner_found,Gefunden: {current} / {total}
+scanner_perfect,Perfekt! Alle Elemente gefunden! +{points} Punkte!
+scanner_partial,Gute Arbeit! {found}/{total} gefunden. +{points} Punkte!
+chase_title,GRENZJAGD
+chase_instruction,Klicken Sie auf die ROTEN Schmuggelwaren! Lassen Sie die GRÜNEN Gegenstände passieren.
+chase_legend,ROT = Fangen!   GRÜN = Passieren lassen
+chase_caught,Gefangen: {current} / {total}
+chase_perfect,Perfekter Fang! +{points} Punkte!
+chase_partial,{count} Gegenstände gefangen. +{points} Punkte!
+sorting_title,STEMPELSORTIERUNG
+sorting_instruction,"Ziehen Sie die Stempel in den richtigen Behälter! Grün = GENEHMIGT, Rot = ABGELEHNT"
+sorting_approved,GENEHMIGT
+sorting_denied,ABGELEHNT
+sorting_progress,Sortiert: {sorted}/{total}  Korrekt: {correct}
+sorting_perfect,Perfekte Sortierung! +{points} Punkte!
+sorting_partial,{correct}/{total} korrekt sortiert. +{points} Punkte!
+fingerprint_title,FINGERABDRUCK-ABGLEICH
+fingerprint_instruction,"Finden Sie den Fingerabdruck, der mit der Referenz übereinstimmt!"
+fingerprint_reference,REFERENZ
+fingerprint_find_match,FINDE DIE ÜBEREINSTIMMUNG
+fingerprint_progress,Abgeglichen: {current} / {total}
+fingerprint_success,Alle Fingerabdrücke stimmen überein! +{points} Punkte!
+fingerprint_partial,Abgeglichen {matched}/{total}. +{points} Punkte!
+score_attack_mode_label,Highscore-Modus
+score_attack_welcome_title,PUNKTEJAGD-MODUS!
+score_attack_welcome_survive,Überlebe so lange wie möglich!
+score_attack_welcome_difficulty,Der Schwierigkeitsgrad steigt mit der Zeit!

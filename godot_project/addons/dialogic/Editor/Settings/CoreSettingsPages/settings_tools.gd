@@ -1,9 +1,9 @@
 @tool
 extends Node
 
-var tool_thread : Thread
+var tool_thread: Thread
 var tool_progress := 1.0
-var tool_progress_mutex : Mutex
+var tool_progress_mutex: Mutex
 signal tool_finished_signal
 
 
@@ -19,7 +19,7 @@ func _ready() -> void:
 		%ToolButtons.add_child(button)
 
 
-func execute_tool(method:Callable) -> void:
+func execute_tool(method: Callable) -> void:
 	for button in %ToolButtons.get_children():
 		button.disabled = true
 
@@ -30,7 +30,6 @@ func execute_tool(method:Callable) -> void:
 
 	tool_thread = Thread.new()
 	tool_progress_mutex = Mutex.new()
-	print(method)
 	tool_thread.start(method)
 
 	await tool_finished_signal
@@ -39,11 +38,13 @@ func execute_tool(method:Callable) -> void:
 		button.disabled = false
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (tool_thread and tool_thread.is_alive()) or %ToolProgress.value < 1:
-		if tool_progress_mutex: tool_progress_mutex.lock()
+		if tool_progress_mutex:
+			tool_progress_mutex.lock()
 		%ToolProgress.value = tool_progress
-		if tool_progress_mutex: tool_progress_mutex.unlock()
+		if tool_progress_mutex:
+			tool_progress_mutex.unlock()
 		%ToolProgress.show()
 		if %ToolProgress.value == 1:
 			tool_finished_signal.emit()
@@ -55,14 +56,16 @@ func _exit_tree() -> void:
 		tool_thread.wait_to_finish()
 
 
-
 #region HELPERS
+
 
 ## Closes the current timeline in the Dialogic Editor and returns the timeline
 ## as a resource.
 ## If no timeline has been opened, returns null.
 func close_active_timeline() -> Resource:
-	var timeline_node: DialogicEditor = get_parent().settings_editor.editors_manager.editors['Timeline']['node']
+	var timeline_node: DialogicEditor = (
+		get_parent().settings_editor.editors_manager.editors["Timeline"]["node"]
+	)
 	# We will close this timeline to ensure it will properly update.
 	# By saving this reference, we can open it again.
 	var current_timeline := timeline_node.current_resource

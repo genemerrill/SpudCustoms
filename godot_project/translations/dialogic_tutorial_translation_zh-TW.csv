@@ -1,0 +1,46 @@
+﻿keys,zh-TW
+Text/156/text,歡迎來到 [pulse freq=2][color=MEDIUM_VIOLET_RED]馬鈴薯海關！[/color][/pulse]
+Text/157/text,本次訓練將教導您保護馬鈴薯邊境所需的 [wave amp=15 freq=2][color=DARK_ORANGE]基本技能[/color][/wave]。
+Text/158/text,您已被選中擔任重要職位：[color=DARK_ORANGE]邊境海關官員[/color]。
+Text/159/text,準備入境的馬鈴薯將在此處您的辦公室外排隊。
+Text/15a/text,若要開始處理馬鈴薯，您需要使用此處的開關開啟您的檢查站。
+Text/15b/text,您可以輕點擴音器，示意每位馬鈴薯靠近您的辦公室。
+Text/15c/text,馬鈴薯將一個接一個進入檢查站，並出示他們的文件。
+Text/15d/text,首先，將他們的文件移至檢查桌，以便仔細查看。
+Text/15e/text,然後，尋找 [tornado radius=3 freq=2][color=YELLOW]過期日期、不正確資訊或偽造跡象[/color][/tornado]。
+Text/15f/text,您的桌上備有文件蓋章用的印章，您可以點擊此處拉出印章條。
+Text/160/text,然後將文件置於您想要的印章下方...
+Text/161/text,點擊印章，將文件標記為 [color=CHARTREUSE]核准[/color] 或 [color=CRIMSON]拒絕[/color]...
+Text/162/text,然後將文件拖回給馬鈴薯，以完成您的決定！
+Text/163/text,有時，馬鈴薯會試圖 [color=CRIMSON]衝過您的檢查站[/color]。
+Text/164/text,您的檢查站設有直接上行鏈路，可讓您控制邊境牆沿線的 [pulse freq=3][color=CRIMSON]飛彈發射器[/color][/pulse]。
+Text/165/text,點擊這些「越境者」以發射飛彈並阻止他們。
+Text/166/text,請記住，每位成功越境的「越境者」都將計為您的一次 [wave amp=20 freq=3][color=CRIMSON]失誤[/color][/wave]。
+Text/167/text,失誤過多，您的班次將會... [tornado radius=3 freq=3][color=CRIMSON]永久終止。[/color][/tornado]
+Text/168/text,每個班次都有您需要處理的 [color=DARK_ORANGE]馬鈴薯配額[/color]，以完成當天工作。
+Text/169/text,您的分數會追蹤您與此檢查站的同事以及遙遠海關辦公室的官員相比的表現。
+Text/16a/text,每個班次結束後，您將看到您的表現摘要，以及您是否成功或未能履行職責。
+Text/16b/text,您將看到您如何處理越境者以及處理了多少文件的詳細分析。
+Text/16c/text,此外，還有您因快速處理文件、完美對齊印章或完美擊中越境馬鈴薯而獲得的任何獎金。
+Text/16d/text,您還將根據您在班次期間處理馬鈴薯的表現獲得績效評級，如果您超出預期，最多可獲得 3 個黃金印章。
+Text/16e/text,您可以在此處將每個班次的得分提交至全球海關官員資料庫，並查看您與世界各地最精銳的海關官員相比表現如何。
+Text/16f/text,如果您的班次成功，您將能點擊「繼續」並開始下一個班次。
+Text/170/text,您的工作很簡單。馬鈴薯會抵達您的檢查亭，您檢查他們的證件，並決定誰能通過。
+Text/171/text,我會[color=YELLOW]一步一步[/color]引導您了解基本知識。按照提示操作，您就會掌握訣竅。
+Text/172/text,斯普德（Spud）的安全取決於您的[pulse freq=2][color=DARK_ORANGE]警惕！[/color][/pulse]
+Text/174/text,讓我們開始您的[color=YELLOW]訓練班次[/color]...
+Text/180/text,但請小心——並非每個馬鈴薯的證件都齊全。
+Text/181/text,[color=RED]過期護照[/color]會自動遭到拒絕。概不例外。
+Text/tut_001/text,歡迎來到[pulse freq=2][color=MEDIUM_VIOLET_RED]薯類海關！[/color][/pulse]
+Text/tut_002/text,您已被選中擔任一個重要職位：[color=DARK_ORANGE]邊境海關官員[/color]。
+Text/tut_003/text,您的工作很簡單。馬鈴薯會抵達您的檢查亭，您檢查他們的證件，並決定誰能通過。
+Text/tut_004/text,但請小心 — 並非所有馬鈴薯的證件都符合規定。
+Text/tut_005/text,[color=RED]過期護照[/color]將自動遭到拒絕。沒有例外。
+Text/tut_006/text,我會引導您[color=YELLOW]循序漸進[/color]了解基本知識。按照提示操作，您很快就會上手。
+Text/tut_007/text,[pulse freq=2][color=RED]還有一件事！[/color][/pulse] 有些馬鈴薯認為證件無法通過檢查時，會試圖[color=CRIMSON]逃跑[/color]。
+Text/tut_008/text,當[color=RED]邊境逃犯[/color]試圖逃跑時，您會看到他們衝過您的檢查亭朝邊境奔去。
+Text/tut_009/text,這就是您的[color=CHARTREUSE]氣動飛彈發射器[/color]派上用場的地方。它是您控制面板上的大按鈕。
+Text/tut_010/text,當逃犯進入射程時，[color=YELLOW]點擊發射[/color]。瞄準[color=GOLD]目標區域中心[/color]以獲得額外分數！
+Text/tut_011/text,但請小心 — [color=RED]不要擊中隊列中無辜的馬鈴薯[/color]。這會讓您失去分數並受到一次懲罰！
+Text/tut_012/text,薯類世界的安全與保障取決於您的[pulse freq=2][color=DARK_ORANGE]警惕！[/color][/pulse]
+Text/tut_013/text,讓我們開始您的[color=YELLOW]訓練班次[/color]...

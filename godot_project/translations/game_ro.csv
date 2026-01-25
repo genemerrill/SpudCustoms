@@ -1,0 +1,132 @@
+﻿keys,ro
+alert_border_runner,FUGARUL DE FRONTIERĂ DETECTAT!\nApasă pentru a lansa racheta!
+alert_rejected_fleeing,CARTOF RESPINS FUGIND!\nApasă pentru a lansa racheta!
+alert_runner_escaped,FUGAR SCĂPAT!\nStrike adăugat!
+citation_runner_escaped,Un fugar a scăpat! Nu ai reușit să-l interceptezi la timp.
+alert_points_deducted,FUGAR SCĂPAT!\nStrike adăugat!\n-{penalty} puncte!
+alert_perfect_hit,LOVITURĂ PERFECTĂ! +{perfect} puncte bonus de precizie
+alert_perfect_stamp,ȘTAMPILĂ PERFECTĂ! +{points} puncte!
+alert_combo,COMBO x{mult}! +{streak} puncte bonus combo
+alert_quota_met,"Cotă îndeplinită, tură terminată! \nBonus: {bonus} puncte!"
+alert_strike_removed,Strike eliminat!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Ai luat decizia corectă, ofițer.\n+{points} puncte!"
+alert_wrong_decision,"Ai cauzat suferință inutilă, ofițer...\n+1 Strike!"
+alert_potato_should_be_approved,\nAcest cartof îndeplinește toate cerințele și ar fi trebuit aprobat.
+incorrect_decision,Decizie incorectă în procesarea documentului.
+alert_strike_out,Număr maxim de strike-uri depășit! Tura ta s-a încheiat.
+ui_score,Scor: {score}
+ui_quota,Cotă: {current} / {target}
+ui_strikes,Strike-uri: {current} / {max}
+ui_click_megaphone,Apasă megafonul pentru a chema următorul cartof
+ui_drag_document,Trage documentul la masa de inspecție
+ui_stamp_document,Selectează o ștampilă pentru a aproba sau respinge
+ui_check_violations,Verifică încălcările documentului
+Strike removed!,Strike eliminat!
+BORDER RUNNER DETECTED!\nClick to launch missile!,FUGARUL DE FRONTIERĂ DETECTAT!\nApasă pentru a lansa racheta!
+REJECTED POTATO FLEEING!\nClick to launch missile!,CARTOF RESPINS FUGIND!\nApasă pentru a lansa racheta!
+RUNNER ESCAPED!\nStrike added!,FUGAR SCĂPAT!\nStrike adăugat!
+Click megaphone to call the next potato,Apasă megafonul pentru a chema următorul cartof
+Drag document to inspection table,Trage documentul la masa de inspecție
+Select a stamp to approve or reject,Selectează o ștampilă pentru a aproba sau respinge
+Check for document violations,Verifică încălcările documentului
+rule_explanation_header,EXPLICAȚIA REGULII:
+rule_explanation_fresh,Olhe para o campo 'Condição'. Se disser algo diferente de 'Fresco' - REJEITAR
+rule_explanation_sweet_potato,Priviți câmpul 'Tip'. Dacă spune 'Cartof Dulce' - RESPINGE (fără permise)
+rule_explanation_chip_hill,Priviți câmpul 'Țară'. Dacă spune 'Chip Hill' - RESPINGE (interzis)
+rule_explanation_age,Priviți câmpul 'Data Nașterii'. Calculați vârsta și verificați împotriva regulii
+rule_explanation_gender,Priviți câmpul 'Gen' și verificați împotriva regulii actuale
+rule_footer_text,Aceste reguli trebuie aplicate pentru TOȚI cartofii
+rule_expired_note,Documentele expirate trebuie ÎNTOTDEAUNA respinse.
+rule_tutorial_hint,Precisa de ajuda? Clique em qualquer regra para uma explicação
+alert_correct_decision_detailed,DECIZIE CORECTĂ! +{points} puncte\n{reason}
+alert_wrong_decision_detailed,DECIZIE GREȘITĂ! Strike adăugat!\n{reason}
+alert_reason_approved,Cartofii îndeplinesc toate cerințele - APROBAT
+alert_reason_should_reject,Ar fi trebuit să RESPINGI acest cartof
+tutorial_check_type,Verificați câmpul 'Tip' din pașaport
+tutorial_check_condition,Verificați câmpul 'Condiție' din pașaport
+tutorial_check_country,Verificați câmpul 'Țară' din pașaport
+tutorial_check_age,Verificați 'Data Nașterii' pentru a calcula vârsta
+tutorial_check_gender,Verificați câmpul 'Gen' din pașaport
+alert_streak_bonus_minigame,5 la rând! MINIJOC BONUS!
+alert_perfect_stamps_bonus_minigame,Ștampile perfecte! MINIJOC BONUS!
+alert_runner_bonus_minigame,Activitate suspectă! MINIJOC BONUS!
+alert_new_minigame_unlocked,Minijoc nou deblocat: {name}!
+alert_minigame_bonus,Bonus minijoc: +{bonus} puncte!
+high_score_display,Scor maxim: {score}
+new_high_score,NOU SCOR MAXIM!
+month_1,Ianuarie
+month_2,Februarie
+month_3,Martie
+month_4,Aprilie
+month_5,Mai
+month_6,Iunie
+month_7,Iulie
+month_8,August
+month_9,Septembrie
+month_10,Octombrie
+month_11,Noiembrie
+month_12,Decembrie
+citation_trash_label,GUNOI
+citation_header,AVERTISMENT OFICIAL
+citation_from_supervisor,De la: Supervizor Russet
+citation_dismiss_hint,[Trageți la gunoi pentru a închide]
+minigame_times_up,"Timpul a expirat! Nu-ți face griji, înapoi la treabă!"
+minigame_time_format,{seconds}.{fraction}
+qte_title,EVENIMENT CU TIMP LIMITAT
+qte_instruction,Apasă tastele pe măsură ce apar!
+qte_auto_completed,Completat automat
+qte_accessibility_note,(Accesibilitate QTE activată)
+qte_get_ready,Pregătește-te...
+qte_progress,Progres
+qte_key_prompt,[{key}]
+qte_result,{successful} / {total} reușite (+{points} puncte)
+qte_image_pending,[Imagine în Așteptare]
+evidence_title,INSPECȚIE DE SECURITATE IMINENTĂ
+evidence_instruction,"Curăță-ți biroul! Distruge probele, ascunde obiectele de lucru."
+evidence_suspicion,Suspiciune: {percent}%
+evidence_items_remaining,Obiecte: {count}
+evidence_times_up_found,Timpul a expirat! Au găsit probele...
+evidence_times_up_suspicious,Timpul a expirat! Inspecția a fost... amănunțită.
+codebreaker_title,SPĂRGĂTOR DE CODURI
+codebreaker_instruction,"Spargi codul! Verde = potrivire exactă, Galben = cifră corectă, loc greșit"
+codebreaker_enter_code,INTRODU CODUL
+codebreaker_submit,TRIMITE
+codebreaker_clear,ȘTERGE
+codebreaker_previous_attempts,Încercări Anterioare:
+codebreaker_attempts,Încercări: {current} / {max}
+codebreaker_result_exact_close,{exact} potriviri exacte
+codebreaker_result_exact,{exact} potriviri exacte
+codebreaker_result_close,{close} potriviri apropiate
+codebreaker_result_none,nicio potrivire
+codebreaker_success,Cod descifrat în {attempts} încercări! +{points} puncte!
+codebreaker_failure,Ai rămas fără încercări! Codul a fost afișat mai sus.
+scanner_title,SCANNER DE DOCUMENTE
+scanner_instruction,Trage lumina UV pentru a găsi semne ascunse! Apasă pentru a confirma.
+scanner_found,Găsite: {current} / {total}
+scanner_perfect,Perfect! Toate elementele găsite! +{points} puncte!
+scanner_partial,Efort bun! Ai găsit {found}/{total}. +{points} puncte!
+chase_title,URMĂRIRE LA GRANIȚĂ
+chase_instruction,Apasă pe obiectele de contrabandă ROȘII! Lasă obiectele VERZI să treacă.
+chase_legend,ROȘU = Prinde!   VERDE = Lasă să treacă
+chase_caught,Prinse: {current} / {total}
+chase_perfect,Captură perfectă! +{points} puncte!
+chase_partial,Ai prins {count} obiecte. +{points} puncte!
+sorting_title,SORTARE ȘTAMPILE
+sorting_instruction,"Trage ștampilele în coșul corect! Verde = APROBAT, Roșu = REFUZAT"
+sorting_approved,APROBAT
+sorting_denied,REFUZAT
+sorting_progress,Sortate: {sorted}/{total}  Corecte: {correct}
+sorting_perfect,Sortare perfectă! +{points} puncte!
+sorting_partial,Ai sortat {correct}/{total} corect. +{points} puncte!
+fingerprint_title,POTRIVIRE AMPRENTĂ
+fingerprint_instruction,Găsește amprenta care se potrivește cu referința!
+fingerprint_reference,REFERINȚĂ
+fingerprint_find_match,GĂSEȘTE POTRIVIREA
+fingerprint_progress,Potriviri: {current} / {total}
+fingerprint_success,Toate amprentele s-au potrivit! +{points} puncte!
+fingerprint_partial,Potriviri {matched}/{total}. +{points} puncte!
+score_attack_mode_label,Mod Atac Scor
+score_attack_welcome_title,MOD ATAC SCOR!
+score_attack_welcome_survive,Supraviețuiește cât mai mult posibil!
+score_attack_welcome_difficulty,Dificultatea crește în timp!

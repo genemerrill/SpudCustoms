@@ -1,6 +1,8 @@
-extends Node2D
-## Manages the spawning of runners, missile targeting, and giblet effects when potatoes are destroyed
 class_name BorderRunnerSystem
+extends Node2D
+## Manages the spawning of runners, missile targeting,
+## and giblet effects when potatoes are destroyed
+
 signal game_over_triggered
 
 @export_group("Debugging")
@@ -8,6 +10,12 @@ signal game_over_triggered
 @export var unlimited_missiles = false
 ## Force Spuds to run the border for your entertainment
 @export var rapid_runners = false
+
+@export_group("Minigame Integration")
+## Chance that an unlocked minigame triggers instead of a border runner (0.25 = 25%)
+@export_range(0, 1, 0.01) var minigame_instead_chance: float = 0.25
+## Reference to the minigame launcher for checking unlocked games
+@export var minigame_launcher: MinigameLauncher = null
 
 @export_group("System References")
 ## Manager for handling the potato queue
@@ -23,13 +31,13 @@ signal game_over_triggered
 
 @export_group("Runner System")
 @export_subgroup("Spawn Settings")
-## Maximum number of simultaneous runners 
+## Maximum number of simultaneous runners
 @export var max_active_runners: int = 3
 @export_range(0, 1, 0.001) var runner_chance: float = 0.025
 ## Minimum time that must pass between runner spawn attempts (Seconds)
-@export var min_time_between_runs: float = 5 # Default: 10
+@export var min_time_between_runs: float = 5  # Default: 10
 ## Maximum time that can pass between runner spawn attempts (Seconds)
-@export var max_time_between_runs: float = 120 # Default: 120 seconds - 2 minutes
+@export var max_time_between_runs: float = 120  # Default: 120 seconds - 2 minutes
 ## Movement speed of runners along their escape path
 @export var runner_speed: float = 0.14
 
@@ -56,7 +64,6 @@ signal game_over_triggered
 ## Radius of explosion effect and damage area
 @export var explosion_size: float = 80
 
-
 @export_group("Giblet System")
 @export_subgroup("Visual Settings")
 ## Number of potato pieces that spawn when a runner is destroyed
@@ -77,6 +84,34 @@ signal game_over_triggered
 @export var gib_spin_speed: float = 13
 # Audio/Visual node references
 
+var smoke_particle_pool = []
+var max_smoke_particles = 50
+# Performance: Cache viewport rect to avoid recalculating every frame per missile
+var _cached_viewport_rect: Rect2 = Rect2()
+var _viewport_rect_valid: bool = false
+
+var explosion_sound_pool = [
+	preload("res://assets/audio/explosions/big distant thump 4.wav"),
+	preload("res://assets/audio/explosions/big distant thump 5.wav"),
+	preload("res://assets/audio/explosions/big distant thump 6.wav"),
+]
+
+# NEW: Additional missile sounds
+var missile_launch_sound = preload("res://assets/audio/gameplay/missile_launch.mp3")
+var missile_perfect_hit_sound = preload("res://assets/audio/gameplay/missile_perfect_hit.mp3")
+var combo_activate_sound = preload("res://assets/audio/gameplay/combo_activate.mp3")
+
+# Internal state tracking
+var is_enabled = true  # Track if system is enabled
+var is_in_dialogic = false  # Track if game is in dialogue mode
+var runner_streak: int = 0
+var time_since_last_run: float = 0.0
+var active_runners = []  # Array of active runners
+var active_missiles = []  # Array of active missiles
+var missile_cooldown_timer: float = 0.0
+var gib_textures: Array = []
+var difficulty_level
+
 @onready var alarm_sound = $AlarmSound
 @onready var explosion_sound = $ExplosionSound
 @onready var missile_sound = $MissileSound
@@ -88,152 +123,149 @@ signal game_over_triggered
 @onready var missile_frames: SpriteFrames
 @onready var smoke_frames: SpriteFrames
 @onready var explosion_frames: SpriteFrames
+# Performance: Use object pool for explosions
+var _explosion_pool: ExplosionPool = null
 
-var smoke_particle_pool = []
-var max_smoke_particles = 50
-
-var explosion_sound_pool = [
-	preload("res://assets/audio/explosions/big distant thump 4.wav"),
-	preload("res://assets/audio/explosions/big distant thump 5.wav"),
-	preload("res://assets/audio/explosions/big distant thump 6.wav"),
-]
-
-# Internal state tracking
-var is_enabled = true  # Track if system is enabled
-var is_in_dialogic = false # Track if game is in dialogue mode
-var runner_streak: int = 0
-var time_since_last_run: float = 0.0
-var active_runners = []  # Array of active runners
-var active_missiles = []  # Array of active missiles
-var missile_cooldown_timer: float = 0.0
-var gib_textures: Array = []
-var difficulty_level
 
 class Missile:
 	var sprite: AnimatedSprite2D
 	var smoke_trail: Array[AnimatedSprite2D] = []  # Array to store smoke trail sprites
 	var position: Vector2
+	var start_position: Vector2  # Track where missile was launched from
 	var target: Vector2
 	var rotation: float
 	var active: bool = true
 	var time_elapsed: float = 0.0
 	var smoke_spawn_timer: float = 0.0
 	var smoke_spawn_interval: float = 0.05  # Adjust for density of smoke trail
-	
+
 	func _init(sprite_frames):
 		sprite = AnimatedSprite2D.new()
 		sprite.sprite_frames = sprite_frames
 		sprite.visible = true
-		sprite.z_index = 8
+		sprite.z_index = ConstantZIndexes.Z_INDEX.MISSILES
 		if sprite.sprite_frames.has_animation("default"):
 			sprite.play("default")  # Start animation
 		else:
 			print("Error: No 'default' animation in sprite frames!")
+
 
 # Runner class to track multiple border runners
 class Runner:
 	var potato: Sprite2D
 	var path_follow: PathFollow2D
 	var has_escaped: bool = false
-	
+
 	func _init(p, pf):
 		potato = p
 		path_follow = pf
-	
+
 	func update(delta, speed):
 		if not potato or not path_follow or has_escaped:
 			return false
-		
+
 		var old_ratio = path_follow.progress_ratio
 		path_follow.progress_ratio += delta * speed
-		
+
 		# Check if runner reached the end
 		if path_follow.progress_ratio >= 0.99:
 			has_escaped = true
 			return true
 		return false
-	
+
 	func get_position() -> Vector2:
 		if potato:
 			return potato.global_position
 		return Vector2.ZERO
-	
+
 	func cleanup():
 		if path_follow:
 			path_follow.queue_free()
 		if potato:
 			potato.queue_free()
 
+
 func _ready():
 	# Create separate SpriteFrames instances for each animation type
 	var missile_frames = SpriteFrames.new()
 	var smoke_frames = SpriteFrames.new()
 	var explosion_frames = SpriteFrames.new()
-	
+
 	# Load the frames for explosion
-	var explosion_texture = preload("res://assets/effects/explosion_spritesheet_1.png")
-	var explosion_hframes = 26 # Adjust based on the actual spritesheet
+	var ExplosionTexture = preload("res://assets/effects/explosion_spritesheet_1.png")
+	var explosion_hframes = 26  # Adjust based on the actual spritesheet
 	var explosion_vframes = 1
-	
+
 	# Add animation frames for explosion
 	for i in range(explosion_hframes):
-		var region = Rect2(i * explosion_texture.get_width() / explosion_hframes, 0, 
-						 explosion_texture.get_width() / explosion_hframes, 
-						 explosion_texture.get_height())
+		var region = Rect2(
+			i * ExplosionTexture.get_width() / explosion_hframes,
+			0,
+			ExplosionTexture.get_width() / explosion_hframes,
+			ExplosionTexture.get_height()
+		)
 		var frame = AtlasTexture.new()
-		frame.atlas = explosion_texture
+		frame.atlas = ExplosionTexture
 		frame.region = region
 		explosion_frames.add_frame("default", frame)
-	
+
 	# Set animation speed for explosion
 	explosion_frames.set_animation_speed("default", 13)  # Frames per second
-	
+
 	# Load the frames for missile
-	var missile_texture = preload("res://assets/effects/rocket_small_spritesheet.png")
+	var MissileTexture = preload("res://assets/effects/rocket_small_spritesheet.png")
 	var missile_hframes = 2  # Adjust based on the actual spritesheet
-	
-		# Add animation frames for missile
+
+	# Add animation frames for missile
 	for i in range(missile_hframes):
-		var region = Rect2(i * missile_texture.get_width() / missile_hframes, 0, 
-						 missile_texture.get_width() / missile_hframes, 
-						 missile_texture.get_height())
+		var region = Rect2(
+			i * MissileTexture.get_width() / missile_hframes,
+			0,
+			MissileTexture.get_width() / missile_hframes,
+			MissileTexture.get_height()
+		)
 		var frame = AtlasTexture.new()
-		frame.atlas = missile_texture
+		frame.atlas = MissileTexture
 		frame.region = region
 		missile_frames.add_frame("default", frame)
-	
+
 	# Set animation speed for missile
 	missile_frames.set_animation_speed("default", 4)  # Frames per second
-	
+
 	# Do the same for smoke frames
-	var smoke_texture = preload("res://assets/effects/smoke_spritesheet.png")
+	var SmokeTexture = preload("res://assets/effects/smoke_spritesheet.png")
 	var smoke_hframes = 8  # Adjust based on actual spritesheet
-	
+
 	# Add animation frames for smoke
 	for i in range(smoke_hframes):
-		var region = Rect2(i * smoke_texture.get_width() / smoke_hframes, 0, 
-						 smoke_texture.get_width() / smoke_hframes, 
-						 smoke_texture.get_height())
+		var region = Rect2(
+			i * SmokeTexture.get_width() / smoke_hframes,
+			0,
+			SmokeTexture.get_width() / smoke_hframes,
+			SmokeTexture.get_height()
+		)
 		var frame = AtlasTexture.new()
-		frame.atlas = smoke_texture
+		frame.atlas = SmokeTexture
 		frame.region = region
 		smoke_frames.add_frame("default", frame)
-	
+
 	# Set animation speed for smoke
 	smoke_frames.set_animation_speed("default", 8)  # Frames per second
-	
+
 	# Store frames for later use
 	self.missile_frames = missile_frames
 	self.smoke_frames = smoke_frames
 	self.explosion_frames = explosion_frames  # Make sure to store this too
-	
+
 	if missile_collision_shape == null:
 		missile_collision_shape = $Area2D/CollisionShape2D
-	
+
 	# Configure difficulty level and set runner chance based on difficulty level
-	difficulty_level = Global.difficulty_level
+	# Configure difficulty level and set runner chance based on difficulty level
+	# REFACTORED: Use GameStateManager
+	difficulty_level = GameStateManager.get_difficulty() if GameStateManager else "Normal"
 	print("Setting Border Runner System to: ", difficulty_level)
-	
+
 	match difficulty_level:
 		"Easy":
 			runner_speed = 0.10
@@ -247,18 +279,26 @@ func _ready():
 			runner_speed = 0.16
 			runner_chance = 0.085
 			max_active_runners = 3
-		_: 
+		_:
 			runner_speed = 0.10
 			runner_chance = 0.10
 			max_active_runners = 2
-			
+
 	if rapid_runners:
 		runner_chance = 1.0
 
+	# Completely disable border runners during tutorial to let players learn
+	var is_tutorial = GameStateManager.is_tutorial_mode() if GameStateManager else false
+	var shift_num = GameStateManager.get_shift() if GameStateManager else 0
+	if shift_num == 0 or is_tutorial:
+		is_enabled = false
+		runner_chance = 0.0
+		print("BorderRunnerSystem DISABLED for tutorial shift")
+
 	if not queue_manager:
 		push_error("BorderRunnerSystem: Could not find QueueManager!")
-	print("BorderRunnerSystem initialized: Chance [", runner_chance, "]")
-	
+	print("BorderRunnerSystem initialized: Chance [", runner_chance, "] Enabled [", is_enabled, "]")
+
 	# Load gib textures
 	for i in range(1, 9):
 		var texture = load("res://assets/potato_giblets/giblet_" + str(i) + ".png")
@@ -266,76 +306,98 @@ func _ready():
 			gib_textures.append(texture)
 		else:
 			push_error("Failed to load giblet_" + str(i))
-			
+
 	# Initialize smoke particle pool
 	for i in range(max_smoke_particles):
 		var smoke = AnimatedSprite2D.new()
 		smoke.sprite_frames = smoke_frames
 		smoke.visible = false
 		add_child(smoke)
-		smoke_particle_pool.append(smoke)	
-			
+		smoke_particle_pool.append(smoke)
+
+	# Performance: Initialize explosion pool
+	_explosion_pool = ExplosionPool.new()
+	add_child(_explosion_pool)
+	_explosion_pool.initialize(explosion_frames, 15, self)
+
+	# REFACTORED: Direct reference to CursorManager autoload
+	if CursorManager:
+		CursorManager.register_missile_zone_callback(is_point_in_missile_zone)
+	else:
+		push_warning("BorderRunnerSystem: Could not find CursorManager for missile cursor")
+
+
 func _process(delta):
 	if not is_enabled or is_in_dialogic:
 		return
-		
+
 	if get_tree().paused:
 		return
-	
+
 	if not queue_manager:
 		print("No queue manager found!")
 		return
-	
+
+	# Performance: Cache viewport rect once per frame for all missiles
+	_cached_viewport_rect = get_viewport_rect().grow(100)
+
 	# Update missile cooldown timer
 	if missile_cooldown_timer > 0:
 		missile_cooldown_timer -= delta
-	
+
 	# Update all active missiles
 	update_missiles(delta)
-	
+
 	# Update all active runners
 	update_runners(delta)
-	
+
 	# Check if we can spawn a new runner
 	if active_runners.size() < max_active_runners:
 		time_since_last_run += delta
 		if rapid_runners:
 			min_time_between_runs = 1
 			max_time_between_runs = 1
-		
+
 		if time_since_last_run >= randi_range(min_time_between_runs, max_time_between_runs):
-			var roll = randf() # Random float between 0 and 1
+			var roll = randf()  # Random float between 0 and 1
 			var threshold = runner_chance * delta
-			
+
 			if roll < threshold:
 				attempt_spawn_runner()
+
 
 # Update all active missiles
 func update_missiles(delta):
 	var i = active_missiles.size() - 1
-	
+
 	while i >= 0:
 		var missile = active_missiles[i]
 		if not missile.active:
 			active_missiles.remove_at(i)
 			i -= 1
 			continue
-		
+
+		# Validate missile sprite is still valid - prevents crash if sprite was freed
+		if not is_instance_valid(missile.sprite):
+			active_missiles.remove_at(i)
+			i -= 1
+			continue
+
 		# Calculate direction and move missile
 		var direction = (missile.target - missile.position).normalized()
 		var distance_to_move = missile_speed * delta
 		missile.position += direction * distance_to_move
-		
+
 		# Update sprite position - this is critical!
 		missile.sprite.global_position = missile.position  # Use global_position instead
-		missile.sprite.rotation = direction.angle() + PI/2
-		
+		missile.sprite.rotation = direction.angle() + PI / 2
+
 		# Smoke trail logic
 		missile.smoke_spawn_timer += delta
 		if missile.smoke_spawn_timer >= missile.smoke_spawn_interval:
 			missile.smoke_spawn_timer = 0
 			spawn_smoke_particle(missile.position, direction)
-		
+
 		# Check if missile reached target
 		var distance_squared = missile.position.distance_squared_to(missile.target)
 		if distance_squared < 100:  # Slightly larger threshold (10 units squared)
@@ -343,28 +405,29 @@ func update_missiles(delta):
 			active_missiles.remove_at(i)
 			i -= 1
 			continue
-		
+
 		# Check if missile has gone significantly past its target
 		# This handles cases where missiles might "miss" their target
-		var start_to_target = missile.target - missile.sprite.global_position
-		var start_to_current = missile.position - missile.sprite.global_position
-		
+		var start_to_target = (missile.target - missile.start_position).length()
+		var start_to_current = (missile.position - missile.start_position).length()
+
 		# If the missile has moved 20% further than the target distance, it's gone too far
-		if start_to_current.length() > start_to_target.length() * 1.2:
+		if start_to_current > start_to_target * 1.2:
 			trigger_explosion(missile)
 			active_missiles.remove_at(i)
 			i -= 1
 			continue
-		
-		# Add a boundary check
-		var viewport_rect = get_viewport_rect().grow(100)  # Add some margin
-		if !viewport_rect.has_point(missile.position):
-			missile.sprite.queue_free()
+
+		# Add a boundary check - trigger explosion instead of silent removal
+		# Performance: Use cached viewport rect instead of recalculating per missile
+		if !_cached_viewport_rect.has_point(missile.position):
+			trigger_explosion(missile)
 			active_missiles.remove_at(i)
 			i -= 1
 			continue
-			
+
 		i -= 1
+
 
 func spawn_smoke_particle(position: Vector2, direction: Vector2):
 	# Get a particle from the pool
@@ -373,11 +436,11 @@ func spawn_smoke_particle(position: Vector2, direction: Vector2):
 		if not particle.visible:
 			smoke = particle
 			break
-			
+
 	# If no particles available, just return
 	if not smoke:
 		return
-		
+
 	# Configure the particle
 	# Randomly vary smoke size
 	var size_variation = randf_range(0.03, 0.05)
@@ -385,139 +448,207 @@ func spawn_smoke_particle(position: Vector2, direction: Vector2):
 	smoke.global_position = position - (direction * 20)
 	smoke.rotation = randf() * TAU
 	smoke.modulate.a = 1.0
-	smoke.z_index = 11
+	smoke.z_index = ConstantZIndexes.Z_INDEX.MISSILE_SMOKE
 	smoke.visible = true
 	smoke.play("default")
-	
+
 	# Create a tween for behavior
 	var tween = create_tween()
 	tween.set_parallel(true)
-	
+
 	# Fade out
 	tween.tween_property(smoke, "modulate:a", 0.0, 1.2)
-	
+
 	# Drift
-	var drift = direction.rotated(randf_range(-PI/4, PI/4)) * -50
+	var drift = direction.rotated(randf_range(-PI / 4, PI / 4)) * -50
 	tween.tween_property(smoke, "global_position", smoke.global_position + drift, 1.2)
-	
+
 	# make smoke darker as it ages
 	tween.tween_property(smoke, "modulate:r", 0.6, 1.2)
 	tween.tween_property(smoke, "modulate:g", 0.6, 1.2)
 	tween.tween_property(smoke, "modulate:b", 0.6, 1.2)
-	
+
 	# Scale ups
 	tween.tween_property(smoke, "scale", Vector2(0.07, 0.07), 1.2)
-	
+
 	# Add rotation over time - this is the key addition
 	var rotation_amount = randf_range(-PI, PI)  # Random rotation between -180° and 180°
 	tween.tween_property(smoke, "rotation", smoke.rotation + rotation_amount, 1.2)
-	
+
 	# Return to pool
-	tween.chain().tween_callback(func(): 
-		smoke.visible = false
-		smoke.stop() # Stop animation
+	tween.chain().tween_callback(
+		func():
+			smoke.visible = false
+			smoke.stop()  # Stop animation
 	)
+
 
 # Update all active runners
 func update_runners(delta):
 	var i = active_runners.size() - 1
-	
+
 	while i >= 0 and i < active_runners.size():
 		if active_runners.size() <= i:  # Additional safety check
 			break
 		var runner = active_runners[i]
-		
+
+		# Store reference to check if runner was removed by signal during follow_path
+		var runner_still_active = true
+
 		if runner.current_path_follow:
 			runner.follow_path(delta)
-		
-		# Check if runner has reached the end of the path
-		if runner.current_path_follow and runner.current_path_follow.progress_ratio >= 0.99:
-			handle_runner_escape(runner)
+			# Check if runner was removed from array by path_completed signal
+			# during follow_path (this can happen when progress_ratio >= 0.99)
+			if i >= active_runners.size() or active_runners[i] != runner:
+				runner_still_active = false
+
+		# Only try to remove if runner is still in the array at this index
+		# The path_completed signal handler may have already removed it
+		if runner_still_active and runner.current_path_follow and runner.current_path_follow.progress_ratio >= 0.99:
 			runner.cleanup()
-			active_runners.remove_at(i)
-		
+			# Double-check the runner is still at this index before removing
+			if i < active_runners.size() and active_runners[i] == runner:
+				active_runners.remove_at(i)
+
 		i -= 1
+
 
 func attempt_spawn_runner():
 	print("Attempting to spawn runner...")
 	if queue_manager.potatoes.size() > 0 and active_runners.size() < max_active_runners:
+		# Check if a minigame should trigger instead of a runner
+		if _try_trigger_minigame_instead():
+			time_since_last_run = 0.0
+			return  # Minigame event emitted, skip runner spawn
+
 		var potato = queue_manager.remove_front_potato()
 		if potato:
 			print("Starting new runner")
 			start_runner(potato)
 			time_since_last_run = 0.0
 
+
+## Try to trigger a minigame instead of a border runner.
+## Returns true if a minigame event was emitted, false otherwise.
+func _try_trigger_minigame_instead() -> bool:
+	# Need minigame launcher reference to check unlocked games
+	if not minigame_launcher:
+		return false
+
+	# Get list of unlocked minigames
+	var unlocked = minigame_launcher.get_unlocked_minigames()
+	if unlocked.is_empty():
+		return false
+
+	# Roll the chance (25% default)
+	if randf() > minigame_instead_chance:
+		return false
+
+	# Pick a random unlocked minigame
+	var random_type = unlocked[randi() % unlocked.size()]
+
+	# Emit event for mainGame.gd to handle (it checks the per-shift limit)
+	if EventBus:
+		EventBus.minigame_from_runner_requested.emit(random_type)
+		print("Minigame triggered instead of border runner: ", random_type)
+		return true
+
+	return false
+
+
 # In BorderRunnerSystem.gd
 func start_runner(potato: PotatoPerson, is_rejected: bool = false):
 	if not is_enabled or is_in_dialogic:
 		push_warning("BorderRunnerSystem disabled or in dialogue, no runners allowed.")
 		return
-		
+
 	# Ensure the potato is visible
 	potato.visible = true
 	potato.modulate.a = 1.0
-	potato.z_index = 8  # Ensure it's above background elements
-	
+	potato.z_index = ConstantZIndexes.Z_INDEX.RUNNER_POTATO  # Ensure it's above background elements
+
 	# Set the runner speed directly on the potato
 	potato.runner_base_speed = runner_speed  # Add this line
-	
+
 	# Play alarm and show alert
 	if alarm_sound and not alarm_sound.playing:
 		alarm_sound.play()
-		
-	# Add a visual indicator to show this was a rejected potato
-	var anger_indicator = Sprite2D.new()
-	anger_indicator.texture = preload("res://assets/effects/anger.png") # Create this small texture
-	anger_indicator.position = Vector2(0, -15) # Position above the potato
-	potato.add_child(anger_indicator)
-	
-	if is_rejected:
-		Global.display_red_alert(alert_label, alert_timer, "REJECTED POTATO FLEEING!\nClick to launch missile!")
+
+	# First check if this potato has an emote system
+	var emote_system = potato.get_node_or_null("PotatoEmoteSystem")
+	if emote_system and emote_system is PotatoEmoteSystem:
+		# Show an anger emote using the existing system
+		# Change the potato's brain state to ANGRY
+		potato.change_brain_state(potato.PotatoBrainState.ANGRY)
+
+		# Show a specific angry emote
+		emote_system.show_random_emote_from_category("negative")
+
+		# Make sure emoting is enabled for this potato
+		emote_system.emoting_enabled = true
+
+		# Set longer duration for the anger emote
+		emote_system.emote_duration = 5.0
 	else:
-		Global.display_red_alert(alert_label, alert_timer, "BORDER RUNNER DETECTED!\nClick to launch missile!")
-	
+		push_warning("No PotatoEmoteSystem found on potato, cannot show anger emote")
+
+	if is_rejected:
+		# REFACTORED: Use EventBus
+		EventBus.show_alert(tr("alert_rejected_fleeing"), false)
+	else:
+		# REFACTORED: Use EventBus
+		EventBus.show_alert(tr("alert_border_runner"), false)
+
 	# Get all available runner paths
 	var paths_node = %RunnerPaths
 	if not paths_node:
 		push_error("Runner paths node not found!")
 		return
-		
+
 	var available_paths = []
-	
+
 	# Collect all valid runner paths
 	for child in paths_node.get_children():
 		if child.name.begins_with("RunnerPath"):
 			available_paths.append(child)
-	
+
 	if available_paths.is_empty():
 		push_error("No runner paths found!")
 		return
-		
+
 	# Randomly select a path
 	var path = available_paths[randi() % available_paths.size()]
 	print("Selected runner path: ", path.name)
-	
+
 	# Attach potato to the path and set its state
 	potato.attach_to_path(path)
 	potato.set_state(potato.TaterState.RUNNING)
-	
+
 	# Connect to path completion signal
 	potato.path_completed.connect(_on_runner_completed.bind(potato))
-	
+
 	# Connect to destroyed signal
 	potato.destroyed.connect(_on_runner_destroyed)
-	
+
 	# Add to active runners list
 	active_runners.append(potato)
+
 
 func _on_runner_completed(potato: PotatoPerson):
 	# Runner escaped
 	handle_runner_escape(potato)
-	
+
+	# Disable emotes when runner is complete
+	var emote_system = potato.get_node_or_null("PotatoEmoteSystem")
+	if emote_system and emote_system is PotatoEmoteSystem:
+		emote_system.emoting_enabled = false
+		emote_system._hide_emote()
+
 	# Remove from active runners list
 	var index = active_runners.find(potato)
 	if index >= 0:
 		active_runners.remove_at(index)
+
 
 func _on_runner_destroyed(position: Vector2):
 	# Create explosion effects at the position
@@ -525,51 +656,41 @@ func _on_runner_destroyed(position: Vector2):
 	# Maybe trigger sound effects or other visual effects
 	#trigger_explosion(position)
 
-func handle_runner_escape(runner: PotatoPerson):
+
+func handle_runner_escape(_runner: PotatoPerson):
 	print("Runner has escaped!")
 	# Reset the runner streak
-	runner_streak = 0 
+	runner_streak = 0
 
-	# Store original score to check if points were deducted
-	var original_score = Global.score
-	var points_to_remove = min(escape_penalty, Global.score)  # Only remove what's available
+	# REFACTORED: Emit event instead of directly modifying Global
+	# The GameStateManager will handle the state changes
+	EventBus.emit_runner_escaped("potato", {
+		"penalty": escape_penalty,
+		"runner_streak_reset": true
+	})
 
-	# Apply score penalty and prevent negative score
-	Global.score = max(0, Global.score - points_to_remove)
-	if score_label:
-		score_label.text = "Score: {total_points}".format({
-			"total_points": Global.score
-		})
+	# Subscribe to UI update events from GameStateManager
+	# For backward compatibility, also update local UI references
+	if score_label and GameStateManager:
+		score_label.text = tr("ui_score").format({"score": str(GameStateManager.get_score())})
 
-	# Update alert to show penalty
-	if points_to_remove == 0:
-		# No points were deducted
-		Global.display_red_alert(alert_label, alert_timer, "RUNNER ESCAPED!\nStrike added!")
-	else:
-		# Points were deducted, show the penalty
-		Global.display_red_alert(alert_label, alert_timer, "RUNNER ESCAPED!\nStrike added!\n-{penalty} points!".format({
-			"penalty": points_to_remove
-		}))
-			
-	print("Before strike: " + str(Global.strikes))
-	
-	# Add one strike to the total strikes stored in the root node of the scene
-	Global.strikes += 1
-	
-	if strike_label:
-		strike_label.text = "Strikes: " + str(Global.strikes) + " / " + str(Global.max_strikes)
-	
-	if Global.strikes >= Global.max_strikes:
+	if strike_label and GameStateManager:
+		strike_label.text = "Strikes: " + str(GameStateManager.get_strikes()) + " / " + str(GameStateManager.get_max_strikes())
+
+	# Check for game over through GameStateManager
+	if GameStateManager and GameStateManager.get_strikes() >= GameStateManager.get_max_strikes():
 		print("DEBUG: Maximum strikes reached! Emitting game over signal")
 		emit_signal("game_over_triggered")
 	else:
-		print("DEBUG: After strike: " + str(Global.strikes) + "/" + str(Global.max_strikes))
+		if GameStateManager:
+			print("DEBUG: After strike: " + str(GameStateManager.get_strikes()) + "/" + str(GameStateManager.get_max_strikes()))
 
-	
-	
+
 func _input(event):
 	if not is_enabled or is_in_dialogic:
 		return
+
+	# Handle mouse input for missiles
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			# Check if the click is within the missile zone
@@ -580,8 +701,43 @@ func _input(event):
 					launch_missile(event.position)
 					# Reset cooldown timer
 					missile_cooldown_timer = missile_cooldown
+					# Provide haptic feedback for controller
+					if ControllerManager and ControllerManager.is_controller_mode():
+						ControllerManager.rumble_medium()
 
-func _unhandled_input(event):
+	# Handle controller input for missiles (RT or A button)
+	if event.is_action_pressed("controller_rt") or event.is_action_pressed("controller_accept"):
+		_handle_controller_fire()
+
+
+## Handle controller fire input - uses virtual cursor or right stick position
+func _handle_controller_fire() -> void:
+	if not is_enabled or is_in_dialogic:
+		return
+
+	# Check cooldown
+	if not unlimited_missiles and missile_cooldown_timer > 0:
+		return
+
+	# Get cursor position (virtual cursor for controller or mouse position)
+	var cursor_pos: Vector2
+	if VirtualCursor and VirtualCursor.is_visible:
+		cursor_pos = VirtualCursor.get_cursor_position()
+	else:
+		cursor_pos = get_viewport().get_mouse_position()
+
+	# Check if cursor is in missile zone
+	var missile_zone = get_missile_zone()
+	if missile_zone.has_point(cursor_pos):
+		launch_missile(cursor_pos)
+		missile_cooldown_timer = missile_cooldown
+
+		# Provide haptic feedback
+		if ControllerManager:
+			ControllerManager.rumble_medium()
+
+
+func _unhandled_input(_event):
 	if not is_enabled or is_in_dialogic:
 		return
 
@@ -590,258 +746,425 @@ func launch_missile(target_pos):
 	if not is_enabled or is_in_dialogic:
 		#print("BorderRunnerSystem disabled or in dialogue, no missiles allowed.")
 		return
-	print("Launching missile: Max Missiles [%d] / Current Missiles [%d]" % [max_missiles, active_missiles.size()])
-	
+	print(
+		(
+			"Launching missile: Max Missiles [%d] / Current Missiles [%d]"
+			% [max_missiles, active_missiles.size()]
+		)
+	)
+
 	if active_missiles.size() >= max_missiles and not unlimited_missiles:
 		print("Maximum number of missiles reached. Cannot launch.")
 		return
-		
+
 	print("Launching missile at: ", target_pos)
-	
+
 	# More detailed missile creation logging
 	var missile = Missile.new(missile_frames)
 	if not missile.sprite:
 		push_error("Failed to create missile sprite!")
 		return
-	
+
 	add_child(missile.sprite)
-	
+
 	var viewport_rect = get_viewport_rect()
 	#print("Viewport rect: ", viewport_rect)
-	
+
 	# More explicit missile start position logging
 	missile.position = Vector2(-100, -100)
+	missile.start_position = missile.position  # Store start position for overshoot detection
 	missile.target = target_pos
-	
+
 	#print("Missile start position: ", missile.position)
 	#print("Missile target position: ", missile.target)
-	
+
 	missile.sprite.global_position = missile.position
-	missile.sprite.rotation = (target_pos - missile.position).normalized().angle() + PI/2
+	missile.sprite.rotation = (target_pos - missile.position).normalized().angle() + PI / 2
 	shift_stats.missiles_fired += 1
-	
+
 	# Play activation and launch sound - FIX THIS PART
 	if missile_sound and missile_sound.get_instance_id() != 0:
 		# Create a dedicated audio player for the missile sound to prevent interruption
 		var launch_player = AudioStreamPlayer2D.new()
-		launch_player.stream = missile_sound.stream
+		# NEW: Use new missile launch sound
+		launch_player.stream = missile_launch_sound
 		launch_player.volume_db = -5.0  # Adjust volume as needed
-		launch_player.pitch_scale = randf_range(0.8, 1.2)
+		launch_player.pitch_scale = randf_range(0.9, 1.1)
 		launch_player.bus = "SFX"
 		launch_player.autoplay = true
 		launch_player.position = missile.position
 		add_child(launch_player)
-		
+
 		# Auto-cleanup after playing
 		launch_player.finished.connect(launch_player.queue_free)
 	else:
 		print("ERROR: Missile sound not loaded properly")
 	active_missiles.append(missile)
-	
+
 	print("Missile launched: Active Missiles [", active_missiles.size(), "]")
+
+
+# Handle explosion animation completion
+func _on_explosion_animation_finished(explosion: AnimatedSprite2D) -> void:
+	explosion.queue_free()
+
+
+# Handle explosion cleanup after timeout
+func _on_explosion_cleanup_timeout(explosion: AnimatedSprite2D) -> void:
+	if is_instance_valid(explosion):
+		explosion.queue_free()
+
+
+# Handle smoke particle animation completion
+func _on_smoke_animation_finished(smoke: AnimatedSprite2D) -> void:
+	smoke.queue_free()
+
+
+# Handle smoke z-index adjustment after delay
+func _on_smoke_alpha_timeout(smoke: AnimatedSprite2D) -> void:
+	if is_instance_valid(smoke):
+		smoke.z_index = ConstantZIndexes.Z_INDEX.EXPLOSION_SMOKE
+
+
+# Handle smoke cleanup after timeout
+func _on_smoke_cleanup_timeout(smoke: AnimatedSprite2D) -> void:
+	if is_instance_valid(smoke):
+		smoke.queue_free()
+
 
 func trigger_explosion(missile_or_position):
 	#print("Triggering explosion")
 	var explosion_position
-	
+
 	# Check if we received a missile object or a position
 	if missile_or_position is Vector2:
 		explosion_position = missile_or_position
 	else:
 		var missile = missile_or_position
-		
+
 		# Get the missile sprite's size
 		var missile_length = 0
-		
+		var angle = 0.0
+
 		# For AnimatedSprite2D, we need to access frames differently
-		if missile.sprite and missile.sprite.sprite_frames:
+		# Use is_instance_valid to prevent crashes if sprite was already freed
+		if is_instance_valid(missile.sprite) and missile.sprite.sprite_frames:
 			# Get the current animation
 			var current_anim = missile.sprite.animation
 			# Get the current frame index
 			var current_frame = missile.sprite.frame
 			# Try to get the texture from the sprite frames
-			var texture = missile.sprite.sprite_frames.get_frame_texture(current_anim, current_frame)
+			var texture = missile.sprite.sprite_frames.get_frame_texture(
+				current_anim, current_frame
+			)
 			if texture:
 				missile_length = texture.get_height() * 0.5 * missile.sprite.scale.y
-		
-		# Calculate tip position using the sprite's rotation
-		var angle = missile.sprite.rotation - PI/2  # Adjust for the initial PI/2 offset
+			# Calculate tip position using the sprite's rotation
+			angle = missile.sprite.rotation - PI / 2  # Adjust for the initial PI/2 offset
+
 		var tip_offset = Vector2(cos(angle), sin(angle)) * missile_length
 		explosion_position = missile.position + tip_offset
-	
+
 	# Trigger screen shake - find the main game node correctly
 	# Navigate up the scene tree to find the Root node
 	var main_game = self
 	while main_game and main_game.get_parent() and main_game.name != "Root":
 		main_game = main_game.get_parent()
-	
+
 	if main_game and main_game.has_method("shake_screen"):
 		# Medium shake for regular explosions
 		main_game.shake_screen(12.0, 0.3)
 	else:
 		push_error("Could not find main game node with shake_screen method!")
 		#print("Current node: ", self.name, ", Parent: ", get_parent().name if get_parent() else "none")
-	
-	# Create explosion animation
-	var explosion = AnimatedSprite2D.new()
-	explosion.sprite_frames = explosion_frames
-	explosion.global_position = explosion_position
-	explosion.scale = Vector2(explosion_size / 16.0, explosion_size / 16.0) * randf_range(0.5, 2)
-	explosion.z_index = 12  # Above missiles
-	explosion.play("default")
-		
-	# Ensure explosion is removed after animation
-	explosion.animation_finished.connect(func(): 
-		#explosion.queue_free()
-		explosion.stop()
-		explosion.frame = randi_range(23, 25)
-	)
-	# Fallback timer to ensure removal
-	var cleanup_timer = get_tree().create_timer(2.0)
-	cleanup_timer.timeout.connect(func():
-		if is_instance_valid(explosion):
-			#explosion.queue_free()
-			explosion.stop()
-			explosion.frame = randi_range(23, 25)
-			
-	)
-	
-	# Create a tween for scaling and fading
-	var exp_tween = create_tween()
-	exp_tween.set_parallel(true)
-	
-	# Scale up with bounce effect
-	exp_tween.tween_property(explosion, "scale", 
-		Vector2(explosion_size / 32.0, explosion_size / 32.0) * randf_range(0.8, 1.2), 0.7)\
-		.set_trans(Tween.TRANS_ELASTIC)\
-		.set_ease(Tween.EASE_OUT)
-		 # Fade out explosion
-		
-	exp_tween.tween_property(explosion, "modulate:a", 0.5 * randf_range(0.8, 1.2), 3)\
-		.set_delay(0.2)
-	add_child(explosion)
-	
-		# Brief game pause for impact
+
+	# Create explosion animation using pool (performance optimization)
+	var explosion: AnimatedSprite2D
+	if _explosion_pool:
+		explosion = _explosion_pool.spawn_explosion(
+			explosion_position,
+			explosion_size / 16.0,  # base_scale
+			0.2,  # fade_delay
+			3.0,  # fade_duration
+			true  # auto_return to pool
+		)
+	else:
+		# Fallback to manual creation if pool not available
+		explosion = AnimatedSprite2D.new()
+		explosion.sprite_frames = explosion_frames
+		explosion.global_position = explosion_position
+		explosion.scale = Vector2(explosion_size / 16.0, explosion_size / 16.0) * randf_range(0.5, 2)
+		explosion.z_index = ConstantZIndexes.Z_INDEX.EXPLOSIONS
+		explosion.play("default")
+		explosion.animation_finished.connect(_on_explosion_animation_finished.bind(explosion))
+		var cleanup_timer = get_tree().create_timer(2.0)
+		cleanup_timer.timeout.connect(_on_explosion_cleanup_timeout.bind(explosion))
+		var exp_tween = create_tween()
+		exp_tween.set_parallel(true)
+		exp_tween.tween_property(
+			explosion, "scale",
+			Vector2(explosion_size / 32.0, explosion_size / 32.0) * randf_range(0.8, 1.2), 0.7
+		).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		exp_tween.tween_property(explosion, "modulate:a", 0.5 * randf_range(0.8, 1.2), 3).set_delay(0.2)
+		add_child(explosion)
+
+	# Brief game pause for impact
 	#var previous_pause_state = get_tree().paused
 	#get_tree().paused = true
-	
+
 	# Create a timer to unpause after a short duration
 	#var unpause_timer = get_tree().create_timer(0.02)  # 20 milliseconds
 	#unpause_timer.timeout.connect(func():
-	#	get_tree().paused = previous_pause_state
+	#   get_tree().paused = previous_pause_state
 	#)
 	# Then, in your trigger_explosion function, replace the current explosion sound code:
-	if explosion_sound and explosion_sound.get_instance_id() != 0:
+	if explosion_sound and explosion_sound.get_instance_id() != 0 and explosion_sound_pool.size() > 0:
 		# Create a dedicated audio player for the explosion sound
 		var explosion_player = AudioStreamPlayer2D.new()
-		
-		# Pick a random sound from the pool
+
+		# Pick a random sound from the pool (safely with size check already done above)
 		var random_sound_index = randi() % explosion_sound_pool.size()
 		explosion_player.stream = explosion_sound_pool[random_sound_index]
-		
+
 		# Add volume and position settings
 		explosion_player.volume_db = 5.0  # Adjust volume as needed
 		explosion_player.position = explosion_position
-		
+
 		# Add pitch variation - wider range for explosions
 		var pitch_variance = randf_range(0.8, 1.25)
 		explosion_player.pitch_scale = pitch_variance
-		
+
 		# Set the audio bus and play
 		explosion_player.bus = "SFX"
 		explosion_player.autoplay = true
 		add_child(explosion_player)
-		
+
 		# Auto-cleanup after playing
 		explosion_player.finished.connect(explosion_player.queue_free)
-	
+
 	# Create smoke animation
 	var smoke = AnimatedSprite2D.new()
 	smoke.sprite_frames = smoke_frames
 	smoke.global_position = explosion_position
 	smoke.scale = Vector2(0.05, 0.05)
-	smoke.z_index = 13 # Above missiles, below explosion
+	smoke.z_index = ConstantZIndexes.Z_INDEX.EXPLOSION_SMOKE  # Above missiles, below explosion
 	smoke.play("default")
-	
-		# Create a tween for behavior
+
+	# Create a tween for behavior
 	var tween = create_tween()
 	tween.set_parallel(true)
-	
-		# Fade out
+
+	# Fade out
 	tween.tween_property(smoke, "modulate:a", 0.0, 1.5)
-	
+
 	# make smoke darker as it ages
 	tween.tween_property(smoke, "modulate:r", 0.6, 1.5)
 	tween.tween_property(smoke, "modulate:g", 0.6, 1.5)
 	tween.tween_property(smoke, "modulate:b", 0.6, 1.5)
-	
+
 	# Scale ups
 	tween.tween_property(smoke, "scale", Vector2(0.10, 0.10), 1.5)
-	
+
 	# Ensure smoke is removed after animation
-	smoke.animation_finished.connect(func(): 
-		smoke.queue_free()
-	)
-		
+	smoke.animation_finished.connect(func(): smoke.queue_free())
+
 	var smoke_alpha_timer = get_tree().create_timer(0.6)
-	smoke_alpha_timer.timeout.connect(func():
-		if is_instance_valid(smoke):
-			smoke.z_index = 13
+	smoke_alpha_timer.timeout.connect(
+		func():
+			if is_instance_valid(smoke):
+				smoke.z_index = ConstantZIndexes.Z_INDEX.EXPLOSION_SMOKE
 	)
-	
+
 	var smoke_cleanup_timer = get_tree().create_timer(1.5)
-	smoke_cleanup_timer.timeout.connect(func():
-		if is_instance_valid(smoke):
-			smoke.queue_free()
+	smoke_cleanup_timer.timeout.connect(
+		func():
+			if is_instance_valid(smoke):
+				smoke.queue_free()
 	)
-	
+
 	add_child(smoke)
-	
+
 	# Clean up missile but leave smoke trail to fade out
 	if missile_or_position is Vector2:
 		# No missile to clean up, just a position
 		pass
 	else:
-		missile_or_position.sprite.queue_free()
+		if is_instance_valid(missile_or_position.sprite):
+			missile_or_position.sprite.queue_free()
 		missile_or_position.active = false
-	
+
 	# Play explosion sound
 	if explosion_sound and not explosion_sound.playing:
 		explosion_sound.play()
-	
-	# Check if we hit any runners
-	check_runner_hits(explosion_position)
 
-func check_runner_hits(explosion_pos):
-	var hit_any = false
+	# Check if we hit any runners or innocent potatoes
+	var hit_any_runner = false
+	var hit_any_innocent = false
+	var innocent_penalty = 500
 	var runners_to_hit = []
 	var i = active_runners.size() - 1
-	
+
 	# First, collect all runners to hit
 	while i >= 0:
+		# Safety check: ensure index is still valid (array could be modified by signals)
+		if i >= active_runners.size():
+			i -= 1
+			continue
+
 		var runner = active_runners[i]
-		var distance = runner.global_position.distance_to(explosion_pos)
-		
-		if distance < (explosion_size * 0.65 ) :
+
+		# Validate runner is still a valid instance
+		if not is_instance_valid(runner):
+			active_runners.remove_at(i)
+			i -= 1
+			continue
+
+		var distance = runner.global_position.distance_to(explosion_position)
+
+		if distance < (explosion_size * 0.65):
 			# Store for later processing
 			runners_to_hit.append(runner)
 			active_runners.remove_at(i)
-			hit_any = true
-		
+			hit_any_runner = true
+
 		i -= 1
-		
+
+	# Then process the hits afterward to avoid recursive signal issues
+	for runner in runners_to_hit:
+		handle_successful_hit(runner, explosion_position)
+		runner.apply_damage()
+
+	# Now check for innocent potatoes (non-runners)
+	var all_potatoes = get_tree().get_nodes_in_group("PotatoPerson")
+	for potato in all_potatoes:
+		# Skip if not valid or already being processed as a runner
+		if not is_instance_valid(potato) or runners_to_hit.has(potato):
+			continue
+
+		# Skip if it's in the active runners list
+		if active_runners.has(potato):
+			continue
+
+		# Check distance to explosion
+		var distance = potato.global_position.distance_to(explosion_position)
+
+		# If within explosion radius and not a runner
+		if distance < (explosion_size * 0.65):
+			hit_any_innocent = true
+			print("Hit innocent potato!")
+
+			# Apply damage to the innocent potato
+			if potato.has_method("apply_damage"):
+				potato.apply_damage()
+
+			# Spawn gibs at the innocent potato's position
+			spawn_gibs(potato.global_position)
+
+			# REFACTORED: Emit innocent hit event instead of direct Global mutation
+			var penalty_message = "INNOCENT POTATO KILLED! -{penalty} POINTS!".format({"penalty": innocent_penalty})
+			EventBus.innocent_hit.emit(innocent_penalty, {
+				"message": penalty_message,
+				"potato_position": potato.global_position
+			})
+
+			# For backward compatibility, update local UI
+			if score_label and GameStateManager:
+				score_label.text = tr("ui_score").format({"score": str(GameStateManager.get_score())})
+
+			# Keep backward compatibility alert
+			# REFACTORED: Use EventBus
+			EventBus.show_alert(penalty_message, false)
+
+	if not hit_any_runner and not hit_any_innocent:
+		print("Missile missed all potatoes")
+		runner_streak = 0
+
+
+func check_runner_hits(explosion_pos):
+	var hit_any_runner = false
+	var hit_any_innocent = false
+	var innocent_penalty = 500
+	var runners_to_hit = []
+	var i = active_runners.size() - 1
+
+	# First, collect all runners to hit
+	while i >= 0:
+		# Safety check: ensure index is still valid (array could be modified by signals)
+		if i >= active_runners.size():
+			i -= 1
+			continue
+
+		var runner = active_runners[i]
+
+		# Validate runner is still a valid instance
+		if not is_instance_valid(runner):
+			active_runners.remove_at(i)
+			i -= 1
+			continue
+
+		var distance = runner.global_position.distance_to(explosion_pos)
+
+		if distance < (explosion_size * 0.65):
+			# Store for later processing
+			runners_to_hit.append(runner)
+			active_runners.remove_at(i)
+			hit_any_runner = true
+
+		i -= 1
+
 	# Then process the hits afterward to avoid recursive signal issues
 	for runner in runners_to_hit:
 		handle_successful_hit(runner, explosion_pos)
 		runner.apply_damage()
-		
-	if not hit_any:
+
+	# Now check for innocent potatoes (non-runners)
+	var all_potatoes = get_tree().get_nodes_in_group("PotatoPerson")
+	for potato in all_potatoes:
+		# Skip if not valid or already being processed as a runner
+		if not is_instance_valid(potato) or runners_to_hit.has(potato):
+			continue
+
+		# Skip if it's in the active runners list
+		if active_runners.has(potato):
+			continue
+
+		# Check distance to explosion
+		var distance = potato.global_position.distance_to(explosion_pos)
+
+		# If within explosion radius and not a runner
+		if distance < (explosion_size * 0.65):
+			hit_any_innocent = true
+
+			# Apply damage to the innocent potato
+			if potato.has_method("apply_damage"):
+				potato.apply_damage()
+
+			# Spawn gibs at the innocent potato's position
+			spawn_gibs(potato.global_position)
+
+			# REFACTORED: Emit innocent hit event instead of direct Global mutation
+			var penalty_message = "INNOCENT POTATO KILLED! -{penalty} POINTS!".format({"penalty": innocent_penalty})
+			EventBus.innocent_hit.emit(innocent_penalty, {
+				"message": penalty_message,
+				"potato_position": potato.global_position
+			})
+
+			# For backward compatibility, update local UI
+			if score_label and GameStateManager:
+				score_label.text = tr("ui_score").format({"score": str(GameStateManager.get_score())})
+
+			# Keep backward compatibility alert
+			# REFACTORED: Use EventBus
+			EventBus.show_alert(penalty_message, false)
+
+	if not hit_any_runner:
 		print("Missile missed all runners")
 		runner_streak = 0
 
+
 func handle_successful_hit(runner, explosion_pos):
 	var root_node = get_tree().current_scene
-		
+	var dir_vector = (runner.global_position - explosion_pos).normalized()
 	# Dictionary of corpse textures by race
 	var corpse_textures = {
 		"Russet": preload("res://assets/potatoes/bodies/russet_corpse.png"),
@@ -849,68 +1172,110 @@ func handle_successful_hit(runner, explosion_pos):
 		"Sweet Potato": preload("res://assets/potatoes/bodies/sweet_potato_corpse.png"),
 		"Purple Majesty": preload("res://assets/potatoes/bodies/purple_majesty_corpse.png")
 	}
-	
+
 	# Create a potato corpse sprite
 	var corpse = Sprite2D.new()
-	
+
 	# Get the runner's race from potato_info
 	var race = "Russet"  # Default fallback race
 	if runner.has_method("get_potato_info"):
 		var potato_info = runner.get_potato_info()
 		if potato_info.has("race"):
 			race = potato_info.race
-	
+
 	# Set the appropriate texture based on race
 	if corpse_textures.has(race):
 		corpse.texture = corpse_textures[race]
 	else:
 		# Fallback to default
 		corpse.texture = corpse_textures["Russet"]
-		
+
 	corpse.global_position = runner.global_position
-	
-	corpse.z_index = 3 # Under explosions, above world background. 5 was last visible tested
-	
+
+	corpse.z_index = ConstantZIndexes.Z_INDEX.CORPSES  # Under explosions, above world background. 5 was last visible tested
+
 	# Slightly adjust size randomly
-	corpse.scale = Vector2(0.9, 0.9) * randf_range(0.9, 1.1) 
-	
+	corpse.scale = Vector2(0.9, 0.9) * randf_range(0.9, 1.1)
+
 	# Add slight random rotation for visual variety
 	corpse.rotation = randf_range(-0.4, 0.4)
-	
+
 	# Add the footprint to a group for easier management
 	corpse.add_to_group("CorpseGroup")
 
 	# Add to a parent that won't be cleaned up
 	root_node.add_child(corpse)
-	
+
+	# Create death animation tween
+	var tween = create_tween()
+
+	# Arc trajectory - first up and away from impact
+	var arc_height = 50.0
+	var arc_distance = 80.0
+	var bounce_pos = runner.global_position + (dir_vector * arc_distance)
+
+	# First go up in arc
+	(
+		tween
+		. tween_property(corpse, "global_position:y", runner.global_position.y - arc_height, 0.3)
+		. set_ease(Tween.EASE_OUT)
+	)
+
+	# While also moving in the direction away from explosion
+	tween.parallel().tween_property(corpse, "global_position:x", bounce_pos.x, 0.3).set_ease(
+		Tween.EASE_OUT
+	)
+
+	# Add spin during arc
+	tween.parallel().tween_property(corpse, "rotation", dir_vector.x * PI * 2, 0.3)
+
+	# Then bounce on ground
+	tween.tween_property(corpse, "global_position:y", runner.global_position.y, 0.2).set_ease(
+		Tween.EASE_IN
+	)
+
+	# Small second bounce
+	tween.tween_property(corpse, "global_position:y", runner.global_position.y - 15, 0.15).set_ease(
+		Tween.EASE_OUT
+	)
+
+	# Final rest
+	tween.tween_property(corpse, "global_position:y", runner.global_position.y, 0.1).set_ease(
+		Tween.EASE_IN
+	)
+
+	# Stop spinning
+	tween.parallel().tween_property(corpse, "rotation", dir_vector.x * PI * 2.5, 0.25)
+
 	#var tween = create_tween()
 	#tween.tween_property(corpse, "modulate:a", 1.0, 2.0)
-	
+
 	# Store original modulate color
 	var original_modulate = runner.modulate
-	
+
 	# Briefly change runner to white
 	runner.modulate = Color.WHITE
-	
+
 	# Create a tween to revert the color
 	#var color_tween = create_tween()
 	#color_tween.tween_property(runner, "modulate", original_modulate, 0.1)
-	
+
 	# Spawn gibs at the runner's position
 	# cspawn_gibs(runner.get_position())
-	
+
 	# Update stats with successful hits
 	shift_stats.missiles_hit += 1
-	
+
 	runner_streak += 1
 	var points_earned = runner_base_points
 	var bonus_text = ""
-	
+	var was_perfect_hit = false
+
 	# Find the main game node correctly
 	var main_game = self
 	while main_game and main_game.get_parent() and main_game.name != "Root":
 		main_game = main_game.get_parent()
-	
+
 	# Calculate bonuses
 	var distance = runner.global_position.distance_to(explosion_pos)
 	if distance < explosion_size * 0.30:
@@ -919,105 +1284,169 @@ func handle_successful_hit(runner, explosion_pos):
 			main_game.shake_screen(16.0, 0.4)  # Strong shake for perfect hits
 		# Update shift stats for perfect hits
 		shift_stats.perfect_hits += 1
+		was_perfect_hit = true
+		# REFACTORED: Emit perfect hit event
+		EventBus.perfect_hit_achieved.emit(perfect_hit_bonus)
+		# NEW: Play perfect hit sound
+		var perfect_hit_player = AudioStreamPlayer.new()
+		perfect_hit_player.stream = missile_perfect_hit_sound
+		perfect_hit_player.bus = "SFX"
+		perfect_hit_player.volume_db = -3.0
+		perfect_hit_player.pitch_scale = randf_range(0.95, 1.05)
+		add_child(perfect_hit_player)
+		perfect_hit_player.play()
+		perfect_hit_player.finished.connect(perfect_hit_player.queue_free)
 		# Spawn even more gibs on a perfect hit
 		spawn_gibs(runner.global_position)
 		points_earned += perfect_hit_bonus
-		bonus_text += "PERFECT HIT! +{perfect} accuracy bonus points\n".format({"perfect": perfect_hit_bonus})
-	
+		bonus_text += tr("alert_perfect_hit").format({"perfect": perfect_hit_bonus})
+
 	if runner_streak > 1:
 		var streak_points = streak_bonus * (runner_streak - 1)
 		points_earned += streak_points
-		bonus_text += "COMBO x{mult}! +{streak} combo bonus points\n".format({
-			"mult": runner_streak,
-			"streak": streak_points
-		})
-	
-	# Add points
-	Global.score += points_earned
-	if score_label:
-		score_label.text = "Score: {total_points}".format({
-			"total_points": Global.score
-		})
-	
-	# Remove a strike if any present
-	if Global.strikes > 0:
-		Global.strikes -= 1 
-		bonus_text += "Strike removed!\n"
-	
-	Global.display_green_alert(alert_label, alert_timer, "{bonus} +{points} points!".format({
-		"bonus": bonus_text,
-		"points": points_earned
-	}))
+		bonus_text += tr("alert_combo").format({"mult": runner_streak, "streak": streak_points})
+		# Play combo sound
+		var combo_player = AudioStreamPlayer.new()
+		combo_player.stream = combo_activate_sound
+		combo_player.bus = "SFX"
+		combo_player.volume_db = -3.0
+		# Increase pitch slightly for higher combos
+		combo_player.pitch_scale = min(1.0 + (runner_streak - 2) * 0.05, 1.3)
+		add_child(combo_player)
+		combo_player.play()
+		combo_player.finished.connect(combo_player.queue_free)
 
-	if strike_label:
-		strike_label.text = "Strikes: " + str(Global.strikes) + " / " + str(Global.max_strikes)
+	# REFACTORED: Emit runner stopped event instead of direct Global mutations
+	# GameStateManager will handle score addition and strike removal
+	EventBus.emit_runner_stopped("potato", points_earned, was_perfect_hit, {
+		"streak": runner_streak,
+		"distance": distance,
+		"explosion_pos": explosion_pos
+	})
+
+	# For backward compatibility, update local UI
+	if score_label and GameStateManager:
+		score_label.text = tr("ui_score").format({"score": str(GameStateManager.get_score())})
+
+	# Check if strike was removed (handled by GameStateManager)
+	var strike_removed = false
+	if GameStateManager and GameStateManager.get_strikes() < GameStateManager.get_max_strikes():
+		# GameStateManager removes strikes automatically on runner_stopped
+		strike_removed = true
+		bonus_text += tr("alert_strike_removed")
+
+	# Only show strike removed message if we actually removed a strike
+	var final_message = ""
+	if strike_removed:
+		final_message = "{bonus} +{points} points!".format(
+			{"bonus": bonus_text, "points": points_earned}
+		)
+	else:
+		# Don't include strike removed text if we didn't remove a strike
+		final_message = "+{points} points!".format({"points": points_earned})
+		if runner_streak > 1:
+			var streak_points = streak_bonus * (runner_streak - 1)
+			final_message = (
+				tr("alert_combo").format({"mult": runner_streak, "streak": streak_points})
+				+ " "
+				+ final_message
+			)
+
+	# REFACTORED: Use EventBus for alert (also keeping backward compatibility)
+	EventBus.show_alert(final_message, true)
+	# REFACTORED: Use EventBus
+	EventBus.show_alert(final_message, true)
+
+	if strike_label and GameStateManager:
+		strike_label.text = tr("ui_strikes").format(
+			{"current": GameStateManager.get_strikes(), "max": GameStateManager.get_max_strikes()}
+		)
+
 
 func enable():
 	is_enabled = true
 	if missile_collision_shape:
 		missile_collision_shape.disabled = false
 
+
 func disable():
 	is_enabled = false
 	if missile_collision_shape:
 		missile_collision_shape.disabled = false
-	
+
 	clean_up_all()
+
 
 func set_dialogic_mode(in_dialogic: bool):
 	is_in_dialogic = in_dialogic
-	
+
 	if in_dialogic:
 		clean_up_all()
+
 
 func clean_up_all():
 	# Clean up all active runners
 	for runner in active_runners:
+		# Validate runner is still a valid instance before cleanup
+		if not is_instance_valid(runner):
+			continue
+
+		# Disable emotes before cleanup
+		var emote_system = runner.get_node_or_null("PotatoEmoteSystem")
+		if emote_system and emote_system is PotatoEmoteSystem:
+			emote_system.emoting_enabled = false
+			emote_system._hide_emote()
+
 		runner.cleanup()
 	active_runners.clear()
-	
+
 	# Clean up all active missiles
 	for missile in active_missiles:
-		missile.sprite.queue_free()
-		missile.active = false
+		# Validate missile sprite is still valid before cleanup
+		if missile and is_instance_valid(missile.sprite):
+			missile.sprite.queue_free()
+		if missile:
+			missile.active = false
 	active_missiles.clear()
-	
+
 	# Stop any ongoing tween animations
 	var all_tweens = get_tree().get_nodes_in_group("Tween")
 	for tween in all_tweens:
 		if tween.is_valid():
 			tween.kill()
-	
+
 	# Reset timers and state
 	time_since_last_run = 0
 	missile_cooldown_timer = 0
-	
+
 	# Force all runners to stop their paths
 	var all_potatoes = get_tree().get_nodes_in_group("PotatoPerson")
 	for potato in all_potatoes:
 		if potato.has_method("cleanup"):
 			potato.cleanup()
 
-class Gib extends Sprite2D:
+
+class Gib:
+	extends Sprite2D
 	var velocity = Vector2.ZERO
 	var spin = 0.0
 	var lifetime = 0.0
 	var max_lifetime = 1.0
-	
+
 	func _process(delta):
 		# Update position
 		position += velocity * delta
-		
+
 		# Apply gravity
 		velocity.y += get_parent().gib_gravity * delta
-		
+
 		# Rotate
 		rotation += spin * delta
-		
+
 		# Update lifetime and fade
 		lifetime += delta
 		modulate.a = 1.0 - (lifetime / max_lifetime)
-		
+
 		# Remove when lifetime expires
 		if lifetime >= max_lifetime:
 			queue_free()
@@ -1028,62 +1457,76 @@ func spawn_gibs(pos):
 	if gib_textures.size() == 0:
 		push_error("No gib textures loaded!")
 		return
-		
+
 	for i in range(num_gibs):
 		var gib = Gib.new()
 		add_child(gib)
-		
-		gib.z_index = 11
+
+		gib.z_index = ConstantZIndexes.Z_INDEX.GIBS
 		gib.z_as_relative = false
-		
+
 		# Set random gib texture
 		gib.texture = gib_textures[randi() % gib_textures.size()]
-		
+
 		# Set initial position
 		gib.position = pos
-		
+
 		# Set random velocity
 		var angle = randf_range(-PI, 0)  # Only spawn in upward half-circle (-180° to 0°)
 		var speed = randf_range(gib_min_speed, gib_max_speed)
 		gib.velocity = Vector2(cos(angle), sin(angle)) * speed
-		
+
 		# Set random rotation and spin
 		gib.rotation = randf() * 2 * PI
 		gib.spin = randf_range(-gib_spin_speed, gib_spin_speed)
-		
+
 		# Set lifetime
 		gib.max_lifetime = gib_lifetime
-		
+
 		# Set scale
 		gib.scale = gib_scale  # Adjust this based on your gib sprite sizes
+
 
 func get_missile_zone() -> Rect2:
 	# First check if we have valid collision shapes
 	var shape1 = $Area2D/CollisionShape2D
 	var shape2 = $Area2D/CollisionShape2D2
-	
+
 	if not shape1 and not shape2:
 		return Rect2()
-	
+
 	var combined_rect = Rect2()
-	
+
 	# Add first shape to the combined rect if it exists
 	if shape1 and shape1.shape is RectangleShape2D:
 		var extents1 = shape1.shape.extents
 		var pos1 = shape1.global_position
 		combined_rect = Rect2(pos1 - extents1, extents1 * 2)
-	
+
 	# Add second shape to the combined rect if it exists
 	if shape2 and shape2.shape is RectangleShape2D:
 		var extents2 = shape2.shape.extents
 		var pos2 = shape2.global_position
 		var rect2 = Rect2(pos2 - extents2, extents2 * 2)
-		
+
 		# If the first rect is empty, just use the second rect
 		if combined_rect.size == Vector2.ZERO:
 			combined_rect = rect2
 		else:
 			# Otherwise, merge the two rectangles
 			combined_rect = combined_rect.merge(rect2)
-	
+
 	return combined_rect
+
+
+## Check if a point is within the missile zone (for cursor targeting)
+func is_point_in_missile_zone(point: Vector2) -> bool:
+	# Don't show target cursor if system is disabled or in dialogue
+	if not is_enabled or is_in_dialogic:
+		return false
+
+	var zone = get_missile_zone()
+	if zone.size == Vector2.ZERO:
+		return false
+
+	return zone.has_point(point)

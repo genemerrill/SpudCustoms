@@ -1,0 +1,141 @@
+﻿keys,en
+alert_border_runner,BORDER RUNNER DETECTED!\nClick to launch missile!
+alert_rejected_fleeing,REJECTED POTATO FLEEING!\nClick to launch missile!
+alert_runner_escaped,RUNNER ESCAPED!\nStrike added!
+citation_runner_escaped,A border runner escaped! You failed to intercept them in time.
+alert_points_deducted,RUNNER ESCAPED!\nStrike added!\n-{penalty} points!
+alert_perfect_hit,PERFECT HIT! +{perfect} accuracy bonus points
+alert_perfect_stamp,PERFECT STAMP! +{points} points!
+alert_combo,COMBO x{mult}! +{streak} combo bonus points
+alert_quota_met,"Quota met, shift completed! \nBonus: {bonus} points!"
+alert_strike_removed,Strike removed!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"You made the right choice, officer.\n+{points} points!"
+alert_wrong_decision,"You have caused unnecessary suffering, officer...\n+1 Strike!"
+alert_potato_should_be_approved,\nThis potato meets all requirements and should have been approved.
+incorrect_decision,Incorrect decision made on document processing.
+alert_strike_out,Maximum strikes exceeded! Your shift is over.
+ui_score,Score: {score}
+ui_quota,Quota: {current} / {target}
+ui_strikes,Strikes: {current} / {max}
+ui_click_megaphone,Click megaphone to call the next potato
+ui_drag_document,Drag document to inspection table
+ui_stamp_document,Select a stamp to approve or reject
+ui_check_violations,Check for document violations
+Strike removed!,Strike removed!
+BORDER RUNNER DETECTED!\nClick to launch missile!,BORDER RUNNER DETECTED!\nClick to launch missile!
+REJECTED POTATO FLEEING!\nClick to launch missile!,REJECTED POTATO FLEEING!\nClick to launch missile!
+RUNNER ESCAPED!\nStrike added!,RUNNER ESCAPED!\nStrike added!
+Click megaphone to call the next potato,Click megaphone to call the next potato
+Drag document to inspection table,Drag document to inspection table
+Select a stamp to approve or reject,Select a stamp to approve or reject
+Check for document violations,Check for document violations
+rule_explanation_header,RULE EXPLANATION:
+rule_explanation_fresh,Look at the 'Condition' field. If it says anything other than 'Fresh' - REJECT
+rule_explanation_sweet_potato,Look at the 'Type' field. If it says 'Sweet Potato' - REJECT (no permits)
+rule_explanation_chip_hill,Look at the 'Country' field. If it says 'Chip Hill' - REJECT (banned)
+rule_explanation_age,Look at 'Born' field. Calculate age and check against rule
+rule_explanation_gender,Look at the 'Gender' field and check against current rule
+rule_footer_text,These rules must be enforced for ALL potatoes
+rule_expired_note,Expired documents must ALWAYS be rejected.
+rule_tutorial_hint,Need help? Click on any rule for an explanation
+alert_correct_decision_detailed,CORRECT DECISION! +{points} points\n{reason}
+alert_wrong_decision_detailed,WRONG DECISION! Strike added!\n{reason}
+alert_reason_approved,Potato meets all requirements - APPROVED
+alert_reason_should_reject,You should have REJECTED this potato
+tutorial_check_type,Check the 'Type' field in the passport
+tutorial_check_condition,Check the 'Condition' field in the passport
+tutorial_check_country,Check the 'Country' field in the passport
+tutorial_check_age,Check the 'Born' field to calculate age
+tutorial_check_gender,Check the 'Gender' field in the passport
+alert_streak_bonus_minigame,5 in a row! BONUS MINIGAME!
+alert_perfect_stamps_bonus_minigame,Perfect stamps! BONUS MINIGAME!
+alert_runner_bonus_minigame,Suspicious activity! BONUS MINIGAME!
+alert_new_minigame_unlocked,New minigame unlocked: {name}!
+alert_minigame_bonus,Minigame bonus: +{bonus} points!
+high_score_display,High Score: {score}
+new_high_score,NEW HIGH SCORE!
+month_1,January
+month_2,February
+month_3,March
+month_4,April
+month_5,May
+month_6,June
+month_7,July
+month_8,August
+month_9,September
+month_10,October
+month_11,November
+month_12,December
+citation_trash_label,TRASH
+citation_header,OFFICIAL CITATION
+citation_from_supervisor,From: Supervisor Russet
+citation_dismiss_hint,[Drag to Trash to dismiss]
+_MINIGAME COMMON,
+minigame_times_up,"Time's up! No worries, back to work!"
+minigame_time_format,{seconds}.{fraction}
+_QUICK TIME EVENT,
+qte_title,QUICK TIME EVENT
+qte_instruction,Press the keys as they appear!
+qte_auto_completed,Auto-completed
+qte_accessibility_note,(QTE Accessibility enabled)
+qte_get_ready,Get ready...
+qte_progress,Progress
+qte_key_prompt,[{key}]
+qte_result,{successful} / {total} successful (+{points} points)
+qte_image_pending,[Image Pending]
+_EVIDENCE DESTRUCTION,
+evidence_title,SECURITY INSPECTION IMMINENT
+evidence_instruction,"Clear your desk! Shred evidence, stash work items."
+evidence_suspicion,Suspicion: {percent}%
+evidence_items_remaining,Items: {count}
+evidence_times_up_found,"Time's up! They found the evidence..."
+evidence_times_up_suspicious,"Time's up! The inspection was... thorough."
+_CODE BREAKER,
+codebreaker_title,CODE BREAKER
+codebreaker_instruction,"Crack the code! Green = exact match, Yellow = right digit wrong spot"
+codebreaker_enter_code,ENTER THE CODE
+codebreaker_submit,SUBMIT
+codebreaker_clear,CLEAR
+codebreaker_previous_attempts,Previous Attempts:
+codebreaker_attempts,Attempts: {current} / {max}
+codebreaker_result_exact_close,{exact} exact, {close} close
+codebreaker_result_exact,{exact} exact
+codebreaker_result_close,{close} close
+codebreaker_result_none,no matches
+codebreaker_success,Code cracked in {attempts} attempts! +{points} points!
+codebreaker_failure,Out of attempts! The code was shown above.
+_DOCUMENT SCANNER,
+scanner_title,DOCUMENT SCANNER
+scanner_instruction,Drag the UV light to find hidden marks! Click to confirm.
+scanner_found,Found: {current} / {total}
+scanner_perfect,Perfect! All elements found! +{points} points!
+scanner_partial,Good effort! Found {found}/{total}. +{points} points!
+_BORDER CHASE,
+chase_title,BORDER CHASE
+chase_instruction,Click the RED contraband items! Let the GREEN items pass.
+chase_legend,RED = Catch!   GREEN = Let pass
+chase_caught,Caught: {current} / {total}
+chase_perfect,Perfect catch! +{points} points!
+chase_partial,Caught {count} items. +{points} points!
+_STAMP SORTING,
+sorting_title,STAMP SORTING
+sorting_instruction,"Drag stamps to the correct bin! Green = APPROVED, Red = DENIED"
+sorting_approved,APPROVED
+sorting_denied,DENIED
+sorting_progress,Sorted: {sorted}/{total}  Correct: {correct}
+sorting_perfect,Perfect sorting! +{points} points!
+sorting_partial,Sorted {correct}/{total} correctly. +{points} points!
+_FINGERPRINT MATCH,
+fingerprint_title,FINGERPRINT MATCH
+fingerprint_instruction,Find the fingerprint that matches the reference!
+fingerprint_reference,REFERENCE
+fingerprint_find_match,FIND THE MATCH
+fingerprint_progress,Matched: {current} / {total}
+fingerprint_success,All fingerprints matched! +{points} points!
+fingerprint_partial,Matched {matched}/{total}. +{points} points!
+_SCORE ATTACK MODE,
+score_attack_mode_label,Score Attack Mode
+score_attack_welcome_title,SCORE ATTACK MODE!
+score_attack_welcome_survive,Survive as long as possible!
+score_attack_welcome_difficulty,Difficulty increases over time!

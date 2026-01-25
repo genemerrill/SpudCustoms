@@ -1,0 +1,46 @@
+﻿keys,fi
+Text/156/text,Tervetuloa [pulse freq=2][color=MEDIUM_VIOLET_RED]Spud Customs Training![/color][/pulse] -koulutukseen!
+Text/157/text,"Tämä koulutus opettaa sinulle [wave amp=15 freq=2][color=DARK_ORANGE]olennaiset taidot[/color][/wave], joita tarvitaan Spudin rajojen suojelemiseen."
+Text/158/text,Velvollisuutesi on käsitellä saapuvia perunoita rajanylityspaikassamme.
+Text/159/text,Maahanmuuttavat perunat jonottavat toimistosi ulkopuolella täällä.
+Text/15a/text,Aloittaaksesi perunoiden käsittelyn sinun on avattava koppisi palvelua varten tästä kytkimestä.
+Text/15b/text,Annat jokaiselle perunalle merkin lähestyä toimistoasi napauttamalla megafonia.
+Text/15c/text,Perunat tulevat koppiin yksi kerrallaan ja esittävät asiakirjansa.
+Text/15d/text,Ensin siirrä heidän asiakirjansa tarkastuspöydälle parempaa tarkastelua varten.
+Text/15e/text,"Etsi sitten [tornado radius=3 freq=2][color=YELLOW]vanhentuneita päivämääriä, virheellisiä tietoja tai väärennöksen merkkejä[/color][/tornado]."
+Text/15f/text,"Pöydälläsi on leimoja asiakirjojen merkitsemistä varten, voit napsauttaa tästä vetääksesi leimapalkin ulos."
+Text/160/text,Aseta sitten asiakirja haluamasi leiman alle...
+Text/161/text,Napsauta leimaa merkitäksesi asiakirjat [color=CHARTREUSE]hyväksytyiksi[/color] tai [color=CRIMSON]hylätyiksi[/color]...
+Text/162/text,Ja vedä asiakirja takaisin perunalle päätöksesi viimeistelemiseksi!
+Text/163/text,Joskus perunat yrittävät [color=CRIMSON]kiirehtiä tarkastuspisteesi ohi[/color].
+Text/164/text,"Sinulla on suora yhteys kopassasi, jonka avulla voit hallita [pulse freq=3][color=CRIMSON]ohjuslaukaisimia[/color][/pulse] rajamuurin varrella."
+Text/165/text,"Napsauta näitä ""juoksijoita"" laukaistaksesi ohjuksen ja pysäyttääksesi heidät."
+Text/166/text,"Muista, että jokainen läpipäässyt juoksija lasketaan [wave amp=20 freq=3][color=CRIMSON]rikkeeksi sinua vastaan[/color][/wave]."
+Text/167/text,"Liian monta rikettä, ja vuorosi päättyy... [tornado radius=3 freq=3][color=CRIMSON]pysyvästi.[/color][/tornado]"
+Text/168/text,"Jokaisella vuorolla on [color=DARK_ORANGE]perunakiintiö[/color], jonka sinun on käsiteltävä päättääksesi päiväsi."
+Text/169/text,Pisteesi seuraa suoritustasi verrattuna kollegoihisi tässä tarkastuspisteessä ja virkailijoihin kaukaisissa tullitoimistoissa.
+Text/16a/text,"Jokaisen vuoron jälkeen näet yhteenvedon suorituksestasi ja siitä, onnistuitko vai epäonnistuitko velvollisuudessasi."
+Text/16b/text,"Näet erittelyn siitä, miten käsittelit juoksijoita ja kuinka monta asiakirjaa käsittelit."
+Text/16c/text,"Lisäksi kaikki bonukset, jotka ansaitsit käsittelemällä asiakirjoja nopeasti, kohdistamalla leimat täydellisesti tai osumalla täydellisesti juokseviin perunoihin."
+Text/16d/text,"Saat myös suoritusarvioinnin sen perusteella, kuinka hyvin käsittelit perunoita vuorosi aikana, ja jopa 3 kultaista leimaa, jos ylität odotukset."
+Text/16e/text,"Täällä voit lähettää pisteitäsi jokaiselta vuorolta tullitarkastajien maailmanlaajuiseen tietokantaan ja nähdä, miten vertaudut maailman huipputullitarkastajiin."
+Text/16f/text,"Jos vuorosi oli onnistunut, voit jatkaa napsauttamalla ""Jatka"" ja aloittamalla seuraavan vuorosi."
+Text/170/text,Tässä käsiteltiin tullitarkastajan velvollisuuksiesi perusteet.
+Text/171/text,"Muista: tarkista asiakirjat huolellisesti, pysäytä juoksijat ja täytä kiintiösi."
+Text/172/text,Spudin turvallisuus riippuu [pulse freq=2][color=DARK_ORANGE]valppaudestasi![/color][/pulse]
+Text/174/text,Aloitetaan [color=YELLOW]harjoitusvuorosi[/color]...
+Text/180/text,Mutta ole varovainen – kaikki perunat eivät ole asiakirjojaan kunnossa.
+Text/181/text,[color=RED]Vanhentuneet passit[/color] ovat automaattinen hylkäys. Ei poikkeuksia.
+Text/tut_001/text,Tervetuloa [pulse freq=2][color=MEDIUM_VIOLET_RED]Spud Customs![/color][/pulse]
+Text/tut_002/text,Sinut on valittu tärkeään rooliin: [color=DARK_ORANGE]Rajatullivirkailija[/color].
+Text/tut_003/text,"Työsi on yksinkertainen. Perunat saapuvat koppiisi, tarkistat heidän asiakirjansa, ja päätät, kuka pääsee läpi."
+Text/tut_004/text,Mutta ole varovainen – kaikilla perunoilla ei ole papereita kunnossa.
+Text/tut_005/text,[color=RED]Vanhentuneet passit[/color] ovat automaattinen hylkäys. Ei poikkeuksia.
+Text/tut_006/text,Opastan sinua perusasioissa [color=YELLOW]askel askeleelta[/color]. Seuraa ohjeita ja opit kyllä.
+Text/tut_007/text,"[pulse freq=2][color=RED]Vielä yksi asia![/color][/pulse] Jotkut perunat yrittävät [color=CRIMSON]paeta[/color], kun he luulevat, etteivät heidän paperinsa läpäise tarkastusta."
+Text/tut_008/text,"Kun [color=RED]rajakarkaaja[/color] yrittää paeta, näet heidän syöksyvän koppisi ohi kohti rajaa."
+Text/tut_009/text,Siinä kohtaa [color=CHARTREUSE]Pneumaattinen ohjuslaukaisin[/color] tulee käyttöön. Se on iso painike ohjauspaneelissasi.
+Text/tut_010/text,"[color=YELLOW]Napsauta laukaistaksesi[/color], kun karkaaja on kantaman sisällä. Tähtää [color=GOLD]maalialueen keskelle[/color] saadaksesi bonuspisteitä!"
+Text/tut_011/text,Mutta ole varovainen – [color=RED]älä osu viattomiin perunoihin[/color] jonossa. Se maksaa sinulle pisteitä ja ansaitsee varoituksen!
+Text/tut_012/text,Spudin turvallisuus riippuu sinun [pulse freq=2][color=DARK_ORANGE]valppaudestasi![/color][/pulse]
+Text/tut_013/text,Aloitetaan sinun [color=YELLOW]harjoitusvuorosi[/color]...

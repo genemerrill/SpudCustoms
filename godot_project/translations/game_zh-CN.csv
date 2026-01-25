@@ -1,0 +1,132 @@
+﻿keys,zh-CN
+alert_border_runner,检测到边境逃犯！\n点击发射导弹！
+alert_rejected_fleeing,被拒土豆逃逸！\n点击发射导弹！
+alert_runner_escaped,逃犯逃逸！\n增加一次失误！
+citation_runner_escaped,边境逃犯逃跑了！您未能及时拦截。
+alert_points_deducted,逃犯逃逸！\n增加一次失误！\n扣除{penalty}点分数！
+alert_perfect_hit,完美命中！\n精准度奖励：+{perfect}点！
+alert_perfect_stamp,完美盖章！\n+{points}点分数！
+alert_combo,连击 x{mult}！\n连击奖励：+{streak}点！
+alert_quota_met,配额已达，班次完成！\n奖励：{bonus}点分数！
+alert_strike_removed,失误已移除！
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,您做出了正确的选择，警官。\n+{points}点分数！
+alert_wrong_decision,您造成了不必要的痛苦，警官……\n增加1次失误！
+alert_potato_should_be_approved,\n此土豆符合所有要求，本应被批准通过。
+incorrect_decision,文件处理决定错误。
+alert_strike_out,失误次数已达上限！您的班次结束了。
+ui_score,分数：{score}
+ui_quota,配额：{current} / {target}
+ui_strikes,失误：{current} / {max}
+ui_click_megaphone,点击扩音器呼叫下一位土豆
+ui_drag_document,将文件拖到检查台
+ui_stamp_document,选择印章以批准或拒绝
+ui_check_violations,检查文件违规
+Strike removed!,失误已移除！
+BORDER RUNNER DETECTED!\nClick to launch missile!,检测到边境逃犯！\n点击发射导弹！
+REJECTED POTATO FLEEING!\nClick to launch missile!,被拒土豆逃逸！\n点击发射导弹！
+RUNNER ESCAPED!\nStrike added!,逃犯逃逸！\n增加一次失误！
+Click megaphone to call the next potato,点击扩音器呼叫下一位土豆
+Drag document to inspection table,将文件拖到检查台
+Select a stamp to approve or reject,选择印章以批准或拒绝
+Check for document violations,检查文件违规
+rule_explanation_header,规则说明：
+rule_explanation_fresh,查看“状况”字段。如果显示“新鲜”以外的任何内容 - 拒绝
+rule_explanation_sweet_potato,查看“类型”字段。如果显示“甘薯” - 拒绝（无许可证）
+rule_explanation_chip_hill,查看“国家”字段。如果显示“薯片山” - 拒绝（禁止入境）
+rule_explanation_age,查看“出生”字段。计算年龄并对照规则检查
+rule_explanation_gender,查看“性别”字段并对照当前规则检查
+rule_footer_text,这些规则必须对所有土豆强制执行
+rule_expired_note,过期文件必须始终拒绝。
+rule_tutorial_hint,需要帮助？点击任意规则查看说明
+alert_correct_decision_detailed,正确决定！+{points} 分\n{reason}
+alert_wrong_decision_detailed,错误决定！增加一次失误！\n{reason}
+alert_reason_approved,土豆符合所有要求 - 批准
+alert_reason_should_reject,您本应拒绝此土豆
+tutorial_check_type,检查护照中的“类型”字段
+tutorial_check_condition,检查护照中的“状况”字段
+tutorial_check_country,检查护照中的“国家”字段
+tutorial_check_age,检查“出生”字段以计算年龄
+tutorial_check_gender,检查护照中的“性别”字段
+alert_streak_bonus_minigame,连对5次！奖励小游戏！
+alert_perfect_stamps_bonus_minigame,完美盖章！奖励小游戏！
+alert_runner_bonus_minigame,可疑活动！奖励小游戏！
+alert_new_minigame_unlocked,新小游戏解锁：{name}！
+alert_minigame_bonus,小游戏奖励：+{bonus} 分！
+high_score_display,最高分：{score}
+new_high_score,新高分！
+month_1,一月
+month_2,二月
+month_3,三月
+month_4,四月
+month_5,五月
+month_6,六月
+month_7,七月
+month_8,八月
+month_9,九月
+month_10,十月
+month_11,十一月
+month_12,十二月
+citation_trash_label,废纸篓
+citation_header,官方警告
+citation_from_supervisor,来自：监督员拉塞特
+citation_dismiss_hint,[拖到废纸篓关闭]
+minigame_times_up,时间到！别担心，回去工作吧！
+minigame_time_format,{秒}.{毫秒}
+qte_title,快速反应事件
+qte_instruction,按照提示按下按键！
+qte_auto_completed,已自动完成
+qte_accessibility_note,(快速反应事件辅助功能已启用)
+qte_get_ready,准备好...
+qte_progress,进度
+qte_key_prompt,[{key}]
+qte_result,成功 {successful} / {total} 次 (获得 {points} 分)
+qte_image_pending,[图片待定]
+evidence_title,安全检查迫在眉睫
+evidence_instruction,清理你的桌子！销毁证据，藏好工作物品。
+evidence_suspicion,嫌疑度：{percent}%
+evidence_items_remaining,物品：{count}
+evidence_times_up_found,时间到！他们找到了证据...
+evidence_times_up_suspicious,时间到！这次检查...非常彻底。
+codebreaker_title,密码破译
+codebreaker_instruction,破解密码！绿色 = 完全匹配，黄色 = 数字正确位置错误
+codebreaker_enter_code,输入密码
+codebreaker_submit,提交
+codebreaker_clear,清除
+codebreaker_previous_attempts,历史尝试：
+codebreaker_attempts,尝试次数：{current} / {max}
+codebreaker_result_exact_close,{exact} 位正确
+codebreaker_result_exact,{exact} 完全匹配
+codebreaker_result_close,{close} 接近
+codebreaker_result_none,无匹配
+codebreaker_success,密码已破解，尝试了 {attempts} 次！+{points} 分！
+codebreaker_failure,尝试次数已用尽！密码已显示在上方。
+scanner_title,文档扫描仪
+scanner_instruction,拖动紫外线灯寻找隐藏标记！点击确认。
+scanner_found,已找到：{current} / {total}
+scanner_perfect,完美！所有元素已找到！+{points} 分！
+scanner_partial,干得不错！找到了 {found}/{total} 个。+{points} 分！
+chase_title,边境追捕
+chase_instruction,点击红色违禁品！让绿色物品通过。
+chase_legend,红色 = 抓捕！ 绿色 = 放行
+chase_caught,已抓捕：{current} / {total}
+chase_perfect,完美抓捕！+{points} 分！
+chase_partial,抓捕了 {count} 个物品。+{points} 分！
+sorting_title,印章分类
+sorting_instruction,将印章拖到正确的箱子！绿色 = 批准，红色 = 拒绝
+sorting_approved,批准
+sorting_denied,拒绝
+sorting_progress,已分类：{sorted}/{total} 正确：{correct}
+sorting_perfect,完美分类！+{points} 分！
+sorting_partial,正确分类了 {correct}/{total} 个。+{points} 分！
+fingerprint_title,指纹匹配
+fingerprint_instruction,找到与参考匹配的指纹！
+fingerprint_reference,参考
+fingerprint_find_match,查找匹配
+fingerprint_progress,已匹配: {current} / {total}
+fingerprint_success,所有指纹均已匹配！+{points} 分！
+fingerprint_partial,已匹配 {matched}/{total}。+{points} 分！
+score_attack_mode_label,积分挑战模式
+score_attack_welcome_title,积分挑战模式！
+score_attack_welcome_survive,尽可能久地生存！
+score_attack_welcome_difficulty,难度会随时间增加！

@@ -1,0 +1,132 @@
+﻿keys,it
+alert_border_runner,CORRIDORE AL CONFINE RILEVATO!\nClicca per lanciare il missile!
+alert_rejected_fleeing,PATATA RESPINTA IN FUGA!\nClicca per lanciare il missile!
+alert_runner_escaped,CORRIDORE FUGGITO!\nStrike aggiunto!
+citation_runner_escaped,Un corridore di confine è fuggito! Non sei riuscito a intercettarlo in tempo.
+alert_points_deducted,CORRIDORE FUGGITO!\nStrike aggiunto!\n-{penalty} punti!
+alert_perfect_hit,COLPO PERFETTO! +{perfect} punti bonus precisione
+alert_perfect_stamp,TIMBRO PERFETTO! +{points} punti!
+alert_combo,COMBO x{mult}! +{streak} punti bonus combo
+alert_quota_met,"Quota raggiunta, turno completato! \nBonus: {bonus} punti!"
+alert_strike_removed,Strike rimosso!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Hai fatto la scelta giusta, ufficiale.\n+{points} punti!"
+alert_wrong_decision,"Hai causato sofferenze inutili, ufficiale...\n+1 Strike!"
+alert_potato_should_be_approved,\nQuesta patata soddisfa tutti i requisiti ed avrebbe dovuto essere approvata.
+incorrect_decision,Decisione errata nell'elaborazione del documento.
+alert_strike_out,Numero massimo di strike superato! Il tuo turno è finito.
+ui_score,Punteggio: {score}
+ui_quota,Limite: {current} / {target}
+ui_strikes,Strike: {current} / {max}
+ui_click_megaphone,Clicca sul megafono per chiamare la prossima patata
+ui_drag_document,Trascina il documento sul tavolo d'ispezione
+ui_stamp_document,Seleziona un timbro per approvare o respingere
+ui_check_violations,Controlla le violazioni del documento
+Strike removed!,Strike rimosso!
+BORDER RUNNER DETECTED!\nClick to launch missile!,CORRIDORE AL CONFINE RILEVATO!\nClicca per lanciare il missile!
+REJECTED POTATO FLEEING!\nClick to launch missile!,PATATA RESPINTA IN FUGA!\nClicca per lanciare il missile!
+RUNNER ESCAPED!\nStrike added!,CORRIDORE FUGGITO!\nStrike aggiunto!
+Click megaphone to call the next potato,Clicca sul megafono per chiamare la prossima patata
+Drag document to inspection table,Trascina il documento sul tavolo d'ispezione
+Select a stamp to approve or reject,Seleziona un timbro per approvare o respingere
+Check for document violations,Controlla le violazioni del documento
+rule_explanation_header,SPIEGAZIONE REGOLA:
+rule_explanation_fresh,Lihat bidang 'Kondisi'. Jika mengatakan selain 'Segar' - TOLAK
+rule_explanation_sweet_potato,Guarda il campo 'Tipo'. Se dice 'Patata Dolce' - RIFIUTA (nessun permesso)
+rule_explanation_chip_hill,Guarda il campo 'Paese'. Se dice 'Chip Hill' - RIFIUTA (vietato)
+rule_explanation_age,Guarda il campo 'Data di Nascita'. Calcola l'età e controlla contro la regola
+rule_explanation_gender,Guarda il campo 'Genere' e controlla contro la regola attuale
+rule_footer_text,Queste regole devono essere applicate per TUTTE le patate
+rule_expired_note,I documenti scaduti devono SEMPRE essere rifiutati.
+rule_tutorial_hint,Hai bisogno di aiuto? Clicca su qualsiasi regola per una spiegazione
+alert_correct_decision_detailed,DECISIONE CORRETTA! +{points} punti\n{reason}
+alert_wrong_decision_detailed,DECISIONE SBAGLIATA! Strike aggiunto!\n{reason}
+alert_reason_approved,La patata soddisfa tutti i requisiti - APPROVATA
+alert_reason_should_reject,Avresti dovuto RIFIUTARE questa patata
+tutorial_check_type,Controlla il campo 'Tipo' nel passaporto
+tutorial_check_condition,Controlla il campo 'Condizione' nel passaporto
+tutorial_check_country,Controlla il campo 'Paese' nel passaporto
+tutorial_check_age,Controlla la 'Data di Nascita' per calcolare l'età
+tutorial_check_gender,Controlla il campo 'Genere' nel passaporto
+alert_streak_bonus_minigame,5 di fila! MINIGIOCO BONUS!
+alert_perfect_stamps_bonus_minigame,Timbri perfetti! MINIGIOCO BONUS!
+alert_runner_bonus_minigame,Attività sospetta! MINIGIOCO BONUS!
+alert_new_minigame_unlocked,Nuovo minigioco sbloccato: {name}!
+alert_minigame_bonus,Bonus minigioco: +{bonus} punti!
+high_score_display,Punteggio più alto: {score}
+new_high_score,NUOVO PUNTEGGIO PIÙ ALTO!
+month_1,Gennaio
+month_2,Febbraio
+month_3,Marzo
+month_4,Aprile
+month_5,Maggio
+month_6,Giugno
+month_7,Luglio
+month_8,Agosto
+month_9,Settembre
+month_10,Ottobre
+month_11,Novembre
+month_12,Dicembre
+citation_trash_label,CESTINO
+citation_header,AVVISO UFFICIALE
+citation_from_supervisor,Da: Supervisore Russet
+citation_dismiss_hint,[Trascina nel cestino per chiudere]
+minigame_times_up,"Tempo scaduto! Nessun problema, torna al lavoro!"
+minigame_time_format,{secondi}.{frazione}
+qte_title,EVENTO A TEMPO
+qte_instruction,Premi i tasti quando appaiono!
+qte_auto_completed,Completato automaticamente
+qte_accessibility_note,(Accessibilità QTE abilitata)
+qte_get_ready,Preparati...
+qte_progress,Progresso
+qte_key_prompt,[{tasto}]
+qte_result,{successful} / {total} riusciti (+{points} punti)
+qte_image_pending,[Immagine in attesa]
+evidence_title,ISPEZIONE DI SICUREZZA IMMINENTE
+evidence_instruction,"Sgombra la scrivania! Distruggi le prove, nascondi gli oggetti di lavoro."
+evidence_suspicion,Sospetto: {percent}%
+evidence_items_remaining,Oggetti: {count}
+evidence_times_up_found,Tempo scaduto! Hanno trovato le prove...
+evidence_times_up_suspicious,Tempo scaduto! L'ispezione è stata... approfondita.
+codebreaker_title,ROMPICODICE
+codebreaker_instruction,"Decifra il codice! Verde = corrispondenza esatta, Giallo = cifra giusta, posizione sbagliata"
+codebreaker_enter_code,INSERISCI IL CODICE
+codebreaker_submit,INVIA
+codebreaker_clear,CANCELLA
+codebreaker_previous_attempts,Tentativi precedenti:
+codebreaker_attempts,Tentativi: {current} / {max}
+codebreaker_result_exact_close,{exact} esatti
+codebreaker_result_exact,{exact} esatti
+codebreaker_result_close,{close} vicini
+codebreaker_result_none,nessuna corrispondenza
+codebreaker_success,Codice decifrato in {attempts} tentativi! +{points} punti!
+codebreaker_failure,Tentativi esauriti! Il codice è stato mostrato sopra.
+scanner_title,SCANNER DOCUMENTI
+scanner_instruction,Trascina la luce UV per trovare i segni nascosti! Clicca per confermare.
+scanner_found,Trovati: {current} / {total}
+scanner_perfect,Perfetto! Tutti gli elementi trovati! +{points} punti!
+scanner_partial,Buon tentativo! Trovati {found}/{total}. +{points} punti!
+chase_title,INSEGUIMENTO AL CONFINE
+chase_instruction,Clicca gli oggetti di contrabbando ROSSI! Lascia passare gli oggetti VERDI.
+chase_legend,ROSSO = Cattura! VERDE = Lascia passare
+chase_caught,Catturati: {current} / {total}
+chase_perfect,Cattura perfetta! +{points} punti!
+chase_partial,Catturati {count} oggetti. +{points} punti!
+sorting_title,SMISTAMENTO TIMBRI
+sorting_instruction,"Trascina i timbri nel contenitore corretto! Verde = APPROVATO, Rosso = NEGATO"
+sorting_approved,APPROVATO
+sorting_denied,NEGATO
+sorting_progress,Smistati: {sorted}/{total} Corretti: {correct}
+sorting_perfect,Smistamento perfetto! +{points} punti!
+sorting_partial,Smistati {correct}/{total} correttamente. +{points} punti!
+fingerprint_title,CONFRONTO IMPRONTE DIGITALI
+fingerprint_instruction,Trova l'impronta digitale che corrisponde al riferimento!
+fingerprint_reference,RIFERIMENTO
+fingerprint_find_match,TROVA LA CORRISPONDENZA
+fingerprint_progress,Corrispondenti: {current} / {total}
+fingerprint_success,Tutte le impronte digitali corrispondono! +{points} punti!
+fingerprint_partial,Corrispondenti {matched}/{total}. +{points} punti!
+score_attack_mode_label,Modalità Attacco al Punteggio
+score_attack_welcome_title,MODALITÀ ATTACCO AL PUNTEGGIO!
+score_attack_welcome_survive,Sopravvivi il più a lungo possibile!
+score_attack_welcome_difficulty,La difficoltà aumenta nel tempo!

@@ -1,0 +1,132 @@
+﻿keys,da
+alert_border_runner,GRÆNSELØBER OPDAGET!\nKlik for at affyre missil!
+alert_rejected_fleeing,AFVIST KARTOFFEL FLYGTER!\nKlik for at affyre missil!
+alert_runner_escaped,LØBER UNDSLUPPET!\nStrike tilføjet!
+citation_runner_escaped,En grænsekrydser flygtede! Du formåede ikke at stoppe dem i tide.
+alert_points_deducted,LØBER UNDSLUPPET!\nStrike tilføjet!\n-{penalty} point!
+alert_perfect_hit,PERFEKT TRÆF! +{perfect} præcisionsbonus point
+alert_perfect_stamp,PERFEKT STEMPEL! +{points} point!
+alert_combo,COMBO x{mult}! +{streak} combo bonuspoint
+alert_quota_met,"Kvote opfyldt, vagt afsluttet! \nBonus: {bonus} point!"
+alert_strike_removed,Strike fjernet!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Du traf det rigtige valg, betjent.\n+{points} point!"
+alert_wrong_decision,"Du har forårsaget unødvendig lidelse, betjent...\n+1 Strike!"
+alert_potato_should_be_approved,\nDenne kartoffel opfylder alle krav og burde være godkendt.
+incorrect_decision,Forkert beslutning ved dokumentbehandling.
+alert_strike_out,Maksimalt antal strikes overskredet! Din vagt er slut.
+ui_score,Point: {score}
+ui_quota,Kvote: {current} / {target}
+ui_strikes,Advarsler: {current} / {max}
+ui_click_megaphone,Klik på megafonen for at kalde den næste kartoffel
+ui_drag_document,Træk dokumentet til inspektionsbordet
+ui_stamp_document,Vælg et stempel for at godkende eller afvise
+ui_check_violations,Tjek for dokumentovertrædelser
+Strike removed!,Strike fjernet!
+BORDER RUNNER DETECTED!\nClick to launch missile!,GRÆNSELØBER OPDAGET!\nKlik for at affyre missil!
+REJECTED POTATO FLEEING!\nClick to launch missile!,AFVIST KARTOFFEL FLYGTER!\nKlik for at affyre missil!
+RUNNER ESCAPED!\nStrike added!,LØBER UNDSLUPPET!\nStrike tilføjet!
+Click megaphone to call the next potato,Klik på megafonen for at kalde den næste kartoffel
+Drag document to inspection table,Træk dokumentet til inspektionsbordet
+Select a stamp to approve or reject,Vælg et stempel for at godkende eller afvise
+Check for document violations,Tjek for dokumentovertrædelser
+rule_explanation_header,REGEL FORKLARING:
+rule_explanation_fresh,Se på 'Tilstand' feltet. Hvis det siger noget andet end 'Frisk' - AFVIS
+rule_explanation_sweet_potato,Se på 'Type' feltet. Hvis det siger 'Sød Kartoffel' - AFVIS (ingen tilladelser)
+rule_explanation_chip_hill,Se på 'Land' feltet. Hvis det siger 'Chip Hill' - AFVIS (forbudt)
+rule_explanation_age,Se på 'Fødselsdato' feltet. Beregn alder og tjek mod regel
+rule_explanation_gender,Se på 'Køn' feltet og tjek mod nuværende regel
+rule_footer_text,Disse regler skal håndhæves for ALLE kartofler
+rule_expired_note,Udløbne dokumenter skal ALTID afvises.
+rule_tutorial_hint,Brug for hjælp? Klik på enhver regel for en forklaring
+alert_correct_decision_detailed,KORREKT BESLUTNING! +{points} point\n{reason}
+alert_wrong_decision_detailed,FORKERT BESLUTNING! Strike tilføjet!\n{reason}
+alert_reason_approved,Kartoffel opfylder alle krav - GODKENDT
+alert_reason_should_reject,Du skulle have AFVIST denne kartoffel
+tutorial_check_type,Tjek 'Type' feltet i passet
+tutorial_check_condition,Tjek 'Tilstand' feltet i passet
+tutorial_check_country,Tjek 'Land' feltet i passet
+tutorial_check_age,Tjek 'Fødselsdato' for at beregne alder
+tutorial_check_gender,Tjek 'Køn' feltet i passet
+alert_streak_bonus_minigame,5 i træk! BONUS MINISPIL!
+alert_perfect_stamps_bonus_minigame,Perfekte stempler! BONUS MINISPIL!
+alert_runner_bonus_minigame,Mistænkelig aktivitet! BONUS MINISPIL!
+alert_new_minigame_unlocked,Nyt minispil låst op: {name}!
+alert_minigame_bonus,Minispil bonus: +{bonus} point!
+high_score_display,Højeste score: {score}
+new_high_score,NY HØJESTE SCORE!
+month_1,Januar
+month_2,Februar
+month_3,Marts
+month_4,April
+month_5,Maj
+month_6,Juni
+month_7,Juli
+month_8,August
+month_9,September
+month_10,Oktober
+month_11,November
+month_12,December
+citation_trash_label,PAPIRKURV
+citation_header,OFFICIEL BØDE
+citation_from_supervisor,Fra: Supervisor Russet
+citation_dismiss_hint,[Træk til papirkurven for at lukke]
+minigame_times_up,"Tiden er udløbet! Ingen bekymringer, tilbage til arbejdet!"
+minigame_time_format,"{seconds},{fraction}"
+qte_title,HURTIGT BEGIVENHED
+qte_instruction,"Tryk på tasterne, når de vises!"
+qte_auto_completed,Automatisk gennemført
+qte_accessibility_note,(QTE Tilgængelighed aktiveret)
+qte_get_ready,Gør dig klar...
+qte_progress,Fremskridt
+qte_key_prompt,[{key}]
+qte_result,{successful} / {total} succesfulde (+{points} point)
+qte_image_pending,[Billede afventer]
+evidence_title,SIKKERHEDSINSPEKTION NÆRMEST
+evidence_instruction,"Ryd dit skrivebord! Makulér beviser, gem arbejdsgenstande."
+evidence_suspicion,Mistanke: {percent}%
+evidence_items_remaining,Genstande: {count}
+evidence_times_up_found,Tiden er udløbet! De fandt beviserne...
+evidence_times_up_suspicious,Tiden er udløbet! Inspektionen var... grundig.
+codebreaker_title,KODEBRYDER
+codebreaker_instruction,"Knæk koden! Grøn = nøjagtigt match, Gul = rigtigt ciffer forkert sted"
+codebreaker_enter_code,INDTAST KODEN
+codebreaker_submit,INDSEND
+codebreaker_clear,RYD
+codebreaker_previous_attempts,Tidligere forsøg:
+codebreaker_attempts,Forsøg: {current} / {max}
+codebreaker_result_exact_close,{exact} nøjagtige
+codebreaker_result_exact,{exact} præcise
+codebreaker_result_close,{close} nære
+codebreaker_result_none,ingen match
+codebreaker_success,Kode knækket på {attempts} forsøg! +{points} point!
+codebreaker_failure,Ingen forsøg tilbage! Koden blev vist ovenfor.
+scanner_title,DOKUMENTSCANNER
+scanner_instruction,Træk UV-lyset for at finde skjulte mærker! Klik for at bekræfte.
+scanner_found,Fundet: {current} / {total}
+scanner_perfect,Perfekt! Alle elementer fundet! +{points} point!
+scanner_partial,God indsats! Fandt {found}/{total}. +{points} point!
+chase_title,GRÆNSEJAGT
+chase_instruction,Klik på de RØDE smuglervarer! Lad de GRØNNE genstande passere.
+chase_legend,RØD = Fang! GRØN = Lad passere
+chase_caught,Fanget: {current} / {total}
+chase_perfect,Perfekt fangst! +{points} point!
+chase_partial,Fangede {count} genstande. +{points} point!
+sorting_title,STEMPELSORTERING
+sorting_instruction,"Træk stempler til den korrekte beholder! Grøn = GODKENDT, Rød = AFVIST"
+sorting_approved,GODKENDT
+sorting_denied,AFVIST
+sorting_progress,Sorteret: {sorted}/{total} Korrekt: {correct}
+sorting_perfect,Perfekt sortering! +{points} point!
+sorting_partial,Sorterede {correct}/{total} korrekt. +{points} point!
+fingerprint_title,FINGERAFTYKSMATCH
+fingerprint_instruction,Find fingeraftrykket der matcher referencen!
+fingerprint_reference,REFERENCE
+fingerprint_find_match,FIND MATCHET
+fingerprint_progress,Matchet: {current} / {total}
+fingerprint_success,Alle fingeraftryk matchet! +{points} point!
+fingerprint_partial,Matchet {matched}/{total}. +{points} point!
+score_attack_mode_label,Pointangrebstilstand
+score_attack_welcome_title,POINTANGREBSTILSTAND!
+score_attack_welcome_survive,Overlev så længe som muligt!
+score_attack_welcome_difficulty,Sværhedsgraden stiger over tid!

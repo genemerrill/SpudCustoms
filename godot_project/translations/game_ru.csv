@@ -1,0 +1,132 @@
+﻿keys,ru
+alert_border_runner,"БЕГЛЕЦ ОБНАРУЖЕН!\nНажмите, чтобы запустить ракету!"
+alert_rejected_fleeing,"ОТВЕРГНУТАЯ КАРТОФЕЛИНА СБЕГАЕТ!\nНажмите, чтобы запустить ракету!"
+alert_runner_escaped,БЕГЛЕЦ СБЕЖАЛ!\nДобавлен штраф!
+citation_runner_escaped,Беглец сбежал! Вы не успели его перехватить.
+alert_points_deducted,БЕГЛЕЦ СБЕЖАЛ!\nДобавлен штраф!\n-{penalty} очков!
+alert_perfect_hit,ИДЕАЛЬНОЕ ПОПАДАНИЕ! +{perfect} бонусных очков за точность
+alert_perfect_stamp,ИДЕАЛЬНЫЙ ШТАМП! +{points} очков!
+alert_combo,КОМБО x{mult}! +{streak} бонусных очков за комбо
+alert_quota_met,"Квота выполнена, смена завершена! \nБонус: {bonus} очков!"
+alert_strike_removed,Штраф снят!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Вы приняли верное решение, офицер.\n+{points} очков!"
+alert_wrong_decision,"Вы причинили ненужные страдания, офицер...\n+1 штраф!"
+alert_potato_should_be_approved,\nЭта картофелина соответствует всем требованиям и должна была быть одобрена.
+incorrect_decision,Неверное решение при обработке документа.
+alert_strike_out,Превышено максимальное количество штрафов! Ваша смена окончена.
+ui_score,Счёт: {score}
+ui_quota,Квота: {current} / {target}
+ui_strikes,Штрафы: {current} / {max}
+ui_click_megaphone,"Нажмите на мегафон, чтобы вызвать следующую картофелину"
+ui_drag_document,Перетащите документ на стол инспекции
+ui_stamp_document,"Выберите штамп, чтобы одобрить или отклонить"
+ui_check_violations,Проверьте документ на нарушения
+Strike removed!,Штраф снят!
+BORDER RUNNER DETECTED!\nClick to launch missile!,"БЕГЛЕЦ ОБНАРУЖЕН!\nНажмите, чтобы запустить ракету!"
+REJECTED POTATO FLEEING!\nClick to launch missile!,"ОТВЕРГНУТАЯ КАРТОФЕЛИНА СБЕГАЕТ!\nНажмите, чтобы запустить ракету!"
+RUNNER ESCAPED!\nStrike added!,БЕГЛЕЦ СБЕЖАЛ!\nДобавлен штраф!
+Click megaphone to call the next potato,"Нажмите на мегафон, чтобы вызвать следующую картофелину"
+Drag document to inspection table,Перетащите документ на инспекционный стол
+Select a stamp to approve or reject,Выберите штамп для одобрения или отклонения
+Check for document violations,Проверьте документ на наличие нарушений
+rule_explanation_header,ОБЪЯСНЕНИЕ ПРАВИЛА:
+rule_explanation_fresh,"Посмотрите на поле 'Состояние'. Если там указано что-либо, кроме 'Свежий' - ОТКЛОНИТЬ"
+rule_explanation_sweet_potato,Посмотрите на поле 'Тип'. Если там указано 'Батат' - ОТКЛОНИТЬ (нет разрешений)
+rule_explanation_chip_hill,Посмотрите на поле 'Страна'. Если там указано 'Чип Хилл' - ОТКЛОНИТЬ (запрещено)
+rule_explanation_age,Посмотрите на поле 'Дата рождения'. Вычислите возраст и проверьте по правилу
+rule_explanation_gender,Посмотрите на поле 'Пол' и проверьте по текущему правилу
+rule_footer_text,Эти правила должны соблюдаться для ВСЕХ картофелин
+rule_expired_note,Документы с истекшим сроком ВСЕГДА должны быть отклонены.
+rule_tutorial_hint,Нужна помощь? Нажмите на любое правило для объяснения
+alert_correct_decision_detailed,ВЕРНОЕ РЕШЕНИЕ! +{points} очков\n{reason}
+alert_wrong_decision_detailed,НЕВЕРНОЕ РЕШЕНИЕ! Добавлен штраф!\n{reason}
+alert_reason_approved,Картофелина соответствует всем требованиям - ОДОБРЕНО
+alert_reason_should_reject,Вы должны были ОТКЛОНИТЬ эту картофелину
+tutorial_check_type,Проверьте поле 'Тип' в паспорте
+tutorial_check_condition,Проверьте поле 'Состояние' в паспорте
+tutorial_check_country,Проверьте поле 'Страна' в паспорте
+tutorial_check_age,"Проверьте поле 'Дата рождения', чтобы вычислить возраст"
+tutorial_check_gender,Проверьте поле 'Пол' в паспорте
+alert_streak_bonus_minigame,5 подряд! БОНУСНАЯ МИНИ-ИГРА!
+alert_perfect_stamps_bonus_minigame,Идеальные штампы! БОНУСНАЯ МИНИ-ИГРА!
+alert_runner_bonus_minigame,Подозрительная активность! БОНУСНАЯ МИНИ-ИГРА!
+alert_new_minigame_unlocked,Новая мини-игра разблокирована: {name}!
+alert_minigame_bonus,Бонус мини-игры: +{bonus} очков!
+high_score_display,Рекорд: {score}
+new_high_score,НОВЫЙ РЕКОРД!
+month_1,Январь
+month_2,Февраль
+month_3,Март
+month_4,Апрель
+month_5,Май
+month_6,Июнь
+month_7,Июль
+month_8,Август
+month_9,Сентябрь
+month_10,Октябрь
+month_11,Ноябрь
+month_12,Декабрь
+citation_trash_label,КОРЗИНА
+citation_header,ОФИЦИАЛЬНОЕ ПРЕДУПРЕЖДЕНИЕ
+citation_from_supervisor,От: Надзиратель Рассет
+citation_dismiss_hint,[Перетащите в корзину, чтобы закрыть]
+minigame_times_up,"Время вышло! Не волнуйтесь, возвращайтесь к работе!"
+minigame_time_format,"{seconds},{fraction}"
+qte_title,СОБЫТИЕ БЫСТРОГО РЕАГИРОВАНИЯ
+qte_instruction,Нажимайте клавиши по мере их появления!
+qte_auto_completed,Автоматически завершено
+qte_accessibility_note,(Доступность QTE включена)
+qte_get_ready,Приготовьтесь...
+qte_progress,Прогресс
+qte_key_prompt,[{key}]
+qte_result,{successful} / {total} успешно (+{points} очков)
+qte_image_pending,[Изображение ожидается]
+evidence_title,ПРОВЕРКА БЕЗОПАСНОСТИ НЕМИНУЕМА
+evidence_instruction,"Очистите свой стол! Уничтожьте улики, спрячьте рабочие предметы."
+evidence_suspicion,Подозрение: {percent}%
+evidence_items_remaining,Предметы: {count}
+evidence_times_up_found,Время вышло! Они нашли улики...
+evidence_times_up_suspicious,Время вышло! Проверка была... тщательной.
+codebreaker_title,ВЗЛОМ КОДА
+codebreaker_instruction,"Взломайте код! Зеленый = точное совпадение, Желтый = правильная цифра, неверное место"
+codebreaker_enter_code,ВВЕДИТЕ КОД
+codebreaker_submit,ПОДТВЕРДИТЬ
+codebreaker_clear,ОЧИСТИТЬ
+codebreaker_previous_attempts,Предыдущие попытки:
+codebreaker_attempts,Попытки: {current} / {max}
+codebreaker_result_exact_close,{exact} точных
+codebreaker_result_exact,{exact} точных совпадений
+codebreaker_result_close,{close} близких совпадений
+codebreaker_result_none,нет совпадений
+codebreaker_success,Код взломан за {attempts} попыток! +{points} очков!
+codebreaker_failure,Попытки исчерпаны! Код был показан выше.
+scanner_title,СКАНЕР ДОКУМЕНТОВ
+scanner_instruction,"Перетащите УФ-лампу, чтобы найти скрытые метки! Нажмите, чтобы подтвердить."
+scanner_found,Найдено: {current} / {total}
+scanner_perfect,Идеально! Все элементы найдены! +{points} очков!
+scanner_partial,Неплохо! Найдено {found}/{total}. +{points} очков!
+chase_title,ПОГОНЯ НА ГРАНИЦЕ
+chase_instruction,Нажмите на КРАСНЫЕ контрабандные предметы! Пропустите ЗЕЛЁНЫЕ предметы.
+chase_legend,КРАСНЫЙ = Поймать! ЗЕЛЁНЫЙ = Пропустить
+chase_caught,Поймано: {current} / {total}
+chase_perfect,Идеальный улов! +{points} очков!
+chase_partial,Поймано {count} предметов. +{points} очков!
+sorting_title,СОРТИРОВКА ШТАМПОВ
+sorting_instruction,"Перетащите штампы в нужную корзину! Зелёный = ОДОБРЕНО, Красный = ОТКАЗАНО"
+sorting_approved,ОДОБРЕНО
+sorting_denied,ОТКАЗАНО
+sorting_progress,Отсортировано: {sorted}/{total} Верно: {correct}
+sorting_perfect,Идеальная сортировка! +{points} очков!
+sorting_partial,Правильно отсортировано {correct}/{total}. +{points} очков!
+fingerprint_title,ПОИСК СОВПАДЕНИЙ ОТПЕЧАТКОВ
+fingerprint_instruction,"Найдите отпечаток пальца, который соответствует образцу!"
+fingerprint_reference,ЭТАЛОН
+fingerprint_find_match,НАЙТИ СОВПАДЕНИЕ
+fingerprint_progress,Совпало: {current} / {total}
+fingerprint_success,Все отпечатки совпали! +{points} очков!
+fingerprint_partial,Совпало {matched}/{total}. +{points} очков!
+score_attack_mode_label,Режим «Атака на очки»
+score_attack_welcome_title,АТАКА НА ОЧКИ!
+score_attack_welcome_survive,Выживайте как можно дольше!
+score_attack_welcome_difficulty,Сложность возрастает со временем!

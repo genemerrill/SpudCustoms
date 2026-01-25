@@ -1,0 +1,132 @@
+﻿keys,id
+alert_border_runner,PELARI PERBATASAN TERDETEKSI!\nKlik untuk meluncurkan rudal!
+alert_rejected_fleeing,KENTANG DITOLAK MELARIKAN DIRI!\nKlik untuk meluncurkan rudal!
+alert_runner_escaped,PELARI LOLOS!\nStrike ditambahkan!
+citation_runner_escaped,Seorang pelari lintas batas lolos! Anda gagal mencegatnya tepat waktu.
+alert_points_deducted,PELARI LOLOS!\nStrike ditambahkan!\n-{penalty} poin!
+alert_perfect_hit,PUKULAN SEMPURNA! +{perfect} poin bonus akurasi
+alert_perfect_stamp,STEMPEL SEMPURNA! +{points} poin!
+alert_combo,KOMBO x{mult}! +{streak} poin bonus kombo
+alert_quota_met,"Kuota terpenuhi, shift selesai! \nBonus: {bonus} poin!"
+alert_strike_removed,Strike dihapus!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Anda membuat pilihan yang benar, petugas.\n+{points} poin!"
+alert_wrong_decision,"Anda telah menyebabkan penderitaan yang tidak perlu, petugas...\n+1 Strike!"
+alert_potato_should_be_approved,\nKentang ini memenuhi semua persyaratan dan seharusnya disetujui.
+incorrect_decision,Keputusan yang salah dalam pemrosesan dokumen.
+alert_strike_out,Batas maksimum strike terlampaui! Shift Anda berakhir.
+ui_score,Skor: {score}
+ui_quota,Kuota: {current} / {target}
+ui_strikes,Strike: {current} / {max}
+ui_click_megaphone,Klik corong untuk memanggil kentang berikutnya
+ui_drag_document,Seret dokumen ke meja inspeksi
+ui_stamp_document,Pilih stempel untuk menyetujui atau menolak
+ui_check_violations,Periksa pelanggaran dokumen
+Strike removed!,Strike dihapus!
+BORDER RUNNER DETECTED!\nClick to launch missile!,PELARI PERBATASAN TERDETEKSI!\nKlik untuk meluncurkan rudal!
+REJECTED POTATO FLEEING!\nClick to launch missile!,KENTANG DITOLAK MELARIKAN DIRI!\nKlik untuk meluncurkan rudal!
+RUNNER ESCAPED!\nStrike added!,PELARI LOLOS!\nStrike ditambahkan!
+Click megaphone to call the next potato,Klik corong untuk memanggil kentang berikutnya
+Drag document to inspection table,Seret dokumen ke meja inspeksi
+Select a stamp to approve or reject,Pilih stempel untuk menyetujui atau menolak
+Check for document violations,Periksa pelanggaran dokumen
+rule_explanation_header,PENJELASAN ATURAN:
+rule_explanation_fresh, mint 'Friss' - ELUTASÍTÁS
+rule_explanation_sweet_potato,Lihat bidang 'Jenis'. Jika mengatakan 'Ubi Jalar' - TOLAK (tidak ada izin)
+rule_explanation_chip_hill,Lihat bidang 'Negara'. Jika mengatakan 'Chip Hill' - TOLAK (dilarang)
+rule_explanation_age,Lihat bidang 'Tanggal Lahir'. Hitung umur dan periksa terhadap aturan
+rule_explanation_gender,Lihat bidang 'Gender' dan periksa terhadap aturan saat ini
+rule_footer_text,Aturan ini harus ditegakkan untuk SEMUA kentang
+rule_expired_note,Dokumen yang sudah kedaluwarsa HARUS SELALU ditolak.
+rule_tutorial_hint,Butuh bantuan? Klik aturan apa pun untuk penjelasan
+alert_correct_decision_detailed,KEPUTUSAN BENAR! +{points} poin\n{reason}
+alert_wrong_decision_detailed,KEPUTUSAN SALAH! Strike ditambahkan!\n{reason}
+alert_reason_approved,Kentang memenuhi semua persyaratan - DISETUJUI
+alert_reason_should_reject,Anda seharusnya MENOLAK kentang ini
+tutorial_check_type,Periksa bidang 'Jenis' di paspor
+tutorial_check_condition,Periksa bidang 'Kondisi' di paspor
+tutorial_check_country,Periksa bidang 'Negara' di paspor
+tutorial_check_age,Periksa 'Tanggal Lahir' untuk menghitung umur
+tutorial_check_gender,Periksa bidang 'Gender' di paspor
+alert_streak_bonus_minigame,5 berturut-turut! MINIGAME BONUS!
+alert_perfect_stamps_bonus_minigame,Stempel sempurna! MINIGAME BONUS!
+alert_runner_bonus_minigame,Aktivitas mencurigakan! MINIGAME BONUS!
+alert_new_minigame_unlocked,Minigame baru terbuka: {name}!
+alert_minigame_bonus,Bonus minigame: +{bonus} poin!
+high_score_display,Skor Tertinggi: {score}
+new_high_score,SKOR TERTINGGI BARU!
+month_1,Januari
+month_2,Februari
+month_3,Maret
+month_4,April
+month_5,Mei
+month_6,Juni
+month_7,Juli
+month_8,Agustus
+month_9,September
+month_10,Oktober
+month_11,November
+month_12,Desember
+citation_trash_label,SAMPAH
+citation_header,PERINGATAN RESMI
+citation_from_supervisor,Dari: Supervisor Russet
+citation_dismiss_hint,[Seret ke Sampah untuk menutup]
+minigame_times_up,"Waktu habis! Jangan khawatir, kembali bertugas!"
+minigame_time_format,{seconds}.{fraction}
+qte_title,AKSI CEPAT
+qte_instruction,Tekan tombol sesuai yang muncul!
+qte_auto_completed,Otomatis Selesai
+qte_accessibility_note,(Aksesibilitas QTE diaktifkan)
+qte_get_ready,Bersiap...
+qte_progress,Kemajuan
+qte_key_prompt,[{key}]
+qte_result,{successful} / {total} berhasil (+{points} poin)
+qte_image_pending,[Gambar Tertunda]
+evidence_title,INSPEKSI KEAMANAN AKAN SEGERA DIMULAI
+evidence_instruction,"Bersihkan mejamu! Hancurkan bukti, sembunyikan barang kerja."
+evidence_suspicion,Kecurigaan: {percent}%
+evidence_items_remaining,Barang: {count}
+evidence_times_up_found,Waktu habis! Mereka menemukan buktinya...
+evidence_times_up_suspicious,Waktu habis! Inspeksinya... menyeluruh.
+codebreaker_title,PEMECAH KODE
+codebreaker_instruction,"Pecahkan kodenya! Hijau = cocok persis, Kuning = digit benar posisi salah"
+codebreaker_enter_code,MASUKKAN KODE
+codebreaker_submit,KIRIM
+codebreaker_clear,HAPUS
+codebreaker_previous_attempts,Percobaan Sebelumnya:
+codebreaker_attempts,Percobaan: {current} / {max}
+codebreaker_result_exact_close,{exact} tepat
+codebreaker_result_exact,{exact} tepat
+codebreaker_result_close,{close} mendekati
+codebreaker_result_none,tidak ada yang cocok
+codebreaker_success,Kode berhasil dipecahkan dalam {attempts} percobaan! +{points} poin!
+codebreaker_failure,Percobaan habis! Kode ditampilkan di atas.
+scanner_title,PEMINDAI DOKUMEN
+scanner_instruction,Seret lampu UV untuk menemukan tanda tersembunyi! Klik untuk mengonfirmasi.
+scanner_found,Ditemukan: {current} / {total}
+scanner_perfect,Sempurna! Semua elemen ditemukan! +{points} poin!
+scanner_partial,Usaha bagus! Ditemukan {found}/{total}. +{points} poin!
+chase_title,PENGEJARAN PERBATASAN
+chase_instruction,Klik item selundupan MERAH! Biarkan item HIJAU lewat.
+chase_legend,MERAH = Tangkap! HIJAU = Biarkan lewat
+chase_caught,Tertangkap: {current} / {total}
+chase_perfect,Penangkapan sempurna! +{points} poin!
+chase_partial,{count} item tertangkap. +{points} poin!
+sorting_title,PENYORTIRAN STAMPEL
+sorting_instruction,"Seret stampel ke tempat yang benar! Hijau = DISETUJUI, Merah = DITOLAK"
+sorting_approved,DISETUJUI
+sorting_denied,DITOLAK
+sorting_progress,Disortir: {sorted}/{total} Benar: {correct}
+sorting_perfect,Penyortiran sempurna! +{points} poin!
+sorting_partial,{correct}/{total} disortir dengan benar. +{points} poin!
+fingerprint_title,PENCOCOKAN SIDIK JARI
+fingerprint_instruction,Temukan sidik jari yang cocok dengan referensi!
+fingerprint_reference,REFERENSI
+fingerprint_find_match,TEMUKAN YANG COCOK
+fingerprint_progress,Cocok: {current} / {total}
+fingerprint_success,Semua sidik jari cocok! +{points} poin!
+fingerprint_partial,Cocok {matched}/{total}. +{points} poin!
+score_attack_mode_label,Mode Serangan Skor
+score_attack_welcome_title,MODE SERANGAN SKOR!
+score_attack_welcome_survive,Bertahanlah selama mungkin!
+score_attack_welcome_difficulty,Tingkat kesulitan akan meningkat seiring waktu!

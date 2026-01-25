@@ -1,0 +1,132 @@
+﻿keys,nl
+alert_border_runner,GRENSOVERTREDER GEDETECTEERD!\nKlik om raket te lanceren!
+alert_rejected_fleeing,AFGEWEZEN AARDAPPEL VLUCHT!\nKlik om raket te lanceren!
+alert_runner_escaped,HARDLOPER ONTSNAPT!\nStrike toegevoegd!
+citation_runner_escaped,Een grensrenner is ontsnapt! U slaagde er niet in om hem op tijd te onderscheppen.
+alert_points_deducted,HARDLOPER ONTSNAPT!\nStrike toegevoegd!\n-{penalty} punten!
+alert_perfect_hit,PERFECTE TREFFER! +{perfect} nauwkeurigheidsbonus punten
+alert_perfect_stamp,PERFECT STEMPEL! +{points} punten!
+alert_combo,COMBO x{mult}! +{streak} combo bonuspunten
+alert_quota_met,"Quotum behaald, dienst voltooid! \nBonus: {bonus} punten!"
+alert_strike_removed,Strike verwijderd!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"U heeft de juiste keuze gemaakt, agent.\n+{points} punten!"
+alert_wrong_decision,"U heeft onnodige ellende veroorzaakt, agent...\n+1 Strike!"
+alert_potato_should_be_approved,\nDeze aardappel voldoet aan alle eisen en had goedgekeurd moeten worden.
+incorrect_decision,Verkeerde beslissing bij documentverwerking.
+alert_strike_out,Maximaal aantal strikes overschreden! Uw dienst is voorbij.
+ui_score,Punten: {score}
+ui_quota,Quotum: {current} / {target}
+ui_strikes,Overtredingen: {current} / {max}
+ui_click_megaphone,Klik op de megafoon om de volgende aardappel op te roepen
+ui_drag_document,Sleep document naar de inspectietafel
+ui_stamp_document,Selecteer een stempel om goed te keuren of af te wijzen
+ui_check_violations,Controleer op documentovertredingen
+Strike removed!,Strike verwijderd!
+BORDER RUNNER DETECTED!\nClick to launch missile!,GRENSOVERTREDER GEDETECTEERD!\nKlik om raket te lanceren!
+REJECTED POTATO FLEEING!\nClick to launch missile!,AFGEWEZEN AARDAPPEL VLUCHT!\nKlik om raket te lanceren!
+RUNNER ESCAPED!\nStrike added!,HARDLOPER ONTSNAPT!\nStrike toegevoegd!
+Click megaphone to call the next potato,Klik op de megafoon om de volgende aardappel op te roepen
+Drag document to inspection table,Sleep document naar de inspectietafel
+Select a stamp to approve or reject,Selecteer een stempel om goed te keuren of af te wijzen
+Check for document violations,Controleer op documentovertredingen
+rule_explanation_header,REGEL UITLEG:
+rule_explanation_fresh,Guarda il campo 'Condizione'. Se dice qualcosa di diverso da 'Fresco' - RIFIUTA
+rule_explanation_sweet_potato,Kijk naar het veld 'Type'. Als het 'Zoete Aardappel' zegt - AFWIJZEN (geen vergunningen)
+rule_explanation_chip_hill,Kijk naar het veld 'Land'. Als het 'Chip Hill' zegt - AFWIJZEN (verboden)
+rule_explanation_age,Kijk naar het veld 'Geboortedatum'. Bereken de leeftijd en controleer tegen de regel
+rule_explanation_gender,Kijk naar het veld 'Geslacht' en controleer tegen de huidige regel
+rule_footer_text,Deze regels moeten worden gehandhaafd voor ALLE aardappelen
+rule_expired_note,Verlopen documenten moeten ALTIJD worden afgewezen.
+rule_tutorial_hint,Hulp nodig? Klik op elke regel voor een uitleg
+alert_correct_decision_detailed,JUISTE BESLISSING! +{points} punten\n{reason}
+alert_wrong_decision_detailed,VERKEERDE BESLISSING! Strike toegevoegd!\n{reason}
+alert_reason_approved,Aardappel voldoet aan alle eisen - GOEDGEKEURD
+alert_reason_should_reject,Je had deze aardappel moeten AFWIJZEN
+tutorial_check_type,Controleer het veld 'Type' in het paspoort
+tutorial_check_condition,Controleer het veld 'Conditie' in het paspoort
+tutorial_check_country,Controleer het veld 'Land' in het paspoort
+tutorial_check_age,Controleer de 'Geboortedatum' om de leeftijd te berekenen
+tutorial_check_gender,Controleer het veld 'Geslacht' in het paspoort
+alert_streak_bonus_minigame,5 op rij! BONUS MINIGAME!
+alert_perfect_stamps_bonus_minigame,Perfecte stempels! BONUS MINIGAME!
+alert_runner_bonus_minigame,Verdachte activiteit! BONUS MINIGAME!
+alert_new_minigame_unlocked,Nieuwe minigame ontgrendeld: {name}!
+alert_minigame_bonus,Minigame bonus: +{bonus} punten!
+high_score_display,Hoogste score: {score}
+new_high_score,NIEUWE HOOGSTE SCORE!
+month_1,Januari
+month_2,Februari
+month_3,Maart
+month_4,April
+month_5,Mei
+month_6,Juni
+month_7,Juli
+month_8,Augustus
+month_9,September
+month_10,Oktober
+month_11,November
+month_12,December
+citation_trash_label,PRULLENBAK
+citation_header,OFFICIËLE WAARSCHUWING
+citation_from_supervisor,Van: Supervisor Russet
+citation_dismiss_hint,[Sleep naar prullenbak om te sluiten]
+minigame_times_up,"De tijd is om! Geen zorgen, terug aan het werk!"
+minigame_time_format,{seconden}.{fractie}
+qte_title,SNEL REACTIE EVENEMENT
+qte_instruction,Druk op de toetsen zoals ze verschijnen!
+qte_auto_completed,Automatisch voltooid
+qte_accessibility_note,(QTE Toegankelijkheid ingeschakeld)
+qte_get_ready,Bereid je voor...
+qte_progress,Voortgang
+qte_key_prompt,[{toets}]
+qte_result,{successful} / {total} geslaagd (+{points} punten)
+qte_image_pending,[Afbeelding volgt]
+evidence_title,VEILIGHEIDSINSPECTIE OP HANDEN
+evidence_instruction,"Ruim je bureau op! Versnipper bewijs, berg werkspullen op."
+evidence_suspicion,Verdenking: {percent}%
+evidence_items_remaining,Items: {aantal}
+evidence_times_up_found,De tijd is om! Ze hebben het bewijs gevonden...
+evidence_times_up_suspicious,De tijd is om! De inspectie was... grondig.
+codebreaker_title,CODEKRAKER
+codebreaker_instruction,"Kraak de code! Groen = exacte overeenkomst, Geel = juiste cijfer, verkeerde positie"
+codebreaker_enter_code,VOER DE CODE IN
+codebreaker_submit,INDIENEN
+codebreaker_clear,WISSEN
+codebreaker_previous_attempts,Vorige Pogingen:
+codebreaker_attempts,Pogingen: {current} / {max}
+codebreaker_result_exact_close,{exact} exacte
+codebreaker_result_exact,{exact} precies
+codebreaker_result_close,{close} bijna
+codebreaker_result_none,geen treffers
+codebreaker_success,Code gekraakt in {attempts} pogingen! +{points} punten!
+codebreaker_failure,Pogingen op! De code stond hierboven.
+scanner_title,DOCUMENTSCANNER
+scanner_instruction,Sleep het UV-licht om verborgen markeringen te vinden! Klik om te bevestigen.
+scanner_found,Gevonden: {current} / {total}
+scanner_perfect,Perfect! Alle elementen gevonden! +{points} punten!
+scanner_partial,Goed gedaan! {found}/{total} gevonden. +{points} punten!
+chase_title,GRENSJACHT
+chase_instruction,Klik op de RODE smokkelwaar! Laat de GROENE items passeren.
+chase_legend,ROOD = Vangen!   GROEN = Laten passeren
+chase_caught,Gevangen: {current} / {total}
+chase_perfect,Perfecte vangst! +{points} punten!
+chase_partial,{count} items gevangen. +{points} punten!
+sorting_title,STEMPELS SORTEREN
+sorting_instruction,"Sleep stempels naar de juiste bak! Groen = GOEDGEKEURD, Rood = GEWEIGERD"
+sorting_approved,GOEDGEKEURD
+sorting_denied,GEWEIGERD
+sorting_progress,Gesorteerd: {sorted}/{total}  Correct: {correct}
+sorting_perfect,Perfect gesorteerd! +{points} punten!
+sorting_partial,{correct}/{total} correct gesorteerd. +{points} punten!
+fingerprint_title,VINGERAFDRUK OVEREENKOMST
+fingerprint_instruction,Vind de vingerafdruk die overeenkomt met de referentie!
+fingerprint_reference,REFERENTIE
+fingerprint_find_match,VIND DE OVEREENKOMST
+fingerprint_progress,Overeenkomsten: {current} / {total}
+fingerprint_success,Alle vingerafdrukken komen overeen! +{points} punten!
+fingerprint_partial,Overeenkomsten {matched}/{total}. +{points} punten!
+score_attack_mode_label,Score-aanvalmodus
+score_attack_welcome_title,SCORE-AANVALMODUS!
+score_attack_welcome_survive,Overleef zo lang mogelijk!
+score_attack_welcome_difficulty,De moeilijkheidsgraad neemt na verloop van tijd toe!

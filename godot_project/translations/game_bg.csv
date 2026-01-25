@@ -1,0 +1,132 @@
+﻿keys,bg
+alert_border_runner,"ЗАСЕЧЕН ГРАНИЧЕН БЕГЛЕЦ!\nКликнете, за да изстреляте ракета!"
+alert_rejected_fleeing,"ОТХВЪРЛЕН КАРТОФ БЯГА!\nКликнете, за да изстреляте ракета!"
+alert_runner_escaped,БЕГЛЕЦЪТ ИЗБЯГА!\nДобавен е удар!
+citation_runner_escaped,Беглец избяга! Не успяхте да го прехванете навреме.
+alert_points_deducted,БЕГЛЕЦЪТ ИЗБЯГА!\nДобавен е удар!\n-{penalty} точки!
+alert_perfect_hit,ПЕРФЕКТЕН УДАР! +{perfect} бонус точки за точност
+alert_perfect_stamp,ПЕРФЕКТЕН ПЕЧАТ! +{points} точки!
+alert_combo,КОМБО x{mult}! +{streak} бонус точки за комбо
+alert_quota_met,"Квотата е изпълнена, смяната приключи! \nБонус: {bonus} точки!"
+alert_strike_removed,Ударът е премахнат!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Взехте правилното решение, офицер.\n+{points} точки!"
+alert_wrong_decision,"Причинихте ненужно страдание, офицер...\n+1 Удар!"
+alert_potato_should_be_approved,\nТози картоф отговаря на всички изисквания и трябваше да бъде одобрен.
+incorrect_decision,Неправилно решение при обработка на документ.
+alert_strike_out,Максималният брой удари е надвишен! Вашата смяна приключи.
+ui_score,Резултат: {score}
+ui_quota,Квота: {current} / {target}
+ui_strikes,Удари: {current} / {max}
+ui_click_megaphone,"Кликнете на мегафона, за да извикате следващия картоф"
+ui_drag_document,Плъзнете документа до масата за проверка
+ui_stamp_document,Изберете печат за одобрение или отхвърляне
+ui_check_violations,Проверете за нарушения в документа
+Strike removed!,Ударът е премахнат!
+BORDER RUNNER DETECTED!\nClick to launch missile!,"ЗАСЕЧЕН ГРАНИЧЕН БЕГЛЕЦ!\nКликнете, за да изстреляте ракета!"
+REJECTED POTATO FLEEING!\nClick to launch missile!,"ОТХВЪРЛЕН КАРТОФ БЯГА!\nКликнете, за да изстреляте ракета!"
+RUNNER ESCAPED!\nStrike added!,БЕГЛЕЦЪТ ИЗБЯГА!\nДобавен е удар!
+Click megaphone to call the next potato,"Кликнете на мегафона, за да извикате следващия картоф"
+Drag document to inspection table,Плъзнете документа до масата за проверка
+Select a stamp to approve or reject,Изберете печат за одобрение или отхвърляне
+Check for document violations,Проверете за нарушения в документа
+rule_explanation_header,ОБЯСНЕНИЕ НА ПРАВИЛОТО:
+rule_explanation_fresh,Погледнете полето 'Състояние'. Ако пише нещо различно от 'Прясно' - ОТХВЪРЛЕТЕ
+rule_explanation_sweet_potato,Погледнете полето 'Вид'. Ако пише 'Сладък картоф' - ОТХВЪРЛЕТЕ (няма разрешителни)
+rule_explanation_chip_hill,Погледнете полето 'Държава'. Ако пише 'Чип Хил' - ОТХВЪРЛЕТЕ (забранено)
+rule_explanation_age,Погледнете полето 'Роден'. Изчислете възрастта и проверете спрямо правилото
+rule_explanation_gender,Погледнете полето 'Пол' и проверете спрямо текущото правило
+rule_footer_text,Тези правила трябва да се прилагат за ВСИЧКИ картофи
+rule_expired_note,Документи с изтекъл срок ВИНАГИ трябва да се отхвърлят.
+rule_tutorial_hint,Нуждаете се от помощ? Кликнете върху което и да е правило за обяснение
+alert_correct_decision_detailed,ПРАВИЛНО РЕШЕНИЕ! +{points} точки\n{reason}
+alert_wrong_decision_detailed,ГРЕШНО РЕШЕНИЕ! Добавен е удар!\n{reason}
+alert_reason_approved,Картофът отговаря на всички изисквания - ОДОБРЕН
+alert_reason_should_reject,Трябваше да ОТХВЪРЛИТЕ този картоф
+tutorial_check_type,Проверете полето 'Вид' в паспорта
+tutorial_check_condition,Проверете полето 'Състояние' в паспорта
+tutorial_check_country,Проверете полето 'Държава' в паспорта
+tutorial_check_age,"Проверете полето 'Роден', за да изчислите възрастта"
+tutorial_check_gender,Проверете полето 'Пол' в паспорта
+alert_streak_bonus_minigame,5 поредни! БОНУС МИНИИГРА!
+alert_perfect_stamps_bonus_minigame,Перфектни печати! БОНУС МИНИИГРА!
+alert_runner_bonus_minigame,Подозрителна дейност! БОНУС МИНИИГРА!
+alert_new_minigame_unlocked,Отключена нова миниигра: {name}!
+alert_minigame_bonus,Бонус от миниигра: +{bonus} точки!
+high_score_display,Най-добър резултат: {score}
+new_high_score,НОВ НАЙ-ДОБЪР РЕЗУЛТАТ!
+month_1,Януари
+month_2,Февруари
+month_3,Март
+month_4,Април
+month_5,Май
+month_6,Юни
+month_7,Юли
+month_8,Август
+month_9,Септември
+month_10,Октомври
+month_11,Ноември
+month_12,Декември
+citation_trash_label,КОШЧЕ
+citation_header,ОФИЦИАЛНО ПРЕДУПРЕЖДЕНИЕ
+citation_from_supervisor,От: Надзирател Ръсет
+citation_dismiss_hint,[Плъзнете в кошчето за затваряне]
+minigame_times_up,"Времето изтече! Няма страшно, обратно на работа!"
+minigame_time_format,{секунди}.{части}
+qte_title,СЪБИТИЕ С БЪРЗА РЕАКЦИЯ
+qte_instruction,Натиснете клавишите както се появяват!
+qte_auto_completed,Автоматично завършено
+qte_accessibility_note,(Достъпност за QTE активирана)
+qte_get_ready,Пригответе се...
+qte_progress,Прогрес
+qte_key_prompt,[{key}]
+qte_result,{successful} / {total} успешни (+{points} точки)
+qte_image_pending,[Изображение очаква]
+evidence_title,ПРЕДСТОИ ПРОВЕРКА ЗА СИГУРНОСТ
+evidence_instruction,"Изчистете бюрото си! Унищожете доказателства, скрийте работни предмети."
+evidence_suspicion,Подозрение: {percent}%
+evidence_items_remaining,Предмети: {count}
+evidence_times_up_found,Времето изтече! Откриха доказателствата...
+evidence_times_up_suspicious,Времето изтече! Проверката беше... щателна.
+codebreaker_title,РАЗБИВАЧ НА КОДОВЕ
+codebreaker_instruction,"Разбийте кода! Зелено = точно съвпадение, Жълто = правилна цифра на грешно място"
+codebreaker_enter_code,ВЪВЕДЕТЕ КОДА
+codebreaker_submit,ИЗПРАТИ
+codebreaker_clear,ИЗЧИСТИ
+codebreaker_previous_attempts,Предишни опити:
+codebreaker_attempts,Опити: {current} / {max}
+codebreaker_result_exact_close,{exact} точни
+codebreaker_result_exact,{exact} точно
+codebreaker_result_close,{close} близо
+codebreaker_result_none,няма съвпадения
+codebreaker_success,Кодът е разбит от {attempts} опита! +{points} точки!
+codebreaker_failure,Изчерпани опити! Кодът беше показан по-горе.
+scanner_title,СКЕНЕР ЗА ДОКУМЕНТИ
+scanner_instruction,"Плъзнете UV лампата, за да намерите скрити знаци! Кликнете за потвърждение."
+scanner_found,Намерени: {current} / {total}
+scanner_perfect,Перфектно! Всички елементи са намерени! +{points} точки!
+scanner_partial,Добро усилие! Намерени {found}/{total}. +{points} точки!
+chase_title,ГРАНИЧНО ПРЕСЛЕДВАНЕ
+chase_instruction,Кликнете върху ЧЕРВЕНИТЕ контрабандни предмети! Оставете ЗЕЛЕНИТЕ предмети да преминат.
+chase_legend,ЧЕРВЕНО = Хвани!   ЗЕЛЕНО = Пусни!
+chase_caught,Хванати: {current} / {total}
+chase_perfect,Перфектен улов! +{points} точки!
+chase_partial,Хванати {count} предмета. +{points} точки!
+sorting_title,СОРТИРАНЕ НА ПЕЧАТИ
+sorting_instruction,"Плъзнете печатите в правилния кош! Зелено = ОДОБРЕНО, Червено = ОТХВЪРЛЕНО"
+sorting_approved,ОДОБРЕНО
+sorting_denied,ОТХВЪРЛЕНО
+sorting_progress,Сортирани: {sorted}/{total}  Верни: {correct}
+sorting_perfect,Перфектно сортиране! +{points} точки!
+sorting_partial,Сортирани {correct}/{total} правилно. +{points} точки!
+fingerprint_title,СЪВПАДЕНИЕ НА ОТПЕЧАТЪЦИ
+fingerprint_instruction,"Намерете отпечатъка, който съвпада с еталона!"
+fingerprint_reference,ЕТАЛОН
+fingerprint_find_match,НАМЕРИ СЪВПАДЕНИЕТО
+fingerprint_progress,Съвпаднали: {current} / {total}
+fingerprint_success,Всички отпечатъци съвпаднаха! +{points} точки!
+fingerprint_partial,Съвпаднали {matched}/{total}. +{points} точки!
+score_attack_mode_label,Режим Атака на Точки
+score_attack_welcome_title,РЕЖИМ АТАКА НА ТОЧКИ!
+score_attack_welcome_survive,Оцелейте възможно най-дълго!
+score_attack_welcome_difficulty,Трудността нараства с времето!

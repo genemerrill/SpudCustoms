@@ -1,0 +1,70 @@
+﻿keys,ru
+dialogue_spud_being_called_1,"Следующий клубень, твоя судьба ждёт."
+dialogue_spud_being_called_2,"Первый в очереди, момент истины приближается."
+dialogue_spud_being_called_3,"Проходите, избранник клубневого рода."
+dialogue_spud_being_called_4,Поздравляем! Ваше ожидание увенчалось успехом.
+dialogue_spud_being_called_5,Великая Картофельная Бюрократия призывает вас.
+dialogue_spud_being_called_6,"Вперёд, благородный клубень! Документы ждут!"
+dialogue_spud_being_called_7,Двигайтесь! Штамп не терпит промедления.
+dialogue_spud_being_called_8,Живее! Форма P-38B требует заполнения.
+dialogue_spud_being_called_9,"Проходите, судьба требует вашего прибытия."
+dialogue_spud_being_called_10,"Подойдите к стойке приговора, клубень."
+dialogue_spud_in_office_1,"Пожалуйста, будьте терпеливы. Время — иллюзия."
+dialogue_spud_in_office_2,Ожидание закаляет характер. И крахмал.
+dialogue_spud_in_office_3,Очередь движется таинственными путями.
+dialogue_spud_in_office_4,Ваше положение отмечено властями.
+dialogue_spud_in_office_5,Стояние в очереди: универсальная константа.
+dialogue_spud_in_office_6,"Ни один клубень не готов, пока не будет приправлен ожиданием."
+dialogue_spud_in_office_7,"Терпение: не единственная добродетель, но она числится."
+dialogue_spud_in_office_8,Бюрократические колёса вращаются медленно. Очень медленно.
+dialogue_spud_in_office_9,"Ах, этот сладкий звук процедуры!"
+dialogue_spud_in_office_10,Сегодняшняя очередь — завтрашний анекдот.
+dialogue_spud_in_office_11,Время в очередях искривляется. Это было измерено.
+dialogue_spud_in_office_12,Навык ожидания: Достигнут 43-й уровень!
+dialogue_warnings_1,Несогласные будут очищены с точностью.
+dialogue_warnings_2,Нарушители очереди отправляются на Экспресс-Обработку.
+dialogue_warnings_3,Нарушение порядка в очереди влечёт за собой лекции об очередях.
+dialogue_warnings_4,Неподчинение ведёт в Комнату с Горячим Маслом.
+dialogue_warnings_5,"Мы не обязаны быть справедливыми, просто организованными."
+dialogue_warnings_6,Комитет по Соблюдению Картофельных Норм видит всё.
+dialogue_warnings_7,Смутьяны: пюре без масла.
+dialogue_warnings_8,Сеятели хаоса станут хашбраунами. Быстро.
+dialogue_warnings_9,Нарушители правил столкнутся с участью дважды запечённых.
+dialogue_warnings_10,Аудиторы Очереди отметили ваше существование.
+dialogue_warnings_11,Ваше досье: помечено КРАСНОЙ печатью.
+dialogue_misc_1,Где все?
+dialogue_misc_2,Чрезвычайная ситуация? Продолжайте ждать в порядке очереди.
+dialogue_misc_3,Читали пункт семь соглашения об ожидании?
+dialogue_misc_4,"Потерянные вещи: найдено, обложено налогом, утеряно."
+dialogue_misc_5,"Если картофелина жалуется, издаёт ли она звук?"
+dialogue_misc_6,Свет заменён табличкой: 'Больше Тоннеля.'
+dialogue_misc_7,Смерть временна. Бюрократия вечна.
+dialogue_misc_8,Система документооборота обрела разум. Сохраняйте спокойствие.
+dialogue_misc_9,Сегодняшние счастливые числа ничего не значат. Извините.
+dialogue_misc_10,"Апокалипсис? Возьмите номерок, ждите, чтобы исчезнуть."
+dialogue_misc_11,Нет доказательств — требуется больше бланков.
+dialogue_document_interaction_1,"Возьмите ваши документы, пожалуйста."
+dialogue_document_interaction_2,ВОЗЬМИТЕ ИХ!
+dialogue_perfect_stamp_1,Отличная работа!
+dialogue_perfect_stamp_2,"Вот это я понимаю, штамп!"
+dialogue_perfect_stamp_3,Идеальная точность!
+dialogue_perfect_stamp_4,Боги штампов благоволят тебе!
+dialogue_perfect_stamp_5,Образцовая техника!
+dialogue_runner_stopped_1,Попался!
+dialogue_runner_stopped_2,Не при мне!
+dialogue_runner_stopped_3,"Правосудие подано, горяченькое!"
+dialogue_runner_stopped_4,Вот что бывает с беглецами!
+dialogue_runner_stopped_5,Цель устранена!
+dialogue_runner_escaped_1,Чёрт! Ушли!
+dialogue_runner_escaped_2,Проклятье! Слишком медленно!
+dialogue_runner_escaped_3,Этот проскользнул...
+dialogue_runner_escaped_4,И сколько бумаг из-за этого...
+dialogue_runner_escaped_5,Не лучший мой момент.
+dialogue_wrong_stamp_1,"Стоп, это неправильно..."
+dialogue_wrong_stamp_2,"Хм, я это специально?"
+dialogue_wrong_stamp_3,Чернила... они предали меня!
+dialogue_wrong_stamp_4,Упс.
+dialogue_strike_received_1,Это пойдёт в моё досье...
+dialogue_strike_received_2,Министерству это не понравится.
+dialogue_strike_received_3,Ещё один шаг к пюре...
+dialogue_strike_received_4,"Штраф! Но не тот, что радует."

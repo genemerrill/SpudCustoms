@@ -1,16 +1,27 @@
 # Attribution
 
 # Lost Rabbit Digital
+(Check us out on GitHub)[https://github.com/Lost-Rabbit-Digital]
 
 ## Programmers
 [Boden McHale](https://www.bodenmchale.com/)
-[David McHale](https://www.youtube.com/channel/UCcmLal-sOU_5ThcSQCFDyoA)
+[David McHale](https://bsky.app/profile/heartcoded.bsky.social)
 
-## Artists
-Oleksii Lotokhov
+## Character / VFX / UI Artists
+[Oleksii Lotokhov](https://lanigram.imgbb.com/)
+
+## Landscape Artists / Animators
+[StagNation](https://x.com/StagnationDraws)
 
 ## Audio
 [Ovani](https://ovanisound.com/)
+
+## Playtesters
+[John S](https://rankitdigitalmarketing.com)
+[Mohamed M](https://www.fiverr.com/mohamed_eshop)
+[Ma31n](https://www.fiverr.com/ma31nho)
+[Nadeem M](https://www.fiverr.com/nadeem_mostafa)
+[Eldaniz O](https://www.fiverr.com/eldenizomerov)
 
 # Tools / Assets
 ## Godot
@@ -39,8 +50,13 @@ Source: [Click Sounds (6)](https://opengameart.org/content/click-sounds6)
 Author: [FilmCow](https://filmcow.itch.io/)
 Source: [itch: FilmCow Royalty Free Sound Effects Library](https://filmcow.itch.io/filmcow-sfx)
 
+## Vehicle Artwork
+Author: Arludus
+Source [itch: 2D Top Down Pixel Art Vehicles](https://arludus.itch.io/2d-top-down-180-pixel-art-vehicles)
+
 # Community Help
-Thank you to the generous members of our community how have tested and reported many bugs for us to fix.
+Thank you to the generous members of our community. 
+You who have tested, and reported many bugs for us to fix.
 
 ZombieWhisperer
 MrBright01 

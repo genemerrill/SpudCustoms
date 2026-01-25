@@ -1,0 +1,132 @@
+﻿keys,vi
+alert_border_runner,NGƯỜI CHẠY BIÊN GIỚI ĐƯỢC PHÁT HIỆN!\nNhấp để phóng tên lửa!
+alert_rejected_fleeing,KHOAI TÂY BỊ TỪ CHỐI ĐANG CHẠY!\nNhấp để phóng tên lửa!
+alert_runner_escaped,NGƯỜI CHẠY TRỐN THOÁT!\nThêm Strike!
+citation_runner_escaped,Một người chạy trốn đã thoát! Bạn đã không kịp chặn họ.
+alert_points_deducted,NGƯỜI CHẠY TRỐN THOÁT!\nThêm Strike!\n-{penalty} điểm!
+alert_perfect_hit,PHÁT BẮN HOÀN HẢO! +{perfect} điểm thưởng độ chính xác
+alert_perfect_stamp,ĐÓNG DẤU HOÀN HẢO! +{points} điểm!
+alert_combo,COMBO x{mult}! +{streak} điểm thưởng combo!
+alert_quota_met,"Đã đạt ngạch, ca làm việc hoàn tất! \nThưởng: {bonus} điểm!"
+alert_strike_removed,Xóa Strike!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Bạn đã đưa ra quyết định đúng, sĩ quan.\n+{points} điểm!"
+alert_wrong_decision,"Bạn đã gây đau khổ không cần thiết, sĩ quan...\n+1 Strike!"
+alert_potato_should_be_approved,\nQuả khoai tây này đáp ứng tất cả các yêu cầu và đáng lẽ phải được phê duyệt.
+incorrect_decision,Quyết định sai trong xử lý tài liệu.
+alert_strike_out,Vượt quá số lần strike tối đa! Ca làm việc của bạn kết thúc.
+ui_score,Điểm số: {score}
+ui_quota,Ngạch: {current} / {target}
+ui_strikes,Lỗi: {current} / {max}
+ui_click_megaphone,Nhấp vào loa để gọi khoai tây tiếp theo
+ui_drag_document,Kéo tài liệu đến bàn kiểm tra
+ui_stamp_document,Chọn con dấu để phê duyệt hoặc từ chối
+ui_check_violations,Kiểm tra vi phạm tài liệu
+Strike removed!,Xóa Strike!
+BORDER RUNNER DETECTED!\nClick to launch missile!,NGƯỜI CHẠY BIÊN GIỚI ĐƯỢC PHÁT HIỆN!\nNhấp để phóng tên lửa!
+REJECTED POTATO FLEEING!\nClick to launch missile!,KHOAI TÂY BỊ TỪ CHỐI ĐANG CHẠY!\nNhấp để phóng tên lửa!
+RUNNER ESCAPED!\nStrike added!,NGƯỜI CHẠY TRỐN THOÁT!\nThêm Strike!
+Click megaphone to call the next potato,Nhấp vào loa để gọi khoai tây tiếp theo
+Drag document to inspection table,Kéo tài liệu đến bàn kiểm tra
+Select a stamp to approve or reject,Chọn con dấu để phê duyệt hoặc từ chối
+Check for document violations,Kiểm tra vi phạm tài liệu
+rule_explanation_header,GIẢI THÍCH QUY TẮC:
+rule_explanation_fresh,Duruma' alanına bakın. 'Taze' dışında bir şey söylüyorsa - REDDET
+rule_explanation_sweet_potato,Nhìn vào trường 'Loại'. Nếu nó nói 'Khoai Lang' - TỪ CHỐI (không có giấy phép)
+rule_explanation_chip_hill,Nhìn vào trường 'Quốc gia'. Nếu nó nói 'Chip Hill' - TỪ CHỐI (bị cấm)
+rule_explanation_age,Nhìn vào trường 'Ngày Sinh'. Tính tuổi và kiểm tra theo quy tắc
+rule_explanation_gender,Nhìn vào trường 'Giới tính' và kiểm tra theo quy tắc hiện tại
+rule_footer_text,Những quy tắc này phải được thực thi cho TẤT CẢ khoai tây
+rule_expired_note,Tài liệu hết hạn phải LUÔN LUÔN bị từ chối.
+rule_tutorial_hint,Yardıma mı ihtiyacınız var? Açıklama için herhangi bir kurala tıklayın
+alert_correct_decision_detailed,QUYẾT ĐỊNH ĐÚNG! +{points} điểm\n{reason}
+alert_wrong_decision_detailed,QUYẾT ĐỊNH SAI! Thêm Strike!\n{reason}
+alert_reason_approved,Khoai tây đáp ứng tất cả yêu cầu - ĐƯỢC PHÊ DUYỆT
+alert_reason_should_reject,Bạn đáng lẽ phải TỪ CHỐI khoai tây này
+tutorial_check_type,Kiểm tra trường 'Loại' trong hộ chiếu
+tutorial_check_condition,Kiểm tra trường 'Tình trạng' trong hộ chiếu
+tutorial_check_country,Kiểm tra trường 'Quốc gia' trong hộ chiếu
+tutorial_check_age,Kiểm tra 'Ngày Sinh' để tính tuổi
+tutorial_check_gender,Kiểm tra trường 'Giới tính' trong hộ chiếu
+alert_streak_bonus_minigame,5 liên tiếp! TRÒ CHƠI NHỎ THƯỞNG!
+alert_perfect_stamps_bonus_minigame,Đóng dấu hoàn hảo! TRÒ CHƠI NHỎ THƯỞNG!
+alert_runner_bonus_minigame,Hoạt động đáng ngờ! TRÒ CHƠI NHỎ THƯỞNG!
+alert_new_minigame_unlocked,Trò chơi nhỏ mới đã mở khóa: {name}!
+alert_minigame_bonus,Thưởng trò chơi nhỏ: +{bonus} điểm!
+high_score_display,Điểm cao nhất: {score}
+new_high_score,ĐIỂM CAO MỚI!
+month_1,Tháng Một
+month_2,Tháng Hai
+month_3,Tháng Ba
+month_4,Tháng Tư
+month_5,Tháng Năm
+month_6,Tháng Sáu
+month_7,Tháng Bảy
+month_8,Tháng Tám
+month_9,Tháng Chín
+month_10,Tháng Mười
+month_11,Tháng Mười Một
+month_12,Tháng Mười Hai
+citation_trash_label,THÙNG RÁC
+citation_header,GIẤY CẢNH CÁO CHÍNH THỨC
+citation_from_supervisor,Từ: Giám sát viên Russet
+citation_dismiss_hint,[Kéo vào Thùng rác để đóng]
+minigame_times_up,"Hết giờ! Đừng lo, quay lại làm việc thôi!"
+minigame_time_format,"{seconds},{fraction} giây"
+qte_title,SỰ KIỆN NHANH
+qte_instruction,Nhấn các phím khi chúng xuất hiện!
+qte_auto_completed,Tự động hoàn thành
+qte_accessibility_note,(Trợ năng QTE đã bật)
+qte_get_ready,Chuẩn bị...
+qte_progress,Tiến độ
+qte_key_prompt,Nhấn [{key}]
+qte_result,{successful} / {total} thành công (+{points} điểm)
+qte_image_pending,[Hình ảnh đang chờ]
+evidence_title,KIỂM TRA AN NINH SẮP DIỄN RA
+evidence_instruction,"Dọn dẹp bàn làm việc! Hủy bằng chứng, cất vật phẩm làm việc."
+evidence_suspicion,Nghi ngờ: {percent}%
+evidence_items_remaining,Vật phẩm: {count}
+evidence_times_up_found,Hết giờ! Họ đã tìm thấy bằng chứng...
+evidence_times_up_suspicious,Hết giờ! Cuộc kiểm tra đã... rất kỹ lưỡng.
+codebreaker_title,GIẢI MÃ
+codebreaker_instruction,"Giải mã! Xanh lá = khớp chính xác, Vàng = đúng số sai vị trí"
+codebreaker_enter_code,NHẬP MÃ
+codebreaker_submit,GỬI
+codebreaker_clear,XÓA
+codebreaker_previous_attempts,Các lần thử trước:
+codebreaker_attempts,Lần thử: {current} / {max}
+codebreaker_result_exact_close,{exact} chính xác
+codebreaker_result_exact,{exact} chính xác
+codebreaker_result_close,{close} gần đúng
+codebreaker_result_none,không khớp
+codebreaker_success,Mã đã được giải trong {attempts} lần thử! +{points} điểm!
+codebreaker_failure,Hết lượt thử! Mã đã được hiển thị bên trên.
+scanner_title,MÁY QUÉT TÀI LIỆU
+scanner_instruction,Kéo đèn UV để tìm dấu hiệu ẩn! Nhấp để xác nhận.
+scanner_found,Đã tìm thấy: {current} / {total}
+scanner_perfect,Hoàn hảo! Đã tìm thấy tất cả các yếu tố! +{points} điểm!
+scanner_partial,Nỗ lực tốt! Đã tìm thấy {found}/{total}. +{points} điểm!
+chase_title,TRUY ĐUỔI BIÊN GIỚI
+chase_instruction,Nhấp vào các vật phẩm buôn lậu MÀU ĐỎ! Cho phép các vật phẩm MÀU XANH LÁ đi qua.
+chase_legend,ĐỎ = Bắt!   XANH LÁ = Cho qua
+chase_caught,Đã bắt: {current} / {total}
+chase_perfect,Bắt hoàn hảo! +{points} điểm!
+chase_partial,Đã bắt {count} vật phẩm. +{points} điểm!
+sorting_title,PHÂN LOẠI CON DẤU
+sorting_instruction,"Kéo con dấu vào thùng đúng! Xanh lá = ĐƯỢC PHÊ DUYỆT, Đỏ = BỊ TỪ CHỐI"
+sorting_approved,ĐƯỢC PHÊ DUYỆT
+sorting_denied,BỊ TỪ CHỐI
+sorting_progress,Đã phân loại: {sorted}/{total}  Đúng: {correct}
+sorting_perfect,Phân loại hoàn hảo! +{points} điểm!
+sorting_partial,Đã phân loại đúng {correct}/{total}. +{points} điểm!
+fingerprint_title,KHỚP VÂN TAY
+fingerprint_instruction,Tìm vân tay khớp với mẫu tham chiếu!
+fingerprint_reference,THAM CHIẾU
+fingerprint_find_match,TÌM KHỚP
+fingerprint_progress,Đã khớp: {current} / {total}
+fingerprint_success,Tất cả dấu vân tay đã khớp! +{points} điểm!
+fingerprint_partial,Đã khớp {matched}/{total}. +{points} điểm!
+score_attack_mode_label,Chế độ Thử thách Điểm số
+score_attack_welcome_title,CHẾ ĐỘ THỬ THÁCH ĐIỂM SỐ!
+score_attack_welcome_survive,Sống sót càng lâu càng tốt!
+score_attack_welcome_difficulty,Độ khó tăng dần theo thời gian!

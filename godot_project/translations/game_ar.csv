@@ -1,0 +1,132 @@
+﻿keys,ar
+alert_border_runner,تم رصد متجاوز للحدود!\nانقر لإطلاق الصاروخ!
+alert_rejected_fleeing,بطاطا مرفوضة تفرّ!\nانقر لإطلاق الصاروخ!
+alert_runner_escaped,هرب المتجاوز!\nتمت إضافة مخالفة!
+citation_runner_escaped,هرب متجاوز للحدود! لقد فشلت في اعتراضه في الوقت المناسب.
+alert_points_deducted,هرب المتجاوز!\nتمت إضافة مخالفة!\n-{penalty} نقطة!
+alert_perfect_hit,إصابة مثالية! +{perfect} نقاط مكافأة دقة
+alert_perfect_stamp,ختم مثالي! +{points} نقطة!
+alert_combo,سلسلة x{mult}! +{streak} نقاط مكافأة السلسلة
+alert_quota_met,تم تحقيق الحصة، انتهى الدوام! \nمكافأة: {bonus} نقطة!
+alert_strike_removed,تمت إزالة مخالفة!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,لقد اتخذت القرار الصحيح، أيها الضابط.\n+{points} نقطة!
+alert_wrong_decision,لقد تسببت في معاناة غير ضرورية، أيها الضابط...\n+1 مخالفة!
+alert_potato_should_be_approved,\nهذه البطاطا تستوفي جميع المتطلبات وكان يجب الموافقة عليها.
+incorrect_decision,قرار خاطئ في معالجة الوثائق.
+alert_strike_out,تم تجاوز الحد الأقصى للمخالفات! انتهى دوامك.
+ui_score,النقاط: {score}
+ui_quota,الحصة: {current} / {target}
+ui_strikes,المخالفات: {current} / {max}
+ui_click_megaphone,انقر على مكبر الصوت لاستدعاء البطاطا التالية
+ui_drag_document,اسحب الوثيقة إلى طاولة الفحص
+ui_stamp_document,اختر ختمًا للموافقة أو الرفض
+ui_check_violations,تحقق من وجود مخالفات في الوثيقة
+Strike removed!,تمت إزالة مخالفة!
+BORDER RUNNER DETECTED!\nClick to launch missile!,تم رصد متجاوز للحدود!\nانقر لإطلاق الصاروخ!
+REJECTED POTATO FLEEING!\nClick to launch missile!,بطاطا مرفوضة تفرّ!\nانقر لإطلاق الصاروخ!
+RUNNER ESCAPED!\nStrike added!,هرب المتجاوز!\nتمت إضافة مخالفة!
+Click megaphone to call the next potato,انقر على مكبر الصوت لاستدعاء البطاطا التالية
+Drag document to inspection table,اسحب الوثيقة إلى طاولة الفحص
+Select a stamp to approve or reject,اختر ختمًا للموافقة أو الرفض
+Check for document violations,تحقق من وجود مخالفات في الوثيقة
+rule_explanation_header,شرح القاعدة:
+rule_explanation_fresh,"انظر إلى حقل ""الحالة"". إذا كان مكتوبًا فيه أي شيء غير ""طازج"" - ارفض"
+rule_explanation_sweet_potato,"انظر إلى حقل ""النوع"". إذا كان مكتوبًا فيه ""بطاطا حلوة"" - ارفض (لا توجد تصاريح)"
+rule_explanation_chip_hill,"انظر إلى حقل ""البلد"". إذا كان مكتوبًا فيه ""تشيب هيل"" - ارفض (محظور)"
+rule_explanation_age,"انظر إلى حقل ""تاريخ الميلاد"". احسب العمر وتحقق من مطابقته للقاعدة"
+rule_explanation_gender,"انظر إلى حقل ""الجنس"" وتحقق من مطابقته للقاعدة الحالية"
+rule_footer_text,يجب تطبيق هذه القواعد على جميع البطاطا
+rule_expired_note,يجب رفض الوثائق منتهية الصلاحية دائماً.
+rule_tutorial_hint,هل تحتاج مساعدة؟ انقر على أي قاعدة للحصول على شرح
+alert_correct_decision_detailed,قرار صحيح! +{points} نقطة\n{reason}
+alert_wrong_decision_detailed,قرار خاطئ! تمت إضافة ضربة!\n{reason}
+alert_reason_approved,البطاطا تستوفي جميع المتطلبات - تمت الموافقة
+alert_reason_should_reject,كان يجب عليك رفض هذه البطاطا
+tutorial_check_type,"تحقق من حقل ""النوع"" في جواز السفر"
+tutorial_check_condition,"تحقق من حقل ""الحالة"" في جواز السفر"
+tutorial_check_country,"تحقق من حقل ""البلد"" في جواز السفر"
+tutorial_check_age,"تحقق من حقل ""تاريخ الميلاد"" لحساب العمر"
+tutorial_check_gender,"تحقق من حقل ""الجنس"" في جواز السفر"
+alert_streak_bonus_minigame,5 على التوالي! لعبة إضافية مصغرة!
+alert_perfect_stamps_bonus_minigame,أختام مثالية! لعبة إضافية مصغرة!
+alert_runner_bonus_minigame,نشاط مشبوه! لعبة إضافية مصغرة!
+alert_new_minigame_unlocked,تم فتح لعبة مصغرة جديدة: {name}!
+alert_minigame_bonus,مكافأة اللعبة المصغرة: +{bonus} نقطة!
+high_score_display,أعلى نتيجة: {score}
+new_high_score,رقم قياسي جديد!
+month_1,يناير
+month_2,فبراير
+month_3,مارس
+month_4,أبريل
+month_5,مايو
+month_6,يونيو
+month_7,يوليو
+month_8,أغسطس
+month_9,سبتمبر
+month_10,أكتوبر
+month_11,نوفمبر
+month_12,ديسمبر
+citation_trash_label,سلة المهملات
+citation_header,إنذار رسمي
+citation_from_supervisor,من: المشرف روسيت
+citation_dismiss_hint,[اسحب إلى سلة المهملات للإغلاق]
+minigame_times_up,انتهى الوقت! لا تقلق، عد إلى العمل!
+minigame_time_format,{seconds}.{fraction}
+qte_title,حدث الوقت السريع
+qte_instruction,اضغط المفاتيح كما تظهر!
+qte_auto_completed,اكتمل تلقائيًا
+qte_accessibility_note,(تم تمكين إمكانية وصول حدث الوقت السريع)
+qte_get_ready,استعد...
+qte_progress,التقدم
+qte_key_prompt,[{key}]
+qte_result,{successful} / {total} ناجحة (+{points} نقاط)
+qte_image_pending,[الصورة قيد الانتظار]
+evidence_title,تفتيش أمني وشيك
+evidence_instruction,أخلِ مكتبك! امحِ الأدلة، أخفِ أغراض العمل.
+evidence_suspicion,اشتباه: {percent}%
+evidence_items_remaining,أغراض: {count}
+evidence_times_up_found,انتهى الوقت! لقد عثروا على الأدلة...
+evidence_times_up_suspicious,انتهى الوقت! كان التفتيش... دقيقًا.
+codebreaker_title,فك الشفرة
+codebreaker_instruction,فك الشفرة! أخضر = تطابق تام، أصفر = الرقم صحيح والمكان خاطئ
+codebreaker_enter_code,أدخل الشفرة
+codebreaker_submit,إرسال
+codebreaker_clear,مسح
+codebreaker_previous_attempts,المحاولات السابقة:
+codebreaker_attempts,محاولات: {current} / {max}
+codebreaker_result_exact_close,{exact} تطابق تام
+codebreaker_result_exact,{exact} مطابق
+codebreaker_result_close,{close} قريب
+codebreaker_result_none,لا توجد مطابقات
+codebreaker_success,تم فك الشفرة في {attempts} محاولات! +{points} نقطة!
+codebreaker_failure,نفدت المحاولات! تم عرض الرمز أعلاه.
+scanner_title,ماسح المستندات
+scanner_instruction,اسحب ضوء الأشعة فوق البنفسجية للعثور على العلامات المخفية! انقر للتأكيد.
+scanner_found,عُثر على: {current} / {total}
+scanner_perfect,ممتاز! تم العثور على جميع العناصر! +{points} نقطة!
+scanner_partial,جهد جيد! عُثر على {found}/{total}. +{points} نقطة!
+chase_title,مطاردة الحدود
+chase_instruction,انقر على العناصر المهربة الحمراء! دع العناصر الخضراء تمر.
+chase_legend,[color=#FF0000]أحمر[/color] = امسك!   [color=#00FF00]أخضر[/color] = دع يمر
+chase_caught,تم الإمساك بـ: {current} / {total}
+chase_perfect,إمساك مثالي! +{points} نقطة!
+chase_partial,تم الإمساك بـ {count} عنصر. +{points} نقطة!
+sorting_title,فرز الأختام
+sorting_instruction,اسحب الأختام إلى الصندوق الصحيح! [color=#00FF00]أخضر[/color] = موافقة، [color=#FF0000]أحمر[/color] = رفض
+sorting_approved,موافقة
+sorting_denied,رفض
+sorting_progress,تم الفرز: {sorted}/{total}  صحيح: {correct}
+sorting_perfect,فرز مثالي! +{points} نقطة!
+sorting_partial,تم فرز {correct}/{total} بشكل صحيح. +{points} نقطة!
+fingerprint_title,مطابقة بصمة الإصبع
+fingerprint_instruction,ابحث عن بصمة الإصبع التي تطابق المرجع!
+fingerprint_reference,المرجع
+fingerprint_find_match,أوجد المطابقة
+fingerprint_progress,مطابق: {current} / {total}
+fingerprint_success,جميع البصمات متطابقة! +{points} نقاط!
+fingerprint_partial,مطابق {matched}/{total}. +{points} نقاط!
+score_attack_mode_label,وضع هجوم النقاط
+score_attack_welcome_title,نمط هجوم النقاط!
+score_attack_welcome_survive,صمد لأطول فترة ممكنة!
+score_attack_welcome_difficulty,تزداد الصعوبة بمرور الوقت!

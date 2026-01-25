@@ -1,193 +1,701 @@
 # final_confrontation.dtl
 audio music "res://assets/music/narrative/wind_house.mp3" [fade="2.0" volume="-5.0" bus="Music"]
-audio "res://assets/music/narrative/storm_thunder_ambience.mp3" [volume="-10.0" bus="Ambient"]
+audio "res://assets/music/narrative/storm_thunder_ambience.mp3" [volume="-5.0" bus="Ambient"]
 [background arg="res://assets/narrative/final_chaos.png" fade="0.0"]
 audio "res://assets/audio/explosions/rumbling 1.wav" [volume="-8.0" bus="SFX"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: The Spud border is in [pulse freq=3][color=CRIMSON]chaos[/color][/pulse]. Panicked potatoes flood checkpoints, desperate to escape after the leaked documents.
+audio "res://assets/audio/atmosphere/crowd_unrest.mp3" [volume="-5.0" bus="Ambient"]
+audio "res://assets/audio/atmosphere/war_zone_distant.mp3" [volume="-5.0" bus="Ambient"]
+narrator: The Spud border is in [pulse freq=3][color=CRIMSON]chaos[/color][/pulse]. Panicked potatoes flood checkpoints, desperate to escape after the leaked documents. #id:11
 
 join player_character [z_index="1"]
 [background arg="res://assets/narrative/extreme_emergency.png" fade="1.2"]
 audio "res://assets/audio/gunfire/Heavy Pistol B.wav" [volume="-18.0" bus="SFX"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-player_character: You slip through with Sasha. [wave amp=20 freq=3][color=CHARTREUSE]We have to keep pushing![/color][/wave] The people know the truth now.
+player_character: I slip through with Sasha. [wave amp=20 freq=3][color=CHARTREUSE]We have to keep pushing![/color][/wave] The people know the truth now. #id:12
 
 [background arg="res://assets/narrative/resistance_base.png" fade="2.0"]
 join sweet_potato_sasha [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: They can't silence the truth any longer. If we can infiltrate the [color=DARK_VIOLET]Root Reserve[/color] facility and broadcast evidence, it'll [tornado radius=3 freq=2][color=CHARTREUSE]ignite the revolution[/color][/tornado].
+sweet_potato_sasha: They can't silence the truth any longer. If we can infiltrate the [color=DARK_VIOLET]Root Reserve[/color] facility and broadcast evidence, it'll [tornado radius=3 freq=2][color=CHARTREUSE]ignite the revolution[/color][/tornado]. #id:13
 
 join resistance_member_2 [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_member_2: That place is a fortress. And now we've got a [color=YELLOW]former customs agent[/color] in our midst. Their eyes narrow at you suspiciously.
+resistance_member_2: That place is a fortress. And now we've got a [color=YELLOW]former customs agent[/color] in our midst. Their eyes narrow at you suspiciously. #id:14
 
 set {resistance_trust} = "none"
-- "I understand your doubt, but I'm committed to this cause."
+- "I understand your doubt, but I'm committed to this cause." #id:15
 	set {resistance_trust} = "diplomatic"
-- "I've already sacrificed everything. I won't back down now."
+- "I've already sacrificed everything. I won't back down now." #id:16
 	set {resistance_trust} = "committed"
+	set {pro_sasha_choice} = {pro_sasha_choice} + 1
 
 if {resistance_trust} == "diplomatic":
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_member_2: Pretty words. But we've heard those before.
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: They helped us get the documents. That's action, not words.
+	resistance_member_2: Pretty words. But we've heard those before. #id:17
+	sweet_potato_sasha: They helped us get the documents. That's action, not words. #id:18
 else:
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_member_2: Can't go back to being a loyal spud now. Welcome to the resistance, comrade.
+	resistance_member_2: Can't go back to being a loyal spud now. Welcome to the resistance, comrade. #id:19
 
 leave resistance_member_2
 leave sweet_potato_sasha
 leave player_character
 audio music "res://assets/music/narrative/metal_violence_main.mp3" [volume="-5.0" bus="Music"]
-# Transition to facility breach - implied gameplay happened
-audio music "res://assets/audio/ambient/horror_drone_23.mp3" [fade="2.0" volume="-12.0" bus="Ambient"]
-[background arg="res://assets/narrative/processing_facility.png" fade="1.2"]
-join narrator [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: After a tense infiltration, your team stands at the heart of [color=DARK_VIOLET]Root Reserve[/color], the [pulse freq=3][color=CRIMSON]horrific machinery of oppression[/color][/pulse] laid bare.
-
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: [wave amp=25 freq=3][color=RED]Alarms blare[/color][/wave] as guards scramble to respond to your intrusion. You race through corridors, dodging security systems.
-leave narrator
-
-[background arg="res://assets/narrative/checkpoint_booth_night.png" fade="2.0"]
-join prime_minister_idaho [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-prime_minister_idaho: A screen flickers on. "Well well, the [color=CRIMSON]traitor[/color] returns with rebel scum."
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-prime_minister_idaho: Did you think you could stop the progress of Spud? [color=DARK_VIOLET]Root Reserve[/color] is the lifeblood of this nation.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-prime_minister_idaho: But fret not. You'll still serve Spud... [tornado radius=4 freq=3][color=DARK_VIOLET]in the processing vats![/color][/tornado]
-The screen suddenly goes black.
-leave prime_minister_idaho
+# SASHA RESCUE SEQUENCE - Critical emotional moment
+[background arg="res://assets/narrative/sasha_capture.png" fade="1.5"]
+audio music "res://assets/music/narrative/horror_downward_main.mp3" [fade="1.0" volume="-3.0" bus="Music"]
+join resistance_member_1 [z_index="1"]
+resistance_member_1: A scout rushes over, breathless. We found her! [color=CHARTREUSE]Sasha's in the detention block![/color] #id:1a_rescue1
+resistance_member_1: They're preparing to... [tornado radius=3 freq=2][color=CRIMSON]process her[/color][/tornado]... in less than an hour! #id:1a_rescue2
+leave resistance_member_1
 
 join player_character [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-player_character: You turn to the others with resolve. "We need to reach Idaho's bunker. Now!"
+player_character: We have to save her. [pulse freq=2][color=CHARTREUSE]She started all of this.[/color][/pulse] We're not leaving without her. #id:1a_rescue3
 leave player_character
 
+# Rescue QTE
+[background arg="res://assets/narrative/security_lockdown.png" fade="0.5"]
+audio "res://assets/audio/stings/heartbeat_tension.mp3" [volume="-5.0" bus="SFX"]
+audio music "res://assets/music/narrative/rescue_chase_main.mp3" [fade="0.5" volume="-3.0" bus="Music"]
 join narrator [z_index="1"]
-[background arg="res://assets/narrative/occupation_checkpoint.png" fade="2.0"]
-audio "res://assets/audio/gun cocking 3.mp3" [volume="0.0" bus="SFX"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: Your group fights through waves of security, narrowly avoiding capture. Sasha's resistance fighters create diversions, clearing your path forward.
+narrator: [wave amp=25 freq=3][color=YELLOW]Race through the facility![/color][/wave] Reach Sasha before it's too late! #id:1a_rescue4
+leave narrator
+[signal arg="qte_rescue"]
+
+# QTE Result handling
+if {qte_rescue_result} == "fail":
+	# FAILURE PATH - Saved by ally or luck
+	[background arg="res://assets/narrative/rescue_fail.png" fade="0.5"]
+	audio "res://assets/audio/stings/failure_sting.mp3" [volume="-5.0" bus="SFX"]
+	join player_character [z_index="1"]
+	player_character: I stumble, losing precious seconds. The path ahead is blocked by guards! #id:1a_rescue_fail1
+	leave player_character
+
+	if {viktor_allied} == "yes":
+		# Viktor saves the day
+		[background arg="res://assets/narrative/viktor_rescue.png" fade="0.3"]
+		audio "res://assets/audio/gunfire/Heavy Pistol B.wav" [volume="-8.0" bus="SFX"]
+		join viktor [z_index="1"]
+		viktor: Viktor bursts through a side door, weapon raised. [color=CHARTREUSE]GO! I'll hold them![/color] #id:1a_rescue_fail2
+		viktor: For Elena. For all of them. [color=STEEL_BLUE]I won't let another one die![/color] #id:1a_rescue_fail3
+		audio "res://assets/audio/stings/heroic_moment.mp3" [volume="-5.0" bus="SFX"]
+		leave viktor
+	elif {murphy_alliance} == "ally":
+		# Murphy sacrifices to buy time
+		[background arg="res://assets/narrative/murphy_sacrifice.png" fade="0.3"]
+		audio "res://assets/audio/explosions/rumbling 1.wav" [volume="-8.0" bus="SFX"]
+		join murphy [z_index="1"]
+		murphy: Murphy yanks a fire alarm. [color=CHARTREUSE]For Tommy![/color] The sprinklers blind the guards! #id:1a_rescue_fail4
+		murphy: [color=STEEL_BLUE]I'll create a distraction. Get her out of there![/color] #id:1a_rescue_fail5
+		leave murphy
+	else:
+		# Pure luck - machinery malfunction
+		[background arg="res://assets/narrative/facility_malfunction.png" fade="0.3"]
+		audio "res://assets/audio/mechanical/alarm.wav" [volume="-5.0" bus="SFX"]
+		join narrator [z_index="1"]
+		narrator: A [color=YELLOW]processing conveyor jams[/color], showering sparks and distracting the guards! #id:1a_rescue_fail6
+		narrator: Fate - or the ghosts of the processed - grants you a second chance. #id:1a_rescue_fail7
+		leave narrator
+
+# Rescue success (either from passing QTE or ally intervention)
+[background arg="res://assets/narrative/sasha_rescue.png" fade="1.0"]
+audio "res://assets/audio/mechanical/Metal Old Door A.wav" [volume="-5.0" bus="SFX"]
+audio music "res://assets/music/narrative/sasha_theme_main.mp3" [fade="1.0" volume="-5.0" bus="Music"]
+join sweet_potato_sasha [z_index="1"]
+sweet_potato_sasha: Sasha looks up from her cell, bruised but unbroken. Her eyes widen. [color=CHARTREUSE]You came.[/color] #id:1a_rescue5
+leave sweet_potato_sasha
+
+join player_character [z_index="1"]
+player_character: Of course I came. [color=CHARTREUSE]We're finishing this together.[/color] #id:1a_rescue6
+leave player_character
+
+join sweet_potato_sasha [z_index="1"]
+
+set {sasha_rescue_reaction} = "none"
+- "I was scared I'd never see you again." #id:1a_rescue7
+	set {sasha_rescue_reaction} = "relieved"
+- "You had us worried sick. Don't do that again." #id:1a_rescue8
+	set {sasha_rescue_reaction} = "angry"
+- "We have work to do. Idaho is waiting." #id:1a_rescue9
+	set {sasha_rescue_reaction} = "focused"
+
+if {sasha_rescue_reaction} == "relieved":
+	sweet_potato_sasha: [color=CHARTREUSE]Sasha pulls you into a brief embrace.[/color] I knew you'd come. I never doubted. #id:1a_rescue10
+	sweet_potato_sasha: Now let's make them pay for everyone they've taken. [color=CHARTREUSE]Together.[/color] #id:1a_rescue11
+elif {sasha_rescue_reaction} == "angry":
+	sweet_potato_sasha: Sasha manages a weak smile through her pain. [color=STEEL_BLUE]I'll try.[/color] But some things are worth the risk. #id:1a_rescue12
+	sweet_potato_sasha: You being here proves that. Now let's finish this. #id:1a_rescue13
+else:
+	sweet_potato_sasha: Sasha nods, her determination rekindled. [color=CHARTREUSE]You're right.[/color] Sentiment can wait. #id:1a_rescue14
+	sweet_potato_sasha: Idaho thinks he's won. Let's show him how wrong he is. #id:1a_rescue15
+
+leave sweet_potato_sasha
+
+# Continue to facility breach
+audio music "res://assets/audio/ambient/horror_drone_23.mp3" [fade="2.0" volume="-12.0" bus="Ambient"]
+[background arg="res://assets/narrative/processing_facility.png" fade="1.2"]
+
+# KEYCARD INTEGRATION - Viktor's keycard makes infiltration smoother
+if {has_keycard} == "yes":
+	join narrator [z_index="1"]
+	narrator: Viktor's [color=GOLD]security keycard[/color] opens doors that should have been impossible. Guards stare at their consoles in confusion as you slip past. #id:fc_keycard1
+	leave narrator
+	join player_character [z_index="1"]
+	player_character: [color=CHARTREUSE]Thank you, Viktor.[/color] Wherever you are. #id:fc_keycard2
+	leave player_character
+	join narrator [z_index="1"]
+	narrator: Your team reaches the heart of [color=DARK_VIOLET]Root Reserve[/color] with minimal resistance. The [pulse freq=3][color=CRIMSON]horrific machinery of oppression[/color][/pulse] laid bare. #id:1a_keycard
+	audio "res://assets/audio/atmosphere/facility_hum.mp3" [volume="-5.0" bus="Ambient"]
+	leave narrator
+else:
+	join narrator [z_index="1"]
+	narrator: After a tense infiltration, your team stands at the heart of [color=DARK_VIOLET]Root Reserve[/color], the [pulse freq=3][color=CRIMSON]horrific machinery of oppression[/color][/pulse] laid bare. #id:1a
+	audio "res://assets/audio/atmosphere/facility_hum.mp3" [volume="-5.0" bus="Ambient"]
+	narrator: [wave amp=25 freq=3][color=RED]Alarms blare[/color][/wave] as guards scramble to respond to your intrusion. You race through corridors, dodging security systems. #id:1b
+	audio "res://assets/audio/stings/alarm_distant.mp3" [volume="-5.0" bus="SFX"]
+	leave narrator
+
+[background arg="res://assets/narrative/checkpoint_booth_night.png" fade="2.0"]
+audio music "res://assets/music/narrative/horror_abyss_main.mp3" [fade="0.8" volume="-3.0" bus="Music"]
+audio "res://assets/audio/stings/threat_reveal.mp3" [volume="-5.0" bus="SFX"]
+join prime_minister_idaho [z_index="1"]
+prime_minister_idaho: A screen flickers on. "Well well, the [color=CRIMSON]traitor[/color] returns with rebel scum." #id:1c
+prime_minister_idaho: Did you think you could stop the progress of Spud? [color=DARK_VIOLET]Root Reserve[/color] is the lifeblood of this nation. #id:1d
+prime_minister_idaho: But fret not. You'll still serve Spud... [tornado radius=4 freq=3][color=DARK_VIOLET]in the processing vats![/color][/tornado] #id:1e
+The screen suddenly goes black. #id:1f
+leave prime_minister_idaho
+
+# ============================================================================
+# MURPHY'S SACRIFICE SEQUENCE - Protocol HARVEST
+# Only triggers if Murphy is allied with the player
+# ============================================================================
+
+if {murphy_alliance} == "ally":
+	# IDAHO INTERLUDE - Cutaway to bunker
+	[background arg="res://assets/narrative/idaho_bunker_monitors.png" fade="0.8"]
+	audio music "res://assets/music/narrative/horror_downward_main.mp3" [fade="0.5" volume="-3.0" bus="Music"]
+	audio "res://assets/audio/atmosphere/bunker_hum.mp3" [volume="-8.0" bus="Ambient"]
+	join narrator [z_index="1"]
+	narrator: [color=STEEL_BLUE]Meanwhile, in Idaho's private bunker...[/color] #id:murphy_sac_001
+	leave narrator
+
+	join prime_minister_idaho [z_index="1"]
+	prime_minister_idaho: [color=STEEL_BLUE]Idaho watches the security feeds, resistance fighters swarming through his facility. His expression shifts from anger to cold calculation.[/color] #id:murphy_sac_002
+	prime_minister_idaho: They think they've won? [color=CRIMSON]Amusing.[/color] #id:murphy_sac_003
+	leave prime_minister_idaho
+
+	join idaho_aide [z_index="1"]
+	idaho_aide: Sir, they've breached the central processing wing. Should I order evacuation? #id:murphy_sac_004
+	leave idaho_aide
+
+	join prime_minister_idaho [z_index="1"]
+	prime_minister_idaho: [tornado radius=3 freq=2][color=DARK_VIOLET]Release Protocol HARVEST.[/color][/tornado] #id:murphy_sac_005
+	leave prime_minister_idaho
+
+	join idaho_aide [z_index="1"]
+	idaho_aide: [wave amp=15 freq=3]The aide's face drains of color.[/wave] Sir... Sub-Level 3 containment? Those subjects are [color=CRIMSON]unstable[/color]— #id:murphy_sac_006
+	leave idaho_aide
+
+	join prime_minister_idaho [z_index="1"]
+	prime_minister_idaho: They're already dead. Let them [color=DARK_VIOLET]serve Spud[/color] one last time. #id:murphy_sac_007
+	prime_minister_idaho: If I can't have this facility... [pulse freq=3][color=CRIMSON]neither can they.[/color][/pulse] #id:murphy_sac_008
+	audio "res://assets/audio/mechanical/button assorted 3.wav" [volume="-5.0" bus="SFX"]
+	prime_minister_idaho: [color=STEEL_BLUE]Idaho presses a red button on his console. A distant rumbling begins.[/color] #id:murphy_sac_009
+	prime_minister_idaho: Now we'll see how brave your resistance really is, [color=CRIMSON]Sasha[/color]. #id:murphy_sac_010
+	leave prime_minister_idaho
+
+	# BACK TO THE TEAM - The Rumbling
+	[background arg="res://assets/narrative/processing_facility.png" fade="0.5"]
+	audio "res://assets/audio/explosions/rumbling 1.wav" [volume="-3.0" bus="SFX"]
+	audio music "res://assets/music/narrative/horror_aliens_main.mp3" [fade="1.0" volume="-3.0" bus="Music"]
+	join player_character [z_index="1"]
+	player_character: [wave amp=25 freq=3]The entire facility shudders. Pipes burst overhead, showering sparks.[/wave] What the— #id:murphy_sac_011
+	leave player_character
+
+	join sweet_potato_sasha [z_index="1"]
+	sweet_potato_sasha: [color=YELLOW]That came from below us. Sub-Level 3.[/color] #id:murphy_sac_012
+	leave sweet_potato_sasha
+
+	join resistance_member_1 [z_index="1"]
+	resistance_member_1: Sub-Level 3? That section was sealed off years ago. [color=STEEL_BLUE]Nobody goes down there.[/color] #id:murphy_sac_013
+	leave resistance_member_1
+
+	# THE AMALGAM EMERGES
+	[background arg="res://assets/narrative/amalgam_emergence.png" fade="0.3"]
+	audio "res://assets/audio/explosions/Explosion Close Collapse.wav" [volume="-5.0" bus="SFX"]
+	audio "res://assets/audio/atmosphere/monster_groan.mp3" [volume="-3.0" bus="SFX"]
+	join narrator [z_index="1"]
+	narrator: The floor [tornado radius=4 freq=3][color=CRIMSON]EXPLODES[/color][/tornado] upward. From the darkness below, something [pulse freq=2][color=DARK_VIOLET]massive[/color][/pulse] pulls itself into the light. #id:murphy_sac_014
+	leave narrator
+
+	[background arg="res://assets/narrative/amalgam_reveal.png" fade="1.0"]
+	audio "res://assets/audio/stings/horror_reveal.mp3" [volume="-3.0" bus="SFX"]
+	join narrator [z_index="1"]
+	narrator: [wave amp=20 freq=2][color=CRIMSON]The Amalgam.[/color][/wave] A twisted mass of fused potato matter, dozens of bodies merged into one nightmare. Frozen faces scream silently from its surface. Root-like tendrils reach outward, grasping. #id:murphy_sac_015
+	narrator: The failed batches. The ones too broken to process into food. [color=DARK_VIOLET]Idaho kept them.[/color] Grew them. [pulse freq=3][color=CRIMSON]Weaponized them.[/color][/pulse] #id:murphy_sac_016
+	leave narrator
+
+	join sweet_potato_sasha [z_index="1"]
+	sweet_potato_sasha: [wave amp=25 freq=3][color=CRIMSON]Everyone BACK![/color][/wave] #id:murphy_sac_017
+	leave sweet_potato_sasha
+
+	# THE TEAM'S HORROR
+	[background arg="res://assets/narrative/team_horror.png" fade="0.5"]
+	join resistance_member_1 [z_index="1"]
+	resistance_member_1: [color=STEEL_BLUE]The resistance fighters stumble backward, weapons raised but hands shaking.[/color] What... what IS that thing?! #id:murphy_sac_018
+	leave resistance_member_1
+
+	join player_character [z_index="1"]
+	player_character: [color=STEEL_BLUE]I freeze, unable to look away from the faces trapped in its mass. So many faces. So many lost.[/color] #id:murphy_sac_019
+	leave player_character
+
+	# MURPHY'S RECOGNITION
+	[background arg="res://assets/narrative/murphy_recognition.png" fade="0.8"]
+	audio music "res://assets/music/narrative/sasha_theme_main.mp3" [fade="2.0" volume="-8.0" bus="Music"]
+	join murphy [z_index="1"]
+	murphy: [color=STEEL_BLUE]Murphy steps forward, face pale, eyes fixed on something. His hand moves to his own forearm, touching a faded tattoo—a small potato with three roots reaching down.[/color] #id:murphy_sac_020
+	murphy: [wave amp=15 freq=2]His voice cracks.[/wave] Matching tattoos. Me and Tommy. A spud with roots. Said we'd always stay grounded, no matter what. #id:murphy_sac_021
+	leave murphy
+
+	join player_character [z_index="1"]
+	player_character: Murphy, what are you— #id:murphy_sac_022
+	leave player_character
+
+	[background arg="res://assets/narrative/murphy_canister.png" fade="0.5"]
+	join murphy [z_index="1"]
+	murphy: [color=STEEL_BLUE]Murphy reaches into his jacket and pulls out a canister. Purple-tinged. The label reads: [color=DARK_VIOLET]RR-UTIL-7 - EXTRA DISTILLED[/color].[/color] #id:murphy_sac_023
+	murphy: I've been carrying him this whole time. [pulse freq=2][color=CRIMSON]My cousin. In a can.[/color][/pulse] #id:murphy_sac_024
+	murphy: Kept telling myself it was evidence. Proof. But I think... [wave amp=10 freq=2]I think I just couldn't let him go.[/wave] #id:murphy_sac_025
+	leave murphy
+
+	# THE AMALGAM ADVANCES
+	[background arg="res://assets/narrative/amalgam_advance.png" fade="0.3"]
+	audio "res://assets/audio/atmosphere/monster_groan.mp3" [volume="-5.0" bus="SFX"]
+	audio "res://assets/audio/explosions/rumbling 1.wav" [volume="-8.0" bus="SFX"]
+	join narrator [z_index="1"]
+	narrator: The Amalgam [tornado radius=3 freq=2]lurches forward[/tornado], tendrils scraping against machinery. It blocks the only path to Idaho's bunker. #id:murphy_sac_026
+	leave narrator
+
+	join sweet_potato_sasha [z_index="1"]
+	sweet_potato_sasha: Our weapons barely scratched it! We need to fall back and find another— #id:murphy_sac_027
+	leave sweet_potato_sasha
+
+	join murphy [z_index="1"]
+	murphy: [color=CHARTREUSE]No.[/color] #id:murphy_sac_028
+	murphy: [color=STEEL_BLUE]Murphy's voice is steady now. Calm. He looks at the canister, then at the refinery tanks lining the walls. Then at you.[/color] #id:murphy_sac_029
+	murphy: That thing is standing between us and Idaho. Between us and [color=CHARTREUSE]ending this[/color]. #id:murphy_sac_030
+	murphy: Extra Distilled burns hot. Real hot. And those refinery tanks? [pulse freq=2][color=CRIMSON]They're full of the same stuff.[/color][/pulse] #id:murphy_sac_031
+	leave murphy
+
+	# PLAYER RESTRAINED
+	[background arg="res://assets/narrative/player_restrained.png" fade="0.5"]
+	audio "res://assets/audio/stings/decision_weight.mp3" [volume="-5.0" bus="SFX"]
+	join player_character [z_index="1"]
+	player_character: Murphy, no. [color=CRIMSON]NO.[/color] There has to be another way— #id:murphy_sac_032
+	leave player_character
+
+	join narrator [z_index="1"]
+	narrator: [color=STEEL_BLUE]You lunge toward Murphy, but strong hands grab your arms. Resistance fighters hold you back.[/color] #id:murphy_sac_033
+	leave narrator
+
+	join resistance_member_2 [z_index="1"]
+	resistance_member_2: [color=STEEL_BLUE]Grim-faced, holding you firm.[/color] Don't. Let him do this. #id:murphy_sac_034
+	leave resistance_member_2
+
+	# PLAYER EMOTIONAL CHOICE
+	set {murphy_farewell} = "none"
+	- [tornado radius=3 freq=2][color=CRIMSON]"MURPHY! MURPHY, NO!"[/color][/tornado] (Desperate) #id:murphy_sac_035
+		set {murphy_farewell} = "desperate"
+	- [wave amp=20 freq=3][color=YELLOW]"There has to be another way! Please!"[/color][/wave] (Pleading) #id:murphy_sac_036
+		set {murphy_farewell} = "pleading"
+	- [color=STEEL_BLUE]*Struggle silently, unable to find words*[/color] (Shock) #id:murphy_sac_037
+		set {murphy_farewell} = "shock"
+
+	if {murphy_farewell} == "desperate":
+		join player_character [z_index="1"]
+		player_character: [tornado radius=4 freq=3][color=CRIMSON]MURPHY! MURPHY, NO![/color][/tornado] #id:murphy_sac_038
+		player_character: [color=STEEL_BLUE]I thrash against the hands holding me, screaming until my voice breaks.[/color] #id:murphy_sac_039
+		leave player_character
+
+		join murphy [z_index="1"]
+		murphy: [color=STEEL_BLUE]Murphy looks back, a sad smile on his face.[/color] Hey. [color=CHARTREUSE]Tell them I went out swinging, yeah?[/color] #id:murphy_sac_040
+		leave murphy
+	elif {murphy_farewell} == "pleading":
+		join player_character [z_index="1"]
+		player_character: [wave amp=20 freq=3][color=YELLOW]There has to be another way! Please, Murphy![/color][/wave] #id:murphy_sac_041
+		player_character: [color=STEEL_BLUE]My voice cracks. We've lost so many already.[/color] #id:murphy_sac_042
+		leave player_character
+
+		join murphy [z_index="1"]
+		murphy: [color=STEEL_BLUE]Murphy shakes his head slowly.[/color] There isn't. And you know it. [color=CHARTREUSE]Take care of Sasha. Finish this.[/color] #id:murphy_sac_043
+		leave murphy
+	else:
+		join player_character [z_index="1"]
+		player_character: [color=STEEL_BLUE]No words come. Just a strangled sound as I watch Murphy walk toward certain death.[/color] #id:murphy_sac_044
+		leave player_character
+
+		join murphy [z_index="1"]
+		murphy: [color=STEEL_BLUE]Murphy catches your eye. Nods once.[/color] [color=CHARTREUSE]The roots grow deep, friend.[/color] #id:murphy_sac_045
+		leave murphy
+
+	# THE CONFRONTATION - Murphy's Stand
+	[background arg="res://assets/narrative/murphy_stand.png" fade="1.5"]
+	audio music "res://assets/music/narrative/metal_violence_main.mp3" [fade="1.0" volume="-3.0" bus="Music"]
+	join narrator [z_index="1"]
+	narrator: [color=STEEL_BLUE]Murphy walks toward the Amalgam. Alone. The canister clutched to his chest.[/color] #id:murphy_sac_046
+	narrator: The monster's tendrils twitch, sensing him. A dozen frozen faces turn toward the approaching figure. #id:murphy_sac_047
+	leave narrator
+
+	[background arg="res://assets/narrative/murphy_arms_spread.png" fade="0.8"]
+	join murphy [z_index="1"]
+	murphy: [color=STEEL_BLUE]Murphy spreads his arms wide, the canister in one hand. He looks up at the nightmare towering over him.[/color] #id:murphy_sac_048
+	murphy: You know, cuz... you always said I'd never amount to anything. #id:murphy_sac_049
+	murphy: [pulse freq=2][color=CHARTREUSE]Guess I finally found something worth blowing up.[/color][/pulse] #id:murphy_sac_050
+	murphy: [wave amp=15 freq=2][color=CHARTREUSE]I love you, Tommy.[/color][/wave] #id:murphy_sac_051
+	leave murphy
+
+	# THE SACRIFICE
+	[background arg="res://assets/narrative/murphy_sacrifice_explosion.png" fade="0.1"]
+	audio "res://assets/audio/explosions/Explosion Close Collapse.wav" [volume="0.0" bus="SFX"]
+	audio "res://assets/audio/stings/heroic_death.mp3" [volume="-3.0" bus="SFX"]
+	join narrator [z_index="1"]
+	narrator: [tornado radius=5 freq=3][color=DARK_VIOLET]Murphy hurls the canister into the Amalgam's mass.[/color][/tornado] #id:murphy_sac_052
+	leave narrator
+
+	[background arg="res://assets/narrative/purple_explosion.png" fade="0.0"]
+	audio "res://assets/audio/explosions/Explosion Ringing.wav" [volume="-3.0" bus="SFX"]
+	join narrator [z_index="1"]
+	narrator: The Extra Distilled [tornado radius=4 freq=3][color=CRIMSON]DETONATES[/color][/tornado]. Purple fire engulfs the monster—and Murphy with it. #id:murphy_sac_053
+	narrator: [color=STEEL_BLUE]For one eternal moment, Murphy is silhouetted against the inferno. Then he's gone.[/color] #id:murphy_sac_054
+	leave narrator
+
+	# THE WASTED SACRIFICE - Monster survives
+	[background arg="res://assets/narrative/amalgam_wounded.png" fade="0.8"]
+	audio "res://assets/audio/atmosphere/monster_groan.mp3" [volume="-5.0" bus="SFX"]
+	audio music "res://assets/music/narrative/horror_abyss_main.mp3" [fade="0.5" volume="-3.0" bus="Music"]
+	join narrator [z_index="1"]
+	narrator: The smoke clears. The Amalgam [wave amp=20 freq=3][color=CRIMSON]still stands[/color][/wave]. Wounded. Burning. But alive. #id:murphy_sac_055
+	narrator: Murphy's sacrifice... [color=STEEL_BLUE]wasn't enough.[/color] #id:murphy_sac_056
+	leave narrator
+
+	join sweet_potato_sasha [z_index="1"]
+	sweet_potato_sasha: [wave amp=25 freq=3][color=CRIMSON]No... NO![/color][/wave] #id:murphy_sac_057
+	leave sweet_potato_sasha
+
+	join player_character [z_index="1"]
+	player_character: [color=STEEL_BLUE]The resistance fighters' grip loosens in horror. I fall to my knees.[/color] Murphy... #id:murphy_sac_058
+	leave player_character
+
+	# THE CHAIN REACTION - Tommy's Legacy
+	[background arg="res://assets/narrative/amalgam_wounded.png" fade="0.3"]
+	audio "res://assets/audio/mechanical/alarm.wav" [volume="-5.0" bus="SFX"]
+	join narrator [z_index="1"]
+	narrator: The wounded Amalgam lurches forward—and its burning mass [color=YELLOW]crashes into the refinery tanks[/color]. #id:murphy_sac_059
+	leave narrator
+
+	[background arg="res://assets/narrative/chain_reaction.png" fade="0.2"]
+	audio "res://assets/audio/explosions/rumbling 1.wav" [volume="-3.0" bus="SFX"]
+	join narrator [z_index="1"]
+	narrator: [pulse freq=3][color=CRIMSON]WARNING: CATASTROPHIC PRESSURE FAILURE[/color][/pulse] #id:murphy_sac_060
+	narrator: The tanks. Filled with [color=DARK_VIOLET]Extra Distilled[/color]. Hundreds of batches. [wave amp=15 freq=2]Hundreds of victims.[/wave] #id:murphy_sac_061
+	leave narrator
+
+	join resistance_member_1 [z_index="1"]
+	resistance_member_1: [color=CRIMSON]THE TANKS ARE GONNA BLOW! EVERYONE DOWN![/color] #id:murphy_sac_062
+	leave resistance_member_1
+
+	# THE RESOLUTION - The Tower Falls
+	[background arg="res://assets/narrative/tower_collapse.png" fade="0.1"]
+	audio "res://assets/audio/explosions/Explosion Close Collapse.wav" [volume="2.0" bus="SFX"]
+	audio "res://assets/audio/explosions/big distant thump 5.wav" [volume="0.0" bus="SFX"]
+	join narrator [z_index="1"]
+	narrator: [tornado radius=5 freq=3][color=CRIMSON]The world turns to fire.[/color][/tornado] #id:murphy_sac_063
+	leave narrator
+
+	[background arg="res://assets/narrative/massive_explosion.png" fade="0.0"]
+	audio music "res://assets/music/Honor Braaam.wav" [volume="-3.0" bus="Music"]
+	join narrator [z_index="1"]
+	narrator: The refinery tower [tornado radius=4 freq=3][color=DARK_VIOLET]erupts[/color][/tornado]. Chain reaction after chain reaction. Every tank. Every batch. [color=CRIMSON]Every victim Idaho tried to weaponize.[/color] #id:murphy_sac_064
+	narrator: The Amalgam [wave amp=20 freq=2]screams[/wave]—a sound like a hundred voices crying out together—as the tower [pulse freq=3][color=CHARTREUSE]collapses on top of it[/color][/pulse]. #id:murphy_sac_065
+	narrator: Tommy started the fire. [color=CHARTREUSE]The lost ones finished it.[/color] #id:murphy_sac_066
+	leave narrator
+
+	# MURPHY'S MEMORIAL - Intimate close-up
+	[background arg="res://assets/narrative/murphy_badge_memorial.png" fade="1.5"]
+	audio music "res://assets/music/narrative/sasha_theme_main.mp3" [fade="2.0" volume="-8.0" bus="Music"]
+	join narrator [z_index="1"]
+	narrator: [color=STEEL_BLUE]In the rubble, a charred security badge. The name barely legible: [color=CHARTREUSE]MURPHY[/color].[/color] #id:murphy_sac_066b
+	narrator: [color=STEEL_BLUE]Beside it, pushing through cracked concrete—a single green sprout. New life from sacrifice.[/color] #id:murphy_sac_066c
+	leave narrator
+
+	# AFTERMATH
+	[background arg="res://assets/narrative/aftermath_rubble.png" fade="2.0"]
+	audio music "res://assets/music/narrative/sasha_theme_main.mp3" [fade="3.0" volume="-5.0" bus="Music"]
+	audio "res://assets/audio/atmosphere/fire_crackle.mp3" [volume="-5.0" bus="Ambient"]
+	join narrator [z_index="1"]
+	narrator: [color=STEEL_BLUE]Silence. Dust and ash settle over the ruins. The path to Idaho's bunker lies open.[/color] #id:murphy_sac_067
+	narrator: [color=STEEL_BLUE]Where the Amalgam stood, only smoldering rubble remains. The faces are finally still.[/color] #id:murphy_sac_068
+	leave narrator
+
+	join sweet_potato_sasha [z_index="1"]
+	sweet_potato_sasha: [color=STEEL_BLUE]Sasha helps you to your feet, her own eyes wet.[/color] He... he saved us all. #id:murphy_sac_069
+	leave sweet_potato_sasha
+
+	# PLAYER RESPONSE TO MURPHY'S DEATH
+	set {murphy_memorial} = "none"
+	- "He was a hero. Tommy would be proud." (Honoring) #id:murphy_sac_070
+		set {murphy_memorial} = "honor"
+		set {pro_sasha_choice} = {pro_sasha_choice} + 1
+	- "This never should have happened. None of it." (Grief) #id:murphy_sac_071
+		set {murphy_memorial} = "grief"
+	- "Let's make sure it meant something. Idaho dies today." (Determined) #id:murphy_sac_072
+		set {murphy_memorial} = "determined"
+		set {pro_sasha_choice} = {pro_sasha_choice} + 1
+	- [color=STEEL_BLUE]*Say nothing. Just stare at the flames.*[/color] (Numb) #id:murphy_sac_073
+		set {murphy_memorial} = "numb"
+
+	if {murphy_memorial} == "honor":
+		join player_character [z_index="1"]
+		player_character: [color=CHARTREUSE]He was a hero. Tommy would be proud.[/color] They both would be. #id:murphy_sac_074
+		leave player_character
+
+		join sweet_potato_sasha [z_index="1"]
+		sweet_potato_sasha: [color=CHARTREUSE]Sasha squeezes your hand.[/color] The roots grow deep. He proved that. #id:murphy_sac_075
+		leave sweet_potato_sasha
+	elif {murphy_memorial} == "grief":
+		join player_character [z_index="1"]
+		player_character: [wave amp=15 freq=2]This never should have happened. None of it.[/wave] Tommy. Murphy. All of them. #id:murphy_sac_076
+		leave player_character
+
+		join sweet_potato_sasha [z_index="1"]
+		sweet_potato_sasha: [color=STEEL_BLUE]No. It shouldn't have.[/color] That's why we keep fighting. So no one else has to make that choice. #id:murphy_sac_077
+		leave sweet_potato_sasha
+	elif {murphy_memorial} == "determined":
+		join player_character [z_index="1"]
+		player_character: [pulse freq=2][color=CRIMSON]Let's make sure it meant something. Idaho dies today.[/color][/pulse] #id:murphy_sac_078
+		leave player_character
+
+		join sweet_potato_sasha [z_index="1"]
+		sweet_potato_sasha: [color=CHARTREUSE]Sasha's expression hardens.[/color] For Murphy. For Tommy. For all of them. #id:murphy_sac_079
+		leave sweet_potato_sasha
+	else:
+		join player_character [z_index="1"]
+		player_character: [color=STEEL_BLUE]I can't speak. Can't move. Just watch the flames consume everything Murphy was.[/color] #id:murphy_sac_080
+		leave player_character
+
+		join sweet_potato_sasha [z_index="1"]
+		sweet_potato_sasha: [color=STEEL_BLUE]Sasha stands beside you in silence. Some grief has no words.[/color] #id:murphy_sac_081
+		sweet_potato_sasha: [color=CHARTREUSE]...Come on. We finish this. For him.[/color] #id:murphy_sac_082
+		leave sweet_potato_sasha
+
+	# Trigger achievement for witnessing Murphy's sacrifice
+	[signal arg="witness_sacrifice"]
+
+	# Continue to Idaho confrontation
+	join narrator [z_index="1"]
+	narrator: [color=STEEL_BLUE]The resistance fighters gather themselves. The explosion has scattered the remaining guards. The path is clear.[/color] #id:murphy_sac_083
+	narrator: [pulse freq=2][color=CHARTREUSE]Idaho awaits.[/color][/pulse] #id:murphy_sac_084
+	leave narrator
+
+# ============================================================================
+# END MURPHY SACRIFICE SEQUENCE - Continue to standard flow
+# ============================================================================
+
+join player_character [z_index="1"]
+if {murphy_alliance} == "ally":
+	player_character: [color=STEEL_BLUE]I wipe ash from my face and turn toward the bunker entrance.[/color] "Let's end this. [color=CHARTREUSE]For Murphy.[/color]" #id:20_post_murphy
+else:
+	player_character: I turn to the others with resolve. "We need to reach Idaho's bunker. Now!" #id:20
+audio music "res://assets/music/narrative/electronic_cyberattack_main.mp3" [fade="1.0" volume="-5.0" bus="Music"]
+leave player_character
+
+# Only show standard QTE if Murphy sacrifice didn't happen
+if {murphy_alliance} != "ally":
+	join narrator [z_index="1"]
+	[background arg="res://assets/narrative/occupation_checkpoint.png" fade="2.0"]
+	audio "res://assets/audio/gun cocking 3.mp3" [volume="0.0" bus="SFX"]
+	narrator: Security forces close in! [pulse freq=3][color=YELLOW]Fight your way through![/color][/pulse] #id:fc_001
+	leave narrator
+	[signal arg="qte_confrontation"]
+
+# QTE Result handling for confrontation
+if {qte_confrontation_result} == "fail":
+	# FAILURE PATH - Cornered but saved
+	[background arg="res://assets/narrative/cornered.png" fade="0.5"]
+	audio "res://assets/audio/stings/failure_sting.mp3" [volume="-5.0" bus="SFX"]
+	join player_character [z_index="1"]
+	player_character: Guards close in from every direction. [color=CRIMSON]There's nowhere to run![/color] #id:21_fail1
+	leave player_character
+
+	if {viktor_allied} == "yes" and {qte_rescue_result} != "fail":
+		# Viktor's heroic intervention
+		[background arg="res://assets/narrative/viktor_standoff.png" fade="0.3"]
+		audio "res://assets/audio/gunfire/gun cocking 3.wav" [volume="-5.0" bus="SFX"]
+		join viktor [z_index="1"]
+		viktor: Viktor appears behind the guards, voice cold as steel. [color=STEEL_BLUE]Stand down. Now.[/color] #id:21_fail2
+		viktor: The guards hesitate - Viktor was one of their own. [color=CRIMSON]Elena's name is on those manifests. Your families could be next.[/color] #id:21_fail3
+		audio "res://assets/audio/stings/heroic_moment.mp3" [volume="-5.0" bus="SFX"]
+		viktor: Some guards lower their weapons. Others flee. The path clears. #id:21_fail4
+		leave viktor
+	elif {murphy_alliance} == "ally" and {qte_rescue_result} != "fail":
+		# Murphy's distraction
+		[background arg="res://assets/narrative/murphy_distraction.png" fade="0.3"]
+		audio "res://assets/audio/explosions/Balloon Explosion A.wav" [volume="-5.0" bus="SFX"]
+		join murphy [z_index="1"]
+		murphy: An explosion rocks the east wing. Murphy's voice crackles over comms: [color=CHARTREUSE]"That's my diversion! MOVE!"[/color] #id:21_fail5
+		murphy: [color=STEEL_BLUE]The guards scatter toward the explosion. Tommy would be proud.[/color] #id:21_fail6
+		leave murphy
+	else:
+		# Sasha saves the day
+		[background arg="res://assets/narrative/sasha_saves.png" fade="0.3"]
+		audio "res://assets/audio/gunfire/Heavy Pistol B.wav" [volume="-8.0" bus="SFX"]
+		join sweet_potato_sasha [z_index="1"]
+		sweet_potato_sasha: Sasha tackles the lead guard from behind. [color=CHARTREUSE]I didn't survive that cell just to watch you die![/color] #id:21_fail7
+		sweet_potato_sasha: [color=STEEL_BLUE]RUN! I've got this![/color] #id:21_fail8
+		leave sweet_potato_sasha
+
+join narrator [z_index="1"]
+narrator: Your group fights through waves of security, narrowly avoiding capture. Sasha's resistance fighters create diversions, clearing your path forward. #id:21
 audio "res://assets/audio/Heavy Pistol B.mp3" [volume="0.0" bus="SFX"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: After a harrowing escape through maintenance tunnels, you finally reach the secure elevator to Idaho's private bunker.
+narrator: After a harrowing escape through maintenance tunnels, you finally reach the secure elevator to Idaho's private bunker. #id:22
 leave narrator
 
 # Final confrontation - direct transition without gameplay
-audio music res://assets/audio/ambient/horror_drone_49.mp3" [fade="2.0" volume="-5.0" bus="Music"]
+audio music "res://assets/audio/ambient/horror_drone_49.mp3" [fade="2.0" volume="-5.0" bus="Music"]
 [background arg="res://assets/narrative/idaho_confrontation.png" fade="2.0"]
 join player_character [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-player_character: With Sasha and your allies at your side, you confront Idaho at last.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-player_character: It's over, Idaho. Your secrets are exposed. How this ends... [pulse freq=2]that's up to you.[/pulse]
+player_character: With Sasha and your allies at your side, you confront Idaho at last. #id:23
+player_character: It's over, Idaho. Your secrets are exposed. How this ends... [pulse freq=2]that's up to you.[/pulse] #id:24
 
 set {ending_choice} = "none"
-- Negotiate a peaceful transition of power (Diplomatic)
+- Negotiate a peaceful transition of power (Diplomatic) #id:25
 	set {ending_choice} = "diplomatic"
 	[signal arg="born_diplomat"]
-- Demand Idaho's immediate arrest (Justice)
+- Demand Idaho's immediate arrest (Justice) #id:26
 	set {ending_choice} = "justice"
 	[signal arg="tater_of_justice"]
-- Enact vigilante justice for Idaho's crimes (Vengeance)
+- Enact vigilante justice for Idaho's crimes (Vengeance) #id:27
 	set {ending_choice} = "vengeance"
 	[signal arg="best_served_hot"]
-- Focus on dismantling Root Reserve infrastructure (Dismantle)
+- Focus on dismantling Root Reserve infrastructure (Dismantle) #id:28
 	set {ending_choice} = "dismantle"
 	[signal arg="down_with_the_tatriarchy"]
 leave player_character
 
 # Ending Choice Section
 if {ending_choice} == "diplomatic":
+	audio music "res://assets/music/ambient_vol3_peace_main.mp3" [fade="2.0" volume="-5.0" bus="Music"]
 	[background arg="res://assets/narrative/idaho_confrontation.png" fade="2.0"]
-	audio "res://assets/audio/footsteps/Metal Walk 1_3.wav" [volume="-10.0" bus="SFX"]
+	audio "res://assets/audio/footsteps/Metal Walk 1_3.wav" [volume="-5.0" bus="SFX"]
 	join player_character [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	player_character: Idaho, it doesn't have to end in more bloodshed. If you cooperate...
+	player_character: Idaho, it doesn't have to end in more bloodshed. If you cooperate... #id:29
 	join prime_minister_idaho [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	prime_minister_idaho: Oh, you [color=STEEL_BLUE]idealistic fool[/color]. You think this is a negotiation?
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
+	prime_minister_idaho: Oh, you [color=STEEL_BLUE]idealistic fool[/color]. You think this is a negotiation? #id:2a
 	audio "res://assets/audio/mechanical/button assorted 3.wav" [volume="-8.0" bus="SFX"]
-	prime_minister_idaho: Idaho smashes a button, and [color=RED]alarms begin blaring[/color]. "The only thing I'll be giving you is a [color=DARK_VIOLET]one-way trip to the fry vats![/color]"
-    audio "res://assets/audio/mechanical/alarm.wav" [volume="-8.0" bus="SFX"]
-	[background arg="res://assets/narrative/guard_betrayal.png" fade="2.0"]
+	prime_minister_idaho: Idaho smashes a button, and [color=RED]alarms begin blaring[/color]. "The only thing I'll be giving you is a [color=DARK_VIOLET]one-way trip to the fry vats![/color]" #id:2b
+	audio "res://assets/audio/mechanical/alarm.wav" [volume="-8.0" bus="SFX"]
+	[background arg="res://assets/narrative/guards_threatening.png" fade="2.0"]
 	join sweet_potato_sasha [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: I don't think so, Idaho. Guards! You saw the dossier, [color=YELLOW]you know what he did to your families.[/color]
-	audio "res://assets/audio/gun cocking 3.wav" [volume="0.0" bus="SFX"]
-	A hulking guard steps forward and kicks Idaho to the ground swiftly.
-	audio "res://assets/audio/Heavy Pistol B.wav" [volume="0.0" bus="SFX"]
-	A shot echoes through the chamber. The screen fades to black.
+	sweet_potato_sasha: I don't think so, Idaho. Guards! You saw the dossier, [color=YELLOW]you know what he did to your families.[/color] #id:2c
+	audio "res://assets/audio/gunfire/gun cocking 3.wav" [volume="0.0" bus="SFX"]
+	A hulking guard steps forward and kicks Idaho to the ground swiftly. #id:2d
+	audio "res://assets/audio/gunfire/Heavy Pistol B.wav" [volume="0.0" bus="SFX"]
+	A shot echoes through the chamber. The screen fades to black. #id:2e
 	leave prime_minister_idaho
 	leave sweet_potato_sasha
 	leave player_character
 elif {ending_choice} == "justice":
+	audio music "res://assets/music/ambient_vol2_glorious_main.mp3" [fade="2.0" volume="-5.0" bus="Music"]
 	[background arg="res://assets/narrative/idaho_confrontation.png" fade="2.0"]
 	join player_character [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	player_character: Idaho, in the name of the potato people of Spud, [color=CHARTREUSE]you're under arrest![/color]
+	player_character: Idaho, in the name of the potato people of Spud, [color=CHARTREUSE]you're under arrest![/color] #id:2f
 	[background arg="res://assets/narrative/justice_hall.png" fade="2.0"]
 	join sweet_potato_sasha [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: It's over. The people have spoken. [color=CHARTREUSE]We'll build a new Spud where our roots are in the soil, not in suffering.[/color]
+	sweet_potato_sasha: It's over. The people have spoken. [color=CHARTREUSE]We'll build a new Spud where our roots are in the soil, not in suffering.[/color] #id:30
 	leave sweet_potato_sasha
 	leave player_character
 elif {ending_choice} == "vengeance":
+	audio music "res://assets/music/narrative/metal_violence_main.mp3" [fade="1.0" volume="-3.0" bus="Music"]
 	[background arg="res://assets/narrative/idaho_confrontation.png" fade="2.0"]
 	join player_character [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	player_character: There will be [color=CRIMSON]no deals, no mercy[/color] for you, Idaho. A tyrant's justice is all you deserve.
-	[background arg="res://assets/narrative/reckoning.png" fade="2.0"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	audio "res://assets/audio/gun cocking 3.wav" [volume="0.0" bus="SFX"]
-	player_character: A reckoning. That's what I am. [color=CHARTREUSE]For every potato sacrificed, we take back our future![/color]
-	audio "res://assets/audio/Heavy Pistol B.wav" [volume="0.0" bus="SFX"]
+	player_character: There will be [color=CRIMSON]no deals, no mercy[/color] for you, Idaho. A tyrant's justice is all you deserve. #id:31
+	[background arg="res://assets/narrative/uprising_victory.png" fade="2.0"]
+	audio "res://assets/audio/gunfire/gun cocking 3.wav" [volume="0.0" bus="SFX"]
+	player_character: A reckoning. That's what I am. [color=CHARTREUSE]For every potato sacrificed, we take back our future![/color] #id:32
+	audio "res://assets/audio/gunfire/Heavy Pistol B.wav" [volume="0.0" bus="SFX"]
 	leave player_character
 else: # dismantle
+	audio music "res://assets/music/narrative/electronic_reborn_main.mp3" [fade="1.5" volume="-5.0" bus="Music"]
 	[background arg="res://assets/narrative/idaho_confrontation.png" fade="2.0"]
 	join player_character [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	player_character: Forget him. He's a symptom, not the disease. [color=CHARTREUSE]Tear down every root and stem of this monstrosity.[/color]
+	player_character: Forget him. He's a symptom, not the disease. [color=CHARTREUSE]Tear down every root and stem of this monstrosity.[/color] #id:33
 	join sweet_potato_sasha [z_index="1"]
 	audio "res://assets/audio/explosions/Balloon Explosion A.wav" [volume="0.0" bus="SFX"]
 	[background arg="res://assets/narrative/night_attack.png" fade="0.5"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	sweet_potato_sasha: We have to go! Now!
+	sweet_potato_sasha: We have to go! Now! #id:34
 	leave sweet_potato_sasha
 	leave player_character
 
+# Chaos Agent acknowledgment - if player manipulated both sides
+if {chaos_points} >= 4:
+	[background arg="res://assets/narrative/checkpoint_corridor.png" fade="1.5"]
+	audio "res://assets/audio/stings/suspicion_sting.mp3" [volume="-5.0" bus="SFX"]
+	join murphy [z_index="1"]
+	murphy: Murphy pulls you aside, voice low. I've been watching you this whole time. The way you played both sides... #id:fc_chaos_001
+	murphy: You leaked info to Russet. You helped operatives escape. You kept everyone guessing. [color=YELLOW]Impressive. Terrifying.[/color] #id:fc_chaos_002
+	leave murphy
+
+	join player_character [z_index="1"]
+	player_character: I did what I had to do. Survival in this world means keeping all your options open. #id:fc_chaos_003
+	leave player_character
+
+	join murphy [z_index="1"]
+	murphy: Maybe. Or maybe you're the most dangerous kind of potato - one who serves only themselves. #id:fc_chaos_004
+	murphy: Just know this: [color=STEEL_BLUE]I'll be watching.[/color] We all will. The new Spud needs leaders, not manipulators. #id:fc_chaos_005
+	leave murphy
+	[signal arg="chaos_architect"]
+
+# Savior of Spud achievement check - romantic ending path
+if {pro_sasha_choice} >= 5 and {sasha_rescue_reaction} == "relieved":
+	[signal arg="savior_of_spud"]
+
 # Common ending for all paths
 [background arg="res://assets/narrative/russet_standoff.png" fade="2.0"]
-audio "res://assets/audio/explosions/Explosion Ringing.wav" [volume="-15.0" bus="SFX"]
+audio "res://assets/audio/explosions/Explosion Ringing.wav" [volume="-5.0" bus="SFX"]
 join narrator [z_index="1"]
-audio music "res://assets/music/narrative/ambient_joy_main.mp3" [fade="2.0" volume="1.0" bus="Music"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: The fall of [color=DARK_VIOLET]Root Reserve[/color] sparks a wildfire of change across Spud.
+audio music "res://assets/music/narrative/victory_aftermath_main.mp3" [fade="2.0" volume="-3.0" bus="Music"]
+narrator: The fall of [color=DARK_VIOLET]Root Reserve[/color] sparks a wildfire of change across Spud. #id:35
 [background arg="res://assets/narrative/victory_scene.png" fade="2.0"]
-audio "res://assets/audio/music/Honor Braaam.wav" [volume="-10.0" bus="SFX"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: Potatoes in every province rise up, embracing a [color=CHARTREUSE]new vision for their nation[/color].
+audio "res://assets/music/Honor Braaam.wav" [volume="-5.0" bus="SFX"]
+narrator: Potatoes in every province rise up, embracing a [color=CHARTREUSE]new vision for their nation[/color]. #id:36
 audio music "res://assets/audio/ambient/1_birds_outside.wav" [fade="2.0" volume="1.0" bus="Music"]
 leave narrator
 
 join player_character [z_index="1"]
 [background arg="res://assets/narrative/credits.png" fade="2.0"]
 join sweet_potato_sasha [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: As long as we stay true to our roots, to the ideals that brought us here... [color=CHARTREUSE]we'll find a way.[/color]
+# Romantic ending requires consistent support for Sasha (3+ pro-Sasha choices throughout the game)
+if {sasha_rescue_reaction} == "relieved" and {pro_sasha_choice} >= 3:
+	sweet_potato_sasha: [color=CHARTREUSE]Sasha moves closer, her hand finding yours as you watch the new dawn together.[/color] We built this. You and me. #id:fc_002
+	sweet_potato_sasha: As long as we stay true to our roots, to the ideals that brought us here... [color=CHARTREUSE]we'll find a way.[/color] Together. #id:fc_003
+	player_character: [color=CHARTREUSE]I squeeze her hand, feeling the warmth of a future finally worth fighting for.[/color] Together. #id:fc_004
+elif {sasha_rescue_reaction} == "relieved":
+	# Player said "relieved" but didn't earn the romantic ending through consistent support
+	sweet_potato_sasha: [color=STEEL_BLUE]Sasha gives you a grateful nod.[/color] We made it. Against all odds. #id:fc_002b
+	sweet_potato_sasha: As long as we stay true to our roots, to the ideals that brought us here... [color=CHARTREUSE]we'll find a way.[/color] #id:fc_003b
+	player_character: [color=STEEL_BLUE]There's warmth in her eyes, but also distance. Some bridges take longer to build.[/color] #id:fc_004b
+elif {sasha_rescue_reaction} == "angry":
+	sweet_potato_sasha: [color=STEEL_BLUE]Sasha stands beside you, a respectful distance between you.[/color] Your fire lit the spark that burned down their empire. #id:fc_005
+	sweet_potato_sasha: As long as we stay true to our roots, to the ideals that brought us here... [color=CHARTREUSE]we'll find a way.[/color] #id:fc_006
+	player_character: [color=STEEL_BLUE]The anger has cooled to determination. There's still work to be done.[/color] #id:fc_007
+else:
+	sweet_potato_sasha: [color=STEEL_BLUE]Sasha offers you a supportive smile.[/color] You've come a long way from that checkpoint. We all have. #id:fc_008
+	sweet_potato_sasha: As long as we stay true to our roots, to the ideals that brought us here... [color=CHARTREUSE]we'll find a way.[/color] #id:fc_009
+	player_character: [color=STEEL_BLUE]The guilt may never fully fade, but you've found purpose in the rebuilding.[/color] #id:fc_010
 leave sweet_potato_sasha
 leave player_character
 
 audio "res://assets/audio/clothing/flag 3.wav" [volume="0.0" bus="SFX"]
 [background arg="res://assets/narrative/new_spud_flag.png" fade="2.0"]
 join narrator [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: And so, from the ashes of the old Spud, a [color=CHARTREUSE]new nation begins to take root[/color]. The Reign of [color=DARK_VIOLET]Root Reserve[/color] is over.
+narrator: And so, from the ashes of the old Spud, a [color=CHARTREUSE]new nation begins to take root[/color]. The Reign of [color=DARK_VIOLET]Root Reserve[/color] is over. #id:38
+audio "res://assets/audio/stings/revelation_hope.mp3" [volume="-5.0" bus="SFX"]
 leave narrator
 
+audio "res://assets/audio/stings/victory_swell.mp3" [volume="-5.0" bus="SFX"]
 [signal arg="credits_ready"]

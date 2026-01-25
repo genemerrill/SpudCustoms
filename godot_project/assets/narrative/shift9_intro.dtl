@@ -1,90 +1,228 @@
 # shift9_intro.dtl
+# TRANSITION: Bridge from Shift 8's emotional low point to Shift 9's chaos
+
+# If player was captured in shift 8, show different opening
+if {player_captured} == "yes":
+	audio music "res://assets/music/ambient_vol3_defeat_main.mp3" [fade="2.0" volume="-5.0" bus="Music"]
+	[background arg="res://assets/narrative/interrogation.png" fade="0.0"]
+	join narrator [z_index="1"]
+	narrator: You've spent hours in the cold cell, listening to distant screams and the steady drip of water. #id:s9i_cap_001
+	narrator: Suddenly, [pulse freq=3][color=YELLOW]explosions rock the building[/color][/pulse]. The lights flicker. Guards shout in confusion. #id:s9i_cap_002
+	leave narrator
+
+	audio "res://assets/audio/stings/alarm_distant.mp3" [volume="-3.0" bus="SFX"]
+	[background arg="res://assets/narrative/night_attack.png" fade="0.5"]
+	join murphy [z_index="1"]
+	murphy: The cell door bursts open. Murphy stands there, smoke swirling behind him. #id:s9i_cap_003
+	murphy: [color=CHARTREUSE]Get up! The resistance is here![/color] We're getting you AND Sasha out! #id:s9i_cap_004
+	leave murphy
+
+	join player_character [z_index="1"]
+	player_character: After the longest night of your life, dawn has brought chaos - and a chance at freedom. #id:s9i_cap_005
+	leave player_character
+	set {player_captured} = "rescued"
+	# Skip to the resistance operative scene
+	jump s9i_operative_scene
+else:
+	# Normal opening - the sleepless night has passed
+	audio music "res://assets/music/narrative/ambient_evil_suspense_main.mp3" [fade="2.0" volume="-5.0" bus="Music"]
+	[background arg="res://assets/narrative/personal_quarters.png" fade="0.0"]
+	join narrator [z_index="1"]
+	narrator: Dawn arrives after a sleepless night. Sasha's arrest plays on repeat in your mind. #id:s9i_trans_001
+	narrator: Every hour that passes is an hour closer to her being... [color=DARK_VIOLET]processed[/color]. #id:s9i_trans_002
+	leave narrator
+
+	# PLAYER_WANTED INTEGRATION - Player is on the security list
+	if {player_wanted} == "yes":
+		[background arg="res://assets/narrative/checkpoint_corridor.png" fade="1.0"]
+		audio "res://assets/audio/stings/suspicion_sting.mp3" [volume="-8.0" bus="SFX"]
+		join narrator [z_index="1"]
+		narrator: Your face is on every security terminal. [pulse freq=2][color=CRIMSON]WANTED FOR QUESTIONING.[/color][/pulse] #id:s9i_wanted_001
+		narrator: You slipped away last night, but they know. They're [color=YELLOW]hunting[/color] for you. #id:s9i_wanted_002
+		leave narrator
+		join player_character [z_index="1"]
+		player_character: Every guard's eyes seem to follow me. [color=STEEL_BLUE]It's only a matter of time before someone recognizes me.[/color] #id:s9i_wanted_003
+		player_character: I need to get to Sasha - and then get [color=CHARTREUSE]out[/color]. There's no going back to the old life now. #id:s9i_wanted_004
+		leave player_character
+	else:
+		join player_character [z_index="1"]
+		if {sasha_arrest_reaction} == "promise":
+			player_character: You made her a promise. Today, you keep it - or die trying. #id:s9i_trans_003
+		elif {sasha_arrest_reaction} == "hide":
+			player_character: The guilt weighs heavy. You hid while they took her. [color=STEEL_BLUE]Never again.[/color] #id:s9i_trans_004
+		else:
+			player_character: You almost got caught trying to help her. Today's plan had better work. #id:s9i_trans_005
+		leave player_character
+
+# Main shift 9 content begins
 audio music "res://assets/audio/ambient/horror_drone_49.mp3" [fade="2.0" volume="-5.0" bus="Ambient"]
 audio music "res://assets/music/narrative/horror_downward_main.mp3" [fade="2.0" volume="-5.0" bus="Music"]
-[background arg="res://assets/narrative/occupation_checkpoint.png" fade="0.0"]
+[background arg="res://assets/narrative/occupation_checkpoint.png" fade="1.5"]
+audio "res://assets/audio/atmosphere/war_zone_distant.mp3" [volume="-5.0" bus="Ambient"]
 join narrator [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: The border resembles a [pulse freq=3][color=CRIMSON]war zone[/color][/pulse]. Barricades, armored vehicles, and elite guards stand ready. Today is when the resistance planned to strike.
+narrator: The border resembles a [pulse freq=3][color=CRIMSON]war zone[/color][/pulse]. Barricades, armored vehicles, and elite guards stand ready. Today is when the resistance planned to strike. #id:s9i_001
 leave narrator
 
 [background arg="res://assets/narrative/extreme_emergency.png" fade="0.3"]
+audio "res://assets/audio/atmosphere/broadcast_static.mp3" [volume="-5.0" bus="SFX"]
+audio "res://assets/audio/ui_drama/radio_click_on.mp3" [volume="-5.0" bus="SFX"]
 join announcer [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-announcer: [wave amp=25 freq=3][color=YELLOW]EMERGENCY BROADCAST[/color][/wave]: All of Spud is under [color=RED]martial law[/color]. "The Resistance" has launched attacks against government facilities.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-announcer: Anyone aiding these [color=CRIMSON]extremists[/color] faces [color=DARK_VIOLET]immediate processing[/color]. The Ministry confirms: [color=DARK_VIOLET]Root Reserve[/color] remains safe for all [color=DARK_ORANGE]loyal potatoes[/color].
+announcer: [wave amp=25 freq=3][color=YELLOW]EMERGENCY BROADCAST[/color][/wave]\: All of Spud is under [color=RED]martial law[/color]. "The Resistance" has launched attacks against government facilities. #id:s9i_002
+announcer: Anyone aiding these [color=CRIMSON]extremists[/color] faces [color=DARK_VIOLET]immediate processing[/color]. The Ministry confirms\: [color=DARK_VIOLET]Root Reserve[/color] remains safe for all [color=DARK_ORANGE]loyal potatoes[/color]. #id:s9i_003
 leave announcer
 
 [background arg="res://assets/narrative/supervisor_presenting.png" fade="1.5"]
 join security_chief [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-security_chief: [color=YELLOW]Rioting has broken out[/color] in multiple sectors. Resistance cells have attacked three [color=DARK_VIOLET]Root Reserve[/color] facilities.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-security_chief: Their goal: access the central database with all production records. Any sign of disloyalty means processing.
+security_chief: [color=YELLOW]Rioting has broken out[/color] in multiple sectors. Resistance cells have attacked three [color=DARK_VIOLET]Root Reserve[/color] facilities. #id:s9i_004
+security_chief: Their goal\: access the central database with all production records. Any sign of disloyalty means processing. #id:s9i_005
 leave security_chief
 
 [background arg="res://assets/narrative/sasha_capture.png" fade="1.5"]
+audio music "res://assets/music/ambient_vol3_defeat_main.mp3" [fade="1.0" volume="-5.0" bus="Music"]
+audio "res://assets/audio/stings/threat_reveal.mp3" [volume="-5.0" bus="SFX"]
 join supervisor_russet [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-supervisor_russet: We've captured several resistance operatives, including Officer Sasha.
+supervisor_russet: We've captured several resistance operatives, including Officer Sasha. #id:s9i_006
 join sweet_potato_sasha [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: The [tornado radius=3 freq=2][color=CRIMSON]real traitors[/color][/tornado] are those who [color=DARK_VIOLET]feed our people to each other[/color]. You can't stop the truth!
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-sweet_potato_sasha: She's dragged away, still shouting: [color=CHARTREUSE]The people will know what's in their food![/color]
+sweet_potato_sasha: The [tornado radius=3 freq=2][color=CRIMSON]real traitors[/color][/tornado] are those who [color=DARK_VIOLET]feed our people to each other[/color]. You can't stop the truth! #id:s9i_007
+sweet_potato_sasha: She's dragged away, still shouting\: [color=CHARTREUSE]The people will know what's in their food![/color] #id:s9i_008
+audio "res://assets/audio/ui_drama/metal_cell_door.mp3" [volume="-5.0" bus="SFX"]
 leave sweet_potato_sasha
 
 join supervisor_russet [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-supervisor_russet: The [color=CRIMSON]traitor[/color] will be [pulse freq=3][color=DARK_VIOLET]processed immediately[/color][/pulse]. A special batch of [color=DARK_VIOLET]Root Reserve[/color], made from the terrorists themselves.
+supervisor_russet: The [color=CRIMSON]traitor[/color] will be [pulse freq=3][color=DARK_VIOLET]processed immediately[/color][/pulse]. A special batch of [color=DARK_VIOLET]Root Reserve[/color], made from the terrorists themselves. #id:s9i_009
 leave supervisor_russet
 
 [background arg="res://assets/narrative/maximum_security.png" fade="2.0"]
 join security_officer [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-security_officer: All border crossings are [color=RED]suspended[/color] except for essential personnel with [color=GOLD]Level Alpha clearance[/color].
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-security_officer: This scanner [color=YELLOW]cannot be fooled[/color]. Sound the alarm immediately for anyone without proper clearance.
+security_officer: All border crossings are [color=RED]suspended[/color] except for essential personnel with [color=GOLD]Level Alpha clearance[/color]. #id:s9i_010
+security_officer: This scanner [color=YELLOW]cannot be fooled[/color]. Sound the alarm immediately for anyone without proper clearance. #id:s9i_011
 leave security_officer
 
+# Evidence Destruction Minigame - Player must clear their desk before security inspection
+# Only for players who weren't captured (captured players skip this)
+if {player_captured} != "yes":
+	[background arg="res://assets/narrative/customs_office.png" fade="1.0"]
+	audio "res://assets/audio/stings/alarm_distant.mp3" [volume="-8.0" bus="SFX"]
+	join announcer [z_index="1"]
+	announcer: [wave amp=20 freq=3][color=YELLOW]ATTENTION ALL PERSONNEL[/color][/wave]\: Security inspection of all workstations in [color=RED]five minutes[/color]. Remain at your desks. #id:s9i_inspection_001
+	announcer: Any [color=CRIMSON]unauthorized materials[/color] will result in [color=DARK_VIOLET]immediate detention[/color]. This is not a drill. #id:s9i_inspection_002
+	leave announcer
+
+	join player_character [z_index="1"]
+	player_character: [pulse freq=3][color=YELLOW]Five minutes.[/color][/pulse] My desk... Sasha's letters, the resistance contacts, Murphy's note... #id:s9i_inspection_003
+	player_character: I need to destroy the evidence before they find it. [color=CRIMSON]Everything incriminating has to go.[/color] #id:s9i_inspection_004
+	leave player_character
+
+	# Launch the evidence destruction minigame
+	[signal arg="evidence_destruction"]
+
+	# Branching based on inspection result
+	if {inspection_result} == "compromised":
+		[background arg="res://assets/narrative/interrogation.png" fade="1.5"]
+		audio "res://assets/audio/stings/threat_reveal.mp3" [volume="-5.0" bus="SFX"]
+		join security_chief [z_index="1"]
+		security_chief: [color=RED]What do we have here?[/color] The security team holds up the evidence they found. Resistance materials. At YOUR desk. #id:s9i_inspection_005
+		security_chief: You have [pulse freq=3][color=CRIMSON]ten seconds[/color][/pulse] to explain yourself before I have you dragged to processing. #id:s9i_inspection_006
+		leave security_chief
+
+		join player_character [z_index="1"]
+		- "Those aren't mine! Someone must have planted them!" (Deny) #id:s9i_inspection_007
+			player_character: [color=STEEL_BLUE]I feign shock and outrage.[/color] I'm a loyal officer! Check my record! #id:s9i_inspection_008
+			join security_chief [z_index="1"]
+			security_chief: [color=YELLOW]Hmm.[/color] Your record IS clean... We'll be watching you VERY closely. One wrong move... #id:s9i_inspection_009
+			leave security_chief
+		- "I was gathering intelligence on the resistance - for the Ministry!" (Bluff) #id:s9i_inspection_010
+			player_character: [color=STEEL_BLUE]I take a calculated risk.[/color] I've been tracking their movements. I was about to report! #id:s9i_inspection_011
+			join security_chief [z_index="1"]
+			security_chief: [color=YELLOW]Convenient timing.[/color] If you're lying, you'll wish you'd been processed. Get back to work. #id:s9i_inspection_012
+			leave security_chief
+		leave player_character
+		set {under_suspicion} = "yes"
+	elif {inspection_result} == "suspicious":
+		[background arg="res://assets/narrative/customs_office.png" fade="1.0"]
+		join security_officer [z_index="1"]
+		security_officer: [color=YELLOW]The inspector pauses at your desk, eyes narrowing.[/color] You seem nervous, officer. Something to hide? #id:s9i_inspection_013
+		leave security_officer
+		join player_character [z_index="1"]
+		player_character: [color=STEEL_BLUE]Just the stress of the situation, sir. Terrible business with those terrorists.[/color] #id:s9i_inspection_014
+		leave player_character
+		join security_officer [z_index="1"]
+		security_officer: [color=YELLOW]Hmm.[/color] Keep your head down and do your job. [color=STEEL_BLUE]The inspector moves on, but you feel watched.[/color] #id:s9i_inspection_015
+		leave security_officer
+		set {under_suspicion} = "mild"
+	else:
+		# Clean inspection
+		[background arg="res://assets/narrative/customs_office.png" fade="1.0"]
+		join security_officer [z_index="1"]
+		security_officer: [color=STEEL_BLUE]The inspector glances at your spotless desk and nods curtly.[/color] Carry on. #id:s9i_inspection_016
+		leave security_officer
+		join player_character [z_index="1"]
+		player_character: [color=CHARTREUSE]I exhale slowly as they move to the next station.[/color] That was too close. #id:s9i_inspection_017
+		leave player_character
+		set {under_suspicion} = "no"
+
+# Label for captured player path to jump to
+label s9i_operative_scene
+
 [background arg="res://assets/narrative/maximum_security.png" fade="2.0"]
+audio music "res://assets/music/ambient_vol3_spirits_intensity_2.mp3" [fade="1.5" volume="-5.0" bus="Music"]
 join resistance_member_1 [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_member_1: A potato in official uniform approaches with seemingly perfect Alpha credentials.
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-resistance_member_1: A tiny blue card falls from the folder. "[wave amp=15 freq=3][color=CHARTREUSE]The roots grow deep.[/color][/wave]", they mutter as they pick up the card.
+resistance_member_1: A potato in official uniform approaches with seemingly perfect Alpha credentials. #id:s9i_012
+audio "res://assets/audio/stings/heartbeat_tension.mp3" [volume="-5.0" bus="SFX"]
+resistance_member_1: A tiny blue card falls from the folder. "[wave amp=15 freq=3][color=CHARTREUSE]The roots grow deep.[/color][/wave]", they mutter as they pick up the card. #id:s9i_013
 
 set {critical_choice} = "none"
-- "Process them through, ignoring the scanner alerts" (Help the resistance)
+- "Process them through, ignoring the scanner alerts" (Help the resistance) #id:s9i_014
 	set {critical_choice} = "help"
-- "Sound the alarm immediately" (Betray the resistance)
+	set {pro_sasha_choice} = {pro_sasha_choice} + 1
+- "Sound the alarm immediately" (Betray the resistance) #id:s9i_015
 	set {critical_choice} = "betray"
+- "Let them through, then alert Russet - catch the bigger fish" (Chaos) #id:s9i_016_chaos
+	set {critical_choice} = "chaos"
+	set {chaos_agent} = "yes"
+	set {chaos_points} = {chaos_points} + 2
 
 if {critical_choice} == "help":
 	join resistance_member_1 [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_member_1: Relief shows in their eyes. "[color=CHARTREUSE]For Sasha. For Spud.[/color]" They disappear toward the central database.
+	resistance_member_1: Relief shows in their eyes. "[color=CHARTREUSE]For Sasha. For Spud.[/color]" They disappear toward the central database. #id:s9i_016
+	leave resistance_member_1
+elif {critical_choice} == "betray":
+	join resistance_member_1 [z_index="1"]
+	resistance_member_1: Horror dawns on their face. "[color=CRIMSON]You traitor! We trusted you![/color]" They're quickly surrounded by guards. #id:s9i_017
+	supervisor_russet: "Excellent work. Your loyalty will be rewarded." #id:s9i_018
 	leave resistance_member_1
 else:
+	# Chaos path - let them through, then betray them
 	join resistance_member_1 [z_index="1"]
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	resistance_member_1: Horror dawns on their face. "[color=CRIMSON]You traitor! We trusted you![/color]" They're quickly surrounded by guards.
-	audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-	supervisor_russet: "Excellent work. Your loyalty will be rewarded."
+	resistance_member_1: Relief shows in their eyes. "[color=CHARTREUSE]For Sasha. For Spud.[/color]" They disappear toward the central database. #id:s9i_016_chaos1
 	leave resistance_member_1
+	join player_character [z_index="1"]
+	player_character: I wait until they're deep inside... then quietly signal security. [color=CRIMSON]Maximum damage to both sides.[/color] #id:s9i_016_chaos2
+	player_character: [color=DARK_ORANGE]The government will be weakened by the attack. The resistance will be crushed in the aftermath.[/color] #id:s9i_016_chaos3
+	player_character: [pulse freq=2][color=YELLOW]And I'll be the only one left standing.[/color][/pulse] #id:s9i_016_chaos4
+	leave player_character
 
 [background arg="res://assets/narrative/night_attack.png" fade="2.0"]
+audio music "res://assets/music/narrative/metal_violence_main.mp3" [fade="0.5" volume="-3.0" bus="Music"]
 join narrator [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-narrator: Suddenly, the facility [color=YELLOW]shakes with explosions[/color]. The resistance attack has begun, regardless of your choice.
+narrator: Suddenly, the facility [color=YELLOW]shakes with explosions[/color]. The resistance attack has begun, regardless of your choice. #id:s9i_019
+audio "res://assets/audio/stings/alarm_distant.mp3" [volume="-5.0" bus="SFX"]
 leave narrator
 
 [background arg="res://assets/narrative/night_gameplay.png" fade="2.0"]
 join player_character [z_index="1"]
-audio "res://assets/audio/talking/keyboard mechanical typing 1.mp3" [volume="0.0" bus="SFX"]
-player_character: Do I stay at my post and hope this blows over, or [color=CHARTREUSE]take a stand[/color] and risk everything to expose the truth?
-- "I can't abandon my duty. I'll stay quiet and hope for the best."
+player_character: Do I stay at my post and hope this blows over, or [color=CHARTREUSE]take a stand[/color] and risk everything to expose the truth? #id:s9i_020
+- "I can't abandon my duty. I'll stay quiet and hope for the best." #id:s9i_021
 	set {stay_or_go} = "stay"
-- "I've been complicit for too long. It's time to fight for what's right."
+- "I've been complicit for too long. It's time to fight for what's right." #id:s9i_022
 	set {stay_or_go} = "go"
+	set {pro_sasha_choice} = {pro_sasha_choice} + 1
 leave player_character
+
+# QTE for the "go" path - player must act quickly during the chaos
+if {stay_or_go} == "go":
+	[background arg="res://assets/narrative/night_attack.png" fade="0.5"]
+	join narrator [z_index="1"]
+	narrator: [pulse freq=3][color=YELLOW]Move quickly![/color][/pulse] Security is scrambling - this is your only chance to escape! #id:s9i_023
+	leave narrator
+	[signal arg="qte_escape"]

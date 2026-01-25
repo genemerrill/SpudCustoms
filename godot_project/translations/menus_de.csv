@@ -1,0 +1,391 @@
+﻿keys,de
+main_menu_feedback,Feedback und Fehler
+main_menu_version,Fassung 1.2.0
+main_menu_new_game,Neues Spiel
+main_menu_continue,Fortsetzen
+main_menu_level_select,Level-Auswahl
+main_menu_score_attack,Punkteangriff
+main_menu_options,Optionen
+main_menu_credits,Mitwirkende
+main_menu_exit,Beenden
+select_language,Sprache
+social_discord_tooltip,Tritt unserem Discord bei!
+social_steam_tooltip,Besuche uns auf Steam
+social_twitch_tooltip,Twitch-Integration
+twitch_status_disabled,Deaktiviert
+twitch_status_no_viewers,Keine Zuschauer im Pool
+twitch_status_ready,{count} Zuschauer bereit
+twitch_connection_disabled,Deaktiviert
+twitch_connection_disconnected,Getrennt
+twitch_connection_connected,Verbunden
+twitch_connection_connecting,Verbinden...
+options_menu_title,Optionen
+options_difficulty,Schwierigkeitsgrad
+options_difficulty_easy,Leicht
+options_difficulty_normal,Standard
+options_difficulty_expert,Experte
+options_music_volume,Musiklautstärke
+options_sfx_volume,Soundeffekt-Lautstärke
+options_camera_shake,Kamerawackeln
+options_back,Zurück
+paused_menu_title,Pausiert
+shift_summary_title,SCHICHT-ZUSAMMENFASSUNG
+shift_summary_continue,Fortsetzen
+shift_summary_restart,Neustart
+shift_summary_main_menu,Hauptmenü
+shift_summary_submit_score,Punktzahl einreichen
+shift_summary_runner_stats,LÄUFER-STATISTIKEN
+shift_summary_document_stats,DOKUMENT-STATISTIKEN
+shift_summary_performance,LEISTUNG
+shift_summary_bonuses,BONI
+_FORMAT KEYS,
+time_format,{minutes}Min {seconds}Sek
+_SHIFT SUMMARY DETAILS,
+shift_complete_success,SCHICHT {shift} ABGESCHLOSSEN\nERFOLG!
+shift_complete_failure,SCHICHT {shift} ABGESCHLOSSEN\n{failure}
+strike_limit_reached,STREIKELIMIT ERREICHT!
+quota_not_met,QUOTE NICHT ERFÜLLT!
+shift_summary_title_with_difficulty,SCHICHT-ZUSAMMENFASSUNG\n{difficulty}
+runner_stats_template,\nLÄUFER-STATISTIKEN\nLäuferversuche: {runner_attempts}\nAbgefeuerte Raketen: {fired}\nGetroffene Läufer: {hit}\nPerfekte Treffer: {perfect}\nTrefferquote: {rate}%
+document_stats_template,DOKUMENT-STATISTIKEN\nGestempelte Dokumente: {stamped}\nGenehmigte Kartoffeln: {approved}\nAbgelehnte Kartoffeln: {rejected}\nPerfekte Stempel: {perfect_stamps}
+bonus_stats_template,BONI\nVerarbeitungsgeschwindigkeitsbonus: {processing_speed_bonus}\nStempelgenauigkeitsbonus: {accuracy}\nPerfekte Treffer Bonus: {perfect_hit_bonus}\nGesamtpunktzahlbonus: {total_score_bonus}
+performance_stats_template,LEISTUNG\nBenötigte Zeit: {time_taken}\nErwartete Punktzahl: {expected_score}\nGesamtpunktzahl: {score}\nÜberschreitung in Prozent: {percent}%\nLeistungsbewertung:\n{rating}
+performance_exceptional,Außergewöhnlich!
+performance_excellent,Ausgezeichnet!
+performance_good,Gut
+performance_needs_improvement,Verbesserungsbedürftig
+performance_poor,Schlecht
+global_leaderboard_title,Globale Rangliste\n- {difficulty}
+getting_leaderboard_scores,Rufe Bestenlisten-Punktzahlen ab...
+_PAUSE OPTIONS OVERLAY,
+reset_game_label,Spiel zurücksetzen:
+reset_game_button,Zurücksetzen
+reset_game_success,Zurücksetzen abgeschlossen!
+mute_label,Stummschalten
+fullscreen_label,Vollbild:
+resolution_label,Auflösung:
+antialiasing_label,Anti-Aliasing:
+screenshake_label,Bildschirmwackeln:
+mouse_sens_label,Mausempfindlichkeit:
+___ LOADING SCREEN,
+Loading…,Wird geladen...
+___ DIALOGS IN GAME,
+You lose.,Du verlierst.
+You won!,Du hast gewonnen!
+Thanks for playing!,Danke fürs Spielen!
+Please Confirm...,Bitte bestätigen...
+Go back to main menu?,Zurück zum Hauptmenü?
+Quit the game?,Spiel beenden?
+Cancel,Abbrechen
+OK,OK
+___ OPTIONS MENU,
+Controls,Steuerung
+Mouse Sensitivity :,Mausempfindlichkeit:
+Actions & Inputs,Aktionen & Eingaben
+Add,Hinzufügen
+Remove,Entfernen
+Assign Key for {action},Taste für {action} zuweisen
+Listening for input...,Warte auf Eingaben...
+Press again to confirm...,Erneut drücken zum Bestätigen...
+Focus here to assign inputs.,"Hier fokussieren, um Eingaben zuzuweisen."
+Already Assigned,Bereits zugewiesen
+{key} already assigned to {action}.,{key} ist bereits {action} zugewiesen.
+Remove Key for {action},Taste für {action} entfernen
+Are you sure you want to remove {key} from {action}?,Möchtest du {key} wirklich von {action} entfernen?
+Reset,Zurücksetzen
+Audio,Ton
+Master :,Master:
+Music :,Musik:
+SFX :,SFX:
+Ambient :,Umgebung:
+Mute :,Stumm:
+Video,Bild
+Fullscreen :,Vollbild:
+Resolution :,Auflösung:
+Anti-Aliasing :,Anti-Aliasing:
+Disabled (Fastest),Deaktiviert (am schnellsten)
+8x (Slowest),8x (am langsamsten)
+Camera Shake :,Kamerawackeln:
+Normal,Standard
+Reduced,Reduziert
+Minimal,Niedrig
+None,Keine
+Game,Spiel
+Reset Game :,Spiel zurücksetzen:
+Do you want to reset your game data?,Möchtest du deine Spieldaten zurücksetzen?
+Back,Zurück
+_INGAME DIALOGUE,
+TAKE THEM!,NIMM SIE!
+"Take your documents, please.",Bitte nimm deine Dokumente mit.
+_SHIFT SUMMARY SCREEN,
+Continue,Weiter
+Main Menu,Hauptmenü
+Submit Score,Punktzahl übermitteln
+Restart,Neustart
+SHIFT SUMMARY,SCHICHTÜBERSICHT
+_DIFFICULTY LEVELS,
+Easy,Einfach
+Normal,Standard
+Expert,Experte
+Primary,Primär
+Secondary,Sekundär
+Primary Interaction,Primäre Interaktion
+Secondary Interaction,Sekundäre Interaktion
+Cancel Interaction,Interaktion abbrechen
+Escape,Zurück
+Dialogic Default Action,Dialog-Standardaktion
+Enter,Eingabe
+Left Mouse Button,Linke Maustaste
+Right Mouse Button,Rechte Maustaste
+_NEW GAME CONFIRMATION,
+Start New Game,Neues Spiel starten
+Starting a new game will reset your progress. Are you sure you want to continue?,"Wenn du ein neues Spiel startest, wird dein Fortschritt zurückgesetzt. Möchtest du wirklich fortfahren?"
+"Yes, Start New Game","Ja, neues Spiel starten"
+Skip,Überspringen
+History,Verlauf
+Return,Zurück
+Restart the game?,Spiel neu starten?
+_HELP MENU,
+help_menu_button,Hilfe
+achievements_menu_button,Erfolge
+achievements_panel_title,ERFOLGE
+achievements_panel_close,Schließen
+help_menu_title,Anleitung
+help_tab_basics,Grundlagen
+help_tab_gameplay,Spielablauf
+help_tab_minigames,Minispiele
+help_basics_intro,[b]Willkommen bei Spud Customs
+help_basics_gate,[b]Tor öffnen[/b]
+help_basics_documents,[b]Dokumente prüfen[/b]
+help_basics_stamping,[b]Dokumente stempeln[/b]
+help_basics_runners,[b]Grenzläufer[/b]
+help_basics_xray,[b]Röntgengerät[/b]
+help_gameplay_quota,[b]Quote erfüllen[/b]
+help_gameplay_strikes,"[b]Verwarnungen[/b]\nFehler (falsche Genehmigungen/Ablehnungen, übersehene Grenzläufer) geben dir Verwarnungen. Bei zu vielen Verwarnungen ist das Spiel vorbei!"
+help_gameplay_rules,"[b]Einwanderungsregeln[/b]\nPrüfe die Anschlagtafel für die aktuellen Regeln. Die Regeln ändern sich jede Schicht – gesperrte Regionen, erforderliche Dokumente und besondere Bedingungen."
+help_gameplay_scoring,"[b]Punktwertung[/b]\nErhalte Punkte für korrekte Entscheidungen, perfekte Stempelabdrücke und das Aufhalten von Grenzläufern. Boni werden für Geschwindigkeit und Genauigkeit vergeben!"
+help_gameplay_difficulty,"[b]Schwierigkeitsgrade[/b]\nEinfach: Großzügigeres Zeitlimit, weniger Regeln. Normal: Standard-Erlebnis. Experte: Strenges Zeitlimit, komplexe Regeln, höhere Punktzahlen."
+help_minigames_intro,"[b]Minispiele[/b]\nWährend deiner Schichten wirst du auf Minispiele stoßen, mit denen du Bonuspunkte verdienen kannst. Schließe sie für Belohnungen ab oder überspringe sie straffrei."
+help_minigames_document_scanner,"[b]Dokumentenscanner[/b] (Schicht 1+)\nBenutze UV-Licht, um versteckte Elemente auf Dokumenten zu finden. Klicke, um Wasserzeichen, Stempel und Symbole zu markieren. Finde alle Elemente, bevor die Zeit abläuft!"
+help_minigames_stamp_sorting,"[b]Stempel sortieren[/b] (Schicht 2+)\nSortiere fallende Stempel in die richtigen Behälter. Grüne Stempel gehören zu GENEHMIGT, rote Stempel zu ABGELEHNT. Sortiere schnell für Bonuspunkte!"
+help_minigames_fingerprint_match,"[b]Fingerabdruck-Abgleich[/b] (Schicht 3+)\nGleiche die Fingerabdrücke aus dem Raster mit dem Referenzmuster ab. Klicke auf übereinstimmende Abdrücke, um die Identität zu überprüfen. Sorgfältige Beobachtung erforderlich!"
+help_minigames_code_breaker,"[b]Codeknacker[/b] (Schicht 4+)\nKnacke den Geheimcode! Errate die 4-stellige Kombination. Grün bedeutet richtige Position, Gelb bedeutet falsche Position. Begrenzte Versuche!"
+help_minigames_border_chase,"[b]Grenzverfolgung[/b] (Schicht 5+)\nSchmuggelware auf dem Förderband! Klicke auf ROTE Gegenstände, um sie zu konfiszieren. Lasse GRÜNE Gegenstände passieren. Schnelle Reflexe bringen mehr Punkte!"
+help_tab_lore,Geschichte
+help_lore_world_intro,"[b]Die Welt von Spud[/b]\n\nWillkommen in einem Land, in dem Kartoffeln ihre eigene Zivilisation aufgebaut haben. In dieser Welt können Knollen laufen, sprechen und haben ihre eigene Nation mit Gesetzen, Grenzen und Bürokratie gegründet."
+help_lore_nation,"[b]Die Nation Spud[/b]\n\nSpud ist eine stolze Nation, die allen Kartoffeln Wohlstand verspricht. Geschützt durch die Große Mauer von Spud, unterhält die Nation strenge Grenzkontrollen, um sicherzustellen, dass nur würdige Knollen eintreten dürfen.\n\nDie Regierung fördert Einheit und Gehorsam, und patriotische Bürger hört man oft ausrufen: ""Ruhm für Spud!"""
+help_lore_your_role,"[b]Deine Rolle[/b]\n\nDu wurdest für eine entscheidende Rolle beim Schutz der Grenzen ausgewählt. Als Zollbeamter arbeitest du unter dem wachsamen Auge von Aufseher Russet.\n\nDein Wohlergehen hängt von deiner Leistung ab. Erfülle deine Quoten, befolge die Regeln und denk daran: Die Nation zählt auf dich."
+help_lore_border,"[b]Die Große Mauer[/b]\n\nDie mächtige Große Mauer von Spud schützt die Nation vor Außenstehenden. An verschiedenen Kontrollpunkten entlang der Mauer stellen Beamte wie du sicher, dass nur die Würdigen eintreten dürfen.\n\nDiejenigen, die versuchen, die Grenze ohne ordnungsgemäße Dokumente zu passieren, müssen mit sofortigen Konsequenzen rechnen."
+help_lore_secrets,"[b]Wurzelreserve[/b]\n\nAbgelehnte Kartoffeln werden... verarbeitet. Laut Protokoll. Die mysteriöse Wurzelreserve kümmert sich um alle Details.\n\nEs ist am besten, nicht zu viele Fragen zu stellen. Konzentriere dich auf deine Pflichten. Nichts weiter."
+day_transition_label,Tag {day}
+level_select_choices_header,Auswahl bis Tag {day}
+level_select_choices_header_named,Auswahl bis Tag {day} - {name}
+level_select_play_day,Diesen Tag spielen
+level_select_close,Schließen
+continue_dialog_header,Ihr Spielstand
+continue_dialog_day,Tag: {day}
+continue_dialog_continue,Fortsetzen
+continue_dialog_cancel,Abbrechen
+new_game_confirm_button,"Ja, neues Spiel starten"
+tutorial_choice_play,Tutorial spielen
+tutorial_choice_skip,Tutorial überspringen
+tutorial_dialog_title,Tutorial
+tutorial_dialog_text,Möchten Sie das Tutorial spielen?\n\nDas Tutorial führt Sie durch die Grundlagen der Arbeit als Zollbeamter bei Spud Customs.
+continue_game_title,Spiel fortsetzen
+level_select_story_choices,Story-Auswahl
+reset_progress_confirm,"Sind Sie sicher, dass Sie den Story-Fortschritt zurücksetzen möchten? Dies kann nicht rückgängig gemacht werden."
+reset_highscores_confirm,"Sind Sie sicher, dass Sie alle Highscores zurücksetzen möchten? Dies kann nicht rückgängig gemacht werden."
+level_name_0,Tutorial
+level_name_1,Erster Arbeitstag
+level_name_2,Neue Vorschriften
+level_name_3,Steigender Druck
+level_name_4,Schmuggelkontrolle
+level_name_5,Halbzeitkrise
+level_name_6,Erhöhte Sicherheit
+level_name_7,Unter Beobachtung
+level_name_8,Doppelagenten
+level_name_9,Grenzchaos
+level_name_10,Der letzte Countdown
+shift_name_1,Erster Arbeitstag
+shift_name_2,Treffen mit Sasha & Murphy
+shift_name_3,Die vermisste Ehefrau
+shift_name_4,Wurzelreserve-Lastwagen
+shift_name_5,Loyalitätsprüfung
+shift_name_6,RealityScan
+shift_name_7,Widerstandstreffen
+shift_name_8,Sashas Gefangennahme
+shift_name_9,Der Angriff
+shift_name_10,Der letzte Countdown
+shift_name_unknown,Unbekannt
+path_chaos_agent,Chaos-Agent
+path_loyalist,Loyalistenpfad
+path_resistance_ally,Widerstandsverbündeter
+path_questioning,Hinterfragend
+path_undetermined,Unbestimmt
+story_choice_path_label,Pfad:
+story_choice_sasha_trust,Vertrauen zu Sasha: {value}/10
+story_choice_chaos_points,Chaos: {value} Pkt.
+story_choice_no_choices,Bisher keine Entscheidungen erfasst
+story_choice_day_header,Tag {day} - {name}
+choice_initial_response_eager,Zeigte Begeisterung für Spud
+choice_initial_response_questioning,Hinterfragte das System
+choice_note_reaction_investigate,"Entschied sich, die Notiz zu untersuchen"
+choice_note_reaction_destroy,Zerstörte die mysteriöse Notiz
+choice_note_reaction_report,Meldete die Notiz den Behörden
+choice_kept_note_yes,Behielt die mysteriöse Notiz
+choice_kept_note_no,Entsorgte die Notiz
+choice_reported_note_yes,Meldete die Notiz
+choice_murphy_trust_open,Öffnete sich Murphy
+choice_murphy_trust_guarded,Blieb Murphy gegenüber vorsichtig
+choice_eat_reserve_ate,Aß die Notrationen
+choice_eat_reserve_refused,Verweigerte die Notrationen
+choice_scanner_response_loyal,Zeigte Loyalität beim Scanner-Test
+choice_scanner_response_questioning,Hinterfragte den Zweck des Scanners
+choice_family_response_refuse,Verweigerte die Hilfe bei der Suche nach der Ehefrau
+choice_family_response_help,"Stimmte zu, bei der Suche nach der vermissten Ehefrau zu helfen"
+choice_has_wife_photo_yes,Erhielt Foto der vermissten Ehefrau
+choice_reveal_reaction_shocked,Reagierte schockiert auf die Enthüllung
+choice_reveal_reaction_cautious,Reagierte vorsichtig auf die Enthüllung
+choice_cafeteria_response_serious,Nahm Kantinen-Gerüchte ernst
+choice_cafeteria_response_avoid,Vermied Kantinen-Diskussionen
+choice_murphy_alliance_ally,Verbündete sich mit Murphy
+choice_murphy_alliance_cautious,Blieb vorsichtig mit Murphy
+choice_murphy_alliance_skeptical,Blieb skeptisch gegenüber Murphy
+choice_sasha_trust_level_committed,Vertraute Sasha voll und ganz
+choice_sasha_trust_level_cautious,Blieb vorsichtig bezüglich Sasha
+choice_sasha_investigation_committed,Engagierte sich für Sashas Ermittlung
+choice_sasha_investigation_hesitant,War zögerlich bezüglich der Ermittlung
+choice_loyalty_response_patriotic,Gab patriotische Antworten
+choice_loyalty_response_idealistic,Äußerte idealistische Ansichten
+choice_hide_choice_desk,Versteckte sich hinter dem Schreibtisch
+choice_hide_choice_window,Versteckte sich am Fenster
+choice_evidence_choice_hand_over,Übergab die Beweismittel
+choice_evidence_choice_keep,Hielt die Beweismittel versteckt
+choice_evidence_choice_lie,Log über die Beweismittel
+choice_evidence_choice_chaos,"Nutzte Beweismittel, um Chaos zu stiften"
+choice_viktor_wife_discovery_yes,Entdeckte Viktors Frau auf dem Manifest
+choice_fellow_officer_response_cautious,War vorsichtig gegenüber dem Kollegen
+choice_fellow_officer_response_sympathetic,Zeigte Mitgefühl für den Kollegen
+choice_fellow_officer_response_loyal,Blieb loyal gegenüber dem Kollegen
+choice_interrogation_response_lie,Log während des Verhörs
+choice_interrogation_response_legal,Gab gesetzeskonforme Antworten
+choice_viktor_conversation_tell_truth,Sagte Viktor die Wahrheit
+choice_viktor_conversation_lie_protect,"Log, um Viktor zu schützen"
+choice_viktor_conversation_curious,War neugierig auf Viktor
+choice_scanner_choice_help,"Half, den Scanner zu sabotieren"
+choice_scanner_choice_scan,Bediente den Scanner normal
+choice_scanner_choice_viktor,Wählte Viktor für den Scanner
+choice_helped_operative_yes,Half dem Widerstandsagenten
+choice_helped_operative_no,"Weigerte sich, dem Agenten zu helfen"
+choice_viktor_allied_yes,Bildete eine Allianz mit Viktor
+choice_betrayed_resistance_yes,Verriet den Widerstand
+choice_sasha_plan_response_committed,Stimmte Sashas Plan zu
+choice_sasha_plan_response_nervous,War nervös wegen des Plans
+choice_malfunction_excuse_technical,Schob es auf eine technische Störung
+choice_malfunction_excuse_innocent,Spielte den Unschuldigen
+choice_resistance_mission_committed,Verpflichtete sich zur Widerstandsmission
+choice_resistance_mission_hesitant,Zögerte bei der Mission
+choice_resistance_mission_cautious,Ging die Mission vorsichtig an
+choice_final_decision_help,"Entschied sich, dem Widerstand zu helfen"
+choice_final_decision_passive,Blieb passiv
+choice_final_decision_undecided,Blieb unentschlossen
+choice_yellow_badge_response_help,Half den Trägern der gelben Plakette
+choice_yellow_badge_response_betray,Verriet die Träger der gelben Plakette
+choice_follow_trucks_volunteer,"Meldete sich freiwillig, den Lastwagen zu folgen"
+choice_follow_trucks_hesitant,"Zögerte, den Lastwagen zu folgen"
+choice_found_facility_yes,Fand die Einrichtung der Wurzelreserve
+choice_sasha_response_cautious,War vorsichtig bezüglich Sashas Situation
+choice_sasha_response_concerned,Zeigte Besorgnis um Sasha
+choice_interrogation_choice_deny,Leugnete Wissen unter Verhör
+choice_interrogation_choice_betray,Verriet andere unter Verhör
+choice_sasha_arrest_reaction_intervene,Griff bei Sashas Verhaftung ein
+choice_sasha_arrest_reaction_hide,Versteckte sich während Sashas Verhaftung
+choice_sasha_arrest_reaction_promise,Gab Sasha ein Versprechen ab
+choice_player_wanted_yes,Wurde von den Behörden gesucht
+choice_player_captured_yes,Wurde von den Behörden gefangen genommen
+choice_has_keycard_yes,Erhielt Sicherheitsschlüsselkarte
+choice_murphy_final_alliance_committed,Vollständig Murphys Allianz verpflichtet
+choice_murphy_final_alliance_hesitant,Zögerlich bezüglich der finalen Allianz
+choice_critical_choice_help,Half im kritischen Moment
+choice_critical_choice_betray,Verriet im kritischen Moment
+choice_stay_or_go_stay,"Blieb, um zu kämpfen"
+choice_stay_or_go_go,Entschied sich zur Flucht
+choice_sasha_rescue_reaction_angry,Reagierte wütend auf die Rettung
+choice_sasha_rescue_reaction_disgusted,War angewidert von den Ereignissen
+choice_sasha_rescue_reaction_relieved,Fühlte sich nach der Rettung erleichtert
+choice_fellow_officer_response_2_cautious,Blieb vorsichtig gegenüber Kollegen
+choice_fellow_officer_response_2_sympathetic,Zeigte Mitgefühl gegenüber Kollegen
+choice_final_mission_response_determined,"Entschlossen, die finale Mission abzuschließen"
+choice_final_mission_response_cautious,Vorsichtig bezüglich der finalen Mission
+choice_resistance_trust_diplomatic,Wählte diplomatischen Ansatz gegenüber dem Widerstand
+choice_resistance_trust_committed,Vollständig dem Widerstand verpflichtet
+choice_ending_choice_diplomatic,Wählte diplomatisches Ende
+choice_ending_choice_justice,Wählte gerechtes Ende
+choice_ending_choice_vengeance,Wählte rachüchtiges Ende
+choice_ending_choice_dismantle,Wählte das System zu demontieren
+choice_accept_medal_accept,Akzeptierte die Medaille mit Stolz
+choice_accept_medal_reluctant,Akzeptierte die Medaille widerwillig
+choice_eat_final_eat,Aß die letzte Gabe
+choice_eat_final_refuse,Verweigerte die letzte Gabe
+choice_final_loyalist_choice_report,Meldete Abweichler
+choice_final_loyalist_choice_ignore,Ignorierte die Abweichler
+choice_final_loyalist_choice_hope,Hielt an der Hoffnung auf Veränderung fest
+choice_qte_rescue_result_pass,Rettungsversuch erfolgreich
+choice_qte_rescue_result_fail,Rettungsversuch gescheitert
+choice_qte_confrontation_result_pass,Konfrontation gewonnen
+choice_qte_confrontation_result_fail,Konfrontation verloren
+choice_qte_escape_result_pass,Flucht erfolgreich
+choice_qte_escape_result_fail,Flucht gescheitert
+choice_qte_infiltration_result_pass,Infiltration erfolgreich
+choice_qte_infiltration_result_fail,Infiltration gescheitert
+choice_qte_scanner_result_pass,Scanner-Sabotage erfolgreich
+choice_qte_scanner_result_fail,Scanner-Sabotage gescheitert
+choice_qte_surveillance_result_pass,Überwachung entgangen
+choice_qte_surveillance_result_fail,Von Überwachung erwischt
+choice_qte_suppression_result_pass,Unterdrückung widerstanden
+choice_qte_suppression_result_fail,Der Unterdrückung erlegen
+passport_label_type,Typ:
+passport_label_born,Geboren:
+passport_label_gender,Geschlecht:
+passport_label_country,Land:
+passport_label_expires,Gültig bis:
+passport_label_condition,Zustand:
+tutorial_skip,Überspringen
+tutorial_skip_all,Alle Tutorials überspringen
+tutorial_continue_auto,(wird automatisch fortgesetzt...)
+tutorial_continue_click,(klicken zum Fortfahren...)
+tutorial_continue,Continue
+tutorial_back,Back
+tutorial_action_required,Complete the action above to continue
+tutorial_skip_action,Having trouble? Click here to skip
+tutorial_header,Tutorial {current} von {total}: {name} – Schritt {step} von {steps}
+tutorial_header_single,{name} – Schritt {step} von {steps}
+tutorial_welcome_name,Willkommen bei Spud Customs
+tutorial_gate_control_name,Das Tor öffnen
+tutorial_megaphone_call_name,Kartoffeln rufen
+tutorial_document_inspection_name,Dokumentenprüfung
+tutorial_rules_checking_name,Einwanderungsregeln
+tutorial_stamp_usage_name,Stempel verwenden
+tutorial_strikes_and_quota_name,Fehler und Quote
+tutorial_welcome_step1,"[center][b]Willkommen bei Spud Customs![/b][/center]\n\nDeine Aufgabe ist es, ankommende Kartoffeln am Grenzkontrollpunkt abzufertigen. Lass uns die Grundlagen lernen!"
+tutorial_gate_control_step1,"[center][b]Deinen Schalter öffnen[/b][/center]\n\nSiehst du diesen Hebel? {interact} ihn, um den Rollladen hochzufahren und deinen Schalter für den Betrieb zu öffnen!\n\n[color=yellow]{interact} den Hebel jetzt.[/color]"
+tutorial_gate_control_step2,"[center][b]Gut gemacht![/b][/center]\n\nDein Schalter ist jetzt geöffnet. Kartoffeln in der Warteschlange können sehen, dass du bereit bist zu bedienen."
+tutorial_megaphone_call_step1,"[center][b]Die nächste Kartoffel rufen[/b][/center]\n\nBenutze das Megafon, um die nächste Kartoffel aus der Warteschlange zu deinem Schalter zu rufen.\n\n[color=yellow]{interact} das Megafon![/color]"
+tutorial_megaphone_call_step2,"[center][b]Da kommen sie![/b][/center]\n\nBeobachte, wie die Kartoffel sich deinem Schalter nähert. Sie werden ihre Dokumente zur Prüfung vorlegen."
+tutorial_document_inspection_step1,"[center][b]Dokumentenprüfung[/b][/center]\n\nDie Kartoffel hat dir ihren Pass überreicht. {drag} ihn auf deinen Prüftisch, um ihn genau zu untersuchen.\n\n[color=yellow]{drag} den Pass auf den Tisch.[/color]"
+tutorial_document_inspection_step2,"[center][b]Passprüfung[/b][/center]\n\n{interact} den Pass, um ihn zu öffnen und die Informationen der Kartoffel zu überprüfen:\n\n- Name und Foto\n- Herkunftsland\n- Kartoffelsorte und -zustand\n\nAchten Sie auf Verdächtiges!"
+tutorial_document_inspection_step3,"[center][b]Regeln prüfen![/b][/center]\n\nBevor Sie eine Entscheidung treffen, müssen Sie die Einreisebestimmungen prüfen. Erfahren Sie mehr darüber!"
+tutorial_rules_checking_step1,"[center][b]Einreisebestimmungen[/b][/center]\n\nSehen Sie sich das Regelheft auf der rechten Seite an. Diese Regeln sagen Ihnen, welche Kartoffeln Sie [color=green]GENEHMIGEN[/color] oder [color=red]ABLEHNEN[/color] müssen.\n\nLehnen Sie jede Kartoffel ab, die gegen die aktuellen Regeln verstößt!\n\n[color=red]WICHTIG: Dokumente mit abgelaufenem Datum müssen ABGELEHNT werden![/color]"
+tutorial_rules_checking_step2,"[center][b]Bleiben Sie wachsam![/b][/center]\n\nRegeln ändern sich zwischen den Schichten. Überprüfen Sie immer die aktuellen Regeln, bevor Sie Entscheidungen treffen.\n\nVergleichen Sie die Passinformationen sorgfältig mit den aktiven Regeln."
+tutorial_stamp_usage_step1,"[center][b]Die Stempelleiste[/b][/center]\n\nSehen Sie die Stempelleiste oben? {interact} den Griff, um Ihre Genehmigungs- und Ablehnungsstempel anzuzeigen.\n\n[color=yellow]{interact}, um die Stempelleiste zu öffnen.[/color]"
+tutorial_stamp_usage_step2,"[center][b]Positionierung zum Stempeln[/b][/center]\n\n{drag} den Pass unter die Stempel. Sie sehen eine Führung, die zeigt, wo er platziert werden muss.\n\n[color=green]Grüner Stempel[/color] = GENEHMIGEN\n[color=red]Roter Stempel[/color] = ABLEHNEN\n\n[color=yellow]Positionieren Sie den Pass unter einem Stempel.[/color]"
+tutorial_stamp_usage_step3,"[center][b]Stempel anwenden![/b][/center]\n\n{interact} den Stempel, um den Pass mit Ihrer Entscheidung zu markieren.\n\n[color=yellow]{interact} einen Stempel, um ihn anzuwenden.[/color]"
+tutorial_stamp_usage_step4,"[center][b]Dokumente zurückgeben[/b][/center]\n\nNun {drag} den gestempelten Pass zurück zur Kartoffel, um deren Bearbeitung abzuschließen.\n\n[color=yellow]Geben Sie den Pass der Kartoffel zurück.[/color]"
+tutorial_stamp_usage_step5,[center][b]Gut gemacht![/b][/center]\n\nSie haben Ihre erste Kartoffel bearbeitet! Behalten Sie Ihr Kontingent im Auge – Sie müssen jede Schicht genügend Kartoffeln bearbeiten.
+tutorial_strikes_and_quota_step1,"[center][b]Das Kontingentsystem[/b][/center]\n\nSehen Sie sich die [color=yellow]Kontingent[/color]-Anzeige an. Diese zeigt, wie viele Kartoffeln Sie pro Schicht korrekt bearbeiten müssen."
+tutorial_strikes_and_quota_step2,[center][b]Vermeiden Sie Strafpunkte![/b][/center]\n\nDer [color=red]Strafpunkte[/color]-Zähler zeigt Ihre Fehler an. Zu viele Strafpunkte und das Spiel ist vorbei!\n\nTreffen Sie falsche Entscheidungen und Sie erhalten Strafpunkte.
+tutorial_strikes_and_quota_step3,"[center][b]Training abgeschlossen![/b][/center]\n\nBearbeiten Sie weiterhin Kartoffeln, um Ihre Trainingsschicht abzuschließen.\n\nNach Abschluss werden Sie [color=green]als Zollbeamter zertifiziert[/color] und sind bereit für Ihren ersten echten Tag!"
+loading_level_in_progress,Level wird geladen...
+loading_level_waiting,Level wird immer noch geladen...
+loading_level_still_waiting,Level wird immer noch geladen... (%d Sekunden)
+loading_level_complete,Level geladen!

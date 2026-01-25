@@ -1,0 +1,132 @@
+﻿keys,pt-BR
+alert_border_runner,FUGITIVO DA FRONTEIRA DETECTADO!\nClique para lançar míssil!
+alert_rejected_fleeing,BATATA REJEITADA EM FUGA!\nClique para lançar míssil!
+alert_runner_escaped,FUGITIVO ESCAPOU!\nAdvertência adicionada!
+citation_runner_escaped,Um fugitivo de fronteira escapou! Você não conseguiu interceptá-lo a tempo.
+alert_points_deducted,FUGITIVO ESCAPOU!\nAdvertência adicionada!\n-{penalty} pontos!
+alert_perfect_hit,ACERTO PERFEITO! +{perfect} pontos de bônus de precisão
+alert_perfect_stamp,CARIMBO PERFEITO! +{points} pontos!
+alert_combo,COMBO x{mult}! +{streak} pontos de bônus de combo
+alert_quota_met,"Cota atingida, turno concluído! \nBônus: {bonus} pontos!"
+alert_strike_removed,Advertência removida!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Você fez a escolha certa, oficial.\n+{points} pontos!"
+alert_wrong_decision,"Você causou sofrimento desnecessário, oficial...\n+1 Advertência!"
+alert_potato_should_be_approved,\nEsta batata atende a todos os requisitos e deveria ter sido aprovada.
+incorrect_decision,Decisão incorreta no processamento de documento.
+alert_strike_out,Máximo de advertências excedido! Seu turno acabou.
+ui_score,Pontuação: {score}
+ui_quota,Cota: {current} / {target}
+ui_strikes,Advertências: {current} / {max}
+ui_click_megaphone,Clique no megafone para chamar a próxima batata
+ui_drag_document,Arraste o documento para a mesa de inspeção
+ui_stamp_document,Selecione um carimbo para aprovar ou rejeitar
+ui_check_violations,Verifique violações no documento
+Strike removed!,Advertência removida!
+BORDER RUNNER DETECTED!\nClick to launch missile!,FUGITIVO DA FRONTEIRA DETECTADO!\nClique para lançar míssil!
+REJECTED POTATO FLEEING!\nClick to launch missile!,BATATA REJEITADA EM FUGA!\nClique para lançar míssil!
+RUNNER ESCAPED!\nStrike added!,FUGITIVO ESCAPOU!\nAdvertência adicionada!
+Click megaphone to call the next potato,Clique no megafone para chamar a próxima batata
+Drag document to inspection table,Arraste o documento para a mesa de inspeção
+Select a stamp to approve or reject,Selecione um carimbo para aprovar ou rejeitar
+Check for document violations,Verifique violações no documento
+rule_explanation_header,EXPLICAÇÃO DA REGRA:
+rule_explanation_fresh,Olhe o campo 'Condição'. Se disser algo diferente de 'Fresco' - REJEITE
+rule_explanation_sweet_potato,Olhe o campo 'Tipo'. Se disser 'Batata Doce' - REJEITE (sem licenças)
+rule_explanation_chip_hill,Olhe o campo 'País'. Se disser 'Chip Hill' - REJEITE (banido)
+rule_explanation_age,Olhe o campo 'Nascimento'. Calcule a idade e verifique contra a regra
+rule_explanation_gender,Olhe o campo 'Gênero' e verifique contra a regra atual
+rule_footer_text,Estas regras devem ser aplicadas a TODAS as batatas
+rule_expired_note,Documentos expirados devem SEMPRE ser rejeitados.
+rule_tutorial_hint,Precisa de ajuda? Clique em qualquer regra para uma explicação
+alert_correct_decision_detailed,DECISÃO CORRETA! +{points} pontos\n{reason}
+alert_wrong_decision_detailed,DECISÃO ERRADA! Uma penalidade foi adicionada!\n{reason}
+alert_reason_approved,Batata atende a todos os requisitos - APROVADA
+alert_reason_should_reject,Você deveria ter REJEITADO esta batata
+tutorial_check_type,Verifique o campo 'Tipo' no passaporte
+tutorial_check_condition,Verifique o campo 'Condição' no passaporte
+tutorial_check_country,Verifique o campo 'País' no passaporte
+tutorial_check_age,Verifique o campo 'Nascimento' para calcular a idade
+tutorial_check_gender,Verifique o campo 'Gênero' no passaporte
+alert_streak_bonus_minigame,5 seguidas! MINIJOGO BÔNUS!
+alert_perfect_stamps_bonus_minigame,Carimbos perfeitos! MINIJOGO BÔNUS!
+alert_runner_bonus_minigame,Atividade suspeita! MINIJOGO BÔNUS!
+alert_new_minigame_unlocked,Novo minijogo desbloqueado: {name}!
+alert_minigame_bonus,Bônus do minijogo: +{bonus} pontos!
+high_score_display,Recorde: {score}
+new_high_score,NOVO RECORDE!
+month_1,Janeiro
+month_2,Fevereiro
+month_3,Março
+month_4,Abril
+month_5,Maio
+month_6,Junho
+month_7,Julho
+month_8,Agosto
+month_9,Setembro
+month_10,Outubro
+month_11,Novembro
+month_12,Dezembro
+citation_trash_label,LIXO
+citation_header,CITAÇÃO OFICIAL
+citation_from_supervisor,De: Supervisor Russet
+citation_dismiss_hint,[Arrastar para o lixo para descartar]
+minigame_times_up,"Tempo esgotado! Sem problemas, de volta ao trabalho!"
+minigame_time_format,"{seconds},{fraction}"
+qte_title,EVENTO DE TEMPO RÁPIDO
+qte_instruction,Pressione as teclas conforme elas aparecem!
+qte_auto_completed,Concluído automaticamente
+qte_accessibility_note,(Acessibilidade QTE ativada)
+qte_get_ready,Prepare-se...
+qte_progress,Progresso
+qte_key_prompt,[{tecla}]
+qte_result,{successful} / {total} bem-sucedidos (+{points} pontos)
+qte_image_pending,[Imagem Pendente]
+evidence_title,INSPEÇÃO DE SEGURANÇA IMINENTE
+evidence_instruction,"Limpe sua mesa! Destrua provas, esconda itens de trabalho."
+evidence_suspicion,Suspeita: {percent}%
+evidence_items_remaining,Itens: {count}
+evidence_times_up_found,Tempo esgotado! Eles encontraram as provas...
+evidence_times_up_suspicious,Tempo esgotado! A inspeção foi... minuciosa.
+codebreaker_title,QUEBRA-CÓDIGOS
+codebreaker_instruction,"Quebre o código! Verde = correspondência exata, Amarelo = dígito certo no lugar errado"
+codebreaker_enter_code,DIGITE O CÓDIGO
+codebreaker_submit,ENVIAR
+codebreaker_clear,LIMPAR
+codebreaker_previous_attempts,Tentativas Anteriores:
+codebreaker_attempts,Tentativas: {current} / {max}
+codebreaker_result_exact_close,{exact} exatos
+codebreaker_result_exact,{exact} exatos
+codebreaker_result_close,{close} próximos
+codebreaker_result_none,nenhum acerto
+codebreaker_success,Código decifrado em {attempts} tentativas! +{points} pontos!
+codebreaker_failure,Tentativas esgotadas! O código foi exibido acima.
+scanner_title,SCANNER DE DOCUMENTOS
+scanner_instruction,Arraste a luz UV para encontrar marcas ocultas! Clique para confirmar.
+scanner_found,Encontrados: {current} / {total}
+scanner_perfect,Perfeito! Todos os elementos encontrados! +{points} pontos!
+scanner_partial,Bom esforço! Encontrou {found}/{total}. +{points} pontos!
+chase_title,PERSEGUIÇÃO NA FRONTEIRA
+chase_instruction,Clique nos itens de contrabando VERMELHOS! Deixe os itens VERDES passarem.
+chase_legend,VERMELHO = Pegar!   VERDE = Deixar passar
+chase_caught,Pegos: {current} / {total}
+chase_perfect,Captura perfeita! +{points} pontos!
+chase_partial,Pegou {count} itens. +{points} pontos!
+sorting_title,CLASSIFICAÇÃO DE CARIMBOS
+sorting_instruction,"Arraste os carimbos para o compartimento correto! Verde = APROVADO, Vermelho = NEGADO"
+sorting_approved,APROVADO
+sorting_denied,NEGADO
+sorting_progress,Classificados: {sorted}/{total} Corretos: {correct}
+sorting_perfect,Classificação perfeita! +{points} pontos!
+sorting_partial,Classificou {correct}/{total} corretamente. +{points} pontos!
+fingerprint_title,COMPARAÇÃO DE IMPRESSÕES DIGITAIS
+fingerprint_instruction,Encontre a impressão digital que corresponde à referência!
+fingerprint_reference,REFERÊNCIA
+fingerprint_find_match,ENCONTRAR CORRESPONDÊNCIA
+fingerprint_progress,Correspondências: {current} / {total}
+fingerprint_success,Todas as impressões digitais correspondem! +{points} pontos!
+fingerprint_partial,Correspondências {matched}/{total}. +{points} pontos!
+score_attack_mode_label,Modo Ataque de Pontuação
+score_attack_welcome_title,MODO ATAQUE DE PONTUAÇÃO!
+score_attack_welcome_survive,Sobreviva o máximo possível!
+score_attack_welcome_difficulty,A dificuldade aumenta com o tempo!

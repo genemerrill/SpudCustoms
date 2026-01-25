@@ -1,0 +1,132 @@
+﻿keys,sv
+alert_border_runner,GRÄNSlöpare UPPTÄCKT!\nKlicka för att avfyra missil!
+alert_rejected_fleeing,AVVISAD POTATIS FLYR!\nKlicka för att avfyra missil!
+alert_runner_escaped,LÖPARE RYMT!\nStrike tillagd!
+citation_runner_escaped,En gränslöpare rymde! Du lyckades inte stoppa dem i tid.
+alert_points_deducted,LÖPARE RYMT!\nStrike tillagd!\n-{penalty} poäng!
+alert_perfect_hit,PERFEKT TRÄFF! +{perfect} precisionsbonus poäng
+alert_perfect_stamp,PERFEKT STÄMPEL! +{points} poäng!
+alert_combo,COMBO x{mult}! +{streak} combo bonuspoäng
+alert_quota_met,"Kvot uppnådd, pass avslutat! \nBonus: {bonus} poäng!"
+alert_strike_removed,Strike borttagen!
+alert_strike_forgiven,+1 Strike Forgiven!
+alert_correct_decision,"Du tog rätt beslut, polis.\n+{points} poäng!"
+alert_wrong_decision,"Du har orsakat onödigt lidande, polis...\n+1 Strike!"
+alert_potato_should_be_approved,\nDenna potatis uppfyller alla krav och borde ha godkänts.
+incorrect_decision,Felaktigt beslut vid dokumenthantering.
+alert_strike_out,Maximalt antal strikes överskridet! Ditt pass är över.
+ui_score,Poäng: {score}
+ui_quota,Kvot: {current} / {target}
+ui_strikes,Anmärkningar: {current} / {max}
+ui_click_megaphone,Klicka på megafonen för att kalla nästa potatis
+ui_drag_document,Dra dokumentet till inspektionsbordet
+ui_stamp_document,Välj en stämpel för att godkänna eller avvisa
+ui_check_violations,Kontrollera dokumentöverträdelser
+Strike removed!,Strike borttagen!
+BORDER RUNNER DETECTED!\nClick to launch missile!,GRÄNSlöpare UPPTÄCKT!\nKlicka för att avfyra missil!
+REJECTED POTATO FLEEING!\nClick to launch missile!,AVVISAD POTATIS FLYR!\nKlicka för att avfyra missil!
+RUNNER ESCAPED!\nStrike added!,LÖPARE RYMT!\nStrike tillagd!
+Click megaphone to call the next potato,Klicka på megafonen för att kalla nästa potatis
+Drag document to inspection table,Dra dokumentet till inspektionsbordet
+Select a stamp to approve or reject,Välj en stämpel för att godkänna eller avvisa
+Check for document violations,Kontrollera dokumentöverträdelser
+rule_explanation_header,REGEL FÖRKLARING:
+rule_explanation_fresh,Pozrite sa na pole 'Stav'. Ak hovorí niečo iné ako 'Čerstvý' - ODMIETNUŤ
+rule_explanation_sweet_potato,Titta på fältet 'Typ'. Om det säger 'Sötpotatis' - AVVISA (inga tillstånd)
+rule_explanation_chip_hill,Titta på fältet 'Land'. Om det säger 'Chip Hill' - AVVISA (förbjudet)
+rule_explanation_age,Titta på fältet 'Födelsedatum'. Beräkna ålder och kontrollera mot regel
+rule_explanation_gender,Titta på fältet 'Kön' och kontrollera mot nuvarande regel
+rule_footer_text,Dessa regler måste tillämpas för ALLA potatisar
+rule_expired_note,Utgångna dokument måste ALLTID avvisas.
+rule_tutorial_hint,Potrebujete pomoc? Kliknite na akékoľvek pravidlo pre vysvetlenie
+alert_correct_decision_detailed,RÄTT BESLUT! +{points} poäng\n{reason}
+alert_wrong_decision_detailed,FEL BESLUT! Strike tillagd!\n{reason}
+alert_reason_approved,Potatis uppfyller alla krav - GODKÄND
+alert_reason_should_reject,Du borde ha AVVISAT denna potatis
+tutorial_check_type,Kontrollera fältet 'Typ' i passet
+tutorial_check_condition,Kontrollera fältet 'Tillstånd' i passet
+tutorial_check_country,Kontrollera fältet 'Land' i passet
+tutorial_check_age,Kontrollera 'Födelsedatum' för att beräkna ålder
+tutorial_check_gender,Kontrollera fältet 'Kön' i passet
+alert_streak_bonus_minigame,5 i rad! BONUS MINISPEL!
+alert_perfect_stamps_bonus_minigame,Perfekta stämplar! BONUS MINISPEL!
+alert_runner_bonus_minigame,Misstänkt aktivitet! BONUS MINISPEL!
+alert_new_minigame_unlocked,Nytt minispel upplåst: {name}!
+alert_minigame_bonus,Minispelbonus: +{bonus} poäng!
+high_score_display,Högsta poäng: {score}
+new_high_score,NY HÖGSTA POÄNG!
+month_1,Januari
+month_2,Februari
+month_3,Mars
+month_4,April
+month_5,Maj
+month_6,Juni
+month_7,Juli
+month_8,Augusti
+month_9,September
+month_10,Oktober
+month_11,November
+month_12,December
+citation_trash_label,PAPPERSKORG
+citation_header,OFFICIELL VARNING
+citation_from_supervisor,Från: Övervakare Russet
+citation_dismiss_hint,[Dra till papperskorgen för att stänga]
+minigame_times_up,"Tiden är ute! Inga problem, tillbaka till jobbet!"
+minigame_time_format,{sekunder}.{hundradelar}
+qte_title,SNABBTIDSHÄNDELSE
+qte_instruction,Tryck på tangenterna när de visas!
+qte_auto_completed,Automatiskt slutförd
+qte_accessibility_note,(QTE-tillgänglighet aktiverad)
+qte_get_ready,Gör dig redo...
+qte_progress,Framsteg
+qte_key_prompt,[{tangent}]
+qte_result,{successful} / {total} lyckade (+{points} poäng)
+qte_image_pending,[Bild väntar]
+evidence_title,SÄKERHETSINSPEKTION FÖRESTÅENDE
+evidence_instruction,"Rensa ditt skrivbord! Makulera bevis, göm arbetsföremål."
+evidence_suspicion,Misstanke: {percent}%
+evidence_items_remaining,Föremål: {count}
+evidence_times_up_found,Tiden är ute! De hittade bevisen...
+evidence_times_up_suspicious,Tiden är ute! Inspektionen var... grundlig.
+codebreaker_title,KODKNÄCKARE
+codebreaker_instruction,"Knäck koden! Grön = exakt matchning, Gul = rätt siffra fel plats"
+codebreaker_enter_code,ANGE KODEN
+codebreaker_submit,SKICKA
+codebreaker_clear,RENSA
+codebreaker_previous_attempts,Tidigare försök:
+codebreaker_attempts,Försök: {current} / {max}
+codebreaker_result_exact_close,{exact} exakta
+codebreaker_result_exact,{exact} exakta
+codebreaker_result_close,{close} nära
+codebreaker_result_none,inga träffar
+codebreaker_success,Kod knäckt på {attempts} försök! +{points} poäng!
+codebreaker_failure,Slut på försök! Koden visades ovan.
+scanner_title,DOKUMENTSKÄNNARE
+scanner_instruction,Dra UV-ljuset för att hitta dolda märken! Klicka för att bekräfta.
+scanner_found,Hittat: {current} / {total}
+scanner_perfect,Perfekt! Alla element hittade! +{points} poäng!
+scanner_partial,Bra försök! Hittade {found}/{total}. +{points} poäng!
+chase_title,GRÄNSJAKT
+chase_instruction,Klicka på de RÖDA smuggelobjekten! Låt de GRÖNA objekten passera.
+chase_legend,RÖD = Fånga!   GRÖN = Låt passera
+chase_caught,Fångade: {current} / {total}
+chase_perfect,Perfekt fångst! +{points} poäng!
+chase_partial,Fångade {count} objekt. +{points} poäng!
+sorting_title,STÄMPELSORTERING
+sorting_instruction,"Dra stämplarna till rätt fack! Grön = GODKÄND, Röd = NEKAD"
+sorting_approved,GODKÄND
+sorting_denied,NEKAD
+sorting_progress,Sorterade: {sorted}/{total} Rätt: {correct}
+sorting_perfect,Perfekt sortering! +{points} poäng!
+sorting_partial,Sorterade {correct}/{total} korrekt. +{points} poäng!
+fingerprint_title,FINGERAVTRYCKSMATCHNING
+fingerprint_instruction,Hitta fingeravtrycket som matchar referensen!
+fingerprint_reference,REFERENS
+fingerprint_find_match,HITTA MATCHNINGEN
+fingerprint_progress,Matchade: {current} / {total}
+fingerprint_success,Alla fingeravtryck matchade! +{points} poäng!
+fingerprint_partial,Matchade {matched}/{total}. +{points} poäng!
+score_attack_mode_label,Poängattackläge
+score_attack_welcome_title,POÄNGATTACKLÄGE!
+score_attack_welcome_survive,Överlev så länge som möjligt!
+score_attack_welcome_difficulty,Svårighetsgraden ökar med tiden!
