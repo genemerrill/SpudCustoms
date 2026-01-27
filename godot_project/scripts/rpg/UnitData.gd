@@ -7,5 +7,10 @@ class_name UnitData
 @export var initiative: int = 5
 @export var movement_range: int = 2
 @export var attack_range: int = 1
-@export var attack_power: int = 2
 @export var texture_path: String = "" # Path to the unit's sprite texture
+
+# TMB Stats
+@export var attack_dice: int = 1
+@export var defense_dice: int = 1
+# 'Bones' accumulation could live here or in a transient BattleUnit state, 
+# but for now we'll stick to static stats.

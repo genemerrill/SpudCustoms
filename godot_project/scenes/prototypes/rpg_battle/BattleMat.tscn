@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" path="res://scenes/prototypes/rpg_battle/BattleController.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://battle_unit_scene" path="res://scenes/prototypes/rpg_battle/BattleUnit.tscn" id="2_unit"]
+[ext_resource type="Script" path="res://scenes/prototypes/rpg_battle/GridLines.gd" id="3_grid"]
 
 [node name="BattleMat" type="Node2D"]
 script = ExtResource("1_script")
 unit_scene = ExtResource("2_unit")
 
 [node name="Background" type="ColorRect" parent="."]
+z_index = -1
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0.1, 0.1, 0.1, 1)
@@ -22,7 +24,8 @@ offset_bottom = 400.0
 color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="GridLines" type="Node2D" parent="GridOverlay"]
-script = null
+unique_name_in_owner = true
+script = ExtResource("3_grid")
 
 [node name="UnitsContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
