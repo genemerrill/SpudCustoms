@@ -380,7 +380,7 @@ graph_offset = Vector2(-180.277, 49)
 script = ExtResource("2_ncvk7")
 level_select_packed_scene = ExtResource("3_xj7vs")
 story_game_scene_path = "uid://crnx6qmk46il"
-endless_game_scene_path = "uid://ysxm2q6sepmc"
+endless_game_scene_path = "uid://dv1m8vx64t350"
 options_packed_scene = ExtResource("3_tuy3s")
 credits_packed_scene = ExtResource("4_lwsll")
 
@@ -448,6 +448,21 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 40)
 layout_mode = 2
 text = "Score Attack"
+
+[node name="TicTacToeButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="4"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(128, 40)
+layout_mode = 2
+text = "Tic Tac Toe"
+
+[node name="TacticalBattleButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="5"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(128, 40)
+layout_mode = 2
+text = "Tactical Battle"
+
 
 [node name="LevelSelectContainer" type="MarginContainer" parent="." index="9"]
 unique_name_in_owner = true

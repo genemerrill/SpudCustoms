@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b873ho41sklv8"]
+[gd_scene load_steps=6 format=3 uid="uid://ntmvvxpll170"]
 
 [ext_resource type="Script" path="res://addons/dialogic/Editor/Settings/settings_general.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dbpkta2tjsqim" path="res://addons/dialogic/Editor/Common/hint_tooltip_icon.tscn" id="2_kqhx5"]

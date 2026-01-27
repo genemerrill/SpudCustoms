@@ -22,4 +22,11 @@ stretch_mode = 0
 [node name="MenuContainer_MenuButtonsMargin_IconsContainer_HBoxContainer#VBoxContainer" type="VBoxContainer" parent="." index="2"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-alignment = 1
+[node name="TicTacToeButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="4"]
+unique_name_in_owner = true
+text = "Tic Tac Toe"
+
+[node name="TacticalBattleButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="5"]
+unique_name_in_owner = true
+text = "Tactical Battle"
+

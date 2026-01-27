@@ -72,28 +72,104 @@ var musical_intervals = {
 var bgm_tracks = []
 var current_track_index = 0
 
+@export var parallax_strength : float = 15.0
+var initial_background_offsets = {}
+
 func _ready():
+	print("DEBUG: main_menu_with_animations _ready started")
 	load_tracks()
 	# Play with original pitch by default
 	next_track_with_random_pitch()
 	#play_with_pitch_variation("original")
-	super._ready()
+	super._ready() # Calls _setup_game_buttons
 	_setup_level_select()
 	animation_state_machine = $MenuAnimationTree.get("parameters/playback")
 	
+	# Capture initial background offsets for parallax
+	if has_node("BackgroundTextureRect"):
+		var bg = $BackgroundTextureRect
+		initial_background_offsets = {
+			"left": bg.offset_left,
+			"top": bg.offset_top,
+			"right": bg.offset_right,
+			"bottom": bg.offset_bottom
+		}
+	
+	print("DEBUG: main_menu_with_animations _ready finished")
+	
+	# Emergency fix for blocked input if animation fails
+	if has_node("FlowControlContainer"):
+		print("DEBUG: Forcing FlowControlContainer to ignore mouse")
+		$FlowControlContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+func _process(delta):
+	if initial_background_offsets.is_empty() or not has_node("BackgroundTextureRect"):
+		return
+		
+	var bg = $BackgroundTextureRect
+	var mouse_pos = get_viewport().get_mouse_position()
+	var viewport_size = get_viewport().get_visible_rect().size
+	var center = viewport_size / 2.0
+	
+	# Safe division check
+	if center.x == 0 or center.y == 0:
+		return
+		
+	var dist = (center - mouse_pos) / center # Ranges roughly from -1 to 1
+	
+	var target_offset_x = dist.x * parallax_strength
+	var target_offset_y = dist.y * parallax_strength
+	
+	bg.offset_left = lerpf(bg.offset_left, initial_background_offsets.left + target_offset_x, 5 * delta)
+	bg.offset_top = lerpf(bg.offset_top, initial_background_offsets.top + target_offset_y, 5 * delta)
+	bg.offset_right = lerpf(bg.offset_right, initial_background_offsets.right + target_offset_x, 5 * delta)
+	bg.offset_bottom = lerpf(bg.offset_bottom, initial_background_offsets.bottom + target_offset_y, 5 * delta)
+	
 func _setup_game_buttons():
+	print("DEBUG: _setup_game_buttons called")
 	super._setup_game_buttons()
 	if GameState.has_game_state():
 		%ContinueGameButton.show()
 		if level_select_packed_scene != null and GameState.get_max_level_reached() > 0:
 			%LevelSelectButton.show()
 
+	# Debug/Prototype Buttons
+	# Only frame them if they exist and we are in a debug build or specifically enabled
+	var show_debug_buttons = OS.is_debug_build() # or Input.is_key_pressed(KEY_F1)
+	print("DEBUG: show_debug_buttons = ", show_debug_buttons)
+
+	var tic_tac = get_node_or_null("%TicTacToeButton")
+	if tic_tac:
+		print("DEBUG: Found TicTacToeButton")
+		tic_tac.visible = show_debug_buttons
+		if not tic_tac.pressed.is_connected(_on_tic_tac_toe_pressed):
+			tic_tac.pressed.connect(_on_tic_tac_toe_pressed)
+	else:
+		print("ERROR: TicTacToeButton not found!")
+
+	var battle = get_node_or_null("%TacticalBattleButton")
+	if battle:
+		print("DEBUG: Found TacticalBattleButton")
+		battle.visible = show_debug_buttons
+		if not battle.pressed.is_connected(_on_tactical_battle_pressed):
+			battle.pressed.connect(_on_tactical_battle_pressed)
+	else:
+		print("ERROR: TacticalBattleButton not found!")
+
 func _on_continue_game_button_pressed():
 	load_game_scene()
 
 func _on_level_select_button_pressed():
 	_open_sub_menu(level_select_scene)
-	
+
+func _on_tic_tac_toe_pressed():
+	print("DEBUG: TicTacToe pressed")
+	get_tree().change_scene_to_file("res://scenes/prototypes/tic_tac_toe/TicTacToe.tscn")
+
+func _on_tactical_battle_pressed():
+	print("DEBUG: TacticalBattle pressed")
+	get_tree().change_scene_to_file("res://scenes/prototypes/rpg_battle/BattleMat.tscn")
+
 func load_tracks():
 	# Replace with your actual music tracks
 	bgm_tracks = [
