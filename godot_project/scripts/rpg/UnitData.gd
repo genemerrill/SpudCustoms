@@ -1,4 +1,5 @@
 extends Resource
+
 class_name UnitData
 
 @export var unit_name: String = "Unit"
@@ -12,5 +13,6 @@ class_name UnitData
 # TMB Stats
 @export var attack_dice: int = 1
 @export var defense_dice: int = 1
-# 'Bones' accumulation could live here or in a transient BattleUnit state, 
+@export var dex: int = 3 # Dexterity (Action Points)
+# 'Bones' accumulation could live here or in a transient BattleUnit state,
 # but for now we'll stick to static stats.
