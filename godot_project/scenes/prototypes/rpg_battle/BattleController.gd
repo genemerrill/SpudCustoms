@@ -5,9 +5,13 @@ extends Node2D
 @onready var ui_turn_label = %TurnLabel
 @onready var grid_overlay = %GridOverlay
 @onready var ui_dex_label = %DexLabel
+@onready var ui_attack_label = %AttackLabel
+@onready var ui_defense_label = %DefenseLabel
 @onready var ui_dice_container = %DiceContainer
 @onready var ui_bones_container = %BonesContainer
 @onready var ui_enemy_health_container = %HealthContainer
+@onready var ui_archer_health_container = %ArcherHealthContainer
+@onready var ui_hero_health_container = %HeroHealthContainer
 
 var turn_manager
 var tile_size = Vector2(100, 100) # Grid cell size
@@ -20,6 +24,11 @@ var current_phase = Phase.MOVE # Initialize
 var hit_overlay: ColorRect
 var damage_label_pool = [] # Simple object pool for damage numbers
 var stored_dice_results = [] # Persist dice state [true(Hit), false(Bone), null(Empty)]
+var hero_unit = null # Track hero for UI updates
+var melee_enemy = null # Track melee enemy for UI
+var ranged_enemy = null # Track ranged enemy for UI
+var battle_ended = false # Prevent duplicate end-game messages
+var bones_container_orig_x = 0.0 # Store original X position for shake reset
 
 
 func _ready():
@@ -36,6 +45,10 @@ func _ready():
 	hit_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	canvas.add_child(hit_overlay)
 
+	# Store original bones container position for shake reset
+	if ui_bones_container:
+		bones_container_orig_x = ui_bones_container.position.x
+
 	# Defer battle setup to ensure everything is ready
 	call_deferred("setup_demo_battle")
 
@@ -44,26 +57,42 @@ func setup_demo_battle():
 	# Create demo units
 	var hero_data = UnitData.new()
 	hero_data.unit_name = "Potato Hero"
-	hero_data.initiative = 4 # TMB Hero Init
-	hero_data.health = 3 # TMB Hero HP
-	hero_data.max_health = 3
-	hero_data.attack_dice = 1
-	hero_data.defense_dice = 1
+	hero_data.initiative = 10 # Highest - goes first
+	hero_data.health = 5
+	hero_data.max_health = 5
+	hero_data.attack_dice = 3 # Up to 3 attack dice
+	hero_data.defense_dice = 0 # Defense comes later
 
-	var enemy_data = UnitData.new()
-	enemy_data.unit_name = "Bad Spud"
-	enemy_data.initiative = 3 # TMB Baddie Init
-	enemy_data.health = 10 # Beefy Baddie
-	enemy_data.max_health = 10
-	enemy_data.attack_dice = 1
-	enemy_data.defense_dice = 0
+	var melee_enemy_data = UnitData.new()
+	melee_enemy_data.unit_name = "Bad Spud"
+	melee_enemy_data.initiative = 5 # Second
+	melee_enemy_data.health = 8
+	melee_enemy_data.max_health = 8
+	melee_enemy_data.attack_dice = 1
+	melee_enemy_data.defense_dice = 0
 
-	# TMB positions: Baddie Top-Left (0,0), Hero Bottom-Left (0,3)
-	var hero = spawn_unit(hero_data, Vector2i(0, 3))
-	var enemy = spawn_unit(enemy_data, Vector2i(0, 0), Color(0.7, 0.4, 0.4)) # Dark Red tint for baddie
+	var ranged_enemy_data = UnitData.new()
+	ranged_enemy_data.unit_name = "Archer Spud"
+	ranged_enemy_data.initiative = 3 # Third - goes last
+	ranged_enemy_data.health = 3
+	ranged_enemy_data.max_health = 3
+	ranged_enemy_data.attack_dice = 1
+	ranged_enemy_data.defense_dice = 0
+	ranged_enemy_data.is_ranged = true
+	ranged_enemy_data.min_attack_range = 2 # Can't hit adjacent
 
-	turn_manager.start_battle([hero, enemy])
-	update_enemy_health_ui(enemy)
+	# Positions: Hero bottom-left, Melee top-left, Ranged top-right
+	hero_unit = spawn_unit(hero_data, Vector2i(0, 3))
+	melee_enemy = spawn_unit(melee_enemy_data, Vector2i(0, 0), Color(0.7, 0.4, 0.4))
+	ranged_enemy = spawn_unit(ranged_enemy_data, Vector2i(3, 0), Color(0.6, 0.3, 0.7))
+
+	turn_manager.start_battle([hero_unit, melee_enemy, ranged_enemy])
+
+	# Initialize all UI
+	update_enemy_health_ui(melee_enemy)
+	update_archer_health_ui(ranged_enemy)
+	update_hero_health_ui(hero_unit)
+	update_hero_stats_ui(hero_unit)
 
 	# Configure GridLines (Fixes visibility)
 	%GridLines.setup(grid_size, tile_size)
@@ -204,29 +233,53 @@ func execute_ai_turn():
 	if check_battle_over():
 		return
 
-	# 1. AI Move Logic
+	# Find hero target
 	var hero = null
 	for unit in turn_manager.units:
 		if unit.data.unit_name == "Potato Hero":
 			hero = unit
 			break
 
-	if hero:
-		# If not adjacent, try to move closer
-		if not is_adjacent(active_unit.grid_position, hero.grid_position):
-			var best_move = get_best_move_towards(active_unit.grid_position, hero.grid_position)
-			if best_move != active_unit.grid_position:
-				move_active_unit(best_move)
-				print("AI moved to ", best_move)
-				await get_tree().create_timer(0.5).timeout
+	if not hero:
+		end_turn()
+		return
 
-		# 2. AI Attack Logic
-		if is_adjacent(active_unit.grid_position, hero.grid_position):
-			attack_unit(active_unit, hero)
-		else:
-			print("AI couldn't reach hero, ending turn.")
-			end_turn()
+	# Check if this is a ranged or melee AI
+	if active_unit.data.is_ranged:
+		await execute_ranged_ai(hero)
 	else:
+		await execute_melee_ai(hero)
+
+
+func execute_melee_ai(hero):
+	# Melee AI: Move towards hero, attack if adjacent
+	if not is_adjacent(active_unit.grid_position, hero.grid_position):
+		var best_move = get_best_move_towards(
+			active_unit.grid_position,
+			hero.grid_position,
+		)
+		if best_move != active_unit.grid_position:
+			move_active_unit(best_move)
+			print("Melee AI moved to ", best_move)
+			await get_tree().create_timer(0.5).timeout
+
+	if is_adjacent(active_unit.grid_position, hero.grid_position):
+		attack_unit(active_unit, hero)
+	else:
+		print("Melee AI couldn't reach hero, ending turn.")
+		end_turn()
+
+
+func execute_ranged_ai(hero):
+	# Ranged AI: Never moves, attacks if NOT adjacent (min range 2)
+	var distance = calc_manhattan_dist(active_unit.grid_position, hero.grid_position)
+
+	if distance >= active_unit.data.min_attack_range:
+		# Can attack - fire arrow!
+		await ranged_attack_unit(active_unit, hero)
+	else:
+		# Too close to attack
+		print("Ranged AI: Hero too close! Skipping turn.")
 		end_turn()
 
 
@@ -388,9 +441,8 @@ func attack_unit(attacker, target):
 		target.take_damage(total_damage)
 		show_damage_number(target, total_damage)
 
-		# Update UI if enemy
-		if target.data.unit_name != "Potato Hero":
-			update_enemy_health_ui(target)
+		# Update appropriate health UI
+		update_target_health_ui(target)
 
 		# VISUAL FEEDBACK
 		if target.data.unit_name == "Potato Hero":
@@ -416,7 +468,110 @@ func attack_unit(attacker, target):
 		end_turn()
 
 
+func ranged_attack_unit(attacker, target):
+	print("\n--- RANGED COMBAT LOG ---")
+	print("%s fires at %s!" % [attacker.data.unit_name, target.data.unit_name])
+
+	# 1. Roll Attack Dice
+	var hits = 0
+	var dice_count = attacker.data.attack_dice
+
+	for i in range(dice_count):
+		var roll = randi_range(1, 6)
+		if roll <= 4:
+			hits += 1
+			print("Die %d: HIT (%d)" % [i + 1, roll])
+		else:
+			print("Die %d: MISS (%d)" % [i + 1, roll])
+
+	# 2. Roll Defense
+	var blocks = 0
+	for i in range(target.data.defense_dice):
+		if randi_range(1, 6) <= 3:
+			blocks += 1
+
+	var total_damage = max(0, hits - blocks)
+
+	# 3. Play arrow projectile animation
+	await play_arrow_projectile(attacker, target)
+
+	# 4. Apply Damage and show result
+	if total_damage > 0:
+		target.take_damage(total_damage)
+		show_damage_number(target, total_damage)
+
+		update_target_health_ui(target)
+
+		if target.data.unit_name == "Potato Hero":
+			trigger_screen_flash()
+	else:
+		show_miss_text(target)
+
+	# 5. Check Death
+	if target.current_health <= 0:
+		print("%s has been defeated!" % target.data.unit_name)
+		target.queue_free()
+		turn_manager.units.erase(target)
+
+	if check_battle_over():
+		return
+
+	end_turn()
+
+
+func play_arrow_projectile(attacker, target):
+	# Create arrow label
+	var arrow = Label.new()
+	arrow.text = "➤"
+	arrow.add_theme_font_size_override("font_size", 32)
+	arrow.add_theme_color_override("font_color", attacker.modulate)
+	arrow.z_index = 100
+
+	# Calculate direction and rotation
+	var start_pos = attacker.position
+	var end_pos = target.position
+	var direction = (end_pos - start_pos).normalized()
+	arrow.rotation = direction.angle()
+
+	# Position arrow at attacker
+	arrow.position = start_pos - Vector2(16, 16) # Center offset
+	add_child(arrow)
+
+	# Animate arrow flying to target
+	var tween = create_tween()
+	tween.tween_property(arrow, "position", end_pos - Vector2(16, 16), 0.4)
+	await tween.finished
+
+	# Flash arrow at impact
+	var flash_tween = create_tween()
+	flash_tween.tween_property(arrow, "modulate:a", 0.0, 0.15)
+	await flash_tween.finished
+
+	arrow.queue_free()
+
+
+func show_miss_text(target):
+	var miss_label = Label.new()
+	miss_label.text = "MISS"
+	miss_label.add_theme_font_size_override("font_size", 24)
+	miss_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
+	miss_label.position = target.position + Vector2(-30, -60)
+	miss_label.z_index = 100
+	add_child(miss_label)
+
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(miss_label, "position:y", miss_label.position.y - 30, 0.6)
+	tween.tween_property(miss_label, "modulate:a", 0.0, 0.6)
+	await tween.finished
+	miss_label.queue_free()
+
+
 func check_battle_over() -> bool:
+	# Prevent duplicate end-game messages
+	if battle_ended:
+		return true
+
 	var hero_alive = false
 	var baddies_alive = false
 
@@ -427,12 +582,15 @@ func check_battle_over() -> bool:
 			baddies_alive = true
 
 	if not hero_alive:
+		battle_ended = true
 		print("GAME OVER - Hero Defeated")
-		show_end_screen("KO", Color(0.5, 0, 0, 0.6)) # Red for KO
+		show_end_screen("KO", Color(0.5, 0, 0, 0.6))
 		return true
-	elif not baddies_alive:
+
+	if not baddies_alive:
+		battle_ended = true
 		print("VICTORY - All Baddies Defeated")
-		show_end_screen("You Win\nThe Battle", Color(0, 0, 0, 0)) # No background color for Win (just text)
+		show_end_screen("You Win\nThe Battle", Color(0, 0, 0, 0))
 		return true
 
 	return false
@@ -561,25 +719,71 @@ func update_bones_ui():
 		child.queue_free()
 
 	# Max bones is 6 (assumed for now)
+	var bones_ready = bones_meter >= 5
+
 	for i in range(6):
 		var bone_rect = ColorRect.new()
 		bone_rect.custom_minimum_size = Vector2(25, 25)
 
 		if i < bones_meter:
-			bone_rect.color = Color(0.3, 0.3, 0.8) # Blue/Bone Color
+			if bones_ready:
+				# Glowing golden when ready
+				bone_rect.color = Color(1.0, 0.85, 0.2)
+			else:
+				bone_rect.color = Color(0.3, 0.3, 0.8)
 		else:
-			bone_rect.color = Color(0.2, 0.2, 0.2) # Empty slot
+			bone_rect.color = Color(0.2, 0.2, 0.2)
 
 		ui_bones_container.add_child(bone_rect)
 
+	# Animate shake when at 5+ bones
+	if bones_ready:
+		animate_bones_ready()
 
-func check_hero_glow(hero_unit):
-	if not is_instance_valid(hero_unit):
+
+func animate_bones_ready():
+	if not ui_bones_container:
+		return
+
+	# Use stored original position to prevent drift
+	var shake_tween = create_tween()
+	shake_tween.set_loops(3)
+	var ox = bones_container_orig_x
+	shake_tween.tween_property(ui_bones_container, "position:x", ox + 3, 0.05)
+	shake_tween.tween_property(ui_bones_container, "position:x", ox - 3, 0.05)
+	shake_tween.tween_property(ui_bones_container, "position:x", ox, 0.05)
+
+
+func check_hero_glow(unit):
+	if not is_instance_valid(unit):
 		return
 	if bones_meter >= 5:
-		hero_unit.modulate = Color(1.5, 1.5, 1.2) # Glow
+		# Strong golden glow with sparkle effect
+		unit.modulate = Color(1.6, 1.4, 0.8)
+		animate_hero_sparkle(unit)
 	else:
-		hero_unit.modulate = Color(1, 1, 1)
+		unit.modulate = Color(1, 1, 1)
+
+
+func animate_hero_sparkle(unit):
+	if not is_instance_valid(unit):
+		return
+
+	# Create a sparkle/pulse effect
+	var pulse_tween = create_tween()
+	pulse_tween.set_loops(2)
+	pulse_tween.tween_property(unit, "modulate", Color(1.8, 1.6, 1.0), 0.15)
+	pulse_tween.tween_property(unit, "modulate", Color(1.6, 1.4, 0.8), 0.15)
+
+
+func update_target_health_ui(target):
+	# Route to correct health bar update based on target
+	if target.data.unit_name == "Potato Hero":
+		update_hero_health_ui(target)
+	elif target.data.unit_name == "Archer Spud":
+		update_archer_health_ui(target)
+	else:
+		update_enemy_health_ui(target)
 
 
 func update_enemy_health_ui(enemy_unit):
@@ -589,7 +793,7 @@ func update_enemy_health_ui(enemy_unit):
 	for child in ui_enemy_health_container.get_children():
 		child.queue_free()
 
-	# Max Health as total slots (10)
+	# Max Health as total slots
 	for i in range(enemy_unit.data.max_health):
 		var rect = ColorRect.new()
 		rect.custom_minimum_size = Vector2(20, 25)
@@ -600,3 +804,48 @@ func update_enemy_health_ui(enemy_unit):
 			rect.color = Color(0.2, 0.2, 0.2) # Empty/Dead
 
 		ui_enemy_health_container.add_child(rect)
+
+
+func update_archer_health_ui(archer_unit):
+	if not ui_archer_health_container:
+		return
+
+	for child in ui_archer_health_container.get_children():
+		child.queue_free()
+
+	for i in range(archer_unit.data.max_health):
+		var rect = ColorRect.new()
+		rect.custom_minimum_size = Vector2(20, 25)
+
+		if i < archer_unit.current_health:
+			rect.color = Color(0.6, 0.3, 0.7) # Purple Health
+		else:
+			rect.color = Color(0.2, 0.2, 0.2) # Empty/Dead
+
+		ui_archer_health_container.add_child(rect)
+
+
+func update_hero_health_ui(unit):
+	if not ui_hero_health_container:
+		return
+
+	for child in ui_hero_health_container.get_children():
+		child.queue_free()
+
+	for i in range(unit.data.max_health):
+		var rect = ColorRect.new()
+		rect.custom_minimum_size = Vector2(20, 25)
+
+		if i < unit.current_health:
+			rect.color = Color(0.2, 0.8, 0.2) # Green Health
+		else:
+			rect.color = Color(0.2, 0.2, 0.2) # Empty/Dead
+
+		ui_hero_health_container.add_child(rect)
+
+
+func update_hero_stats_ui(unit):
+	if ui_attack_label:
+		ui_attack_label.text = "Attack: %d" % unit.data.attack_dice
+	if ui_defense_label:
+		ui_defense_label.text = "Defense: %d" % unit.data.defense_dice

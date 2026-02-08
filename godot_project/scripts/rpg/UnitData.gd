@@ -8,6 +8,8 @@ class_name UnitData
 @export var initiative: int = 5
 @export var movement_range: int = 2
 @export var attack_range: int = 1
+@export var is_ranged: bool = false # Ranged units attack from distance
+@export var min_attack_range: int = 1 # Minimum range (ranged units can't hit adjacent)
 @export var texture_path: String = "" # Path to the unit's sprite texture
 
 # TMB Stats

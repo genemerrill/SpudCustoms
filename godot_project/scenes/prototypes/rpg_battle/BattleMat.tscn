@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://rpg_battle_mat"]
+[gd_scene load_steps=4 format=3 uid="uid://bryyucja124jm"]
 
-[ext_resource type="Script" path="res://scenes/prototypes/rpg_battle/BattleController.gd" id="1_script"]
-[ext_resource type="PackedScene" uid="uid://battle_unit_scene" path="res://scenes/prototypes/rpg_battle/BattleUnit.tscn" id="2_unit"]
-[ext_resource type="Script" path="res://scenes/prototypes/rpg_battle/GridLines.gd" id="3_grid"]
+[ext_resource type="Script" uid="uid://7puemim4fq3e" path="res://scenes/prototypes/rpg_battle/BattleController.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/prototypes/rpg_battle/BattleUnit.tscn" id="2_unit"]
+[ext_resource type="Script" uid="uid://edu5610w1pi6" path="res://scenes/prototypes/rpg_battle/GridLines.gd" id="3_grid"]
 
 [node name="BattleMat" type="Node2D"]
 script = ExtResource("1_script")
@@ -91,72 +91,163 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="DexPanel" type="Panel" parent="CanvasLayer/UI"]
+[node name="ArcherHUD" type="Panel" parent="CanvasLayer/UI"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -140.0
-offset_right = 220.0
-offset_bottom = -20.0
-grow_vertical = 0
+offset_top = 90.0
+offset_right = 270.0
+offset_bottom = 150.0
 
-[node name="DexLabel" type="Label" parent="CanvasLayer/UI/DexPanel"]
-unique_name_in_owner = true
+[node name="NameLabel" type="Label" parent="CanvasLayer/UI/ArcherHUD"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 10.0
-offset_bottom = 40.0
+offset_bottom = 23.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 24
-text = "Dex: 3 / 3"
+text = "Archer Spud"
 horizontal_alignment = 1
 
-[node name="AttackLabel" type="Label" parent="CanvasLayer/UI/DexPanel"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 50.0
-offset_bottom = 73.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
-text = "Attack"
-horizontal_alignment = 1
-
-[node name="DiceContainer" type="HBoxContainer" parent="CanvasLayer/UI/DexPanel"]
+[node name="ArcherHealthContainer" type="HBoxContainer" parent="CanvasLayer/UI/ArcherHUD"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_bottom = -10.0
+offset_top = -30.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="BonesLabel" type="Label" parent="CanvasLayer/UI/DexPanel"]
+[node name="HeroPanel" type="Panel" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -280.0
+offset_right = 290.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="HeroHealthLabel" type="Label" parent="CanvasLayer/UI/HeroPanel"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = -40.0
-offset_bottom = -17.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 28.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
 theme_override_font_sizes/font_size = 14
-text = "Bones"
+text = "Health"
 horizontal_alignment = 1
 
-[node name="BonesContainer" type="HBoxContainer" parent="CanvasLayer/UI/DexPanel"]
+[node name="HeroHealthContainer" type="HBoxContainer" parent="CanvasLayer/UI/HeroPanel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = -20.0
-offset_bottom = -5.0
+offset_left = 10.0
+offset_top = 30.0
+offset_right = -10.0
+offset_bottom = 55.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="DexLabel" type="Label" parent="CanvasLayer/UI/HeroPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 65.0
+offset_right = -10.0
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 18
+text = "Dex: 3 / 3"
+horizontal_alignment = 1
+
+[node name="AttackLabel" type="Label" parent="CanvasLayer/UI/HeroPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 95.0
+offset_right = -10.0
+offset_bottom = 115.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 14
+text = "Attack: 3"
+horizontal_alignment = 1
+
+[node name="DefenseLabel" type="Label" parent="CanvasLayer/UI/HeroPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 118.0
+offset_right = -10.0
+offset_bottom = 138.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 14
+text = "Defense: 0"
+horizontal_alignment = 1
+
+[node name="DiceLabel" type="Label" parent="CanvasLayer/UI/HeroPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 150.0
+offset_right = -10.0
+offset_bottom = 168.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_font_sizes/font_size = 14
+text = "Attack Dice"
+horizontal_alignment = 1
+
+[node name="DiceContainer" type="HBoxContainer" parent="CanvasLayer/UI/HeroPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 170.0
+offset_right = -10.0
+offset_bottom = 200.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="BonesLabel" type="Label" parent="CanvasLayer/UI/HeroPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 210.0
+offset_right = -10.0
+offset_bottom = 228.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_font_sizes/font_size = 14
+text = "Bones"
+horizontal_alignment = 1
+
+[node name="BonesContainer" type="HBoxContainer" parent="CanvasLayer/UI/HeroPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 230.0
+offset_right = -10.0
+offset_bottom = 260.0
 grow_horizontal = 2
 alignment = 1
 
