@@ -13,6 +13,16 @@ extends Node2D
 @onready var ui_archer_health_container = %ArcherHealthContainer
 @onready var ui_hero_health_container = %HeroHealthContainer
 @onready var ui_hero_health_label = %HeroHealthLabel
+@onready var ui_initiative_container = %InitiativeContainer
+@onready var ui_restart_button = $CanvasLayer/UI/RestartButton
+
+# Audio Players
+@onready var sfx_hero_melee = %HeroMelee
+@onready var sfx_enemy_melee = %EnemyMelee
+@onready var sfx_arrow = %Arrow
+@onready var sfx_fireball = %Fireball
+@onready var sfx_victory = %Victory
+@onready var sfx_defeat = %Defeat
 
 var turn_manager
 var tile_size = Vector2(100, 100) # Grid cell size
@@ -22,19 +32,34 @@ var current_dex: int = 0
 var bones_meter: int = 0 # Track rolled bones (Max 6)
 enum Phase { MOVE, ACTION }
 var current_phase = Phase.MOVE # Initialize
+
+# Battle phases
+enum BattlePhase { DEPLOYMENT, INITIATIVE_ROLL, COMBAT }
+var battle_phase = BattlePhase.DEPLOYMENT
+
 var hit_overlay: ColorRect
 var damage_label_pool = [] # Simple object pool for damage numbers
-var stored_dice_results = [] # Persist dice state [true(Hit), false(Bone), null(Empty)]
+var stored_dice_results = [] # Persist dice state
 var hero_unit = null # Track hero for UI updates
 var melee_enemy = null # Track melee enemy for UI
 var ranged_enemy = null # Track ranged enemy for UI
 var battle_ended = false # Prevent duplicate end-game messages
+
+# Deployment phase
+var deployment_highlights = [] # Highlight rects for valid placement
+var pending_hero_data = null # Hero data waiting for placement
+
+# Initiative tracking
+var initiative_order = [] # Units sorted by initiative
+var rolled_init_values = { } # Stores the rolled init value per unit
+var current_round = 1 # Current battle round
 
 
 func _ready():
 	turn_manager = preload("res://scripts/rpg/TurnManager.gd").new()
 	add_child(turn_manager)
 	turn_manager.turn_changed.connect(_on_turn_changed)
+	turn_manager.round_changed.connect(_on_round_changed)
 
 	# Create Hit Overlay for feedback
 	var canvas = CanvasLayer.new()
@@ -50,50 +75,260 @@ func _ready():
 
 
 func setup_demo_battle():
-	# Create demo units
-	var hero_data = UnitData.new()
-	hero_data.unit_name = "Potato Hero"
-	hero_data.initiative = 10 # Highest - goes first
-	hero_data.health = 5
-	hero_data.max_health = 5
-	hero_data.attack_dice = 3 # Up to 3 attack dice
-	hero_data.defense_dice = 0 # Defense comes later
+	# Configure GridLines first
+	%GridLines.setup(grid_size, tile_size)
 
-	var melee_enemy_data = UnitData.new()
-	melee_enemy_data.unit_name = "Bad Spud"
-	melee_enemy_data.initiative = 5 # Second
-	melee_enemy_data.health = 8
-	melee_enemy_data.max_health = 8
-	melee_enemy_data.attack_dice = 1
-	melee_enemy_data.defense_dice = 0
+	# Create hero data with custom initiative die
+	pending_hero_data = UnitData.new()
+	pending_hero_data.unit_name = "Potato Hero"
+	pending_hero_data.is_hero = true
+	pending_hero_data.initiative_die = [3, 3, 2, 2, 4, 1] # Tank: slow but heavy
+	pending_hero_data.health = 5
+	pending_hero_data.max_health = 5
+	pending_hero_data.attack_dice = 3
+	pending_hero_data.defense_dice = 0
+	pending_hero_data.dex = 3
 
-	var ranged_enemy_data = UnitData.new()
-	ranged_enemy_data.unit_name = "Archer Spud"
-	ranged_enemy_data.initiative = 3 # Third - goes last
-	ranged_enemy_data.health = 3
-	ranged_enemy_data.max_health = 3
-	ranged_enemy_data.attack_dice = 1
-	ranged_enemy_data.defense_dice = 0
-	ranged_enemy_data.is_ranged = true
-	ranged_enemy_data.min_attack_range = 2 # Can't hit adjacent
+	# Start deployment phase
+	battle_phase = BattlePhase.DEPLOYMENT
+	start_deployment_phase()
 
-	# Row-based spawning:
-	# Row 0 = Enemy Ranged, Row 1 = Enemy Melee
-	# Row 2 = Hero Melee, Row 3 = Hero Ranged
-	hero_unit = spawn_unit(hero_data, Vector2i(0, 2))
-	melee_enemy = spawn_unit(melee_enemy_data, Vector2i(0, 1), Color(0.7, 0.4, 0.4))
-	ranged_enemy = spawn_unit(ranged_enemy_data, Vector2i(3, 0), Color(0.6, 0.3, 0.7))
+	# Print tactical battle debug commands
+	print("")
+	print("╔══════════════════════════════════════════════════════════════╗")
+	print("║           TACTICAL BATTLE DEBUG COMMANDS                     ║")
+	print("╠══════════════════════════════════════════════════════════════╣")
+	print("║  F1  - Fill Bones Meter                                      ║")
+	print("╚══════════════════════════════════════════════════════════════╝")
+	print("")
 
-	turn_manager.start_battle([hero_unit, melee_enemy, ranged_enemy])
 
-	# Initialize all UI
+func start_deployment_phase():
+	# Show deployment message
+	ui_turn_label.text = "Deploy Potato Hero"
+
+	# Highlight valid deployment cells (row 2 for melee heroes)
+	for x in range(grid_size.x):
+		var grid_pos = Vector2i(x, 2) # Row 2 = melee hero row
+		var highlight = create_deployment_highlight(grid_pos)
+		deployment_highlights.append(highlight)
+
+
+func create_deployment_highlight(grid_pos: Vector2i) -> ColorRect:
+	var highlight = ColorRect.new()
+	highlight.size = tile_size - Vector2(8, 8)
+	highlight.position = grid_to_world(grid_pos) - tile_size / 2 + Vector2(4, 4)
+	highlight.color = Color(0.2, 0.9, 0.3, 0.6) # Bright green, more opaque
+	highlight.z_index = 5 # Above grid lines
+	highlight.set_meta("grid_pos", grid_pos)
+
+	# Add to the scene at the grid level (not units_container)
+	add_child(highlight)
+
+	# Add a bright border using a second rect
+	var border = ColorRect.new()
+	border.size = tile_size - Vector2(4, 4)
+	border.position = grid_to_world(grid_pos) - tile_size / 2 + Vector2(2, 2)
+	border.color = Color(0.0, 1.0, 0.2, 0.9) # Bright green border
+	border.z_index = 4
+	border.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(border)
+
+	# Make inner rect slightly smaller to create border effect
+	highlight.z_index = 6
+
+	# Store border for cleanup
+	highlight.set_meta("border", border)
+
+	# Pulse animation on the highlight
+	var tween = create_tween()
+	tween.set_loops()
+	tween.tween_property(highlight, "color:a", 0.3, 0.4)
+	tween.tween_property(highlight, "color:a", 0.7, 0.4)
+
+	# Also pulse the border
+	var tween2 = create_tween()
+	tween2.set_loops()
+	tween2.tween_property(border, "color:a", 0.5, 0.4)
+	tween2.tween_property(border, "color:a", 1.0, 0.4)
+
+	return highlight
+
+
+func clear_deployment_highlights():
+	for h in deployment_highlights:
+		if is_instance_valid(h):
+			# Also remove the border if it exists
+			if h.has_meta("border"):
+				var border = h.get_meta("border")
+				if is_instance_valid(border):
+					border.queue_free()
+			h.queue_free()
+	deployment_highlights.clear()
+
+
+func deploy_hero_at(grid_pos: Vector2i):
+	# Clear highlights
+	clear_deployment_highlights()
+
+	# Spawn hero at chosen position
+	hero_unit = spawn_unit(pending_hero_data, grid_pos)
+	pending_hero_data = null
+
+	# Now spawn enemies
+	spawn_enemies()
+
+	# Roll initiative and start combat
+	battle_phase = BattlePhase.INITIATIVE_ROLL
+	roll_initiative()
+
+
+func spawn_enemies():
+	# Bad Spud (melee) - fixed initiative 1
+	var melee_data = UnitData.new()
+	melee_data.unit_name = "Bad Spud"
+	melee_data.initiative = 1
+	melee_data.health = 8
+	melee_data.max_health = 8
+	melee_data.attack_dice = 1
+	melee_enemy = spawn_unit(melee_data, Vector2i(0, 1), Color(0.7, 0.4, 0.4))
+
+	# Archer Spud (ranged) - fixed initiative 3
+	var ranged_data = UnitData.new()
+	ranged_data.unit_name = "Archer Spud"
+	ranged_data.initiative = 3
+	ranged_data.health = 3
+	ranged_data.max_health = 3
+	ranged_data.attack_dice = 1
+	ranged_data.is_ranged = true
+	ranged_data.min_attack_range = 2
+	ranged_enemy = spawn_unit(ranged_data, Vector2i(3, 0), Color(0.6, 0.3, 0.7))
+
+	# Update enemy UI
 	update_enemy_health_ui(melee_enemy)
 	update_archer_health_ui(ranged_enemy)
+
+
+func roll_initiative():
+	# Roll hero's custom die
+	var hero_init = 0
+	if hero_unit.data.initiative_die.size() > 0:
+		var roll_idx = randi() % hero_unit.data.initiative_die.size()
+		hero_init = hero_unit.data.initiative_die[roll_idx]
+	else:
+		hero_init = hero_unit.data.initiative
+
+	print("Initiative Roll: Hero rolled %d" % hero_init)
+
+	# Build initiative order
+	var units_with_init = []
+	units_with_init.append({ "unit": hero_unit, "init": hero_init, "is_hero": true })
+	units_with_init.append({ "unit": melee_enemy, "init": melee_enemy.data.initiative, "is_hero": false })
+	units_with_init.append({ "unit": ranged_enemy, "init": ranged_enemy.data.initiative, "is_hero": false })
+
+	# Sort by initiative (highest first), ties go to hero
+	units_with_init.sort_custom(
+		func(a, b):
+			if a.init != b.init:
+				return a.init > b.init
+			return a.is_hero # Hero wins ties
+	)
+
+	# Store sorted order and rolled values
+	initiative_order.clear()
+	rolled_init_values.clear()
+	print("Initiative Order:")
+	for i in range(units_with_init.size()):
+		var entry = units_with_init[i]
+		initiative_order.append(entry.unit)
+		rolled_init_values[entry.unit] = entry.init
+		print("  %d. %s (init %d)" % [i + 1, entry.unit.data.unit_name, entry.init])
+
+	# Update UI and start combat
 	update_hero_health_ui(hero_unit)
 	update_hero_stats_ui(hero_unit)
+	update_initiative_ui()
 
-	# Configure GridLines (Fixes visibility)
-	%GridLines.setup(grid_size, tile_size)
+	battle_phase = BattlePhase.COMBAT
+	turn_manager.start_battle(initiative_order)
+
+
+func update_initiative_ui():
+	# Clear existing slots
+	for child in ui_initiative_container.get_children():
+		child.queue_free()
+
+	# Create a slot for each unit in initiative order
+	for i in range(initiative_order.size()):
+		var unit = initiative_order[i]
+		if not is_instance_valid(unit):
+			continue
+
+		var slot = create_initiative_slot(unit, i)
+		ui_initiative_container.add_child(slot)
+
+
+func create_initiative_slot(unit, index: int) -> Panel:
+	var slot = Panel.new()
+	slot.custom_minimum_size = Vector2(90, 60)
+	slot.set_meta("unit", unit)
+
+	# Color based on unit type
+	var style = StyleBoxFlat.new()
+	if unit == hero_unit:
+		style.bg_color = Color(0.2, 0.5, 0.3) # Green for hero
+	elif unit == ranged_enemy:
+		style.bg_color = Color(0.4, 0.2, 0.5) # Purple for archer
+	else:
+		style.bg_color = Color(0.5, 0.25, 0.25) # Red for melee enemy
+	style.corner_radius_top_left = 5
+	style.corner_radius_top_right = 5
+	style.corner_radius_bottom_left = 5
+	style.corner_radius_bottom_right = 5
+	slot.add_theme_stylebox_override("panel", style)
+
+	# Unit name label
+	var name_label = Label.new()
+	name_label.text = unit.data.unit_name.split(" ")[0] # First word only
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.add_theme_font_size_override("font_size", 11)
+	name_label.position = Vector2(5, 5)
+	name_label.size = Vector2(80, 20)
+	slot.add_child(name_label)
+
+	# Init value badge
+	var init_label = Label.new()
+	var init_val = unit.data.initiative
+	if unit.data.is_hero and unit.data.initiative_die.size() > 0:
+		# Show the rolled value (stored during roll_initiative)
+		init_val = get_stored_init(unit)
+	init_label.text = str(init_val)
+	init_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	init_label.add_theme_font_size_override("font_size", 18)
+	init_label.position = Vector2(5, 28)
+	init_label.size = Vector2(80, 25)
+	slot.add_child(init_label)
+
+	return slot
+
+
+func get_stored_init(unit) -> int:
+	# Return stored value from roll, or fall back to unit data
+	if rolled_init_values.has(unit):
+		return rolled_init_values[unit]
+	return unit.data.initiative
+
+
+func highlight_active_initiative_slot():
+	if not is_instance_valid(active_unit):
+		return
+
+	for slot in ui_initiative_container.get_children():
+		var unit = slot.get_meta("unit") if slot.has_meta("unit") else null
+		if unit == active_unit:
+			slot.modulate = Color(1.5, 1.5, 1.0) # Highlight active
+		else:
+			slot.modulate = Color(0.7, 0.7, 0.7) # Dim others
 
 
 func spawn_unit(data: UnitData, grid_pos: Vector2i, tint: Color = Color.WHITE):
@@ -120,9 +355,17 @@ func world_to_grid(world_pos: Vector2):
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if active_unit and active_unit.data.unit_name == "Potato Hero": # Player Turn Check
-			var clicked_grid_pos = world_to_grid(event.position)
+		var clicked_grid_pos = world_to_grid(event.position)
 
+		# Handle deployment phase clicks
+		if battle_phase == BattlePhase.DEPLOYMENT:
+			# Check if clicked a valid deployment cell
+			if clicked_grid_pos.y == 2 and clicked_grid_pos.x >= 0 and clicked_grid_pos.x < grid_size.x:
+				deploy_hero_at(clicked_grid_pos)
+			return
+
+		# Combat phase: existing logic
+		if active_unit and active_unit.data.unit_name == "Potato Hero": # Player Turn
 			if clicked_grid_pos.x >= 0 and clicked_grid_pos.x < grid_size.x and \
 			clicked_grid_pos.y >= 0 and clicked_grid_pos.y < grid_size.y:
 				# Check for Attack (Target logic)
@@ -223,7 +466,10 @@ func _on_turn_changed(new_unit):
 	current_dex = active_unit.data.dex
 	update_dex_ui()
 
-	ui_turn_label.text = "Turn: %s" % [active_unit.data.unit_name]
+	# Update initiative tracker highlighting
+	highlight_active_initiative_slot()
+
+	ui_turn_label.text = "Round %d: %s" % [current_round, active_unit.data.unit_name]
 
 	# Only show selection (yellow box) for hero when ready for input
 	if active_unit.data.unit_name == "Potato Hero":
@@ -232,6 +478,21 @@ func _on_turn_changed(new_unit):
 		# AI Turn - don't show selection, trigger AI
 		print("AI Turn Started...")
 		call_deferred("execute_ai_turn")
+
+
+func _on_round_changed(round_number: int):
+	current_round = round_number
+	print("=== ROUND %d ===" % round_number)
+
+	# At round 6, add red tinge for urgency
+	if round_number >= 6:
+		# Create subtle red background tinge
+		var bg = get_node_or_null("Background")
+		if bg:
+			bg.modulate = Color(1.2, 0.9, 0.9) # Red tint
+		# Also tint the grid overlay slightly
+		if grid_overlay:
+			grid_overlay.modulate = Color(1.1, 0.95, 0.95)
 
 
 func execute_ai_turn():
@@ -491,12 +752,19 @@ func attack_unit(attacker, target):
 	# 4. Apply Damage or INSTA-KILL
 	if used_insta_kill:
 		# INSTA-KILL bypasses health - directly removes enemy from battle
+		sfx_fireball.play()
 		show_insta_kill_text(target)
 		print("%s was INSTA-KILLED!" % target.data.unit_name)
+		await play_flame_dissolve(target)
 		target.queue_free()
 		turn_manager.units.erase(target)
 		update_target_health_ui(target)
 	elif total_damage > 0:
+		# Play melee attack sound based on attacker
+		if attacker.data.unit_name == "Potato Hero":
+			sfx_hero_melee.play()
+		else:
+			sfx_enemy_melee.play()
 		target.take_damage(total_damage)
 		show_damage_number(target, total_damage)
 
@@ -551,7 +819,8 @@ func ranged_attack_unit(attacker, target):
 
 	var total_damage = max(0, hits - blocks)
 
-	# 3. Play arrow projectile animation
+	# 3. Play arrow projectile animation and sound
+	sfx_arrow.play()
 	await play_arrow_projectile(attacker, target)
 
 	# 4. Apply Damage and show result
@@ -609,6 +878,69 @@ func play_arrow_projectile(attacker, target):
 	arrow.queue_free()
 
 
+func play_flame_dissolve(target):
+	# DRAMATIC INSTA-KILL EFFECT!
+	# 1. Bright white screen flash
+	trigger_white_flash()
+
+	# 2. Create flame overlay on target
+	var sprite = target.get_node_or_null("Sprite2D")
+	if not sprite:
+		await get_tree().create_timer(0.5).timeout
+		return
+
+	# Create a bright flame-colored overlay
+	var flame_overlay = ColorRect.new()
+	flame_overlay.color = Color(1.0, 0.6, 0.1, 0.9) # Bright orange
+	flame_overlay.size = Vector2(120, 120)
+	flame_overlay.position = Vector2(-60, -60) # Center on sprite
+	flame_overlay.z_index = 10
+	sprite.add_child(flame_overlay)
+
+	# Make target glow bright orange/yellow
+	target.modulate = Color(3.0, 2.0, 0.5) # Very bright!
+
+	# Animate: scale up, flash colors, then shrink and fade
+	var tween = create_tween()
+	tween.set_parallel(true)
+
+	# Scale up dramatically
+	tween.tween_property(target, "scale", Vector2(1.5, 1.5), 0.15)
+
+	# Flash the overlay through flame colors
+	tween.tween_property(flame_overlay, "color", Color(1.0, 1.0, 0.3, 1.0), 0.1) # Yellow flash
+
+	await get_tree().create_timer(0.15).timeout
+
+	# Second phase: shrink and burn away
+	var tween2 = create_tween()
+	tween2.set_parallel(true)
+	tween2.tween_property(target, "scale", Vector2(0.0, 0.0), 0.4).set_ease(Tween.EASE_IN)
+	tween2.tween_property(target, "modulate:a", 0.0, 0.4)
+	tween2.tween_property(flame_overlay, "color", Color(0.8, 0.2, 0.0, 0.0), 0.4) # Fade to red then gone
+
+	await tween2.finished
+	flame_overlay.queue_free()
+
+
+func trigger_white_flash():
+	# Create a bright white flash that covers the whole screen
+	var flash_layer = CanvasLayer.new()
+	flash_layer.layer = 100
+	add_child(flash_layer)
+
+	var white_rect = ColorRect.new()
+	white_rect.color = Color(1, 1, 1, 0.9) # Bright white
+	white_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	white_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	flash_layer.add_child(white_rect)
+
+	# Quick flash: fade out rapidly
+	var tween = create_tween()
+	tween.tween_property(white_rect, "color:a", 0.0, 0.25)
+	tween.tween_callback(flash_layer.queue_free)
+
+
 func show_miss_text(target, color: Color = Color(0.7, 0.7, 0.7)):
 	var miss_label = Label.new()
 	miss_label.text = "MISS"
@@ -643,13 +975,17 @@ func check_battle_over() -> bool:
 	if not hero_alive:
 		battle_ended = true
 		print("GAME OVER - Hero Defeated")
+		sfx_defeat.play()
 		show_end_screen("KO", Color(0.5, 0, 0, 0.6))
 		return true
 
 	if not baddies_alive:
 		battle_ended = true
 		print("VICTORY - All Baddies Defeated")
-		show_end_screen("You Win\nThe Battle", Color(0, 0, 0, 0))
+		sfx_victory.play()
+		# Sepia/warm grey overlay for victory
+		show_end_screen("You Win\nThe Battle", Color(0.4, 0.35, 0.25, 0.5))
+		pulse_restart_button()
 		return true
 
 	return false
@@ -674,6 +1010,21 @@ func show_end_screen(message: String, bg_color: Color):
 
 	# Stop any further input/turns
 	turn_manager.set_process(false)
+
+
+func pulse_restart_button():
+	# Pulse the restart button green to draw user attention
+	if not ui_restart_button:
+		return
+
+	# Set initial green tint
+	ui_restart_button.modulate = Color(0.5, 1.0, 0.5)
+
+	# Create pulsing animation
+	var tween = create_tween()
+	tween.set_loops()
+	tween.tween_property(ui_restart_button, "modulate", Color(0.3, 1.0, 0.3), 0.4)
+	tween.tween_property(ui_restart_button, "modulate", Color(0.7, 1.0, 0.7), 0.4)
 
 
 func end_turn():
@@ -798,14 +1149,25 @@ func update_bones_ui():
 	# Max bones is 6 (assumed for now)
 	var bones_ready = bones_meter >= 5
 
+	# Load sparkle shader for ready state
+	var sparkle_shader = null
+	if bones_ready:
+		sparkle_shader = load("res://scenes/prototypes/rpg_battle/shaders/bones_sparkle.gdshader")
+
 	for i in range(6):
 		var bone_rect = ColorRect.new()
 		bone_rect.custom_minimum_size = Vector2(25, 25)
 
 		if i < bones_meter:
 			if bones_ready:
-				# Glowing golden when ready
+				# Glowing golden with sparkle shader
 				bone_rect.color = Color(1.0, 0.85, 0.2)
+				if sparkle_shader:
+					var mat = ShaderMaterial.new()
+					mat.shader = sparkle_shader
+					mat.set_shader_parameter("time_offset", i * 0.5)
+					mat.set_shader_parameter("intensity", 1.5)
+					bone_rect.material = mat
 			else:
 				bone_rect.color = Color(0.3, 0.3, 0.8)
 		else:
@@ -820,23 +1182,25 @@ func update_bones_ui():
 func check_hero_glow(unit):
 	if not is_instance_valid(unit):
 		return
-	if bones_meter >= 5:
-		# Strong golden glow with sparkle effect
-		unit.modulate = Color(1.6, 1.4, 0.8)
-		animate_hero_sparkle(unit)
-	else:
-		unit.modulate = Color(1, 1, 1)
 
-
-func animate_hero_sparkle(unit):
-	if not is_instance_valid(unit):
+	var sprite = unit.get_node_or_null("Sprite2D")
+	if not sprite:
 		return
 
-	# Create a sparkle/pulse effect
-	var pulse_tween = create_tween()
-	pulse_tween.set_loops(2)
-	pulse_tween.tween_property(unit, "modulate", Color(1.8, 1.6, 1.0), 0.15)
-	pulse_tween.tween_property(unit, "modulate", Color(1.6, 1.4, 0.8), 0.15)
+	if bones_meter >= 5:
+		# Apply dramatic sparkle shader to hero sprite
+		if not sprite.material or not sprite.material is ShaderMaterial:
+			var sparkle_shader = load("res://scenes/prototypes/rpg_battle/shaders/bones_sparkle.gdshader")
+			var mat = ShaderMaterial.new()
+			mat.shader = sparkle_shader
+			mat.set_shader_parameter("intensity", 2.5)
+			sprite.material = mat
+		# Also boost modulate for extra brightness
+		unit.modulate = Color(1.4, 1.3, 1.0)
+	else:
+		# Remove shader when not ready
+		sprite.material = null
+		unit.modulate = Color(1, 1, 1)
 
 
 func update_target_health_ui(target):

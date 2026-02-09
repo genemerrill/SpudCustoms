@@ -61,7 +61,20 @@ func _input(event: InputEvent) -> void:
 	if not key_event.pressed or key_event.echo:
 		return
 
-	# Handle minigame keys F1-F5
+	# Check if we're in a tactical battle scene
+	var in_tactical_battle = _is_in_tactical_battle()
+
+	if in_tactical_battle:
+		# Handle tactical battle debug commands
+		match key_event.keycode:
+			KEY_F1:
+				_fill_bones_meter()
+			KEY_F12:
+				_toggle_debug_overlay()
+		# All other F-keys are disabled during tactical battle
+		return
+
+	# Handle minigame keys F1-F5 (only when NOT in tactical battle)
 	if key_event.keycode in MINIGAME_KEYS:
 		_launch_minigame(MINIGAME_KEYS[key_event.keycode])
 		return
@@ -95,7 +108,7 @@ func _launch_minigame(minigame_type: String) -> void:
 
 	# Use EventBus to request minigame launch with force_launch to bypass unlock checks
 	if EventBus:
-		EventBus.minigame_launch_requested.emit(minigame_type, {"force_launch": true})
+		EventBus.minigame_launch_requested.emit(minigame_type, { "force_launch": true })
 		_show_debug_message("Launched: " + minigame_type.replace("_", " ").capitalize())
 	else:
 		push_warning("[DEBUG] EventBus not available for minigame launch")
@@ -233,11 +246,51 @@ func _get_main_game() -> Node:
 	return null
 
 
-## Create the debug overlay UI
+## Check if we're currently in a tactical battle scene
+func _is_in_tactical_battle() -> bool:
+	var root = get_tree().current_scene
+	if root and root.name == "BattleMat":
+		return true
+	# Also check if BattleMat is a child of root
+	if root:
+		var battle = root.find_child("BattleMat", true, false)
+		if battle:
+			return true
+	return false
+
+
+## Get the BattleController for tactical battle commands
+func _get_battle_controller() -> Node:
+	var root = get_tree().current_scene
+	if root and root.name == "BattleMat":
+		return root
+	if root:
+		return root.find_child("BattleMat", true, false)
+	return null
+
+
+## Fill bones meter to max (tactical battle debug command)
+func _fill_bones_meter() -> void:
+	var battle = _get_battle_controller()
+	if battle and battle.has_method("get") or battle:
+		# Access bones_meter directly since it's a variable
+		if "bones_meter" in battle:
+			battle.bones_meter = 6
+			if battle.has_method("update_bones_ui"):
+				battle.update_bones_ui()
+			if battle.has_method("check_hero_glow") and "hero_unit" in battle:
+				battle.check_hero_glow(battle.hero_unit)
+			_show_debug_message("Bones meter filled!")
+		else:
+			_show_debug_message("ERROR: bones_meter not found")
+	else:
+		_show_debug_message("ERROR: BattleController not found")
+
+
 func _create_debug_overlay() -> void:
 	debug_overlay = CanvasLayer.new()
 	debug_overlay.name = "DebugOverlay"
-	debug_overlay.layer = 1000  # Above everything
+	debug_overlay.layer = 1000 # Above everything
 	debug_overlay.visible = false
 
 	var panel = PanelContainer.new()

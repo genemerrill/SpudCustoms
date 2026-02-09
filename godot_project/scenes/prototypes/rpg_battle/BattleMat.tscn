@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bryyucja124jm"]
+[gd_scene load_steps=11 format=3 uid="uid://bryyucja124jm"]
 
 [ext_resource type="Script" uid="uid://7puemim4fq3e" path="res://scenes/prototypes/rpg_battle/BattleController.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://scenes/prototypes/rpg_battle/BattleUnit.tscn" id="2_unit"]
 [ext_resource type="Script" uid="uid://edu5610w1pi6" path="res://scenes/prototypes/rpg_battle/GridLines.gd" id="3_grid"]
+[ext_resource type="AudioStream" uid="uid://docj5qfjgejum" path="res://assets/audio/music/kalimba 1.wav" id="4_music"]
+[ext_resource type="AudioStream" uid="uid://bvl4dyewyfch2" path="res://assets/audio/clothing/punch clothes 1.wav" id="5_punch_hero"]
+[ext_resource type="AudioStream" uid="uid://buove2jvx0ynh" path="res://assets/audio/clothing/punch clothes 2.wav" id="6_punch_enemy"]
+[ext_resource type="AudioStream" uid="uid://bu38efstjkyj5" path="res://assets/audio/ui_feedback/motion_straight_air.wav" id="7_arrow"]
+[ext_resource type="AudioStream" uid="uid://dchpdr1k0dotl" path="res://assets/audio/explosions/Whoosh Fireball 001.wav" id="8_fireball"]
+[ext_resource type="AudioStream" uid="uid://b27fdpq7bbips" path="res://assets/audio/ui_feedback/Task Complete Ensemble 001.wav" id="9_victory"]
+[ext_resource type="AudioStream" uid="uid://br4w0x1flqg0m" path="res://assets/audio/ui_feedback/Task Fail Ensemble 001.wav" id="10_defeat"]
 
 [node name="BattleMat" type="Node2D"]
 script = ExtResource("1_script")
@@ -231,9 +238,9 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 10.0
-offset_top = 210.0
+offset_top = 214.0
 offset_right = -10.0
-offset_bottom = 228.0
+offset_bottom = 232.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
 theme_override_font_sizes/font_size = 14
@@ -250,6 +257,38 @@ offset_top = 230.0
 offset_right = -10.0
 offset_bottom = 260.0
 grow_horizontal = 2
+alignment = 1
+
+[node name="InitiativePanel" type="Panel" parent="CanvasLayer/UI"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 760.0
+offset_top = 160.0
+offset_right = 860.0
+offset_bottom = 560.0
+
+[node name="PanelLabel" type="Label" parent="CanvasLayer/UI/InitiativePanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 25.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 12
+text = "Initiative"
+horizontal_alignment = 1
+
+[node name="InitiativeContainer" type="VBoxContainer" parent="CanvasLayer/UI/InitiativePanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 30.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
 [node name="RestartButton" type="Button" parent="CanvasLayer/UI"]
@@ -278,6 +317,39 @@ offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Exit Battle"
+
+[node name="AudioPlayers" type="Node" parent="."]
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("4_music")
+volume_db = -10.0
+autoplay = true
+
+[node name="HeroMelee" type="AudioStreamPlayer" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("5_punch_hero")
+
+[node name="EnemyMelee" type="AudioStreamPlayer" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("6_punch_enemy")
+pitch_scale = 0.8
+
+[node name="Arrow" type="AudioStreamPlayer" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("7_arrow")
+
+[node name="Fireball" type="AudioStreamPlayer" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("8_fireball")
+
+[node name="Victory" type="AudioStreamPlayer" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("9_victory")
+
+[node name="Defeat" type="AudioStreamPlayer" parent="AudioPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("10_defeat")
 
 [connection signal="pressed" from="CanvasLayer/UI/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/ExitButton" to="." method="_on_exit_button_pressed"]
