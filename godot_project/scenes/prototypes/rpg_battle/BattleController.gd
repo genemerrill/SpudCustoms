@@ -44,6 +44,7 @@ var hero_unit = null # Track hero for UI updates
 var melee_enemy = null # Track melee enemy for UI
 var ranged_enemy = null # Track ranged enemy for UI
 var battle_ended = false # Prevent duplicate end-game messages
+var is_acting = false # Input lock during animations
 
 # Deployment phase
 var deployment_highlights = [] # Highlight rects for valid placement
@@ -202,6 +203,8 @@ func spawn_enemies():
 	ranged_data.attack_dice = 1
 	ranged_data.is_ranged = true
 	ranged_data.min_attack_range = 2
+	ranged_data.min_attack_range = 2
+	ranged_data.defense_dice = 0 # Archer is squishy
 	ranged_enemy = spawn_unit(ranged_data, Vector2i(3, 0), Color(0.6, 0.3, 0.7))
 
 	# Update enemy UI
@@ -309,6 +312,28 @@ func create_initiative_slot(unit, index: int) -> Panel:
 	init_label.size = Vector2(80, 25)
 	slot.add_child(init_label)
 
+	# Selection Reticle (Yellow Border) - Initially hidden
+	var reticle = Panel.new()
+	reticle.name = "Reticle"
+	reticle.set_anchors_preset(Control.PRESET_FULL_RECT)
+	reticle.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var reticle_style = StyleBoxFlat.new()
+	reticle_style.bg_color = Color(0, 0, 0, 0) # Transparent center
+	reticle_style.border_width_left = 3
+	reticle_style.border_width_top = 3
+	reticle_style.border_width_right = 3
+	reticle_style.border_width_bottom = 3
+	reticle_style.border_color = Color(1, 1, 0) # Yellow
+	reticle_style.corner_radius_top_left = 5
+	reticle_style.corner_radius_top_right = 5
+	reticle_style.corner_radius_bottom_left = 5
+	reticle_style.corner_radius_bottom_right = 5
+
+	reticle.add_theme_stylebox_override("panel", reticle_style)
+	reticle.hide() # Hidden by default
+	slot.add_child(reticle)
+
 	return slot
 
 
@@ -325,10 +350,16 @@ func highlight_active_initiative_slot():
 
 	for slot in ui_initiative_container.get_children():
 		var unit = slot.get_meta("unit") if slot.has_meta("unit") else null
+		var reticle = slot.get_node_or_null("Reticle")
+
 		if unit == active_unit:
 			slot.modulate = Color(1.5, 1.5, 1.0) # Highlight active
+			if reticle:
+				reticle.show()
 		else:
 			slot.modulate = Color(0.7, 0.7, 0.7) # Dim others
+			if reticle:
+				reticle.hide()
 
 
 func spawn_unit(data: UnitData, grid_pos: Vector2i, tint: Color = Color.WHITE):
@@ -355,6 +386,8 @@ func world_to_grid(world_pos: Vector2):
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if is_acting:
+			return
 		var clicked_grid_pos = world_to_grid(event.position)
 
 		# Handle deployment phase clicks
@@ -453,8 +486,10 @@ func trigger_unit_blink(unit):
 
 func move_active_unit(target_grid_pos: Vector2i):
 	if active_unit:
+		is_acting = true
 		active_unit.grid_position = target_grid_pos
 		active_unit.move_to_grid_pos(grid_to_world(target_grid_pos), tile_size)
+		is_acting = false
 
 
 func _on_turn_changed(new_unit):
@@ -592,22 +627,26 @@ func get_random_adjacent_open_position(from_pos: Vector2i) -> Vector2i:
 func get_best_move_towards(current: Vector2i, target: Vector2i) -> Vector2i:
 	var directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 	var best_moves = []
-	var min_dist = calc_manhattan_dist(current, target)
+	var current_dist = calc_manhattan_dist(current, target)
+	var min_dist = current_dist
 
 	for dir in directions:
 		var next_pos = current + dir
 		if is_valid_pos(next_pos) and is_cell_empty(next_pos):
 			var dist = calc_manhattan_dist(next_pos, target)
 
-			if dist < min_dist:
-				min_dist = dist
-				best_moves = [next_pos] # Found a new best distance, reset list
-			elif dist == min_dist:
-				best_moves.append(next_pos) # Found another move just as good
+			# STRICT: Only consider moves that REDUCE the distance
+			if dist < current_dist:
+				if dist < min_dist:
+					min_dist = dist
+					best_moves = [next_pos] # Found a new best distance, reset list
+				elif dist == min_dist:
+					best_moves.append(next_pos) # Found another move just as good (e.g. diagonal path option)
 
 	if best_moves.size() > 0:
 		return best_moves.pick_random()
 
+	# If no moves reduce distance, stay put (don't wander aimlessly)
 	return current
 
 
@@ -620,6 +659,7 @@ func is_valid_pos(pos: Vector2i) -> bool:
 
 
 func attack_unit(attacker, target):
+	is_acting = true
 	# ... (Logging) ...
 	print("\n--- COMBAT LOG ---")
 	print("%s attacks %s!" % [attacker.data.unit_name, target.data.unit_name])
@@ -662,6 +702,7 @@ func attack_unit(attacker, target):
 		# 2. Sequential Roll Animation: Each die shakes then reveals
 		if not is_instance_valid(ui_dice_container):
 			print("[DEBUG] ui_dice_container is invalid, returning early!")
+			is_acting = false
 			return
 		var children = ui_dice_container.get_children()
 		print("[DEBUG] dice_count=%d, children.size()=%d" % [dice_count, children.size()])
@@ -776,6 +817,11 @@ func attack_unit(attacker, target):
 			trigger_screen_flash()
 		else:
 			trigger_unit_blink(target)
+			trigger_unit_blink(target)
+	elif hits > 0 and total_damage == 0:
+		# Hits were fully blocked!
+		var block_color = Color(0.3, 0.3, 0.9) # Blue for blocked
+		show_blocked_text(target, block_color)
 	else:
 		# Miss! Show miss text with attacker's color theme
 		var miss_color = Color(0.9, 0.3, 0.3) \
@@ -789,8 +835,10 @@ func attack_unit(attacker, target):
 		turn_manager.units.erase(target) # Remove from turn order
 
 	if check_battle_over():
+		is_acting = false
 		return # Stop turn logic if battle ends
 
+	is_acting = false
 	# Turn ending is handled by the caller based on DEX consumption
 	# This allows for future "end of turn" effects to be triggered
 
@@ -939,6 +987,23 @@ func trigger_white_flash():
 	var tween = create_tween()
 	tween.tween_property(white_rect, "color:a", 0.0, 0.25)
 	tween.tween_callback(flash_layer.queue_free)
+
+
+func show_blocked_text(target, color: Color = Color(0.3, 0.3, 0.9)):
+	var label = Label.new()
+	label.text = "BLOCKED"
+	label.add_theme_font_size_override("font_size", 24)
+	label.add_theme_color_override("font_color", color)
+	label.position = target.position + Vector2(-40, -60)
+	label.z_index = 100
+	add_child(label)
+
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(label, "position:y", label.position.y - 30, 0.6)
+	tween.tween_property(label, "modulate:a", 0.0, 0.6)
+	await tween.finished
+	label.queue_free()
 
 
 func show_miss_text(target, color: Color = Color(0.7, 0.7, 0.7)):
